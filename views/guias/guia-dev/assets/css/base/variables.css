@@ -1,0 +1,173 @@
+:root {
+  /* ========================================
+     COLORES BASE
+     ======================================== */
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --card: #1a1a1a;
+  --border: #2a2a2a;
+
+  /* ========================================
+     COLORES DE TEXTO
+     ======================================== */
+  --text: #f0f1f3;
+  --muted: #8a8d96;
+  --text-inverse: #0a0a0a;
+
+  /* ========================================
+     COLORES DE ACENTO
+     ======================================== */
+  --accent: #ff6c0c;
+  --accent-s: rgba(255, 108, 12, 0.1);
+  --accent-hover: #e05a00;
+
+  /* ========================================
+     COLORES DE ESTADO
+     ======================================== */
+  --green: #00cfb4;
+  --green-s: rgba(0, 207, 180, 0.1);
+  --green-hover: #00b89a;
+
+  --red: #e05252;
+  --red-s: rgba(224, 82, 82, 0.1);
+  --red-hover: #c43a3a;
+
+  --blue: #0062a8;
+  --blue-s: rgba(0, 98, 168, 0.1);
+  --blue-hover: #00528a;
+
+  /* ========================================
+     COLORES SEMÁNTICOS (para componentes)
+     ======================================== */
+  --input-bg: var(--bg);
+  --input-border: var(--border);
+  --input-focus: var(--accent);
+  --input-placeholder: #444444;
+
+  --shadow-color: rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 4px 20px var(--shadow-color);
+  --shadow-md: 0 8px 32px var(--shadow-color);
+  --shadow-lg: 0 24px 60px var(--shadow-color);
+
+  /* ========================================
+     TIPOGRAFÍA
+     ======================================== */
+  --mono: "JetBrains Mono", monospace;
+  --display: "Barlow Condensed", sans-serif;
+  --body-f: "Barlow", sans-serif;
+
+  /* ========================================
+     LAYOUT
+     ======================================== */
+  --sidebar-width: clamp(280px, 20vw, 360px);
+  --sidebar-width-collapsed: 0px;
+  --right-panel-width: clamp(320px, 24vw, 420px);
+  --nav-height: 57px;
+  --transition-speed: 0.25s;
+
+  /* ========================================
+     RADIOS Y BORDES
+     ======================================== */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ========================================
+     ESPACIADOS
+     ======================================== */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* ========================================
+     TAMAÑOS DE FUENTE
+     ======================================== */
+  --font-xs: 0.65rem;
+  --font-sm: 0.75rem;
+  --font-base: 0.875rem;
+  --font-md: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.25rem;
+  --font-2xl: 1.5rem;
+  --font-3xl: 2rem;
+  --font-4xl: 2.5rem;
+
+  /* ========================================
+     PESOS DE FUENTE
+     ======================================== */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  --weight-black: 900;
+
+  /* ========================================
+     TRANSICIONES
+     ======================================== */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================
+     Z-INDEX
+     ======================================== */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+  --z-toast: 1070;
+  --z-overlay: 1080;
+  --z-max: 9999;
+}
+
+/* ========================================
+   MEDIA QUERIES RESPONSIVE
+   ======================================== */
+
+/* Desktop grande */
+@media (min-width: 1700px) {
+  :root {
+    --sidebar-width: clamp(300px, 19vw, 420px);
+    --right-panel-width: clamp(340px, 22vw, 480px);
+  }
+}
+
+/* Laptop / tablet horizontal */
+@media (max-width: 1280px) {
+  :root {
+    --sidebar-width: 300px;
+    --right-panel-width: 340px;
+  }
+}
+
+/* Tablet / móvil */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 50px;
+    --space-xl: 1.5rem;
+    --space-2xl: 2rem;
+    --font-3xl: 1.75rem;
+    --font-4xl: 2rem;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  :root {
+    --nav-height: 44px;
+    --space-xl: 1.25rem;
+    --space-2xl: 1.5rem;
+    --font-2xl: 1.25rem;
+    --font-3xl: 1.5rem;
+    --font-4xl: 1.75rem;
+  }
+}

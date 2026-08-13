@@ -1,0 +1,337 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
+    header("Location: ../../index.php");
+    exit();
+    }
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataformas</title>
+        <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="assets/css/estilo.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estils.css'); ?>">
+    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+</head>
+
+
+<style>
+    body {
+        /* background-image: url(../assets/images/bg2.jpg); */
+        background-color: #111111;
+        color: white;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: cover;
+        font-family: 'Barlow', sans-serif;
+    }
+    .card {
+        /* background: linear-gradient( rgba(30, 30, 31, 0.8) 0%, hsla(170, 97%, 50%, 0.81)); */
+        background-color: var(--pt-navbar);
+        background-size: cover;        color: var(--pt-text);
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        align-items: center
+
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(42, 255, 184, 0.5);
+    }
+    .card-img-top {
+        border-radius: 15px 15px 0 0;
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+    .btn-producto {
+        background-color: hsl(182, 97%, 63%);
+    }
+    .btn:hover{
+        background-color: rgb(255, 123, 0);
+    }
+
+    main {
+        flex: 1;
+    }
+    .navbar {
+        background-color: #252424a9 !important;
+        backdrop-filter: blur(8px);
+        color:  #ffff;
+    }
+    .back:hover {
+        background: #ff6811f5;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 10px rgba(255, 94, 0, 0.5);
+
+    }
+    /*.suscrip {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #ff6811f5;
+        color: rgb(255, 255, 255);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 0.15rem 0.55rem;
+        border-radius: 12px;
+        z-index: 2;
+    }*/
+    /* necesito centrar los mensajitos naranaja en la parte superior de cada card, y que quede fijo ahi, sin importar el tamaño de la imagen o el contenido de la card. Tambien quiero que tenga un fondo naranja con letras negras, y que se vea como una etiqueta superpuesta a la imagen, pero sin afectar el diseño responsivo de las cards. */
+
+        .suscrip {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgb(0, 255, 255);
+            color: rgb(0, 0, 0);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+        } 
+
+    .servicio1 {
+        background: rgba(0, 183, 255, 0.96);
+        color: rgb(255, 255, 255);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 0.15rem 0.5rem;
+        /*    border-radius: 0 0 10px 0; */
+        border-radius: 12px;
+    }
+    .servicio2 {
+        background: #ff3939f5;
+        color: rgb(255, 255, 255);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 0.15rem 0.5rem;
+        /*    border-radius: 0 0 10px 0; */
+        border-radius: 12px;
+    }
+    /* Filtro servicio (botones) */
+    .servicio-toggle{
+        display: inline-flex;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.15);
+        background: rgba(0,0,0,0.18);
+    }
+    .servicio-btn{
+        border: 0;
+        padding: 0.6rem 1.2rem;
+        background: transparent;
+        color: rgba(255,255,255,0.9);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        transition: background 0.2s ease, color 0.2s ease;
+        line-height: 1;
+    }
+    .servicio-btn + .servicio-btn{
+        border-left: 1px solid rgba(255,255,255,0.12);
+    }
+    .servicio-btn.active{
+        background: rgba(66, 117, 119, 0.7);
+        color: #3df9ff;
+    }
+        .second-title {
+        background:rgba(77, 77, 77, 0.08);
+        border-radius:0 12px 12px 0;
+        padding:0.9rem 1.2rem;
+        margin: 10px;
+        gap:0.8rem;
+        align-items: center;
+        font-size: 1.00rem;
+        color: var(--pt-text);
+        line-height:1.4;
+
+    }
+    .second-title i{color: rgb(0, 204, 255);font-size:1.2rem;flex-shrink:0;}
+    .second-title strong{color: rgb(3, 204, 194);}
+
+
+</style>
+
+
+<body class="d-flex flex-column min-vh-100">
+
+
+    <?php
+        $nav_back_url  = "../../sesiones.php";
+        $nav_back_text = "Atras";
+        $nav_base      = "../../";
+        require_once '../../php/navbar.php';
+    ?>
+
+
+    <div class="container text-center" >
+       <div class="second-title ">
+        <i class="bi bi-google-play fs-3"></i>
+        <div>
+            <strong>Bienvenido a la sesion de plataformas</strong>
+            <br>
+            Elige la tienda en la que vas a suscribirte
+        </div>
+    </div>
+    </nav><br>
+    <!--<div class="container text-center" >
+        <h3 class="display-4 fw-bold mb-3">Bienvenido a la sesion de plataformas</h3>
+        <p class="lead mb-4">Elije la plataforma en donde vas a hacer tus compras</p>
+    </div> --->
+
+
+
+    <section>
+        <div class="container mt-5" >
+            <h1 class="text-center mb-3" >Plataformas</h1>
+
+            <!-- Botones para filtrar por servicio PlaceToPay -->
+            <div class="d-flex justify-content-center mb-4">
+                <div class="servicio-toggle" role="group" aria-label="Filtrar juegos por servicio">
+                    <button type="button" class="servicio-btn active" data-filter="web">Web Checkout</button>
+                    <button type="button" class="servicio-btn" data-filter="api">API Gateway</button>
+                </div>
+            </div>
+
+
+            <div class="row" style="text-align: center" id="suscripciones-row">
+
+                <!-- WEB CHECKOUT -->
+                <div class="col-md-4 mb-4" data-servicio="web">
+                    <div class="card h-100">
+                        
+                        <img src="https://www.dongee.com/tutoriales/content/images/2024/04/image-6.png" class="card-img-top" alt="streaming">
+                        
+                        <div class="card-body">
+                            <div class="suscrip">Pago + Suscripción</div>
+                            <div class="servicio1">Web Chekout</div>
+                            <h5 class="card-title">Streamings</h5>
+                            <p class="card-text">Adquiere planes</p>
+                            <a href="streaming.php" class="btn btn-producto" >Productos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4" data-servicio="web">
+                    <div class="card h-100">
+                        <div class="suscrip">Recurrencia</div>
+                        <img src="https://imagenes.20minutos.es/files/image_1280_720/files/fp/uploads/imagenes/2024/06/26/redes-sociales.r_d.566-624-11532.jpeg" class="card-img-top" alt="redes">
+                        <div class="card-body">
+                            <div class="servicio1">Web Chekout</div>
+                            <h5 class="card-title">Redes Sociales</h5>
+                            <p class="card-text">Adquiere Membresías y verificados</p>
+                            <a href="redes.php" class="btn btn-producto">Productos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4" data-servicio="web">
+                    <div class="card h-100">
+                        <div class="suscrip">Suscripción + Recurrencia</div>
+                        <img src="https://www.clarin.com/2025/06/02/r8YhhzdFc_0x750__1.jpg" class="card-img-top" alt="ia">
+                        <div class="card-body">
+                            <div class="servicio1">Web Chekout</div>
+                            <h5 class="card-title">IA's</h5>
+                            <p class="card-text">Mejora tus planes</p>
+                            <a href="ia.php" class="btn btn-producto">Productos</a>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-md-4 mb-4" data-servicio="web">
+                    <div class="card h-100 ">
+                        <div class="suscrip">Suscripción</div>
+                        <img src="https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2022/11/23/comparacion-de-precios-de-netflix-hbo-max-prime-video-y-otras-plataformas-para-ver-series-y-peliculas.jpeg" class="card-img-top" alt="otras streaming">
+                        <div class="card-body">
+                            <div class="servicio1">Web Chekout</div>
+                            <h5 class="card-title">Otros Streamings</h5>
+                            <p class="card-text">Adquiere planes</p>
+                            <a href="otras_streaming.php" class="btn btn-producto">Productos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API GATEWAY -->
+                <div class="col-md-4 mb-4" data-servicio="api">
+                    <div class="card h-100 ">
+                        <div class="suscrip">Pago + Suscripción</div>
+                        <img src="https://elfrente.com.co/content/images/2024/01/stream-1.jpg" class="card-img-top" alt="streamings gateway">
+                        <div class="card-body">
+                            <div class="servicio2">Api Gateway</div>
+                            <h5 class="card-title">Streamings</h5>
+                            <p class="card-text">Adquiere planes</p>
+                            <a href="../plataformas/streaming_gateway.php" class="btn btn-producto">Productos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4" data-servicio="api">
+                    <div class="card h-100">
+                        <div class="suscrip">Suscripción</div>
+                        <img src="https://i.blogs.es/e018be/portada/1366_2000.webp" class="card-img-top" alt="musica">
+                        <div class="card-body">
+                            <div class="servicio2">Api Gateway</div>
+                            <h5 class="card-title">Música</h5>
+                            <p class="card-text">Mejora tus planes de música</p>
+                            <a href="../plataformas/music_gateway.php" class="btn btn-producto">Productos</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </section>
+    <script>
+        (function () {
+            const buttons = Array.from(document.querySelectorAll('.servicio-btn'));
+            const cards = Array.from(document.querySelectorAll('[data-servicio]'));
+
+            function applyFilter(filter) {
+                cards.forEach(card => {
+                    const svc = card.getAttribute('data-servicio');
+                    card.style.display = (svc === filter) ? '' : 'none';
+                });
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    applyFilter(btn.getAttribute('data-filter'));
+                });
+            });
+
+            // Default: Web Checkout
+            applyFilter('web');
+        })();
+    </script>
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/validaciones.js"></script>
+</body>
+</html>

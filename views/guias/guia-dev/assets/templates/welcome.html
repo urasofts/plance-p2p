@@ -1,0 +1,29 @@
+<section id="welcomeScreen" class="welcome-guide-screen">
+  <aside class="guide-sidebar">
+    <div class="guide-brand">
+      <span class="guide-dot"></span>
+      <div>
+        <h2>API Explorer</h2>
+        <small>Guía de usuario</small>
+      </div>
+    </div>
+
+    <nav class="guide-nav">
+      <button class="guide-link active" data-target="g-home">Bienvenido</button>
+      <button class="guide-link" data-target="g-session">Crear sesión</button>
+      <button class="guide-link" data-target="g-process">Procesar pagos</button>
+      <button class="guide-link" data-target="g-links">Generar links</button>
+      <button class="guide-link" data-target="g-errors">Simular errores</button>
+    </nav>
+
+    <button id="goExplorerBtn" class="welcome-btn full">
+      <i class="bi bi-rocket-takeoff"></i>
+      Ir al Explorer
+    </button>
+  </aside>
+
+  <main class="guide-content" id="guideContent">
+    <!-- template-loader inyecta aquí:
+         g-home.html, g-session.html, g-process.html, g-links.html, g-errors.html -->
+  </main>
+</section>

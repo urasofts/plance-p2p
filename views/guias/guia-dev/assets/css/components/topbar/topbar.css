@@ -1,0 +1,414 @@
+/* ========================================
+   TOPBAR - BARRA DE NAVEGACIÓN SUPERIOR
+   ======================================== */
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-height);
+  gap: var(--space-md);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ========================================
+   BRAND / LOGO
+   ======================================== */
+
+.topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text);
+  transition: opacity var(--transition-speed) var(--ease);
+}
+
+.topbar .brand:hover {
+  opacity: 0.8;
+}
+
+.topbar .brand:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.brand-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-s);
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px var(--accent-s);
+  }
+  50% {
+    box-shadow: 0 0 0 6px var(--accent-s);
+  }
+}
+
+.brand-name {
+  font-family: var(--display);
+  font-size: var(--font-lg);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.brand-name .brand-highlight {
+  color: var(--accent);
+}
+
+.brand-sub {
+  font-size: var(--font-xs);
+  color: var(--muted);
+  font-weight: var(--weight-normal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: var(--space-xs);
+  opacity: 0.6;
+}
+
+/* ========================================
+   CENTER SECTION
+   ======================================== */
+
+.topbar .center-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  justify-content: center;
+}
+
+.topbar .center-section .status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-xs);
+  color: var(--muted);
+}
+
+.topbar .center-section .status-indicator .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.topbar .center-section .status-indicator .status-dot.warning {
+  background: var(--accent);
+}
+
+.topbar .center-section .status-indicator .status-dot.error {
+  background: var(--red);
+}
+
+/* ========================================
+   RIGHT SECTION
+   ======================================== */
+
+.topbar .right-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ========================================
+   ENVIRONMENT BADGE
+   ======================================== */
+
+.env-badge {
+  background: var(--green-s);
+  border: 1px solid rgba(0, 207, 180, 0.25);
+  color: var(--green);
+  font-size: var(--font-xs);
+  font-weight: var(--weight-bold);
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.env-badge .env-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-dot-env 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot-env {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.env-badge.dev {
+  background: var(--accent-s);
+  border-color: rgba(255, 108, 12, 0.25);
+  color: var(--accent);
+}
+
+.env-badge.prod {
+  background: var(--red-s);
+  border-color: rgba(224, 82, 82, 0.25);
+  color: var(--red);
+}
+
+.env-badge.staging {
+  background: var(--blue-s);
+  border-color: rgba(0, 98, 168, 0.25);
+  color: var(--blue);
+}
+
+/* ========================================
+   SIDEBAR TOGGLE
+   ======================================== */
+
+.sidebar-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: var(--radius-sm);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-speed) var(--ease);
+  font-size: var(--font-md);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sidebar-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-s);
+  transform: scale(1.05);
+}
+
+.sidebar-toggle:active {
+  transform: scale(0.9);
+}
+
+.sidebar-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sidebar-toggle .toggle-icon {
+  transition: transform var(--transition-speed) var(--ease);
+}
+
+.sidebar-toggle.active .toggle-icon {
+  transform: rotate(90deg);
+}
+
+/* Tooltip para el toggle */
+.sidebar-toggle[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-xs);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-speed) var(--ease);
+  border: 1px solid var(--border);
+}
+
+.sidebar-toggle[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ========================================
+   USER / PROFILE
+   ======================================== */
+
+.topbar .user-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  transition: all var(--transition-speed) var(--ease);
+  cursor: pointer;
+}
+
+.topbar .user-menu:hover {
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.topbar .user-menu .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--weight-bold);
+  font-size: var(--font-sm);
+  color: var(--text-inverse);
+  flex-shrink: 0;
+}
+
+.topbar .user-menu .user-name {
+  font-size: var(--font-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+}
+
+.topbar .user-menu .user-role {
+  font-size: var(--font-xs);
+  color: var(--muted);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0.5rem var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .brand-name {
+    font-size: var(--font-base);
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
+  .brand-dot {
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 0 0 3px var(--accent-s);
+  }
+
+  .topbar .center-section {
+    display: none;
+  }
+
+  .env-badge {
+    font-size: var(--font-xs);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .env-badge .env-text {
+    display: none;
+  }
+
+  .topbar .user-menu .user-name,
+  .topbar .user-menu .user-role {
+    display: none;
+  }
+
+  .sidebar-toggle {
+    width: 30px;
+    height: 30px;
+    font-size: var(--font-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0.4rem var(--space-sm);
+    min-height: 44px;
+  }
+
+  .brand-name {
+    font-size: var(--font-sm);
+  }
+
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    box-shadow: 0 0 0 2px var(--accent-s);
+  }
+
+  .sidebar-toggle {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-xs);
+  }
+
+  .env-badge {
+    padding: 0.15rem 0.4rem;
+    font-size: var(--font-xs);
+  }
+
+  .topbar .user-menu .avatar {
+    width: 24px;
+    height: 24px;
+    font-size: var(--font-xs);
+  }
+}
+
+/* ========================================
+   ACCESIBILIDAD - REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-dot {
+    animation: none !important;
+  }
+
+  .env-badge .env-dot {
+    animation: none !important;
+  }
+
+  .sidebar-toggle {
+    transition: none !important;
+  }
+
+  .topbar .brand {
+    transition: none !important;
+  }
+
+  .sidebar-toggle[data-tooltip]::after {
+    transition: none !important;
+  }
+}
+
+/* ========================================
+   DARK MODE - ya está cubierto por variables
+   ======================================== */

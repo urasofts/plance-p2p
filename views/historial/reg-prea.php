@@ -1,0 +1,191 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+require_once '../../php/conexion_be.php';
+if (!isset($conexion)) {
+    $conexion = plance_db_connect();
+    if (!$conexion) die("Error de conexión: " . mysqli_connect_error());
+}
+
+$correo_sesion = mysqli_real_escape_string($conexion, $_SESSION['correo'] ?? '');
+$resultado = mysqli_query($conexion, "SELECT * FROM reservaciones WHERE usuario_id = '$correo_sesion' ORDER BY created_at DESC");
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial — Preautorizaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<style>
+    body {
+        background-color: #000000;
+        color: white;
+        font-family: 'Barlow', sans-serif;
+    }
+    .navbar { background-color: #0f0f0fa9 !important; backdrop-filter: blur(8px); }
+
+    .tabla-container {
+        background: rgba(15,15,15,0.85);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 2rem auto;
+        max-width: 1100px;
+        backdrop-filter: blur(8px);
+    }
+    .tabla-titulo {
+        font-size: 1.3rem; font-weight: 700;
+        margin-bottom: 1rem; color: #6366f1;
+        display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .table { color: white; border-color: rgba(255,255,255,0.1); }
+    .table thead th {
+        background: rgba(0,0,0,0.79); color: #a5b4fc;
+        border-color: rgba(255,255,255,0.1);
+        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .table tbody tr { border-color: rgba(255,255,255,0.07); transition: background 0.15s; }
+    .table tbody tr:hover { background: rgba(255,255,255,0.05); }
+    .table tbody td { border-color: rgba(255,255,255,0.07); font-size: 0.88rem; vertical-align: middle; background: #1312129a; color: white; }
+
+    .badge-aprobada  { background: rgba(62,207,142,0.2);  color: #3ecf8e; }
+    .badge-pendiente { background: rgba(240,180,41,0.2);  color: #f0b429; }
+    .badge-rechazada { background: rgba(224,82,82,0.2);   color: #e05252; }
+
+    .estado-pill {
+        display: inline-block; padding: 0.2rem 0.65rem;
+        border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .preauth-pill {
+        display: inline-flex; align-items: center; gap: 0.3rem;
+        background: rgba(99,102,241,0.15); color: #a5b4fc;
+        border: 1px solid rgba(99,102,241,0.3);
+        padding: 0.15rem 0.5rem; border-radius: 20px;
+        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .sin-registros {
+        text-align: center; padding: 3rem;
+        color: #8a8d96; font-size: 0.95rem;
+    }
+    .btn-verificar {
+        background: rgba(99,102,241,0.15);
+        border: 1px solid rgba(99,102,241,0.4);
+        color: #a5b4fc; border-radius: 6px;
+        padding: 0.2rem 0.6rem; font-size: 0.75rem; font-weight: 700;
+        cursor: pointer; text-decoration: none;
+        display: inline-flex; align-items: center; gap: 0.3rem;
+        transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-verificar:hover { background: rgba(99,102,241,0.3); color: #a5b4fc; text-decoration: none; }
+    .alert-verify {
+        background: rgba(62,207,142,0.12); color: #3ecf8e;
+        border: 1px solid rgba(62,207,142,0.3);
+        border-radius: 8px; padding: 0.75rem 1rem;
+        margin-bottom: 1rem; font-size: 0.88rem;
+    }
+
+    /* Info banner */
+    .info-banner {
+        background: rgba(99,102,241,0.07);
+        border: 1px solid rgba(99,102,241,0.2);
+        border-left: 3px solid #6366f1;
+        border-radius: 0 8px 8px 0;
+        padding: 0.75rem 1rem; margin-bottom: 1.2rem;
+        font-size: 0.82rem; color: #a5b4fc; line-height: 1.6;
+    }
+</style>
+<body>
+    <?php
+        $nav_back_url  = "historial.php";
+        $nav_back_text = "Atrás";
+        $nav_base      = "../../";
+        require_once '../../php/navbar.php';
+    ?>
+
+    <div class="tabla-container">
+        <div class="tabla-titulo">
+            <i class="bi bi-shield-lock-fill" style="color:#6366f1;"></i>
+            Historial de Preautorizaciones
+        </div>
+
+        <div class="info-banner">
+            <i class="bi bi-info-circle-fill"></i>
+            Las <strong>preautorizaciones</strong> reservan el monto en tu tarjeta sin cobrarlo. El cargo real se realiza al hacer check-out en el hotel. Si ves estado <strong>Pendiente</strong>, puedes verificar el estado actual con el botón correspondiente.
+        </div>
+
+        <?php if (!empty($_SESSION['verify_msg'])): ?>
+        <div class="alert-verify"><?= htmlspecialchars($_SESSION['verify_msg']) ?></div>
+        <?php unset($_SESSION['verify_msg']); endif; ?>
+
+        <?php if (mysqli_num_rows($resultado) > 0): ?>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Habitación</th>
+                        <th>Descripción</th>
+                        <th>Monto</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($resultado)): ?>
+                    <tr>
+                        <td><span style="color:#8a8d96;">#<?= htmlspecialchars($row['id']) ?></span></td>
+                        <td style="font-weight:600;">🏨 <?= htmlspecialchars($row['habitacion']) ?></td>
+                        <td style="font-size:0.82rem;color:#8a8d96;max-width:200px;"><?= htmlspecialchars($row['descripcion']) ?></td>
+                        <td style="color:#6366f1;font-weight:700;">
+                            $<?= number_format($row['precio'], 0, ',', '.') ?>
+                            <span style="font-size:0.72rem;color:#8a8d96;"><?= htmlspecialchars($row['moneda']) ?></span>
+                        </td>
+                        <td><span class="preauth-pill"><i class="bi bi-shield-lock-fill"></i> Check-in</span></td>
+                        <td>
+                            <span class="estado-pill badge-<?= strtolower($row['estado']) ?>">
+                                <?= strtoupper($row['estado']) ?>
+                            </span>
+                        </td>
+                        <td style="color:#8a8d96;font-size:0.8rem;"><?= htmlspecialchars($row['created_at']) ?></td>
+                        <td>
+                            <?php if (strtolower($row['estado']) === 'pendiente' && !empty($row['session_id'])): ?>
+                            <a href="../../php/verificar_pago.php?tabla=reservaciones&id=<?= $row['id'] ?>&request_id=<?= urlencode($row['session_id']) ?>&redirect=../views/historial/reg-prea.php"
+                               class="btn-verificar">
+                                <i class="bi bi-arrow-repeat"></i> Verificar
+                            </a>
+                            <?php else: ?>
+                            <span style="color:#555860;font-size:0.75rem;">—</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php else: ?>
+            <div class="sin-registros">
+                <i class="bi bi-inbox" style="font-size:2rem;display:block;margin-bottom:0.5rem;"></i>
+                No tienes reservaciones registradas aún.
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

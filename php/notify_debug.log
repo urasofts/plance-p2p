@@ -1,0 +1,128 @@
+2026-05-19 22:25:52 - Received notify:
+
+
+2026-05-19 22:33:34 - Received notify:
+
+
+2026-05-20 02:14:35 - Received notify:
+
+
+2026-05-21 00:11:35 - Received notify:
+
+ 
+2026-05-22 21:14:23 - Received notify:
+
+
+2026-05-22 21:14:41 - Received notify:
+
+2026-06-05 22:09:37 - Received notify:
+
+
+2026-06-05 22:16:15 - Received notify:
+
+
+2026-06-26 17:58:36 - Received notify:
+
+
+2026-06-26 18:27:41 - Received notify:
+
+
+2026-06-26 18:27:48 - Received notify:
+
+
+2026-06-26 21:14:35 - Received notify:
+
+
+2026-07-16 19:37:15 | GET | 127.0.0.1
+
+
+2026-07-16 19:37:15 | GET | 127.0.0.1
+
+
+2026-07-16 19:37:58 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:37:58+02:00"},"requestId":123456,"reference":"7","signature":"sha256:d9a58e6da0e45fac6931a633c3b93853e9096943fa65c925372bcc69a9203118"}
+
+2026-07-16 19:37:58 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:37:58+02:00"},"requestId":123456,"reference":"7","signature":"44d4c1059b8bbbbb78c0e4599a1f87250fa82645"}
+
+2026-07-16 19:37:58 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:37:58+02:00"},"requestId":555,"reference":"PRE-ABCD1234","signature":"sha256:b02714eabfa62aee90652aa5ae4653c1949a495f1f956b084cea7d2123408179"}
+
+2026-07-16 19:37:58 | POST | 127.0.0.1
+{"status":{"status":"REJECTED","reason":"?C","message":"Rechazada","date":"2026-07-16T19:37:58+02:00"},"requestId":777,"reference":"DISP-AA11BB22","signature":"sha256:2ad21651c12d9909f9505e090cc53ed3e72230c9f3e3997a0f50fd2f421f9f49"}
+
+2026-07-16 19:37:58 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:37:58+02:00"},"requestId":123456,"reference":"7","signature":"sha256:0000000000000000000000000000000000000000000000000000000000000000"}
+
+2026-07-16 19:37:58 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:37:58+02:00"},"internalReference":999888,"reference":"REC-12","recurring":{"tries":3,"enabled":true},"signature":"sha256:2075a2945c4a7ec36ba27dfb8fdef2753e3f36bf662ae818d6d890cb33e3abab"}
+
+2026-07-16 19:39:02 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:39:02+02:00"},"requestId":123456,"reference":"7","signature":"sha256:c0b59a5a583f48237c2e456ec95469bda813ea1e8f284614493d3cb4e7c44d48"}
+
+2026-07-16 19:39:02 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:39:02+02:00"},"requestId":123456,"reference":"7","signature":"c6701e720499f8d5b9af23574ce40711ea395002"}
+
+2026-07-16 19:39:02 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:39:02+02:00"},"requestId":555,"reference":"PRE-ABCD1234","signature":"sha256:65694fbabfeb8cdf10350f36914b77318d1824f3f69a5fb5e030459970fab637"}
+
+2026-07-16 19:39:02 | POST | 127.0.0.1
+{"status":{"status":"REJECTED","reason":"?C","message":"Rechazada","date":"2026-07-16T19:39:02+02:00"},"requestId":777,"reference":"DISP-AA11BB22","signature":"sha256:2796ca294541af93f46acdfeec54f6ab7fe8d9f8e9ae1256688531b791a82528"}
+
+2026-07-16 19:39:02 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:39:02+02:00"},"requestId":123456,"reference":"7","signature":"sha256:0000000000000000000000000000000000000000000000000000000000000000"}
+
+2026-07-16 19:39:02 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"Aprobada","date":"2026-07-16T19:39:02+02:00"},"internalReference":999888,"reference":"REC-12","recurring":{"tries":3,"enabled":true},"signature":"sha256:dcab830dc91f38984a9196e41dc346f6a2b836aed57be32a65a44b3df438124d"}
+
+2026-07-16 19:40:15 | POST | 127.0.0.1
+"{}"
+
+2026-07-16 19:40:58 | POST | 127.0.0.1
+{"status":{"status":"APPROVED","reason":"00","message":"ok","date":"2026-07-16T19:40:58+02:00"},"requestId":123456,"reference":"7","signature":"sha256:764ab70a247041361d49b0f0e699b51cd3dce5de0d1789805ae8f87bcba12909"}
+
+2026-07-16 21:04:19 | GET | ::1
+
+
+2026-07-16 21:05:06 | GET | ::1
+
+
+2026-07-16 21:07:43 | GET | ::1
+
+
+2026-07-23 15:53:00 | GET | ::1
+
+
+2026-07-23 15:53:06 | GET | ::1
+
+
+2026-07-24 00:45:11 | POST | ::1
+{"status":{"status":"PAID","reason":200,"message":"Tienes una transacci\u00f3n en estado aprobado","date":"2026-07-23T17:45:13-05:00"},"linkId":820213,"reference":"PL-20C0FE43","signature":"3e5979dd080a6f94e850cc28e008ace11aabea4f1847d42df2bc517f59b43819"}
+
+2026-07-24 00:49:19 | GET | ::1
+
+
+2026-07-24 00:49:39 | GET | ::1
+
+
+2026-07-24 00:52:08 | POST | ::1
+{"status":{"status":"PAID","reason":200,"message":"Tienes una transacci\u00f3n en estado aprobado","date":"2026-07-23T17:52:10-05:00"},"linkId":820213,"reference":"PL-20C0FE43","signature":"fdb48fb2483f704d71da27135bb2b918566971d6c15c45499e85f7c6d558257e"}
+
+2026-07-24 00:57:10 | GET | ::1
+
+
+2026-07-24 19:07:21 | GET | ::1
+
+
+2026-07-24 23:37:52 | GET | ::1
+
+
+2026-07-28 23:40:57 | POST | ::1
+{"status":{"status":"APPROVED","message":"Testing notification","reason":"TT","date":"2026-07-28T21:19:22.502Z"},"requestId":3814719,"reference":"SUB-105","signature":"sha256:0c00b64e895184388e036a9e26b9099987ab690f40dd9b56a5c800cfe0499f9c"}
+
+2026-07-28 23:44:08 | POST | ::1
+{"status":{"status":"APPROVED","message":"Testing notification","reason":"TT","date":"2026-07-28T21:19:22.502Z"},"requestId":38147215,"reference":"ORD-000176","signature":"sha256:37a4f4aa589f29136f52105cd5e5519904afca2f9a695e49b7a3b8c75fb548dd"}
+
+2026-07-28 23:45:20 | POST | ::1
+{"status":{"status":"FAILED","message":"Testing notification","reason":"TT","date":"2026-07-28T21:19:22.502Z"},"requestId":38147215,"reference":"ORD-000176","signature":"sha256:ce7f8c34cc7103157729db103b30f86b73d6c9bc56c3f5024039df9dce3c37ea"}
+

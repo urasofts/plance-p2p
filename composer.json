@@ -1,0 +1,20 @@
+{
+    "name": "jair/plance",
+    "description": "Paquete",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jair\\Plance\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "John"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "nesbot/carbon": "^3.11"
+    }
+}

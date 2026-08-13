@@ -1,0 +1,217 @@
+:root {
+  /* Variables de layout */
+  --sidebar-width: clamp(280px, 20vw, 360px);
+  --sidebar-width-collapsed: 0px;
+  --right-panel-width: clamp(320px, 24vw, 420px);
+  --nav-height: 57px;
+  --transition-speed: 0.25s;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* App shell */
+#appShell {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Layout principal (Explorer) */
+.lab-layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(
+      --right-panel-width
+    );
+  min-height: calc(100vh - var(--nav-height));
+  width: 100%;
+  transition: grid-template-columns var(--transition-speed) ease;
+  background-color: var(--bg);
+}
+
+/* Sidebar oculta */
+.lab-layout.sidebar-hidden {
+  grid-template-columns: var(--sidebar-width-collapsed) minmax(0, 1fr) var(
+      --right-panel-width
+    );
+}
+
+.lab-layout.sidebar-hidden .panel-left {
+  display: none;
+}
+
+/* Paneles individuales */
+.panel-left {
+  background-color: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.panel-center {
+  background-color: var(--bg);
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.panel-right {
+  background-color: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* Scrollbar personalizado */
+.panel-left::-webkit-scrollbar,
+.panel-center::-webkit-scrollbar,
+.panel-right::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.panel-left::-webkit-scrollbar-track,
+.panel-center::-webkit-scrollbar-track,
+.panel-right::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+.panel-left::-webkit-scrollbar-thumb,
+.panel-center::-webkit-scrollbar-thumb,
+.panel-right::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.panel-left::-webkit-scrollbar-thumb:hover,
+.panel-center::-webkit-scrollbar-thumb:hover,
+.panel-right::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Desktop grande: más aire */
+@media (min-width: 1700px) {
+  :root {
+    --sidebar-width: clamp(300px, 19vw, 420px);
+    --right-panel-width: clamp(340px, 22vw, 480px);
+  }
+
+  .lab-layout {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(
+        --right-panel-width
+      );
+  }
+
+  .lab-layout.sidebar-hidden {
+    grid-template-columns: var(--sidebar-width-collapsed) minmax(0, 1fr) var(
+        --right-panel-width
+      );
+  }
+}
+
+/* Laptop / tablet horizontal */
+@media (max-width: 1280px) {
+  :root {
+    --sidebar-width: 300px;
+    --right-panel-width: 340px;
+  }
+
+  .lab-layout {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(
+        --right-panel-width
+      );
+  }
+
+  .lab-layout.sidebar-hidden {
+    grid-template-columns: var(--sidebar-width-collapsed) minmax(0, 1fr) var(
+        --right-panel-width
+      );
+  }
+}
+
+/* Tablet / móvil */
+@media (max-width: 1100px) {
+  .lab-layout {
+    grid-template-columns: 1fr;
+    min-height: calc(100vh - var(--nav-height));
+  }
+
+  .lab-layout.sidebar-hidden {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-left,
+  .panel-right {
+    display: none;
+  }
+
+  /* Mostrar en móvil como drawer o overlay */
+  .panel-left.mobile-visible,
+  .panel-right.mobile-visible {
+    display: block;
+    position: fixed;
+    top: var(--nav-height);
+    bottom: 0;
+    width: 85%;
+    max-width: 340px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    animation: slideIn 0.3s ease;
+  }
+
+  .panel-left.mobile-visible {
+    left: 0;
+    border-right: 1px solid var(--border);
+  }
+
+  .panel-right.mobile-visible {
+    right: 0;
+    border-left: 1px solid var(--border);
+  }
+
+  /* Overlay para móvil */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .mobile-overlay.active {
+    display: block;
+  }
+
+  /* Animaciones para móvil */
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 600px) {
+  .panel-left.mobile-visible,
+  .panel-right.mobile-visible {
+    width: 100%;
+    max-width: 100%;
+  }
+}

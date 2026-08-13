@@ -1,0 +1,37 @@
+/
+├─ lab_index.html
+├─ assets/
+│  ├─ templates/
+│  │  ├─ welcome.html
+│  │  ├─ app-shell.html
+│  │  └─ sections/
+│  │     ├─ g-home.html
+│  │     ├─ g-session.html
+│  │     ├─ g-process.html
+│  │     ├─ g-links.html
+│  │     └─ g-errors.html
+│  ├─ css/
+│  │  ├─ base/
+│  │  │  ├─ variables.css
+│  │  │  ├─ reset.css
+│  │  │  └─ layout.css
+│  │  └─ components/
+│  │     ├─ welcome/welcome.css
+│  │     ├─ topbar/topbar.css
+│  │     ├─ sidebar/sidebar.css
+│  │     ├─ request/request.css
+│  │     ├─ response/response.css
+│  │     └─ popup/popup.css
+│  └─ js/
+│     ├─ core/
+│     │  ├─ state.js
+│     │  ├─ constants.js
+│     │  └─ utils.js
+│     ├─ components/
+│     │  ├─ welcome/welcome.js
+│     │  ├─ topbar/topbar.js
+│     │  ├─ sidebar/sidebar.js
+│     │  ├─ request/request.js
+│     │  ├─ response/response.js
+│     │  └─ popup/popup.js
+│     └─ app.js

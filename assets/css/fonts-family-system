@@ -1,0 +1,97 @@
+/* --- FUENTES DEL SISTEMA (SIN LINKS EXTERNOS) --- */
+
+/* 1. System UI Stack (La que usan GitHub, Medium y Facebook) 
+   Se adapta al sistema: San Francisco en Mac/iOS y Segoe UI en Windows. */
+.font-system {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 2. El estándar moderno (Sans Serif)
+   Limpia, legible y ultra compatible. */
+.font-arial {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 3. La clásica elegante (Serif)
+   Ideal para periódicos, blogs serios o documentos oficiales. */
+.font-times {
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* 4. Humanista y ancha
+   Es muy legible en pantallas pequeñas y se ve más "amigable" que Arial. */
+.font-verdana {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+/* 5. Estilo sofisticado y delgado
+   Se ve muy bien en diseños minimalistas de Mac y Windows. */
+.font-trebuchet {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+/* 6. Estética de máquina de escribir o código
+   Perfecta para bloques de texto técnico o diseño industrial. */
+.font-mono {
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* 7. Estilo retro/condensado
+   Impactante para títulos si no quieres usar fuentes externas. */
+.font-impact {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+/* 8. Serif tradicional y robusta
+   Más moderna que Times New Roman, muy usada en libros digitales. */
+.font-georgia {
+  font-family: Georgia, serif;
+}
+/* --- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* --- FUENTES DE SISTEMA RECOMENDADAS (HIDDEN GEMS) --- */
+
+/* 1. Estilo "Apple/Minimalista" (San Francisco / Segoe UI)
+   Es la apuesta más segura hoy en día para que una web parezca profesional. */
+.estilo-moderno-ui {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 2. Estilo "Humanista" (Optima / Candara)
+   Es elegante, suave y se aleja de lo aburrido de Arial. 
+   Muy común en dispositivos Windows y Mac modernos. */
+.estilo-humanista {
+  font-family: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
+}
+
+/* 3. Estilo "Geométrico" (Century Gothic)
+   Es muy circular y moderna. Si no quieres usar Montserrat, esta es su 
+   mejor alternativa de sistema. */
+.estilo-redondeado {
+  font-family: "Century Gothic", AppleGothic, sans-serif;
+}
+
+/* 4. Estilo "Editorial Premium" (Palatino)
+   Es una Serif mucho más estilizada y hermosa que Times New Roman. 
+   Se usa mucho en revistas digitales de lujo. */
+.estilo-editorial {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+/* 5. Estilo "Condensado" (Franklin Gothic)
+   Ideal para títulos que necesitan ocupar poco espacio pero ser potentes. */
+.estilo-titular-fuerte {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+/* 6. La mejor "Monospace" de sistema (Consolas / Monaco)
+   Mucho más bonita y legible que Courier New para mostrar código. */
+.estilo-codigo-pro {
+  font-family: Consolas, Monaco, "Lucida Console", monospace;
+}
+
+/* 7. Estilo "Clásico Suizo" (Helvetica)
+   Si estás en un Mac, Helvetica es la fuente por excelencia. 
+   En Windows usará Arial como respaldo, que es su "clon". */
+.estilo-helvetica {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

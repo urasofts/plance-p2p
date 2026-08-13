@@ -1,0 +1,51 @@
+/* --- LAS 10 FUENTES MÁS POPULARES DE GOOGLE FONTS --- */
+
+/* 1. La reina de la web (Versátil y moderna) */
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* 2. Ideal para interfaces limpias y minimalistas */
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+/* 3. Muy usada en blogs y sitios corporativos por su legibilidad */
+.font-open-sans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* 4. Estilo geométrico, perfecta para marcas modernas y tecnología */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* 5. Elegante y profesional con un toque amigable */
+.font-lato {
+  font-family: 'Lato', sans-serif;
+}
+
+/* 6. La mejor Serif (con patitas) para textos largos y elegantes */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* 7. Excelente para títulos fuertes y compactos */
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+}
+
+/* 8. Estilo geométrico circular, muy de moda en startups */
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 9. Una Serif clásica y muy legible en tamaños pequeños */
+.font-lora {
+  font-family: 'Lora', serif;
+}
+
+/* 10. La mejor para mostrar código o estética técnica */
+.font-roboto-mono {
+  font-family: 'Roboto Mono', monospace;
+}

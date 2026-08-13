@@ -1,0 +1,49 @@
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+}
+.paginacion .pag-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 0.6rem;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    color: #c7c9cf;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Barlow', sans-serif;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.paginacion .pag-btn:hover:not(:disabled):not(.active) {
+    border-color: var(--pag-accent, #f0b429);
+    color: var(--pag-accent, #f0b429);
+}
+.paginacion .pag-btn.active {
+    background: var(--pag-accent, #f0b429);
+    border-color: var(--pag-accent, #f0b429);
+    color: #0a0a0a;
+    cursor: default;
+}
+.paginacion .pag-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+.paginacion .pag-ellipsis {
+    color: #555860;
+    padding: 0 0.2rem;
+    font-weight: 700;
+}
+.paginacion .pag-info {
+    margin-left: 0.6rem;
+    color: #8a8d96;
+    font-size: 0.78rem;
+}

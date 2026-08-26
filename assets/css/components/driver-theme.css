@@ -1,0 +1,38 @@
+/* Tema de Driver.js (tutoriales guiados) alineado con la paleta de Plance
+   (usa las variables --pt-* generadas por php/theme.php, con fallback oscuro) */
+
+.driver-popover {
+    background: var(--pt-bg-surface, #16181c);
+    color: var(--pt-text, #f0f1f3);
+    border-radius: 16px;
+    border: 1px solid #f07229;
+}
+
+.driver-popover-title {
+    color: #f07229;
+}
+
+.driver-popover-description {
+    color: var(--pt-text-sec, #8a8d96);
+}
+
+.driver-popover-progress-text {
+    color: var(--pt-text, #f0f1f3);
+}
+
+.driver-popover-navigation-btns button {
+    background: var(--pt-bg-card, #1e2128);
+    color: var(--pt-text, #f0f1f3);
+    border: 1px solid var(--pt-border, #2e3038);
+    text-shadow: none;
+}
+
+.driver-popover-navigation-btns button:hover {
+    background: rgba(240, 114, 41, 0.15);
+    color: #f07229;
+}
+
+.driver-popover-close-btn:focus {
+    outline: none;
+    box-shadow: none;
+}

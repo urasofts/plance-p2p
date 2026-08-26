@@ -29,6 +29,10 @@
   
     <?php $theme_seccion = 'home'; require_once __DIR__ . '/php/theme.php'; ?>
    <!-- <link rel="stylesheet" href="assets/css/estilov=<?php echo filemtime(__DIR__ . '/assets/css/estilo'); ?>"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="assets/css/components/driver-theme.css?v=<?php echo filemtime(__DIR__ . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 
   <!-- Logica NAV -->
@@ -432,7 +436,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
         <!-- Speed Dial tipo navegador -->
-        <div class="speed-dial-grid">
+        <div class="speed-dial-grid" id="home-speed-dial">
 
             <a href="sesiones.php" class="speed-dial-item" title="Sesiones">
                 <div class="speed-dial-icon">
@@ -551,5 +555,7 @@ if (isset($_SESSION['user_id'])) {
         })();
     </script>
     <script src="assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="assets/js/components/driver-tours/tour-home.js"></script>
 </body>
 </html>

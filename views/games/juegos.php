@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
     <link rel="stylesheet" href="../../assets/css/styles-juegos.css">
     <?php $theme_seccion = 'tiendas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 
 
@@ -224,7 +228,7 @@
 
             <!-- Botones para filtrar por servicio PlaceToPay -->
             <div class="d-flex justify-content-center mb-4">
-                <div class="servicio-toggle" role="group" aria-label="Filtrar juegos por servicio">
+                <div class="servicio-toggle" role="group" aria-label="Filtrar juegos por servicio" id="tipo-flujo">
                     <button type="button" class="servicio-btn active" data-filter="web">Web Checkout</button>
                     <button type="button" class="servicio-btn" data-filter="api">API Gateway</button>
                 </div>
@@ -233,9 +237,9 @@
             <div class="row" style="text-align: center;" id="games-row">
 
                 <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100"> 
-                        
-                        <img src="https://media.tycsports.com/files/2021/07/15/307410/cod-mobile-todas-las-novedades-de-la-beta-de-julio-_862x485.jpg" class="card-img-top" alt="Juego 1" style="height: 100px width 100px;"><div class="pagob">Pago Basico</div>
+                    <div class="card h-100" id="tarjeta">
+
+                        <img src="https://media.tycsports.com/files/2021/07/15/307410/cod-mobile-todas-las-novedades-de-la-beta-de-julio-_862x485.jpg" class="card-img-top" alt="Juego 1" style="height: 100px width 100px;"><div class="pagob" id="tipo-servicio-basico">Pago Basico</div>
                             
                         <div class="card-body">
                             <div class="servicio1">Web Chekout</div>
@@ -286,7 +290,7 @@
                     <div class="card h-100">
                         <img src="https://cdn.mos.cms.futurecdn.net/xaL9drgBrarwALudYvLpgZ-650-80.jpg.webp" class="card-img-top" alt="EA Sports">
                         <div class="card-body">
-                            <div class="pagom">Pago Mixto</div>
+                            <div class="pagom" id="tipo-servicio-mixto">Pago Mixto</div>
                             <div class="servicio1">Web Chekout</div>
                             <h5 class="card-title">Rainbow Six Siege</h5>
                             <p class="card-text">Compra puntos y más</p>
@@ -355,5 +359,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/validaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-juegos.js"></script>
 </body>
 </html>

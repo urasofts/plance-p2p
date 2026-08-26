@@ -26,6 +26,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
+
 </head>
 <style>
     /* Call of Duty Mobile — acento dorado */
@@ -63,7 +67,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <section class="products-panel">
 
       <!-- Products Grid -->
-      <div class="section-block">
+      <div class="section-block" id="bloque-productos">
         <p class="section-label">Elige el producto</p>
         <div class="products-grid" id="productsGrid">
 
@@ -455,6 +459,8 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
   })();
   </script>
   <script src="../../assets/js/code-block.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+  <script src="../../assets/js/components/driver-tours/tour-cod.js"></script>
 </body>
 </html>
 

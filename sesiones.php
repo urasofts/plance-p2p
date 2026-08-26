@@ -22,6 +22,10 @@
     <!-- Tu CSS -->
     <link rel="stylesheet" href="assets/css/estilos?v=<?php echo filemtime(__DIR__ . '/assets/css/e'); ?>">
     <?php $theme_seccion = 'sesiones'; require_once __DIR__ . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="assets/css/components/driver-theme.css?v=<?php echo filemtime(__DIR__ . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 
 
@@ -318,7 +322,7 @@
     </nav><br>
 
         <!-- Speed Dial tipo navegador  -->
-        <div class="speed-dial-grid">
+        <div class="speed-dial-grid" id="sesiones-speed-dial">
 
             <div class="speed-dial-item" title="Juegos Mobiles">
                 <a href="views/games/juegos.php" class="speed-dial-link">
@@ -433,6 +437,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/validaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="assets/js/components/driver-tours/tour-sesiones.js"></script>
     <script>
         document.querySelectorAll('.detalles-toggle').forEach(function (btn) {
             btn.addEventListener('click', function (e) {

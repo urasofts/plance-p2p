@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
 
     <?php $theme_seccion = 'textiles'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 
 
@@ -195,7 +199,7 @@
 
             <!-- Botones para filtrar por servicio PlaceToPay -->
             <div class="d-flex justify-content-center mb-4">
-                <div class="servicio-toggle" role="group" aria-label="Filtrar ropa por servicio">
+                <div class="servicio-toggle" role="group" aria-label="Filtrar ropa por servicio" id="tipo-flujo">
                     <button type="button" class="servicio-btn active" data-filter="web">API Link de pagos</button>
                     <button type="button" class="servicio-btn" data-filter="api">N/A</button>
                 </div>
@@ -204,9 +208,9 @@
             <div class="row" style="text-align: center;" id="games-row">
 
                 <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100"> 
-                        
-                        <img src="https://static.designboom.com/wp-content/uploads/2016/02/designstudio-premier-league-logo-graphic-design-designboom-09.jpg" class="card-img-top" alt="Juego 1" style="height: 100px width 100px;"><div class="linkp">API Link de pagos</div>
+                    <div class="card h-100" id="tarjeta">
+
+                        <img src="https://static.designboom.com/wp-content/uploads/2016/02/designstudio-premier-league-logo-graphic-design-designboom-09.jpg" class="card-img-top" alt="Juego 1" style="height: 100px width 100px;"><div class="linkp" id="tipo-link-pagos">API Link de pagos</div>
                             
                         <div class="card-body">
                             <div class="servicio1">API Link de pagos</div>
@@ -294,5 +298,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/validaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-textiles.js"></script>
 </body>
 </html>

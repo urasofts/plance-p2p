@@ -22,6 +22,10 @@
     <!-- Tu CSS -->
     <link rel="stylesheet" href="assets/css/estilo.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estils.css'); ?>">
     <?php $theme_seccion = 'plataformas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 
 
@@ -207,7 +211,7 @@
 
             <!-- Botones para filtrar por servicio PlaceToPay -->
             <div class="d-flex justify-content-center mb-4">
-                <div class="servicio-toggle" role="group" aria-label="Filtrar juegos por servicio">
+                <div class="servicio-toggle" role="group" aria-label="Filtrar juegos por servicio" id="tipo-flujo">
                     <button type="button" class="servicio-btn active" data-filter="web">Web Checkout</button>
                     <button type="button" class="servicio-btn" data-filter="api">API Gateway</button>
                 </div>
@@ -218,12 +222,12 @@
 
                 <!-- WEB CHECKOUT -->
                 <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100">
-                        
+                    <div class="card h-100" id="tarjeta">
+
                         <img src="https://www.dongee.com/tutoriales/content/images/2024/04/image-6.png" class="card-img-top" alt="streaming">
-                        
+
                         <div class="card-body">
-                            <div class="suscrip">Pago + Suscripción</div>
+                            <div class="suscrip" id="tipo-suscripcion-mixta">Pago + Suscripción</div>
                             <div class="servicio1">Web Chekout</div>
                             <h5 class="card-title">Streamings</h5>
                             <p class="card-text">Adquiere planes</p>
@@ -234,7 +238,7 @@
 
                 <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100">
-                        <div class="suscrip">Recurrencia</div>
+                        <div class="suscrip" id="tipo-suscripcion-recurrencia">Recurrencia</div>
                         <img src="https://imagenes.20minutos.es/files/image_1280_720/files/fp/uploads/imagenes/2024/06/26/redes-sociales.r_d.566-624-11532.jpeg" class="card-img-top" alt="redes">
                         <div class="card-body">
                             <div class="servicio1">Web Chekout</div>
@@ -334,5 +338,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/validaciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-suscripciones.js"></script>
 </body>
 </html>

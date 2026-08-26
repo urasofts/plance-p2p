@@ -132,6 +132,55 @@ $nav_seccion_actual = $nav_current_dir . '/' . $nav_current_file;
         z-index: 1030;
     }
 
+    /* ── Controles del tutorial (Driver.js) ── */
+    body.tutorial-active .navbar { z-index: 1000000001; }
+    body.tutorial-active .driver-popover { z-index: 1000000002; }
+    body.tutorial-active #navbar-tutorial-actions,
+    body.tutorial-active #navbar-tutorial-actions .btn-tutorial {
+        z-index: 1000000003;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    .navbar-tutorial-actions {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 2;
+    }
+
+    .btn-tutorial {
+        background-color: #f07229;
+        color: #0d0e10;
+        border: 1px solid #f07229;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.82rem;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn-tutorial:hover {
+        background-color: #ff8a4d;
+        border-color: #ff8a4d;
+    }
+
+    @media (max-width: 767px) {
+        .navbar-tutorial-actions {
+            position: static;
+            transform: none;
+            justify-content: center;
+            margin: 6px 0;
+            width: 100%;
+            order: 10;
+        }
+    }
+
 
     /* ── NAVBAR AVATAR ── */
     .nav-avatar-wrap {
@@ -280,6 +329,15 @@ $nav_seccion_actual = $nav_current_dir . '/' . $nav_current_file;
     <a href="<?= htmlspecialchars($nav_back_url) ?>" class="btn" style="color: black; color: #f06129;">
         <i class="fa-solid fa-circle-arrow-left fs-6"></i> <?= htmlspecialchars($nav_back_text) ?>
     </a>  <!---->
+
+    <div id="navbar-tutorial-actions" class="navbar-tutorial-actions">
+        <button id="navbar-iniciar-tutorial" type="button" class="btn-tutorial">
+            <i class="bi bi-question-circle"></i> Iniciar tutorial
+        </button>
+        <button id="navbar-cerrar-tutorial" type="button" class="btn-tutorial" hidden>
+            <i class="bi bi-x-circle"></i> Cerrar tutorial
+        </button>
+    </div>
 
     <?php if ($nav_mostrar_secciones): ?>
     <!-- Acceso rápido para saltar a otra sección (juegos, plataformas, textiles, reservaciones, dispersiones) -->

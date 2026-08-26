@@ -158,6 +158,7 @@ export function updateSimModeOptions() {
     "eXH",
   ]);
   const linkOptions = new Set([
+    "ok",
     "e101",
     "e102",
     "e103",

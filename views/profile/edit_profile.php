@@ -220,8 +220,8 @@ unset($_SESSION['profile_msg'], $_SESSION['profile_msg_type']);
             <div class="pcard-title">📸 Foto de perfil</div>
             <div class="foto-section">
 
-                <?php if (!empty($row['profile_image']) && file_exists('../uploads/' . $row['profile_image'])): ?>
-                    <img src="../uploads/<?= htmlspecialchars($row['profile_image']) ?>" class="avatar-img" alt="Foto">
+                <?php if (!empty($row['profile_image']) && file_exists('../../uploads/' . $row['profile_image'])): ?>
+                    <img src="../../uploads/<?= htmlspecialchars($row['profile_image']) ?>" class="avatar-img" alt="Foto">
                 <?php else: ?>
                     <div class="avatar-initials"><?= strtoupper(substr($row['usuario'], 0, 1)) ?></div>
                 <?php endif; ?>

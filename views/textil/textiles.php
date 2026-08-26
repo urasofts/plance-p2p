@@ -22,7 +22,8 @@
 
     <!-- Tu CSS -->
     <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <?php $theme_seccion = 'textiles'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 
 
@@ -148,18 +149,20 @@
         color: #f36eff;
     }
     .second-title {
-        background: var(--pt-bg-base);
-        border-radius:0 12px 12px 0;
-        padding:0.9rem 1.2rem;
-        margin: 10px;
-        gap:0.8rem;
-        font-size: 1.00rem;
-        color: var(--pt-text);  
-        line-height:1.4;
-
+        background: linear-gradient(135deg, rgba(182, 92, 255, 0.20), rgba(232, 97, 250, 0.08));
+        border: 1px solid rgba(182, 92, 255, 0.35);
+        border-radius: 14px;
+        padding: 1.25rem 1.75rem;
+        margin: 0 10px 20px;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1.05rem;
+        color: var(--pt-text);
+        line-height: 1.5;
+        box-shadow: 0 6px 22px rgba(182, 92, 255, 0.18);
     }
-    .second-title i{color: rgb(217, 93, 255);font-size:1.2rem;flex-shrink:0;}
-    .second-title strong{color: purple;}
+    .second-title i{color: rgb(217, 93, 255);font-size:1.7rem;flex-shrink:0;}
+    .second-title strong{color: rgb(217, 93, 255); font-size: 1.12rem;}
     
 </style>
 
@@ -174,7 +177,7 @@
         $nav_base      = "../../";
         require_once '../../php/navbar.php';
     ?>
-    <div class="container text-center" >
+    <div class="container-fluid text-center px-4" >
        <div class="second-title ">
         <i class="fa-solid fa-calendar-check fs-3"></i>
         <div>
@@ -234,7 +237,7 @@
                             <div class="servicio1">API Link de pagos</div>
                             <h5 class="card-title">Bundesliga</h5>
                             <p class="card-text">Compra equipaciones de tus equipos alemanes favoritos</p>
-                            <a href="../games/efootball.php" class="btn btn-producto">Productos</a>
+                            <a href="../textil/bundesliga.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>
                 </div>
@@ -246,7 +249,7 @@
                             <div class="servicio1">API Link de pagos</div>
                             <h5 class="card-title">Serie A</h5>
                             <p class="card-text">Compra equipaciones de tus equipos italianos favoritos</p>
-                            <a href="../games/easport.php" class="btn btn-producto">Productos</a>                        
+                            <a href="../textil/seriea.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>
                 </div>

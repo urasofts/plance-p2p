@@ -83,6 +83,7 @@ if (!empty($token)) {
     $mensaje = 'Tu tarjeta fue tokenizada exitosamente. Tu suscripción está completamente activada.';
     $color   = '#3ecf8e';
     $bg_icon = 'rgba(62,207,142,0.15)';
+    $color_rgb = '62, 207, 142';
     $icono   = '✅';
 } else {
     $exito   = false;
@@ -90,6 +91,7 @@ if (!empty($token)) {
     $mensaje = 'No logramos tokenizar tu tarjeta. Puedes intentarlo nuevamente desde tu historial.';
     $color   = '#e05252';
     $bg_icon = 'rgba(224,82,82,0.15)';
+    $color_rgb = '224, 82, 82';
     $icono   = '❌';
 }
 
@@ -107,81 +109,14 @@ unset($_SESSION['token_requestId'], $_SESSION['token_sub_id']);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <?php require_once dirname(__DIR__) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../assets/css/styles-retorno.css">
     <style>
         :root {
-            --bg-base:    #0d0e10;
-            --bg-surface: #16181c;
-            --bg-card:    #1e2128;
-            --border:     #2e3038;
-            --text-primary:   #f0f1f3;
-            --text-secondary: #8a8d96;
-            --font-display: 'Barlow', sans-serif;
-            --font-body:    'Barlow', sans-serif;
+            --ret-color:     <?= $color ?>;
+            --ret-bg-icon:   <?= $bg_icon ?>;
+            --ret-color-rgb: <?= $color_rgb ?>;
+            --ret-maxw:      420px;
         }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background-color: var(--pt-bg-base);
-            color: var(--pt-text);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-        .result-card {
-            background: var(--pt-boxitem);
-            /* border: 1px solid var(--pt-border); */
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            animation: fadeUp 0.4s ease both;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .result-icon {
-            font-size: 3rem; width: 80px; height: 80px;
-            border-radius: 50%; display: flex;
-            align-items: center; justify-content: center;
-            margin: 0 auto 1.2rem;
-            background: <?= $bg_icon ?>;
-        }
-        .result-title {
-            font-family: var(--font-display);
-            font-size: 2rem; font-weight: 800;
-            color: <?= $color ?>;
-            margin-bottom: 0.5rem; letter-spacing: 0.02em;
-        }
-        .result-message {
-            font-size: 0.95rem;
-            color: var(--pt-text);
-            margin-bottom: 1.5rem;
-        }
-        .btn-home {
-            display: inline-block; padding: 0.75rem 2rem;
-            background: <?= $color ?>; color: #0d0e10;
-            border: none; border-radius: 8px;
-            font-family: var(--font-display); font-size: 1rem;
-            font-weight: 800; letter-spacing: 0.05em;
-            text-transform: uppercase; text-decoration: none;
-            transition: opacity 0.2s; margin-right: 0.5rem;
-        }
-        .btn-home:hover { opacity: 0.85; color: #0d0e10; text-decoration: none; }
-        .btn-volver {
-            display: inline-block; padding: 0.75rem 1.5rem;
-            background: transparent; color: var(--pt-text-sec);
-            border: 1px solid var(--pt-border); border-radius: 8px;
-            font-family: var(--font-display); font-size: 1rem;
-            font-weight: 700; letter-spacing: 0.05em;
-            text-transform: uppercase; text-decoration: none;
-            transition: all 0.2s;
-        }
-        .btn-volver:hover { border-color: <?= $color ?>; color: <?= $color ?>; text-decoration: none; }
     </style>
 </head>
 <body>

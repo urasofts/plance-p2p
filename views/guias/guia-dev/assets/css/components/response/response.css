@@ -79,7 +79,7 @@
   border-radius: 50%;
   flex-shrink: 0;
   transition: all var(--transition-speed) var(--ease);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(var(--overlay-rgb), 0.05);
 }
 
 .sdot.idle {
@@ -237,7 +237,7 @@
 }
 
 .resp-body .json-line:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(var(--overlay-rgb), 0.02);
 }
 
 /* ========================================
@@ -363,7 +363,7 @@
    ======================================== */
 
 .resp-body .jk {
-  color: #93c5fd;
+  color: var(--json-key);
 }
 
 .resp-body .js {
@@ -371,7 +371,7 @@
 }
 
 .resp-body .jn {
-  color: #fca5a5;
+  color: var(--json-number);
 }
 
 .resp-body .jb {

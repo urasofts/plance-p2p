@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Location: ../../index.php"); exit(); }
 ?>
@@ -14,124 +14,18 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-plataformas-gateway.css">
+    <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
 </head>
 <style>
+    /* Streaming API Gateway — acento ámbar */
     :root {
-        --bg-base:var(--pt-bg-base); --bg-surface:var(--pt-bg-surface); --bg-card:var(--pt-navbar);
-        --bg-card-hover:var(--pt-hover); --bg-selected:rgba(245, 158, 11, 0.1); --border:var(--pt-border);
-        --accent:#f59e0b; --accent-glow:rgba(245,158,11,0.25); --accent-dark:#d97706;
-        --text-primary:var(--pt-text); --text-secondary:var(--pt-text-sec); --text-muted:var(--pt-text-sec);
-        --font-display:'Barlow',sans-serif; --font-body:'Barlow',sans-serif;
-        --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
+        --plat-accent:      #f59e0b;
+        --plat-accent-rgb:  245, 158, 11;
+        --plat-accent-dark: #d97706;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background-color:var(--bg-base);color:var(--text-primary);font-family:var(--font-body);min-height:100vh;-webkit-font-smoothing:antialiased;}
-    .navbar{background-color:var(--pt-navbar)!important;backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-
-    /* AVISO SEGURIDAD */
-    .security-warning {
-        background: rgba(224,82,82,0.08);
-        border-left: 4px solid #e05252;
-        border-radius: 0 8px 8px 0;
-        padding: 0.9rem 1.2rem;
-        margin: 1rem 2rem;
-        display: flex; gap: 0.8rem; align-items: flex-start;
-        font-size: 0.83rem; color: var(--text-primary); line-height: 1.6;
-    }
-    .security-warning i { color: #e05252; font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
-    .security-warning strong { color: #e05252; }
-    .security-warning-header{display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;user-select:none;}
-    .security-warning-toggle{color:#e05252;font-size:1rem;transition:transform 0.3s ease;margin-left:auto;padding-left:1rem;}
-    .security-warning-toggle.collapsed{transform:rotate(-90deg);}
-    .security-warning-content{margin-top:0.5rem;overflow:hidden;max-height:500px;transition:max-height 0.3s ease,opacity 0.3s ease;opacity:1;}
-    .security-warning-content.collapsed{max-height:0;opacity:0;margin-top:0;}
-
-    .game-banner{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 2rem;background:var(--bg-surface);border-bottom:1px solid var(--border);gap:1rem;}
-    .game-banner__tag{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:0.04em;color:var(--text-primary);}
-    .gw-badge{background:rgba(245,158,11,0.15);color:var(--accent);font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;letter-spacing:0.05em;font-family:var(--font-display);}
-
-    .shop-layout{display:grid;grid-template-columns:1fr 370px;gap:1.5rem;max-width:1200px;margin:1.5rem auto;padding:0 1.5rem 3rem;align-items:start;}
-
-    .section-block{margin-bottom:1.8rem;}
-    .platform-header{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
-    .platform-header span{font-family:var(--font-display);font-size:1.1rem;font-weight:800;letter-spacing:0.04em;color:var(--text-primary);}
-
-    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;}
-    .product-card{position:relative;background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1rem 0.85rem 0.9rem;cursor:pointer;transition:all 0.18s ease;display:flex;flex-direction:column;gap:0.15rem;overflow:hidden;}
-    .product-card:hover{background:var(--bg-card-hover);border-color:rgba(245,158,11,0.4);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
-    .product-card.selected{background:var(--pt-border);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 4px 24px var(--accent-glow);}
-    .product-card.selected::after{content:'✔';position:absolute;top:0.5rem;right:0.55rem;width:18px;height:18px;background:var(--accent);border-radius:50%;color:#0d0e10;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:900;line-height:18px;text-align:center;}
-    .badge-popular{position:absolute;top:-1px;left:-1px;background:var(--accent);color:#0d0e10;font-family:var(--font-display);font-size:0.68rem;font-weight:800;letter-spacing:0.05em;padding:0.15rem 0.5rem;border-radius:var(--radius-sm) 0 var(--radius-sm) 0;}
-    .product-card__platform{font-size:0.7rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.1rem;}
-    .product-card__pts{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--text-primary);line-height:1.1;}
-    .product-card__label{font-size:0.72rem;color:var(--text-secondary);margin-bottom:0.3rem;}
-    .product-card__price{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:0.35rem;flex-wrap:wrap;margin-top:auto;}
-    .sub-tag{background:rgba(245,158,11,0.12);color:var(--accent);font-size:0.65rem;font-weight:700;padding:0.1rem 0.35rem;border-radius:3px;}
-
-    /* CHECKOUT */
-    .checkout-panel{display:flex;flex-direction:column;gap:1rem;position:sticky;top:16px;}
-    .checkout-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem 1.3rem;}
-    .checkout-product-name{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--text-primary);margin-bottom:0.6rem;}
-    .checkout-price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;}
-    .checkout-price{font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--text-primary);}
-    .checkout-divider{height:1px;background:var(--border);margin:0.7rem 0;}
-
-    /* Tabs método pago */
-    .payment-tabs{display:flex;gap:0.5rem;margin-bottom:0.8rem;}
-    .payment-tab{flex:1;padding:0.45rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);color:var(--text-secondary);font-family:var(--font-body);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem;}
-    .payment-tab:hover{border-color:var(--accent);color:var(--text-primary);}
-    .payment-tab.active{border-color:var(--accent);background:rgba(245,158,11,0.1);color:var(--accent);}
-
-    .form-section{display:none;}
-    .form-section.active{display:block;}
-
-    .field-group{margin-bottom:0.65rem;}
-    .field-label{font-size:0.73rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.25rem;display:block;}
-    .field-input{width:100%;background:var(--pt-border);border:1.5px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:var(--font-body);font-size:0.83rem;padding:0.4rem 0.7rem;outline:none;transition:border-color 0.2s;}
-    .field-input:focus{border-color:var(--accent);}
-    .field-input::placeholder{color:var(--text-muted);}
-    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
-
-    .section-label-sm{font-family:var(--font-display);font-size:0.73rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:0.5rem;display:block;}
-
-    .btn-pagar{width:100%;margin-top:0.8rem;padding:0.8rem;background:var(--accent);border:none;border-radius:var(--radius-md);color:#0a0a0b;font-family:var(--font-display);font-size:1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.18s ease;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
-    .btn-pagar:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);}
-    .sim-mode-wrap{margin-top:0.9rem;}
-    .sim-mode-label{font-family:var(--font-display);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:0.45rem;display:block;}
-    .sim-mode-toggle{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;background:var(--bg-card);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:0.3rem;}
-    .sim-mode-opt{border:none;background:transparent;cursor:pointer;padding:0.55rem 0.4rem;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:0.8rem;font-weight:600;color:var(--text-secondary);transition:all 0.18s ease;display:flex;align-items:center;justify-content:center;gap:0.35rem;}
-    .sim-mode-opt:hover{background-color: rgba(255, 194, 89, 0.12); ;color:var(--text-primary);}
-    .sim-mode-opt.active{background:rgba(245,158,11,0.12);color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent);}
-    .sim-mode-hint{font-size:0.72rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.4;}
-    .security-note{display:flex;align-items:center;gap:0.4rem;font-size:0.73rem;color:var(--text-muted);margin-top:0.5rem;justify-content:center;}
-
-    /* 3DS */
-    .tds-badge{background:rgba(60, 255, 0, 0.15);color: #03ff03; font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;letter-spacing:0.05em;font-family:var(--font-display);}
-    .tds-check-wrap{display:flex;align-items:flex-start;gap:0.5rem;padding:0.7rem 0.8rem;margin-top:0.8rem;background:rgba(245,158,11,0.06);border:1.5px solid rgba(245,158,11,0.2);border-radius:8px;cursor:pointer;}
-    .tds-check-wrap input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);flex-shrink:0;margin-top:2px;}
-    .tds-check-label{font-size:0.81rem;color:#c99010;line-height:1.4;}
-    .tds-check-label strong{color:var(--accent);}
-    .tds-panel{display:none;background:rgba(245,158,11,0.05);border:1.5px solid rgba(245,158,11,0.25);border-radius:10px;padding:1rem;margin-top:0.8rem;text-align:center;animation:fadeSlideIn 0.25s ease;}
-    .tds-panel.show{display:block;}
-    .tds-panel-title{font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--accent);letter-spacing:0.04em;margin-bottom:0.3rem;}
-    .tds-panel-sub{font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.8rem;line-height:1.5;}
-    .tds-inputs{display:flex;gap:0.4rem;justify-content:center;margin-bottom:0.8rem;}
-    .tds-digit{width:42px;height:48px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:1.3rem;font-weight:800;text-align:center;outline:none;transition:border-color 0.2s;font-family:var(--font-display);}
-    .tds-digit:focus{border-color:var(--accent);}
-    .tds-digit.error{border-color:#e05252;}
-    .tds-digit.success{border-color:#3ecf8e;}
-    .tds-hint{font-size:0.75rem;color:var(--text-muted);margin-bottom:0.6rem;}
-    .tds-hint span{color:var(--accent);font-weight:700;}
-    .tds-status{font-size:0.82rem;font-weight:700;padding:0.4rem 0.8rem;border-radius:6px;display:none;margin-bottom:0.5rem;}
-    .tds-status.ok{display:block;background:rgba(62,207,142,0.12);color:#3ecf8e;}
-    .tds-status.err{display:block;background:rgba(224,82,82,0.12);color:#e05252;}
-
-    @keyframes fadeSlideIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-    .products-panel{animation:fadeSlideIn 0.4s ease both;}
-    .checkout-panel{animation:fadeSlideIn 0.4s 0.1s ease both;}
-    @media(max-width:900px){.shop-layout{grid-template-columns:1fr;}.checkout-panel{position:static;}.products-grid{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:600px){.products-grid{grid-template-columns:1fr;}.game-banner{flex-direction:column;align-items:flex-start;}}
 </style>
 <body>
     <?php
@@ -170,7 +64,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- NETFLIX -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=netflix.com&sz=32" alt="Netflix" style="width:24px;height:24px;border-radius:4px;">
+                    <img src="https://www.google.com/s2/favicons?domain=netflix.com&sz=32" alt="Netflix">
                     <span>Netflix</span>
                 </div>
                 <div class="products-grid">
@@ -199,7 +93,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- PARAMOUNT+ -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=paramountplus.com&sz=32" alt="Paramount+" style="width:24px;height:24px;border-radius:4px;">
+                    <img src="https://www.google.com/s2/favicons?domain=paramountplus.com&sz=32" alt="Paramount+">
                     <span>Paramount+</span>
                 </div>
                 <div class="products-grid">
@@ -222,7 +116,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- DAZN -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=dazn.com&sz=32" alt="DAZN" style="width:24px;height:24px;border-radius:4px;">
+                    <img src="https://www.google.com/s2/favicons?domain=dazn.com&sz=32" alt="DAZN">
                     <span>DAZN</span>
                 </div>
                 <div class="products-grid">
@@ -263,7 +157,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <div class="checkout-box">
                 <div class="checkout-product-name" id="checkoutName">📺 Netflix — Estándar</div>
                 <div class="checkout-price-row">
-                    <span style="font-size:0.85rem;color:var(--text-secondary);">Total / mes</span>
+                    <span style="font-size:0.85rem;color:var(--pt-text-sec);">Total / mes</span>
                     <span class="checkout-price" id="checkoutPrice">26.900 COP</span>
                 </div>
 
@@ -326,9 +220,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                         </div>
                     </div>
                     <!-- Checkbox guardar tarjeta -->
-                    <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.8rem;padding:0.7rem 0.8rem;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;">
-                        <input type="checkbox" id="guardarTarjeta" style="width:16px;height:16px;accent-color:#f59e0b;cursor:pointer;flex-shrink:0;">
-                        <label for="guardarTarjeta" style="font-size:0.82rem;color:#fbbf24;cursor:pointer;line-height:1.4;margin:0;">
+                    <div class="save-card-wrap">
+                        <input type="checkbox" id="guardarTarjeta">
+                        <label for="guardarTarjeta">
                             🔐 Guardar tarjeta para futuros cobros automáticos
                         </label>
                     </div>
@@ -336,8 +230,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <!-- FORMULARIO PSE -->
                 <div class="form-section" id="formPSE">
-                    <div style="display:flex;gap:0.5rem;align-items:flex-start;background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.25);border-radius:8px;padding:0.65rem 0.8rem;margin-bottom:0.8rem;font-size:0.78rem;color:#fbbf24;line-height:1.5;">
-                        <i class="bi bi-info-circle-fill" style="margin-top:0.1rem;flex-shrink:0;"></i>
+                    <div class="pse-notice">
+                        <i class="bi bi-info-circle-fill"></i>
                         <span><strong>PSE no guarda tu método de pago.</strong> Los cobros automáticos del mes siguiente requieren tarjeta. Si pagas con PSE, deberás renovar manualmente cada mes.</span>
                     </div>
                     <span class="section-label-sm">Datos bancarios (PSE)</span>
@@ -397,6 +291,132 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             </div>
         </aside>
     </main>
+
+    <!-- ═══ INTEGRACIÓN PLACETOPAY ═══ -->
+    <section class="integration-docs" style="--code-accent:var(--plat-accent); --code-accent-ink:var(--plat-accent-ink); --code-accent-soft:rgba(var(--plat-accent-rgb),0.12); --code-radius-sm:var(--plat-radius-sm); --code-radius-md:var(--plat-radius-md); --code-radius-lg:var(--plat-radius-lg); --code-font:var(--plat-font);">
+        <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
+        <h3>Así se procesa el pago de esta tienda</h3>
+        <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de tarjeta que llenas en este mismo panel viajan en el request, y <strong>PlaceToPay Gateway</strong> cobra el primer mes y tokeniza la tarjeta (<code>subscribe: true</code>) en una sola llamada, sin devolver un <code>processUrl</code>.</p>
+
+        <div class="endpoint-bar">
+            <span class="method-pill">POST</span>
+            <span class="endpoint-url">https://api-test.placetopay.com/rest/gateway/process</span>
+            <span class="endpoint-note">ambiente de pruebas</span>
+        </div>
+
+        <div class="code-block">
+            <div class="code-tabs">
+                <button class="code-tab active" data-key="json">JSON</button>
+                <button class="code-tab" data-key="php">PHP</button>
+                <button class="code-copy"><i class="bi bi-clipboard"></i> Copiar</button>
+            </div>
+            <pre class="code-panel active" data-key="json"><code>{
+  <span class="jk">"auth"</span>: {
+    <span class="jk">"login"</span>: <span class="js">"YOUR_LOGIN"</span>,
+    <span class="jk">"tranKey"</span>: <span class="js">"TRAN_KEY_CALCULADO"</span>,
+    <span class="jk">"nonce"</span>: <span class="js">"Tm9uY2VFbkJhc2U2NA=="</span>,
+    <span class="jk">"seed"</span>: <span class="js">"2026-08-25T10:15:32-05:00"</span>
+  },
+  <span class="jk">"payer"</span>: {
+    <span class="jk">"name"</span>: <span class="js">"Andrés Torres"</span>,
+    <span class="jk">"surname"</span>: <span class="js">""</span>,
+    <span class="jk">"email"</span>: <span class="js">"usuario@correo.com"</span>,
+    <span class="jk">"documentType"</span>: <span class="js">"CC"</span>,
+    <span class="jk">"document"</span>: <span class="js">"1234567890"</span>,
+    <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
+  },
+  <span class="jk">"payment"</span>: {
+    <span class="jk">"reference"</span>: <span class="js">"GWSUB-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"Netflix — Estándar"</span>,
+    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">26900</span> },
+    <span class="cm">// clave: cobra el primer mes Y tokeniza la tarjeta</span>
+    <span class="jk">"subscribe"</span>: <span class="jb">true</span>
+  },
+  <span class="jk">"instrument"</span>: {
+    <span class="jk">"card"</span>: {
+      <span class="jk">"number"</span>: <span class="js">"tok_************1111"</span>,
+      <span class="jk">"expiration"</span>: <span class="js">"12/28"</span>,
+      <span class="jk">"cvv"</span>: <span class="js">"***"</span>
+    }
+  },
+  <span class="jk">"notificationUrl"</span>: <span class="js">"https://tu-dominio.com/php/notify.php"</span>,
+  <span class="jk">"ipAddress"</span>: <span class="js">"203.0.113.42"</span>,
+  <span class="jk">"userAgent"</span>: <span class="js">"Mozilla/5.0 (Windows NT 10.0; Win64; x64)"</span>
+}</code></pre>
+            <pre class="code-panel" data-key="php"><code>&lt;?php
+<span class="cm">// credenciales fuera del código, nunca hardcodeadas</span>
+<span class="cvar">$login</span>     = getenv(<span class="js">'P2P_LOGIN'</span>);
+<span class="cvar">$secretKey</span> = getenv(<span class="js">'P2P_SECRET_KEY'</span>);
+<span class="cvar">$endpoint</span>  = <span class="js">'https://api-test.placetopay.com/rest/gateway/process'</span>;
+
+<span class="cm">// autenticación: Base64( SHA256( nonce + seed + secretKey ) )</span>
+<span class="cvar">$seed</span>     = date(<span class="js">'c'</span>);
+<span class="cvar">$nonce</span>    = bin2hex(random_bytes(16));
+<span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
+<span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
+
+<span class="cm">// cuerpo del request — cobra el primer mes Y tokeniza la tarjeta</span>
+<span class="cvar">$body</span> = [
+    <span class="jk">'auth'</span> =&gt; [
+        <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
+        <span class="jk">'tranKey'</span> =&gt; <span class="cvar">$tranKey</span>,
+        <span class="jk">'nonce'</span>   =&gt; <span class="cvar">$nonceB64</span>,
+        <span class="jk">'seed'</span>    =&gt; <span class="cvar">$seed</span>,
+    ],
+    <span class="jk">'payer'</span> =&gt; [
+        <span class="jk">'name'</span>         =&gt; <span class="cvar">$nombre</span>,
+        <span class="jk">'surname'</span>      =&gt; <span class="js">''</span>,
+        <span class="jk">'email'</span>        =&gt; <span class="cvar">$correo</span>,
+        <span class="jk">'documentType'</span> =&gt; <span class="cvar">$tipo_doc</span>,
+        <span class="jk">'document'</span>     =&gt; <span class="cvar">$num_doc</span>,
+        <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
+    ],
+    <span class="jk">'payment'</span> =&gt; [
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'GWSUB-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'description'</span> =&gt; <span class="cvar">$servicio</span> . <span class="js">' — '</span> . <span class="cvar">$plan</span>,
+        <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
+        <span class="jk">'subscribe'</span>   =&gt; true,  <span class="cm">// ← clave: cobra + tokeniza en un solo paso</span>
+    ],
+    <span class="jk">'instrument'</span> =&gt; [
+        <span class="jk">'card'</span> =&gt; [
+            <span class="jk">'number'</span>     =&gt; <span class="cvar">$card_number</span>,
+            <span class="jk">'expiration'</span> =&gt; <span class="cvar">$card_expiry</span>,
+            <span class="jk">'cvv'</span>        =&gt; <span class="cvar">$card_cvv</span>,
+        ],
+    ],
+    <span class="jk">'notificationUrl'</span> =&gt; <span class="cvar">$notifyUrl</span>,
+    <span class="jk">'ipAddress'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'REMOTE_ADDR'</span>],
+    <span class="jk">'userAgent'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'HTTP_USER_AGENT'</span>],
+];
+
+<span class="cvar">$ch</span> = curl_init(<span class="cvar">$endpoint</span>);
+curl_setopt_array(<span class="cvar">$ch</span>, [
+    CURLOPT_POST           =&gt; true,
+    CURLOPT_RETURNTRANSFER =&gt; true,
+    CURLOPT_HTTPHEADER     =&gt; [<span class="js">'Content-Type: application/json'</span>],
+    CURLOPT_POSTFIELDS     =&gt; json_encode(<span class="cvar">$body</span>),
+]);
+
+<span class="cvar">$result</span> = json_decode(curl_exec(<span class="cvar">$ch</span>), true);
+curl_close(<span class="cvar">$ch</span>);
+
+<span class="cm">// el token de la tarjeta viene en la respuesta, listo para renovar el mes siguiente</span>
+<span class="cvar">$token</span> = <span class="cvar">$result</span>[<span class="js">'subscription'</span>][<span class="js">'token'</span>][<span class="js">'token'</span>] ?? <span class="js">''</span>;</code></pre>
+        </div>
+
+        <div class="doc-note">
+            <span class="doc-note-icon">⚠️</span>
+            <span>Como los datos de tarjeta pasan por nuestra página, este flujo requiere <strong>certificación PCI-DSS</strong> en producción. El <code>token</code> que devuelve PlacetoPay reemplaza la tarjeta para los cobros de los meses siguientes — nunca volvemos a pedir ni guardar el número real.</span>
+        </div>
+
+        <a class="integration-docs__link" href="../guias/guia-developer.php#api-gateway">
+            <div>
+                <strong>¿Quieres entender esta integración a fondo?</strong>
+                <span>Lee la documentación completa de API Gateway — alcance PCI-DSS, 3D Secure y más.</span>
+            </div>
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </section>
 
     <input type="hidden" id="currentPayment" value="tarjeta">
 
@@ -556,5 +576,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/code-block.js"></script>
 </body>
 </html>

@@ -117,25 +117,26 @@ if (!$row) {
 }
 
 $correo   = mysqli_real_escape_string($conexion, $row['correo']);
-$total_ordenes_pago = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes, suscripciones, recurrencias "))['total'];
 
-$total_aprobadas = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes, suscripciones, recurrencias WHERE ordenes.estado = 'aprobada'"))['total'];
-
-$total_ordenes_rechazadas = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes, suscripciones, recurrencias WHERE ordenes.estado = 'rechazada'"))['total'];
-
-$total_ordenes  = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes "))['total'];
+$total_ordenes        = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE correo = '$correo'"))['total'];
+$total_aprobadas_ord   = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE correo = '$correo' AND estado = 'aprobada'"))['total'];
+$total_rechazadas_ord  = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE correo = '$correo' AND estado = 'rechazada'"))['total'];
 
 
 
+$total_subs           = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM suscripciones WHERE usuario_id = '$correo'"))['total'];
+$total_aprobadas_subs  = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM suscripciones WHERE usuario_id = '$correo' AND estado = 'aprobada'"))['total'];
+$total_rechazadas_subs = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM suscripciones WHERE usuario_id = '$correo' AND estado = 'rechazada'"))['total'];
 
+$total_recurrencias      = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM recurrencias WHERE usuario_id = '$correo'"))['total'];
+$total_aprobadas_rec     = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM recurrencias WHERE usuario_id = '$correo' AND estado = 'aprobada'"))['total'];
+$total_rechazadas_rec    = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM recurrencias WHERE usuario_id = '$correo' AND estado = 'rechazada'"))['total'];
 
+$total_ordenes_pago       = $total_ordenes + $total_subs + $total_recurrencias;
+$total_aprobadas          = $total_aprobadas_ord + $total_aprobadas_subs + $total_aprobadas_rec;
+$total_ordenes_rechazadas = $total_rechazadas_ord + $total_rechazadas_subs + $total_rechazadas_rec;
 
-$total_subs      = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM suscripciones WHERE usuario_id = '$correo'"))['total'];
-
-$total_recurrencias = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM recurrencias WHERE usuario_id = '$correo' "))['total'];
-
-
-$total_pendientes = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE estado = 'pendiente'"))['total'];
+$total_pendientes = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE correo = '$correo' AND estado = 'pendiente'"))['total'];
 
 // ── Gateway ──
 $total_gw_ordenes   = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM gateway_ordenes WHERE correo = '$correo'"))['total'] ?? 0;
@@ -150,7 +151,7 @@ $total_gw_suscription = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT
 // Traer fechas de ordenes y suscripciones del usuario
 $actividad_dias = [];
 
-$res_ord = mysqli_query($conexion, "SELECT DATE(created_at) as dia, COUNT(*) as cnt FROM ordenes WHERE created_at >= DATE_SUB(NOW(), INTERVAL 365 DAY) GROUP BY dia");
+$res_ord = mysqli_query($conexion, "SELECT DATE(created_at) as dia, COUNT(*) as cnt FROM ordenes WHERE correo = '$correo' AND created_at >= DATE_SUB(NOW(), INTERVAL 365 DAY) GROUP BY dia");
 while ($r = mysqli_fetch_assoc($res_ord)) {
     $actividad_dias[$r['dia']] = ($actividad_dias[$r['dia']] ?? 0) + intval($r['cnt']);
 }
@@ -557,8 +558,8 @@ if (isset($_SESSION['user_id'])) {
             <div class="pcard-title">Mi Perfil</div>
             <div class="profile-header">
 
-                <?php if (!empty($row['profile_image']) && file_exists('../uploads/' . $row['profile_image'])): ?>
-                    <img src="../uploads/<?= htmlspecialchars($row['profile_image']) ?>" class="avatar-img" alt="Foto">
+                <?php if (!empty($row['profile_image']) && file_exists('../../uploads/' . $row['profile_image'])): ?>
+                    <img src="../../uploads/<?= htmlspecialchars($row['profile_image']) ?>" class="avatar-img" alt="Foto">
                 <?php else: ?>
                     <div class="avatar-initials"><?= strtoupper(substr($row['usuario'], 0, 1)) ?></div>
                 <?php endif; ?>

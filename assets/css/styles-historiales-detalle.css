@@ -1,0 +1,235 @@
+/* ══════════════════════════════════════════════════════════════
+   styles-historiales-detalle.css
+   Estilos para la vista de detalle de una transacción reversable
+   (detalle_reverso.php): tarjetas de información + panel de
+   acciones + modal de carta de reverso.
+
+   Las superficies leen --pt-* (de php/theme.php) para respetar el
+   tema claro/oscuro. El acento (rojo) es fijo porque la acción
+   principal de esta vista es siempre "reversar" (destructiva).
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --hist-accent:     #e05252;
+    --hist-accent-rgb: 224, 82, 82;
+    --hist-font:       'Barlow', sans-serif;
+}
+
+body { font-family: var(--hist-font); }
+
+.navbar {
+    background-color: #0f0f0fa9 !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--pt-border);
+}
+
+/* ── LAYOUT ── */
+.detalle-layout {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.2rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 1.2rem;
+    align-items: start;
+}
+
+/* ── TARJETAS DE INFO ── */
+.pcard {
+    background: var(--pt-bg-surface);
+    border: 1px solid var(--pt-border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+}
+
+.pcard-title {
+    font-family: var(--hist-font);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pt-text-sec);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--pt-border);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--pt-border);
+}
+.info-row:last-child { border-bottom: none; }
+.info-row span:first-child { color: var(--pt-text-sec); }
+.info-row span:last-child {
+    font-weight: 600;
+    color: var(--pt-text);
+    text-align: right;
+    max-width: 60%;
+}
+
+.estado-badge {
+    display: inline-block;
+    padding: 0.2rem 0.2rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    font-family: var(--hist-font);
+    letter-spacing: 0.05em;
+    background: rgba(62, 207, 142, 0.15);
+    color: #3ecf8e;
+    margin: 10px;
+}
+
+/* ── PANEL DE ACCIONES ── */
+.opciones-wrap { position: relative; }
+
+.btn-opciones {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--hist-accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--hist-font);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s;
+}
+.btn-opciones:hover { background: #c93d3d; }
+
+.opciones-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--pt-bg-surface);
+    border: 1px solid var(--pt-border);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 99;
+    box-shadow: var(--pt-box-shadow);
+    animation: dropFade 0.15s ease;
+}
+@keyframes dropFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.opciones-menu.show { display: block; }
+
+.opcion-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    color: var(--pt-text);
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    border-bottom: 1px solid var(--pt-border);
+}
+.opcion-item:last-child { border-bottom: none; }
+.opcion-item:hover { background: var(--pt-hover); text-decoration: none; }
+.opcion-item.danger { color: var(--hist-accent); }
+.opcion-item.danger:hover { background: rgba(var(--hist-accent-rgb), 0.1); }
+
+.reverso-info {
+    background: rgba(var(--hist-accent-rgb), 0.08);
+    border: 1px solid rgba(var(--hist-accent-rgb), 0.2);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: var(--hist-accent);
+    line-height: 1.5;
+}
+
+/* ── ALERTAS (mismo patrón que styles-historiales.css) ── */
+.alert-success-custom { background: rgba(62, 207, 142, 0.12); color: #3ecf8e; border: 1px solid rgba(62, 207, 142, 0.3); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.88rem; }
+.alert-error-custom   { background: rgba(224, 82, 82, 0.12);  color: #e05252; border: 1px solid rgba(224, 82, 82, 0.3);  border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.88rem; }
+
+/* ── MODAL: CARTA DE REVERSO ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+
+.modal-box {
+    background: var(--pt-bg-surface);
+    border: 1px solid var(--pt-border);
+    border-radius: 14px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    font-family: var(--hist-font);
+}
+
+.modal-box h3 {
+    font-family: var(--hist-font);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--pt-text);
+    margin-bottom: 1rem;
+}
+
+.modal-carta-body {
+    background: var(--pt-bg-card);
+    border-radius: 8px;
+    padding: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--pt-text-sec);
+    line-height: 1.7;
+}
+.modal-carta-body p:first-child { color: var(--pt-text); font-weight: 600; margin-bottom: 0.5rem; }
+.modal-carta-body strong { color: var(--pt-text); }
+
+.modal-actions { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+
+.btn-modal-print {
+    flex: 1;
+    padding: 0.65rem;
+    background: #f0b429;
+    color: #0d0e10;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--hist-font);
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn-modal-close {
+    flex: 1;
+    padding: 0.65rem;
+    background: transparent;
+    color: var(--pt-text-sec);
+    border: 1px solid var(--pt-border);
+    border-radius: 8px;
+    font-family: var(--hist-font);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+    .detalle-layout { grid-template-columns: 1fr; }
+}

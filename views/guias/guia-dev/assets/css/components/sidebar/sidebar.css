@@ -69,7 +69,7 @@
 
 .section {
   margin-bottom: var(--space-xs);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(var(--overlay-rgb), 0.03);
   padding-bottom: var(--space-xs);
 }
 
@@ -89,7 +89,7 @@
 }
 
 .section-head:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(var(--overlay-rgb), 0.02);
 }
 
 .section-head .panel-title {
@@ -109,7 +109,7 @@
 }
 
 .section-head .chev:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--overlay-rgb), 0.05);
 }
 
 .section.collapsed .section-head .chev {
@@ -339,7 +339,7 @@
 
 .checkbox-option:hover {
   border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(var(--overlay-rgb), 0.02);
 }
 
 .checkbox-option input {
@@ -584,7 +584,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(var(--overlay-rgb), 0.1), transparent);
   opacity: 0;
   transition: opacity var(--transition-speed) var(--ease);
 }

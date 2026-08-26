@@ -13,7 +13,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <?php $theme_seccion = 'preautor'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
 </head>
 <style>
     :root {
@@ -309,6 +311,124 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         </aside>
     </main>
 
+    <!-- ═══ INTEGRACIÓN PLACETOPAY ═══ -->
+    <section class="integration-docs" style="--code-accent:var(--accent); --code-accent-ink:#ffffff; --code-accent-soft:var(--accent-soft); --code-radius-sm:6px; --code-radius-md:var(--radius-md); --code-radius-lg:var(--radius-lg); --code-font:var(--font-body);">
+        <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
+        <h3>Así se crea la sesión de pago de esta reserva</h3>
+        <p>Cuando presionas <strong>"Reservar ahora"</strong>, nuestro backend arma este mismo request y lo envía a <strong>PlacetoPay Web Checkout</strong> con <code>type: "checkin"</code>. Esto aparta el monto en tu tarjeta como garantía, <strong>sin cobrarlo todavía</strong> — el cargo real se hace al check-out.</p>
+
+        <div class="endpoint-bar">
+            <span class="method-pill">POST</span>
+            <span class="endpoint-url">https://checkout-test.placetopay.com/api/session</span>
+            <span class="endpoint-note">ambiente de pruebas</span>
+        </div>
+
+        <div class="code-block">
+            <div class="code-tabs">
+                <button class="code-tab active" data-key="json">JSON</button>
+                <button class="code-tab" data-key="php">PHP</button>
+                <button class="code-copy"><i class="bi bi-clipboard"></i> Copiar</button>
+            </div>
+            <pre class="code-panel active" data-key="json"><code>{
+  <span class="jk">"locale"</span>: <span class="js">"es_CO"</span>,
+  <span class="jk">"auth"</span>: {
+    <span class="jk">"login"</span>: <span class="js">"YOUR_LOGIN"</span>,
+    <span class="jk">"tranKey"</span>: <span class="js">"TRAN_KEY_CALCULADO"</span>,
+    <span class="jk">"nonce"</span>: <span class="js">"Tm9uY2VFbkJhc2U2NA=="</span>,
+    <span class="jk">"seed"</span>: <span class="js">"2026-08-25T10:15:32-05:00"</span>
+  },
+  <span class="cm">// "checkin": aparta el monto sin cobrarlo todavía</span>
+  <span class="jk">"type"</span>: <span class="js">"checkin"</span>,
+  <span class="jk">"payment"</span>: {
+    <span class="jk">"reference"</span>: <span class="js">"PRE-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"Reserva Habitación Estándar - 3 noches"</span>,
+    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">450000</span> }
+  },
+  <span class="jk">"buyer"</span>: {
+    <span class="jk">"name"</span>: <span class="js">"Andrés Torres"</span>,
+    <span class="jk">"surname"</span>: <span class="js">""</span>,
+    <span class="jk">"email"</span>: <span class="js">"usuario@correo.com"</span>,
+    <span class="jk">"documentType"</span>: <span class="js">"CC"</span>,
+    <span class="jk">"document"</span>: <span class="js">"1234567890"</span>,
+    <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
+  },
+  <span class="jk">"expiration"</span>: <span class="js">"2026-08-27T10:15:32-05:00"</span>,
+  <span class="jk">"returnUrl"</span>: <span class="js">"https://tu-dominio.com/retorno/retorno_preautorizacion.php?reserva_id=482"</span>,
+  <span class="jk">"ipAddress"</span>: <span class="js">"203.0.113.42"</span>,
+  <span class="jk">"userAgent"</span>: <span class="js">"Mozilla/5.0 (Windows NT 10.0; Win64; x64)"</span>,
+  <span class="jk">"notificationUrl"</span>: <span class="js">"https://tu-dominio.com/php/notify.php"</span>
+}</code></pre>
+            <pre class="code-panel" data-key="php"><code>&lt;?php
+<span class="cm">// credenciales fuera del código, nunca hardcodeadas</span>
+<span class="cvar">$login</span>     = getenv(<span class="js">'P2P_LOGIN'</span>);
+<span class="cvar">$secretKey</span> = getenv(<span class="js">'P2P_SECRET_KEY'</span>);
+<span class="cvar">$endpoint</span>  = <span class="js">'https://checkout-test.placetopay.com/api/session'</span>;
+
+<span class="cm">// autenticación: Base64( SHA256( nonce + seed + secretKey ) )</span>
+<span class="cvar">$seed</span>     = date(<span class="js">'c'</span>);
+<span class="cvar">$nonce</span>    = bin2hex(random_bytes(16));
+<span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
+<span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
+
+<span class="cm">// cuerpo del request — "checkin" preautoriza en vez de cobrar</span>
+<span class="cvar">$body</span> = [
+    <span class="jk">'locale'</span> =&gt; <span class="js">'es_CO'</span>,
+    <span class="jk">'auth'</span>   =&gt; [
+        <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
+        <span class="jk">'tranKey'</span> =&gt; <span class="cvar">$tranKey</span>,
+        <span class="jk">'nonce'</span>   =&gt; <span class="cvar">$nonceB64</span>,
+        <span class="jk">'seed'</span>    =&gt; <span class="cvar">$seed</span>,
+    ],
+    <span class="jk">'type'</span>    =&gt; <span class="js">'checkin'</span>,  <span class="cm">// ← clave: preautoriza, no cobra</span>
+    <span class="jk">'payment'</span> =&gt; [
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'PRE-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'description'</span> =&gt; <span class="js">'Reserva '</span> . <span class="cvar">$habitacion</span> . <span class="js">' - '</span> . <span class="cvar">$noches</span> . <span class="js">' noches'</span>,
+        <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; <span class="cvar">$total</span>],
+    ],
+    <span class="jk">'buyer'</span> =&gt; [
+        <span class="jk">'name'</span>         =&gt; <span class="cvar">$nombre</span>,
+        <span class="jk">'surname'</span>      =&gt; <span class="js">''</span>,
+        <span class="jk">'email'</span>        =&gt; <span class="cvar">$correo</span>,
+        <span class="jk">'documentType'</span> =&gt; <span class="cvar">$tipo_doc</span>,
+        <span class="jk">'document'</span>     =&gt; <span class="cvar">$num_doc</span>,
+        <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
+    ],
+    <span class="jk">'expiration'</span>      =&gt; date(<span class="js">'c'</span>, strtotime(<span class="js">'+2 days'</span>)),
+    <span class="jk">'returnUrl'</span>       =&gt; app_base_url() . <span class="js">'/retorno/retorno_preautorizacion.php?reserva_id='</span> . <span class="cvar">$reserva_id</span>,
+    <span class="jk">'ipAddress'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'REMOTE_ADDR'</span>],
+    <span class="jk">'userAgent'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'HTTP_USER_AGENT'</span>],
+    <span class="jk">'notificationUrl'</span> =&gt; <span class="cvar">$notifyUrl</span>,
+];
+
+<span class="cvar">$ch</span> = curl_init(<span class="cvar">$endpoint</span>);
+curl_setopt_array(<span class="cvar">$ch</span>, [
+    CURLOPT_POST           =&gt; true,
+    CURLOPT_RETURNTRANSFER =&gt; true,
+    CURLOPT_HTTPHEADER     =&gt; [<span class="js">'Content-Type: application/json'</span>],
+    CURLOPT_POSTFIELDS     =&gt; json_encode(<span class="cvar">$body</span>),
+]);
+
+<span class="cvar">$result</span> = json_decode(curl_exec(<span class="cvar">$ch</span>), true);
+curl_close(<span class="cvar">$ch</span>);
+
+<span class="cm">// redirige al comprador a la pasarela de PlacetoPay</span>
+header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[<span class="js">'processUrl'</span>]);</code></pre>
+        </div>
+
+        <div class="doc-note">
+            <span class="doc-note-icon">💡</span>
+            <span>La construcción del request es la <strong>misma</strong> que un Web Checkout normal — lo único que cambia es <code>type: "checkin"</code>. Si cancelas antes del check-in, el monto reservado se libera automáticamente sin ningún cargo.</span>
+        </div>
+
+        <a class="integration-docs__link" href="../guias/guia-developer.php#tipos-pago">
+            <div>
+                <strong>¿Quieres entender esta integración a fondo?</strong>
+                <span>Lee la documentación completa sobre tipos de pago — incluye preautorización.</span>
+            </div>
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </section>
+
     <script>
     (function() {
         const products = {
@@ -413,5 +533,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/code-block.js"></script>
 </body>
 </html>

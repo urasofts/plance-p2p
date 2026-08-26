@@ -48,145 +48,15 @@ switch ($modo) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <?php $theme_seccion = 'historial'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
 
 </head>
 <style>
-    body {
-        /* background-image: url(../assets/images/bg26.jpg); */
-        background-color: #000000;
-        color: white;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: fixed;
-        background-size: cover;
-        font-family: 'Barlow', sans-serif;
-    }
-    .navbar {
-        background-color: #0f0f0fa9 !important;
-        backdrop-filter: blur(8px);
-    }
-    .tabla-container {
-        background: var(--pt-paint);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 2rem auto;
-        max-width: 1100px;
-        backdrop-filter: blur(8px);
-    }
-    .tabla-titulo {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #a855f7;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .table {
-        color: white;
-        border-color: rgba(255,255,255,0.1);
-    }
-    .table thead th {
-        background: var(--pt-th1);
-        color: #8a00fc;
-        border-color: rgba(255,255,255,0.1);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-    }
-    .table tbody tr {
-        border-color: rgba(255,255,255,0.07);
-        transition: background 0.15s;
-    }
-    .table tbody tr:hover { background: var(--pt-th1); }
-    .table tbody td { border-color: rgba(255,255,255,0.07); font-size: 0.88rem; vertical-align: middle; background: var(--pt-th);}
-
-    .badge-aprobada  { background: rgba(62,207,142,0.2);  color: #3ecf8e; }
-    .badge-pendiente { background: rgba(240,180,41,0.2);  color: #f0b429; }
-    .badge-rechazada { background: rgba(224,82,82,0.2);   color: #e05252; }
-    .badge-cancelada { background: rgba(138,141,150,0.2); color: #8a8d96; }
-
-    .estado-pill {
-        display: inline-block;
-        padding: 0.2rem 0.65rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-    .sin-registros {
-        text-align: center;
-        padding: 3rem;
-        color: #8a8d96;
-        font-size: 0.95rem;
-    }
-    .modo-tabs-group { margin-bottom: 1.2rem; }
-    .modo-tabs-label {
-        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-        text-transform: uppercase; color: #555860; margin-bottom: 0.4rem;
-    }
-    .modo-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
-    .modo-tab {
-        padding: 0.4rem 0.85rem; border-radius: 8px;
-        font-size: 0.79rem; font-weight: 700; text-decoration: none;
-        display: inline-flex; align-items: center; gap: 0.3rem;
-        transition: all 0.2s; border: 1.5px solid rgba(255,255,255,0.08);
-        color: #8a8d96; background: rgba(255,255,255,0.02);
-    }
-    .modo-tab:hover { text-decoration: none; color: var(--pt-text); }
-    .modo-tab.active-purple { border-color: #a855f7; background: rgba(168,85,247,0.1); color: #a855f7; }
-    .modo-tab.active-blue   { border-color: #4d9fff; background: rgba(77,159,255,0.1); color: #4d9fff; }
-    .modo-tab.active-green  { border-color: #3ecf8e; background: rgba(62,207,142,0.1); color: #3ecf8e; }
-    .modo-tab.active-orange { border-color: #f59e0b; background: rgba(245,158,11,0.1); color: #f59e0b; }
-    .tabs-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 0.6rem 0; }
-    .btn-verificar {
-        background: rgba(168,85,247,0.15);
-        border: 1px solid rgba(168,85,247,0.4);
-        color: #a855f7;
-        border-radius: 6px;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        transition: all 0.2s;
-        white-space: nowrap;
-    }
-    .btn-verificar:hover { background: rgba(168,85,247,0.3); color: #a855f7; text-decoration: none; }
-    .alert-verify {
-        background: rgba(62,207,142,0.12); color: #3ecf8e;
-        border: 1px solid rgba(62,207,142,0.3);
-        border-radius: 8px; padding: 0.75rem 1rem;
-        margin-bottom: 1rem; font-size: 0.88rem;
-    }
-    .btn-cancelar {
-        background: rgba(224,82,82,0.15);
-        border: 1px solid rgba(224,82,82,0.4);
-        color: #e05252;
-        border-radius: 6px;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        transition: all 0.2s;
-        white-space: nowrap;
-        margin-top: 0.3rem;
-    }
-    .btn-cancelar:hover { background: rgba(224,82,82,0.3); color: #e05252; text-decoration: none; }
-    .alert-cancel {
-        background: rgba(224,82,82,0.12); color: #e05252;
-        border: 1px solid rgba(224,82,82,0.3);
-        border-radius: 8px; padding: 0.75rem 1rem;
-        margin-bottom: 1rem; font-size: 0.88rem;
+    /* Historial de Suscripciones — acento morado */
+    :root {
+        --hist-accent:     #a855f7;
+        --hist-accent-rgb: 168, 85, 247;
     }
 </style>
 <body>

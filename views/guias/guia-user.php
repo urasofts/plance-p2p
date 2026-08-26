@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guía de Usuario | Plance</title>
+  <title>Guía de Usuario</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,6 +130,14 @@
       backdrop-filter: blur(12px);
     }
     .topbar h2 { margin: 0; font-size: 15px; font-weight: 600; color: var(--pt-text); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 16px; border-radius: 10px;
+      border: 1px solid var(--pt-border); color: var(--pt-text);
+      text-decoration: none; font-size: 13.5px; font-weight: 600;
+      transition: all 0.15s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
     .search {
       width: 280px; max-width: 100%;
       background: var(--pt-boxitem); border: 1px solid var(--pt-border);
@@ -390,10 +398,16 @@
   <!-- MAIN -->
   <main class="content">
     <header class="topbar">
-      <a href="../../home.php"><i class="icon-colors bi bi-backspace-fill" style="font-size: 1.5rem;"></i></a>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <a href="guia.php" class="btn-ghost" title="Volver a Guías">
+          <i class="bi bi-arrow-left"></i> Guías
+        </a>
+        <a href="guia-developer.php" class="btn-ghost" title="Ir a la Guía Developer">
+          <i class="bi bi-code-slash"></i> Guía Developer
+        </a>
+      </div>
       <h2>Centro de Ayuda — Usuarios</h2>
       <input class="search" type="text" placeholder="🔍 Buscar en la guía...">
-      
     </header>
 
     <div class="container">
@@ -410,7 +424,7 @@
           </p>
         </div>
         <div class="image-placeholder">  
-          <img src="../assets/images/plance2.jpg" alt="imagen" class="img-fluid">
+          <img src="/assets/images/plance2.jpg" alt="imagen" class="img-fluid">
         </div>
          
         
@@ -504,7 +518,7 @@
           <article class="card">
             <div class="card-icon"><i class="icon-colors bi bi-building"></i></div>
             <h5>Reservas de hotel</h5>
-            <p>Reserva habitaciones en el Hotel Plance. Tu tarjeta no se cobra hasta el check-out.</p>
+            <p>Reserva habitaciones en el Hotel Demo. Tu tarjeta no se cobra hasta el check-out.</p>
             <span class="card-tag">Preautorización</span>
           </article>
           <article class="card">
@@ -646,14 +660,14 @@
           <div class="split" style="margin-top:16px;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/boton-verificar.webp" type="image/webp">
-                <img src="../assets/capturas/boton-verificar.webp" alt="Boton para verificar el estado de un pago">
+                <source srcset="/assets/capturas/WEBP/boton-verificar.webp" type="image/webp">
+                <img src="/assets/capturas/boton-verificar.webp" alt="Boton para verificar el estado de un pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/estado-aprobed.webp" type="image/webp">
-                <img src="../assets/capturas/estado-aprobed.webp" alt="Estado de pago aprobado">
+                <source srcset="/assets/capturas/WEBP/estado-aprobed.webp" type="image/webp">
+                <img src="/assets/capturas/estado-aprobed.webp" alt="Estado de pago aprobado">
               </picture>
             </div>
           </div>
@@ -725,14 +739,14 @@
           <div class="split" style="margin-top:16px;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/trans-reversar.webp" type="image/webp">
+                <source srcset="/assets/capturas/WEBP/trans-reversar.webp" type="image/webp">
                 <img src="../assets/capturas/trans-reversar.webp" alt="Transaccion disponible para reversar">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/reversar-tran.webp" type="image/webp">
-                <img src="../assets/capturas/reversar-tran.webp" alt="Confirmacion de reverso de transaccion">
+                <source srcset="/assets/capturas/WEBP/reversar-tran.webp" type="image/webp">
+                <img src="/assets/capturas/reversar-tran.webp" alt="Confirmacion de reverso de transaccion">
               </picture>
             </div>
           </div>
@@ -758,14 +772,14 @@
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/seciones.webp" type="image/webp">
-                <img src="../assets/capturas/seciones.webp" alt="Creacion de una sesion de pago">
+                <source srcset="/assets/capturas/WEBP/seciones.webp" type="image/webp">
+                <img src="/assets/capturas/seciones.webp" alt="Creacion de una sesion de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="../assets/capturas/WEBP/webchekout.webp" type="image/webp">
-                <img src="../assets/capturas/webchekout.webp" alt="Pasarela Web Checkout de PlacetoPay">
+                <img src="/assets/capturas/webchekout.webp" alt="Pasarela Web Checkout de PlacetoPay">
               </picture>
             </div>
           </div>
@@ -824,52 +838,52 @@
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/seleccion-juegos.webp" type="image/webp">
-                <img src="../assets/capturas/seleccion-juegos.webp" alt="Selección de producto en la tienda de juegos">
+                <source srcset="/assets/capturas/WEBP/seleccion-juegos.webp" type="image/webp">
+                <img src="/assets/capturas/seleccion-juegos.webp" alt="Selección de producto en la tienda de juegos">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/sesion-juegos.webp" type="image/webp">
-                <img src="../assets/capturas/sesion-juegos.webp" alt="Pasarela Web Checkout de PlacetoPay">
+                <source srcset="/assets/capturas/WEBP/sesion-juegos.webp" type="image/webp">
+                <img src="/assets/capturas/sesion-juegos.webp" alt="Pasarela Web Checkout de PlacetoPay">
               </picture>
   
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/comprar-recarga.webp" type="image/webp">
-                <img src="../assets/capturas/comprar-recarga.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/comprar-recarga.webp" type="image/webp">
+                <img src="/assets/capturas/comprar-recarga.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/digitar-id.webp" type="image/webp">
-                <img src="../assets/capturas/digitar-id.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/digitar-id.webp" type="image/webp">
+                <img src="/assets/capturas/digitar-id.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/redireccion-wc.webp" type="image/webp">
-                <img src="../assets/capturas/redireccion-wc.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/redireccion-wc.webp" type="image/webp">
+                <img src="/assets/capturas/redireccion-wc.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>         
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/pago-pse.webp" type="image/webp">
-                <img src="../assets/capturas/pago-pse.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/pago-pse.webp" type="image/webp">
+                <img src="/assets/capturas/pago-pse.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/pago-tarjeta.webp" type="image/webp">
-                <img src="../assets/capturas/pago-tarjeta.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/pago-tarjeta.webp" type="image/webp">
+                <img src="/assets/capturas/pago-tarjeta.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/recibo-pago.webp" type="image/webp">
-                <img src="../assets/capturas/recibo-pago.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/recibo-pago.webp" type="image/webp">
+                <img src="/assets/capturas/recibo-pago.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
           </div>
@@ -923,8 +937,8 @@
           <span><strong>¿Guardaste tu tarjeta?</strong> Si activaste la opción, el sistema la tokenizará de forma segura — nunca se guarda el número real, solo un código que PlacetoPay usa para los cobros siguientes.</span>
             <div class="image-placeholder">
                 <picture>
-                  <source srcset="../assets/capturas/WEBP/opcion-tokenizar.webp" type="image/webp">
-                  <img src="../assets/capturas/opcion-tokenizar.webp" alt="tokenizar tarjeta">
+                  <source srcset="/assets/capturas/WEBP/opcion-tokenizar.webp" type="image/webp">
+                  <img src="/assets/capturas/opcion-tokenizar.webp" alt="tokenizar tarjeta">
                 </picture>
             </div>
         </div>
@@ -935,38 +949,38 @@
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder"> 
               <picture>
-                <source srcset="../assets/capturas/WEBP/seleccion-platf.webp" type="image/webp">
-                <img src="../assets/capturas/seleccion-platf.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/seleccion-platf.webp" type="image/webp">
+                <img src="/assets/capturas/seleccion-platf.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/sesion-streamings.webp" type="image/webp">
+                <source srcset="/assets/capturas/WEBP/sesion-streamings.webp" type="image/webp">
                 <img src="../assets/capturas/sesion-streamings.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/comprar-subs.webp" type="image/webp">
-                <img src="../assets/capturas/comprar-subs.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/comprar-subs.webp" type="image/webp">
+                <img src="/assets/capturas/comprar-subs.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/pago-tarjeta-subs.webp" type="image/webp">
-                <img src="../assets/capturas/pago-tarjeta-subs.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/pago-tarjeta-subs.webp" type="image/webp">
+                <img src="/assets/capturas/pago-tarjeta-subs.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/tokenizar-tar.webp" type="image/webp">
-                <img src="../assets/capturas/tokenizar-tar.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/tokenizar-tar.webp" type="image/webp">
+                <img src="/assets/capturas/tokenizar-tar.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/volver-comercio.webp" type="image/webp">
-                <img src="../assets/capturas/volver-comercio.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/volver-comercio.webp" type="image/webp">
+                <img src="/assets/capturas/volver-comercio.webp" alt="Pantalla de confirmación de pago">
               </picture>
             </div>
           </div>
@@ -1017,8 +1031,8 @@
           <span><strong>¿Quieres cancelar?</strong> Ve a tu historial, busca la membresía activa y haz clic en el botón de cancelar. La membresía seguirá activa hasta el final del periodo ya pagado.</span>
           <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/cancelar-sub.webp" type="image/webp">
-                <img src="../assets/capturas/cancelar-sub.webp" alt="volver al comercio">
+                <source srcset="/assets/capturas/WEBP/cancelar-sub.webp" type="image/webp">
+                <img src="/assets/capturas/cancelar-sub.webp" alt="volver al comercio">
               </picture>  
           </div>
         </div>
@@ -1029,26 +1043,26 @@
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/recurrencias.webp" type="image/webp">
-                <img src="../assets/capturas/recurrencias.webp" alt="tienda de recurrencias">
+                <source srcset="/assets/capturas/WEBP/recurrencias.webp" type="image/webp">
+                <img src="/assets/capturas/recurrencias.webp" alt="tienda de recurrencias">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/ia-rec.webp" type="image/webp">
-                <img src="../assets/capturas/ia-rec.webp" alt="tienda de ias">
+                <source srcset="/assets/capturas/WEBP/ia-rec.webp" type="image/webp">
+                <img src="/assets/capturas/ia-rec.webp" alt="tienda de ias">
               </picture>  
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/pago-recurrente.webp" type="image/webp">
-                <img src="../assets/capturas/pago-recurrente.webp" alt="pago recurrente">
+                <source srcset="/assets/capturas/WEBP/pago-recurrente.webp" type="image/webp">
+                <img src="/assets/capturas/pago-recurrente.webp" alt="pago recurrente">
               </picture>  
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/volver-comercio-rec.webp" type="image/webp">
-                <img src="../assets/capturas/volver-comercio-rec.webp" alt="volver al comercio">
+                <source srcset="/assets/capturas/WEBP/volver-comercio-rec.webp" type="image/webp">
+                <img src="/assets/capturas/volver-comercio-rec.webp" alt="volver al comercio">
               </picture>  
             </div>
           </div>
@@ -1067,7 +1081,7 @@
           <article class="card">
             <div class="card-icon"><i class="icon-colors bi bi-lock"></i></div>
             <h5>Nunca guardamos tu tarjeta</h5>
-            <p>Plance no almacena los números de tu tarjeta. Solo usamos un código llamado "token" que genera PlacetoPay de forma segura.</p>
+            <p>Aquí no almacenamos los números de tu tarjeta. Solo usamos un código llamado "token" que genera PlacetoPay de forma segura.</p>
           </article>
           <article class="card">
             <div class="card-icon"><i class="icon-colors bi bi-bank"></i></div>
@@ -1146,26 +1160,26 @@
             <div class="image-placeholder">
    
               <picture>
-                <source srcset="../assets/capturas/WEBP/juegos-api.webp" type="image/webp">
-                <img src="../assets/capturas/juegos-api.webp" alt="elegir tienda">
+                <source srcset="/assets/capturas/WEBP/juegos-api.webp" type="image/webp">
+                <img src="/assets/capturas/juegos-api.webp" alt="elegir tienda">
               </picture>  
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/tienda-api.webp" type="image/webp">
-                <img src="../assets/capturas/tienda-api.webp" alt="elegir producto">
+                <source srcset="/assets/capturas/WEBP/tienda-api.webp" type="image/webp">
+                <img src="/assets/capturas/tienda-api.webp" alt="elegir producto">
               </picture>  
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/recibo-api.webp" type="image/webp">
-                <img src="../assets/capturas/recibo-api.webp" alt="recibo de la compra">
+                <source srcset="/assets/capturas/WEBP/recibo-api.webp" type="image/webp">
+                <img src="/assets/capturas/recibo-api.webp" alt="recibo de la compra">
               </picture>  
             </div>
               <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/pago-hist.webp" type="image/webp">
-                <img src="../assets/capturas/pago-hist.webp" alt="pago en el historial">
+                <source srcset="/assets/capturas/WEBP/pago-hist.webp" type="image/webp">
+                <img src="/assets/capturas/pago-hist.webp" alt="pago en el historial">
               </picture>  
           </div>
           </div>
@@ -1199,7 +1213,7 @@
             <div class="step-index">3</div>
             <div>
               <h6>El comprador paga desde el link</h6>
-              <p>Cualquier persona con el enlace puede completar el pago desde la pasarela de PlacetoPay, sin necesidad de tener cuenta en Plance.</p>
+              <p>Cualquier persona con el enlace puede completar el pago desde la pasarela de PlacetoPay, sin necesidad de tener cuenta aquí.</p>
             </div>
           </div>
         </div>
@@ -1272,7 +1286,7 @@
           <div class="section-icon"><i class="icon-colors bi bi-shield-lock"></i></div>
           <h4>Reservas con preautorización</h4>
         </div>
-        <p>Al reservar una habitación en el Hotel Plance, tu tarjeta <strong>no se cobra de inmediato</strong>. El monto queda "apartado" como garantía y solo se cobra realmente cuando haces check-out.</p>
+        <p>Al reservar una habitación en el Hotel Demo, tu tarjeta <strong>no se cobra de inmediato</strong>. El monto queda "apartado" como garantía y solo se cobra realmente cuando haces check-out.</p>
 
         <div class="steps">
           <div class="step">

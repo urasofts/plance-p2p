@@ -75,6 +75,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Tu recarga fue procesada exitosamente.';
     $color        = '#3ecf8e';
     $bg_icon      = 'rgba(62, 207, 142, 0.15)';
+    $color_rgb    = '62, 207, 142';
 } elseif ($status_p2p === 'REJECTED') {
     $nuevo_estado = 'rechazada';
     $icono        = '❌';
@@ -82,6 +83,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Tu pago no pudo ser procesado. Intenta de nuevo.';
     $color        = '#e05252';
     $bg_icon      = 'rgba(224, 82, 82, 0.15)';
+    $color_rgb    = '224, 82, 82';
 } elseif ($status_p2p === 'PENDING') {
     $nuevo_estado = 'pendiente';
     $icono        = '⏳';
@@ -89,6 +91,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Tu pago está siendo procesado. Te notificaremos pronto.';
     $color        = '#f0b429';
     $bg_icon      = 'rgba(240, 180, 41, 0.15)';
+    $color_rgb    = '240, 180, 41';
 } else {
     // CANCELED u otro
     $nuevo_estado = 'cancelada';
@@ -97,6 +100,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Cancelaste el proceso de pago.';
     $color        = '#8a8d96';
     $bg_icon      = 'rgba(138, 141, 150, 0.15)';
+    $color_rgb    = '138, 141, 150';
 }
 
 // ══════════════════════════════════════════
@@ -126,160 +130,13 @@ unset($_SESSION['p2p_requestId'], $_SESSION['p2p_order_id']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
     <?php require_once dirname(__DIR__) . '/php/theme.php'; ?>
-    
+    <link rel="stylesheet" href="../assets/css/styles-retorno.css">
     <style>
         :root {
-            --bg-base:    #0d0e10;
-            --bg-surface: #16181c;
-            --bg-card:    #1e2128;
-            --border:     #2e3038;
-            --text-primary:   #f0f1f3;
-            --text-secondary: #8a8d96;
-            --font-display: 'Barlow', sans-serif;
-            --font-body:    'Barlow', sans-serif;
+            --ret-color:     <?= $color ?>;
+            --ret-bg-icon:   <?= $bg_icon ?>;
+            --ret-color-rgb: <?= $color_rgb ?>;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
- 
-        body {
-            background-color: var(--bg-base);
-            color: var(--pt-text);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .result-card {
-            background: var(--pt-boxitem);
-            /* border: 1px solid var(--border); */
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            max-width: 460px;
-            width: 100%;
-            text-align: center;
-            animation: fadeUp 0.4s ease both;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-icon {
-            font-size: 3rem;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.2rem;
-            background: <?= $bg_icon ?>;
-            position: relative;
-        }
-
-        /* Spinner animado para estado pendiente */
-        .pending-spinner {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .pending-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            border-top-color: <?= $color ?>;
-            border-right-color: <?= $color ?>;
-        }
-        .pending-dots { display: flex; gap: 5px; }
-        .pending-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: <?= $color ?>;
-        }
-        .pending-label {
-            font-size: 0.78rem;
-            color: <?= $color ?>;
-            margin-top: 0.6rem;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-        }
-
-        .result-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 800;
-            color: <?= $color ?>;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.02em;
-        }
-
-        .result-message {
-            font-size: 0.95rem;
-            color: var(--pt-text);
-            margin-bottom: 1.5rem;
-        }
-
-        .order-details {
-            background: var(--pt-bg-card);
-           /* border: 1px solid var(--border); */
-            border-radius: 10px;
-            padding: 1rem 1.2rem;
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .order-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.4rem 0;
-            font-size: 0.875rem;
-            /* border-bottom: 1px solid var(--border); */
-            color: var(--pt-text);
-        }
-
-        .order-row:last-child { border-bottom: none; }
-        .order-row { opacity: 0; }
-
-        .order-row span:first-child { color: var(--pt-text-sec); }
-        .order-row span:last-child  { font-weight: 600; color: var(--pt-text); }
-
-        .estado-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            font-family: var(--font-display);
-            letter-spacing: 0.05em;
-            background: <?= $bg_icon ?>;
-            color: <?= $color ?>;
-        }
-
-        .btn-home {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: <?= $color ?>;
-            color: #0d0e10;
-            border: none;
-            border-radius: 8px;
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .btn-home:hover { opacity: 0.85; color: #0d0e10; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -288,8 +145,8 @@ unset($_SESSION['p2p_requestId'], $_SESSION['p2p_order_id']);
         <?php if ($status_p2p === 'PENDING'): ?>
         <div class="result-icon">
             <div class="pending-spinner">
-                <div class="pending-ring" id="pendingRing"></div>
-                <div class="pending-dots" id="pendingDots">
+                <div class="pending-ring"></div>
+                <div class="pending-dots">
                     <span class="pending-dot"></span>
                     <span class="pending-dot"></span>
                     <span class="pending-dot"></span>
@@ -334,24 +191,6 @@ unset($_SESSION['p2p_requestId'], $_SESSION['p2p_order_id']);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         if (typeof anime !== 'undefined') {
-            // Anillo girando
-            anime({
-                targets: '#pendingRing',
-                rotate: '360deg',
-                duration: 1100,
-                easing: 'linear',
-                loop: true
-            });
-            // Puntitos pulsando en cascada
-            anime({
-                targets: '#pendingDots .pending-dot',
-                scale: [1, 1.5, 1],
-                opacity: [0.4, 1, 0.4],
-                delay: anime.stagger(160, { start: 0 }),
-                duration: 900,
-                easing: 'easeInOutSine',
-                loop: true
-            });
             // Entrada de la card de detalles
             anime({
                 targets: '.order-row',

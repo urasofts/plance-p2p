@@ -362,7 +362,7 @@
                     <div class="speed-dial-icon">
                         <i class="fa-solid fa-tshirt fs-3" style="color: rgb(255, 102, 0);"></i>
                     </div>
-                    <span class="speed-dial-label">Ropa</span>
+                    <span class="speed-dial-label">Textiles</span>
                 </a>
                 <button type="button" class="detalles-toggle" data-target="detalle-ropa">Detalles</button>
                 <div class="speed-dial-details" id="detalle-ropa">
@@ -388,13 +388,12 @@
                     <small class="detail-subtitle">Preautorizacion</small>
                 </div>
             </div>
-
             <div class="speed-dial-item" title="Dispersiones">
                 <a href="views/dispersiones/dispersion.php" class="speed-dial-link">
                     <div class="speed-dial-icon">
-                        <i class="fa-solid fa-chart-line fs-3" style="color: rgb(255, 102, 0);"></i>
+                        <i class="bi bi-airplane-fill fs-3" style="color: rgb(255, 102, 0);"></i>
                     </div>
-                    <span class="speed-dial-label">Dispersiones</span>
+                    <span class="speed-dial-label">Ticketes</span>
                 </a>
                 <button type="button" class="detalles-toggle" data-target="detalle-dispersiones">Detalles</button>
                 <div class="speed-dial-details" id="detalle-dispersiones">

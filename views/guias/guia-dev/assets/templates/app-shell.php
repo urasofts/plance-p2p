@@ -11,6 +11,21 @@
       >
         <i class="bi bi-layout-sidebar-inset"></i>
       </div>
+      <a
+        class="sidebar-toggle"
+        href="../../../guia-developer.php"
+        title="Ver Guía Developer"
+      >
+        <i class="bi bi-file-earmark-code"></i>
+      </a>
+      <button
+        class="sidebar-toggle"
+        data-theme-toggle
+        type="button"
+        title="Cambiar a modo claro"
+      >
+        <i class="bi bi-sun-fill" data-theme-icon></i>
+      </button>
       <div class="brand-dot"></div>
       <div>
         <div class="brand-name">Payment API Explorer</div>

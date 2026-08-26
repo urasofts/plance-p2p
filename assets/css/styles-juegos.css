@@ -1,0 +1,459 @@
+/* ══════════════════════════════════════════════════════════════
+   styles-juegos.css
+   Estilos compartidos para las tiendas de juegos (cod, freefire,
+   easport, efootball...). Estructura común: banner + grid de
+   productos + panel de checkout.
+
+   Paleta: las superficies (fondos de card/nav/panel, bordes, texto)
+   se leen de las variables --pt-* definidas por php/theme.php, para
+   que la tienda respete el tema claro/oscuro del usuario.
+
+   Identidad de marca: cada juego define su propio acento antes de
+   cargar este archivo (o en un <style> justo después), sobreescribiendo:
+     --gj-accent, --gj-accent-glow, --gj-accent-soft,
+     --gj-accent-hover, --gj-accent-dark
+   Si una vista no los define, se usan los valores por defecto de abajo.
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    /* Acento por defecto (dorado) — cada tienda lo sobreescribe */
+    --gj-accent:        #f0b429;
+    --gj-accent-glow:   rgba(240, 180, 41, 0.25);
+    --gj-accent-soft:   rgba(240, 180, 41, 0.15);
+    --gj-accent-hover:  rgba(240, 180, 41, 0.4);
+    --gj-accent-dark:   #c99010;
+
+    /* Texto sobre superficies de acento (botones, badges, avatar) */
+    --gj-accent-ink:    #0a0a0b;
+
+    /* Indicador fijo de ahorro/descuento (no depende del juego) */
+    --gj-green:         #3ecf8e;
+
+    --gj-font-display:  'Calibri', sans-serif;
+    --gj-font-body:     'Calibri', sans-serif;
+
+    --gj-radius-sm:     6px;
+    --gj-radius-md:     10px;
+    --gj-radius-lg:     14px;
+    --gj-transition:    0.2s ease;
+}
+
+/* ── RESET & BASE ── */
+.shop-layout, .shop-layout *, .shop-layout *::before, .shop-layout *::after,
+.game-banner, .game-banner *, .game-banner *::before, .game-banner *::after {
+    box-sizing: border-box;
+}
+
+body { font-family: var(--gj-font-body); -webkit-font-smoothing: antialiased; }
+
+.game-banner a,
+.shop-layout a { color: var(--gj-accent); text-decoration: none; }
+.game-banner a:hover,
+.shop-layout a:hover { text-decoration: underline; }
+
+/* ── GAME BANNER ── */
+.game-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 2rem;
+    background: var(--pt-th2);
+    border-bottom: 1px solid var(--pt-border);
+    gap: 1rem;
+}
+
+.game-banner__tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--gj-font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--pt-text);
+}
+
+.game-icon { width: 20px; height: 20px; border-radius: 4px; }
+
+.card-img-top {
+    border-radius: 15px 15px 0 0;
+    height: 20px;
+    width: 10%;
+    object-fit: cover;
+}
+
+/* ── BANNER PLAYER ID ── */
+.banner-player-id { display: flex; align-items: center; gap: 0.5rem; }
+
+.banner-player-id label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--pt-text-sec);
+    white-space: nowrap;
+}
+
+.banner-player-id input {
+    background: var(--pt-bg-card);
+    border: 1.5px solid var(--pt-border);
+    border-radius: var(--gj-radius-sm);
+    color: var(--pt-text);
+    font-family: var(--gj-font-body);
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    outline: none;
+    transition: border-color var(--gj-transition);
+    width: 180px;
+}
+
+.banner-player-id input::placeholder { color: var(--pt-text-sec); }
+.banner-player-id input:focus { border-color: var(--gj-accent); }
+
+/* ── MAIN LAYOUT ── */
+.shop-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 0 1.5rem 3rem;
+    align-items: start;
+}
+
+/* ── SECTION HELPERS ── */
+.section-block { margin-bottom: 1.4rem; }
+
+.section-label {
+    font-family: var(--gj-font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pt-text-sec);
+    margin-bottom: 0.75rem;
+}
+
+/* ── PRODUCTS GRID ── */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.65rem;
+    font-family: var(--gj-font-body);
+}
+
+.product-card {
+    position: relative;
+    background: var(--pt-boxitem);
+    border: 1.5px solid var(--pt-border);
+    border-radius: var(--gj-radius-md);
+    padding: 0.9rem 0.75rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    background: var(--pt-boxitem);
+    border-color: var(--gj-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.product-card.selected {
+    background: var(--pt-border);
+    border-color: var(--gj-accent);
+    box-shadow: 0 0 0 1px var(--gj-accent), 0 4px 24px var(--gj-accent-glow);
+}
+
+.product-card.selected::after {
+    content: '✔';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.55rem;
+    width: 18px;
+    height: 18px;
+    background: var(--gj-accent);
+    border-radius: 50%;
+    color: var(--gj-accent-ink);
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    line-height: 18px;
+    text-align: center;
+}
+
+.badge-popular {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    background: var(--gj-accent);
+    color: var(--gj-accent-ink);
+    font-family: var(--gj-font-display);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--gj-radius-sm) 0 var(--gj-radius-sm) 0;
+}
+
+.product-card__img { font-size: 1.5rem; margin-bottom: 0.25rem; }
+
+.product-card__pts {
+    font-family: var(--gj-font-display);
+    font-size: 1.00rem;
+    font-weight: 700;
+    color: var(--pt-text);
+    line-height: 1;
+}
+
+.product-card__label {
+    font-size: 0.75rem;
+    color: var(--pt-text-sec);
+    margin-bottom: 0.3rem;
+}
+
+.product-card__price-old {
+    font-size: 0.72rem;
+    color: var(--pt-text-sec);
+    text-decoration: line-through;
+}
+
+.product-card__price {
+    font-family: var(--gj-font-display);
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: var(--gj-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.discount-tag {
+    background: var(--gj-accent-soft);
+    color: var(--gj-accent);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+}
+
+/* ── CHECKOUT PANEL ── */
+.checkout-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 16px;
+}
+
+.checkout-summary,
+.session-instructions,
+.vendor-box {
+    background: var(--pt-boxitem);
+    border: 1px solid var(--pt-border);
+    border-radius: var(--gj-radius-lg);
+    padding: 1.2rem 1.3rem;
+}
+
+.checkout-product-name {
+    font-family: var(--gj-font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--pt-text);
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.checkout-product-name img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.checkout-product-name img[src=""],
+.checkout-product-name img:not([src]) { display: none; }
+
+.checkout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.65rem;
+}
+
+.checkout-label { font-size: 0.85rem; color: var(--pt-text-sec); }
+.checkout-delivery { font-size: 0.85rem; font-weight: 600; color: var(--pt-text); }
+.checkout-divider { height: 1px; background: var(--pt-border); margin: 0.8rem 0; }
+.checkout-total-row { align-items: flex-end; }
+
+.checkout-pricing {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.checkout-original {
+    font-size: 0.8rem;
+    color: var(--pt-text-sec);
+    text-decoration: line-through;
+}
+
+.checkout-final-row { display: flex; align-items: center; gap: 0.4rem; }
+
+.checkout-badge {
+    background: rgba(62, 207, 142, 0.15);
+    color: var(--gj-green);
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--gj-font-display);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+}
+
+.checkout-final-price {
+    font-family: var(--gj-font-display);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--pt-text);
+    line-height: 1;
+}
+
+/* ── BUY BUTTON ── */
+.btn-buy {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.85rem 1.2rem;
+    background: var(--gj-accent);
+    border: none;
+    border-radius: var(--gj-radius-md);
+    color: var(--gj-accent-ink);
+    font-family: var(--gj-font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: all 0.18s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-buy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.btn-buy:hover {
+    background: var(--gj-accent-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--gj-accent-glow);
+}
+.btn-buy:hover::before { transform: translateX(100%); }
+.btn-buy:active { transform: translateY(0); }
+
+.btn-arrow { font-size: 1.1rem; transition: transform 0.2s; }
+.btn-buy:hover .btn-arrow { transform: translateX(4px); }
+
+/* ── TRUST BADGES ── */
+.trust-badges { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--pt-text-sec); }
+
+/* ── SESSION INSTRUCTIONS (ID → producto → sesión) ── */
+.session-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.session-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+}
+
+.session-step__num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--gj-accent-soft);
+    color: var(--gj-accent);
+    font-family: var(--gj-font-display);
+    font-weight: 800;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.session-step__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-top: 0.1rem;
+}
+
+.session-step__title { font-size: 0.87rem; font-weight: 700; color: var(--pt-text); }
+.session-step__desc { font-size: 0.78rem; color: var(--pt-text-sec); line-height: 1.5; }
+
+/* ── VENDOR ── */
+.vendor-info { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+
+.vendor-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gj-accent), var(--gj-accent-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--gj-font-display);
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--gj-accent-ink);
+    flex-shrink: 0;
+}
+
+.vendor-name { font-weight: 600; font-size: 0.9rem; color: var(--pt-text); }
+.vendor-rating { font-size: 0.78rem; color: var(--pt-text-sec); margin-top: 0.1rem; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.products-panel { animation: fadeSlideIn 0.4s ease both; }
+.checkout-panel { animation: fadeSlideIn 0.4s 0.1s ease both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .shop-layout { grid-template-columns: 1fr; }
+    .checkout-panel { position: static; }
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .navbar__links { display: none; }
+    .game-banner { flex-direction: column; align-items: flex-start; }
+}

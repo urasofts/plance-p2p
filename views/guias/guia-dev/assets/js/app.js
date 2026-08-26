@@ -6,6 +6,7 @@ import { initSidebar, onEpChange } from "./components/sidebar/sidebar.js";
 import { initRequest, initEditor } from "./components/request/request.js";
 import { initResponse } from "./components/response/response.js";
 import { initPopup } from "./components/popup/popup.js";
+import { initTheme } from "./components/theme/theme.js";
 
 let booted = false;
 
@@ -18,6 +19,8 @@ function boot() {
 
   booted = true;
   console.log("[app] boot");
+
+  initTheme();
 
   const nav = createNavigation(state);
 

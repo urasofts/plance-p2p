@@ -28,96 +28,15 @@ $resultado = mysqli_query($conexion, "SELECT * FROM payment_link ORDER BY create
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
 </head>
 <style>
-    body {
-        background-color: #000000;
-        color: white;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: fixed;
-        background-size: cover;
-        font-family: 'Barlow', sans-serif;
+    /* Historial de Links de Pago — acento magenta */
+    :root {
+        --hist-accent:     #ff99ff;
+        --hist-accent-rgb: 255, 153, 255;
+        --hist-maxw:       1200px;
     }
-    .navbar {
-        background-color: #0f0f0fa9 !important;
-        backdrop-filter: blur(8px);
-    }
-    .tabla-container {
-        background: rgba(15, 15, 15, 0.85);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 2rem auto;
-        max-width: 1200px;
-        backdrop-filter: blur(8px);
-    }
-    .tabla-titulo {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: rgb(255, 153, 255);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .table {
-        color: white;
-        border-color: rgba(255,255,255,0.1);
-    }
-    .table thead th {
-        background: rgba(0, 0, 0, 0.79);
-        color: hsl(298, 94%, 68%);
-        border-color: rgba(255,255,255,0.1);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-    }
-    .table tbody tr {
-        border-color: rgba(255,255,255,0.07);
-        background-color: black;
-        transition: background 0.15s;
-    }
-    .table tbody tr:hover { background: rgba(255,255,255,0.05); }
-    .table tbody td { border-color: rgba(255,255,255,0.07); font-size: 0.88rem; vertical-align: middle; background: #1312129a; color: white; }
-
-    .badge-activo    { background: rgba(246, 59, 237, 0.2);  color: rgb(230, 166, 255); }
-    .badge-error     { background: rgba(224,82,82,0.2);   color: #e05252; }
-    .badge-expirado  { background: rgba(138,141,150,0.2); color: #8a8d96; }
-
-    .estado-pill {
-        display: inline-block;
-        padding: 0.2rem 0.65rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-    .sin-registros {
-        text-align: center;
-        padding: 3rem;
-        color: #968a8a;
-        font-size: 0.95rem;
-    }
-    .btn-link-action {
-        background: rgba(59,130,246,0.15);
-        border: 1px solid rgba(59,130,246,0.4);
-        color: #ff85eb;
-        border-radius: 6px;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        transition: all 0.2s;
-        white-space: nowrap;
-        font-family: 'Barlow', sans-serif;
-    }
-    .btn-link-action:hover { background: rgba(59,130,246,0.3); color: #60a5fa; text-decoration: none; }
-    .btn-link-action.copied { background: rgba(62,207,142,0.2); border-color: rgba(62,207,142,0.4); color: #3ecf8e; }
 </style>
 <body>
     <?php

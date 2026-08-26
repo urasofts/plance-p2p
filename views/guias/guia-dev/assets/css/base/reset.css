@@ -180,12 +180,12 @@ input[type="week"] {
 /* Selección de texto personalizada */
 ::selection {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--text-inverse);
 }
 
 ::-moz-selection {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--text-inverse);
 }
 
 /* Placeholder personalizado */

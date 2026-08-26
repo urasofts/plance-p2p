@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 
 if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
@@ -18,371 +18,18 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
-    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <?php $theme_seccion = 'plataformas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-plataformas.css">
+    <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+
 </head>
 <style>
-    /* ════════════════════════════════════════
-    STREAMING — Dark Theme · Púrpura/Rojo
-    ════════════════════════════════════════ */
-
+    /* Streaming — acento morado */
     :root {
-    --bg-base:        var(--pt-bg-base);
-    --bg-surface:     var(--pt-bg-surface);
-    --bg-card:        var(--pt-navbar);
-    --bg-card-hover:  var(--pt-hover);
-    --bg-selected:    rgba(168, 85, 247, 0.1);
-    --border:         var(--pt-border);
-    --accent:         #a855f7;
-    --accent-glow:    rgba(168, 85, 247, 0.25);
-    --accent-dark:    #7c3aed;
-    --text-primary:   var(--pt-text);
-    --text-secondary: var(--pt-text-sec);
-    --text-muted:     var(--pt-text-sec);
-    --green:          #3ecf8e;
-    --font-display:   'Barlow', sans-serif;
-    --font-body:      'Barlow', sans-serif;
-    --radius-sm:      6px;
-    --radius-md:      10px;
-    --radius-lg:      14px;
-    --transition:     0.2s ease;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-    background-color: var(--bg-base);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-    }
-
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ── GAME BANNER ── */
-    .game-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.6rem 2rem;
-    background: var(--pt-th2);
-    border-bottom: 1px solid var(--pt-border);
-    gap: 1rem;
-    }
-
-    .game-banner__tag {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 0.04em;
-    color: var(--text-primary);
-    }
-
-    /* ── MAIN LAYOUT ── */
-    .shop-layout {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 1.5rem auto;
-    padding: 0 1.5rem 3rem;
-    align-items: start;
-    }
-
-    .section-block { margin-bottom: 1.8rem; }
-
-    .section-label {
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    margin-bottom: 0.75rem;
-    }
-
-    /* ── PLATAFORMA HEADER ── */
-    .platform-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
-    }
-
-    .platform-header img {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    object-fit: contain;
-    }
-
-    .platform-header span {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    color: var(--text-primary);
-    }
-
-    /* ── PRODUCTS GRID ── */
-    .products-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.65rem; 
-    }
-
-    .product-card {
-    position: relative;
-    background: var(--bg-card);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1rem 0.85rem 0.9rem;
-    cursor: pointer;
-    transition: all 0.18s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    overflow: hidden;
-    }
-
-    .product-card:hover {
-    background: var(--pt-boxitem);
-    border-color: rgba(168, 85, 247, 0.4);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-    }
-
-    .product-card.selected {
-    background: var(--pt-border);
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent), 0 4px 24px var(--accent-glow);
-    }
-
-    .product-card.selected::after {
-    content: '✔';
-    position: absolute;
-    top: 0.5rem;
-    right: 0.55rem;
-    width: 18px;
-    height: 18px;
-    background: var(--accent);
-    border-radius: 50%;
-    color: #0d0e10;
-    font-size: 0.65rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    line-height: 18px;
-    text-align: center;
-    }
-
-    .badge-popular {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    background: var(--accent);
-    color: #0d0e10;
-    font-family: var(--font-body);
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radius-sm) 0 var(--radius-sm) 0;
-    }
-
-    .product-card__platform {
-    font-size: 0.7rem;
-    /*  */
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.1rem;
-    }
-
-    .product-card__pts {
-    font-family: var(--font-body);
-    /* line-height: 1.1; */
-    /*  */
-    font-size: 1.2rem;
-    /*  */
-    color: var(--text-primary);
-    font-weight: 800;
-    }
-
-    .product-card__label {
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.3rem;
-    }
-
-    .product-card__price {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    flex-wrap: wrap;
-    margin-top: auto;
-    }
-
-    /* ── CHECKOUT PANEL ── */
-    .checkout-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: sticky;
-    top: 16px;
-    }
-
-    .checkout-summary,
-    .delivery-instructions,
-    .vendor-box {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.2rem 1.3rem;
-    }
-
-    .checkout-product-name {
-    font-family: var(--font-body);
-    font-size: 1.20rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-    }
-
-    .checkout-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.65rem; }
-    .checkout-label { font-size: 0.85rem; color: var(--text-secondary); }
-    .checkout-delivery { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
-    .checkout-divider { height: 1px; background: var(--border); margin: 0.8rem 0; }
-    .checkout-total-row { align-items: flex-end; }
-
-    .checkout-pricing { text-align: right; display: flex; flex-direction: column; gap: 0.15rem; }
-
-    .checkout-final-price {
-    font-family: var(--font-body);
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--text-primary);
-    line-height: 1;
-    }
-
-    .btn-buy {
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.85rem 1.2rem;
-    background: var(--accent);
-    border: none;
-    border-radius: var(--radius-md);
-    color: #0a0a0b;
-    font-family: var(--font-body);
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    transition: all 0.18s ease;
-    position: relative;
-    overflow: hidden;
-    }
-
-    .btn-buy::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-    }
-
-    .btn-buy:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 20px var(--accent-glow); }
-    .btn-buy:hover::before { transform: translateX(100%); }
-    .btn-buy:active { transform: translateY(0); }
-    .btn-arrow { font-size: 1.1rem; transition: transform 0.2s; }
-    .btn-buy:hover .btn-arrow { transform: translateX(4px); }
-
-    .trust-badges { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); }
-
-    .card-required-notice {
-        display: flex; gap: 0.5rem; align-items: flex-start;
-        background: rgba(240,180,41,0.08);
-        border: 1px solid rgba(240,180,41,0.25);
-        border-radius: 8px; padding: 0.65rem 0.8rem;
-        margin: 0.8rem 0; font-size: 0.78rem;
-        color: #fbbf24; line-height: 1.5;
-    }
-    .card-required-notice i { font-size: 0.95rem; margin-top: 0.1rem; flex-shrink: 0; }
-    .card-required-notice strong { color: #fde68a; }
-
-    .instruction-text { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
-
-    .btn-instructions {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
-    font-size: 0.82rem;
-    padding: 0.35rem 0.8rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all var(--transition);
-    font-family: var(--font-body);
-    }
-    .btn-instructions:hover { border-color: var(--accent); color: var(--text-primary); }
-
-    .vendor-info { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
-
-    .vendor-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #a855f7, #7c3aed);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 0.85rem;
-    color: #fff;
-    flex-shrink: 0;
-    }
-
-    .vendor-name { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
-    .vendor-rating { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.1rem; }
-
-    @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
-    }
-    .products-panel { animation: fadeSlideIn 0.4s ease both; }
-    .checkout-panel { animation: fadeSlideIn 0.4s 0.1s ease both; }
-
-    @media (max-width: 900px) {
-    .shop-layout { grid-template-columns: 1fr; }
-    .checkout-panel { position: static; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-    .products-grid { grid-template-columns: 1fr; }
-    .game-banner { flex-direction: column; align-items: flex-start; }
+        --plat-accent:      #a855f7;
+        --plat-accent-rgb:  168, 85, 247;
+        --plat-accent-dark: #7c3aed;
     }
 </style>
 <body>
@@ -401,12 +48,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <i class="bi bi-tv-fill" style="color: rgba(174, 0, 255, 0.96);"></i> Suscripciones Streaming
         </div>
         <!-- Correo del usuario (obligatorio para invitados) -->
-        <div class="banner-correo" style="display: flex; align-items: center; gap: 0.5rem;">
-            <div style="max-width:1200px;padding: 5px 10px; border-radius: 5px; font-weight: bold; margin: 0px;">
-                <input type="email" id="usuarioIdInput" placeholder="Ingresa tu correo electrónico para continuar"
-                    value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>"
-                    style="width:100%;max-width:340px;background:var(--pt-bg-card);border:1.5px solid var(--pt-border);border-radius:8px;color:var(--pt-text);font-family:inherit;font-size:0.85rem;padding:0.5rem 0.8rem;outline:none;">
-            </div>
+        <div class="banner-correo">
+            <label for="usuarioIdInput"><i class="bi bi-envelope-fill fs-6"></i> Correo electrónico</label>
+            <input type="email" id="usuarioIdInput" placeholder="Ingresa tu correo electrónico para continuar"
+                value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>" autocomplete="off">
         </div>
     </div>
 
@@ -558,14 +203,31 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                 </div> -->
             </div>
 
-            <div class="delivery-instructions">
-                <p class="section-label">Instrucciones</p>
-                <div class="instruction-text" id="instructionText">
-                    Netflix® | Plan Estándar 📺<br>
-                    <span>🌐</span> Acceso inmediato tras el pago<br>
-                    <span>⛔</span> IMPORTANT NOTE BEFORE PURCHASE
-                </div>
-                <button class="btn-instructions">Ver todas las instrucciones ▾</button>
+            <div class="session-instructions">
+                <p class="section-label">Instrucciones para crear sesión</p>
+                <ol class="session-steps">
+                    <li class="session-step">
+                        <span class="session-step__num">1</span>
+                        <div class="session-step__body">
+                            <span class="session-step__title">Digita tu correo electrónico</span>
+                            <span class="session-step__desc">Escríbelo en el campo de arriba; ahí gestionamos el acceso a tu suscripción.</span>
+                        </div>
+                    </li>
+                    <li class="session-step">
+                        <span class="session-step__num">2</span>
+                        <div class="session-step__body">
+                            <span class="session-step__title">Elige el plan</span>
+                            <span class="session-step__desc">Selecciona la plataforma y el plan que quieres suscribir en el panel de la izquierda.</span>
+                        </div>
+                    </li>
+                    <li class="session-step">
+                        <span class="session-step__num">3</span>
+                        <div class="session-step__body">
+                            <span class="session-step__title">Crea tu sesión de pago</span>
+                            <span class="session-step__desc">Presiona "Suscribirse ahora" para generar tu sesión y completar el pago de forma segura.</span>
+                        </div>
+                    </li>
+                </ol>
             </div>
 
             <div class="vendor-box">
@@ -581,6 +243,111 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
 
         </aside>
     </main>
+
+    <!-- ═══ INTEGRACIÓN PLACETOPAY ═══ -->
+    <section class="integration-docs" style="--code-accent:var(--plat-accent); --code-accent-ink:var(--plat-accent-ink); --code-accent-soft:rgba(var(--plat-accent-rgb),0.12); --code-radius-sm:var(--plat-radius-sm); --code-radius-md:var(--plat-radius-md); --code-radius-lg:var(--plat-radius-lg); --code-font:var(--plat-font);">
+        <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
+        <h3>Así se crea la sesión de pago de esta tienda</h3>
+        <p>Cuando presionas <strong>"Suscribirse ahora"</strong>, nuestro backend arma este mismo request y lo envía a <strong>PlacetoPay Web Checkout</strong> con <code>payment.subscribe: true</code>. La respuesta trae un <code>processUrl</code> al que te redirigimos para pagar con tarjeta — es el único método que permite guardarla para las renovaciones.</p>
+
+        <div class="endpoint-bar">
+            <span class="method-pill">POST</span>
+            <span class="endpoint-url">https://checkout-test.placetopay.com/api/session</span>
+            <span class="endpoint-note">ambiente de pruebas</span>
+        </div>
+
+        <div class="code-block">
+            <div class="code-tabs">
+                <button class="code-tab active" data-key="json">JSON</button>
+                <button class="code-tab" data-key="php">PHP</button>
+                <button class="code-copy"><i class="bi bi-clipboard"></i> Copiar</button>
+            </div>
+            <pre class="code-panel active" data-key="json"><code>{
+  <span class="jk">"locale"</span>: <span class="js">"es_CO"</span>,
+  <span class="jk">"auth"</span>: {
+    <span class="jk">"login"</span>: <span class="js">"YOUR_LOGIN"</span>,
+    <span class="jk">"tranKey"</span>: <span class="js">"TRAN_KEY_CALCULADO"</span>,
+    <span class="jk">"nonce"</span>: <span class="js">"Tm9uY2VFbkJhc2U2NA=="</span>,
+    <span class="jk">"seed"</span>: <span class="js">"2026-08-25T10:15:32-05:00"</span>
+  },
+  <span class="cm">// pre-diligencia el correo para que PlacetoPay no lo vuelva a pedir</span>
+  <span class="jk">"buyer"</span>: { <span class="jk">"email"</span>: <span class="js">"usuario@correo.com"</span> },
+  <span class="jk">"payment"</span>: {
+    <span class="jk">"reference"</span>: <span class="js">"SUB-000058"</span>,
+    <span class="jk">"description"</span>: <span class="js">"Netflix Estandar"</span>,
+    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">26900</span> },
+    <span class="cm">// clave: cobra el primer mes Y tokeniza la tarjeta para el siguiente</span>
+    <span class="jk">"subscribe"</span>: <span class="jb">true</span>
+  },
+  <span class="jk">"expiration"</span>: <span class="js">"2026-08-25T11:15:32-05:00"</span>,
+  <span class="jk">"returnUrl"</span>: <span class="js">"https://tu-dominio.com/retorno/retorno_subs.php?sub=58"</span>,
+  <span class="jk">"notifyUrl"</span>: <span class="js">"https://tu-dominio.com/php/notify.php"</span>,
+  <span class="jk">"ipAddress"</span>: <span class="js">"203.0.113.42"</span>,
+  <span class="jk">"userAgent"</span>: <span class="js">"Mozilla/5.0 (Windows NT 10.0; Win64; x64)"</span>
+}</code></pre>
+            <pre class="code-panel" data-key="php"><code>&lt;?php
+<span class="cm">// credenciales fuera del código, nunca hardcodeadas</span>
+<span class="cvar">$login</span>     = getenv(<span class="js">'P2P_LOGIN'</span>);
+<span class="cvar">$secretKey</span> = getenv(<span class="js">'P2P_SECRET_KEY'</span>);
+<span class="cvar">$url</span>       = <span class="js">'https://checkout-test.placetopay.com/api/session'</span>;
+
+<span class="cm">// autenticación: Base64( SHA256( nonce + seed + secretKey ) )</span>
+<span class="cvar">$seed</span>     = date(<span class="js">'c'</span>);
+<span class="cvar">$nonce</span>    = bin2hex(random_bytes(16));
+<span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
+<span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
+
+<span class="cm">// cuerpo del request — cobra el primer mes Y tokeniza la tarjeta</span>
+<span class="cvar">$data</span> = [
+    <span class="jk">'locale'</span> =&gt; <span class="js">'es_CO'</span>,
+    <span class="jk">'auth'</span>   =&gt; [
+        <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
+        <span class="jk">'tranKey'</span> =&gt; <span class="cvar">$tranKey</span>,
+        <span class="jk">'nonce'</span>   =&gt; <span class="cvar">$nonceB64</span>,
+        <span class="jk">'seed'</span>    =&gt; <span class="cvar">$seed</span>,
+    ],
+    <span class="jk">'buyer'</span>  =&gt; [<span class="jk">'email'</span> =&gt; <span class="cvar">$usuario_id</span>],
+    <span class="jk">'payment'</span> =&gt; [
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'SUB-'</span> . <span class="cvar">$sub_id</span>,
+        <span class="jk">'description'</span> =&gt; <span class="cvar">$plataforma</span> . <span class="js">' '</span> . <span class="cvar">$plan</span>,
+        <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
+        <span class="jk">'subscribe'</span>   =&gt; true,  <span class="cm">// ← clave: cobra + tokeniza en un solo paso</span>
+    ],
+    <span class="jk">'expiration'</span> =&gt; date(<span class="js">'c'</span>, strtotime(<span class="js">'+1 hour'</span>)),
+    <span class="jk">'returnUrl'</span>  =&gt; app_base_url() . <span class="js">'/retorno/retorno_subs.php?sub='</span> . <span class="cvar">$sub_id</span>,
+    <span class="jk">'notifyUrl'</span>  =&gt; <span class="cvar">$notifyUrl</span>,
+    <span class="jk">'ipAddress'</span>  =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'REMOTE_ADDR'</span>],
+    <span class="jk">'userAgent'</span>  =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'HTTP_USER_AGENT'</span>],
+];
+
+<span class="cvar">$ch</span> = curl_init(<span class="cvar">$url</span>);
+curl_setopt_array(<span class="cvar">$ch</span>, [
+    CURLOPT_POST           =&gt; true,
+    CURLOPT_RETURNTRANSFER =&gt; true,
+    CURLOPT_HTTPHEADER     =&gt; [<span class="js">'Content-Type: application/json'</span>],
+    CURLOPT_POSTFIELDS     =&gt; json_encode(<span class="cvar">$data</span>),
+]);
+
+<span class="cvar">$result</span> = json_decode(curl_exec(<span class="cvar">$ch</span>), true);
+curl_close(<span class="cvar">$ch</span>);
+
+<span class="cm">// redirige al comprador a la pasarela de PlacetoPay</span>
+header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[<span class="js">'processUrl'</span>]);</code></pre>
+        </div>
+
+        <div class="doc-note">
+            <span class="doc-note-icon">💡</span>
+            <span>Por eso el checkout de esta tienda solo acepta <strong>tarjeta</strong>: PSE no permite guardar un medio de pago para cobros futuros. Cuando el mes termina, el sistema vuelve a cobrar automáticamente sobre la tarjeta tokenizada, sin que tengas que hacer nada.</span>
+        </div>
+
+        <a class="integration-docs__link" href="../guias/guia-developer.php#tipos-pago">
+            <div>
+                <strong>¿Quieres entender esta integración a fondo?</strong>
+                <span>Lee la documentación completa sobre tipos de pago y tokenización en Web Checkout.</span>
+            </div>
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </section>
 
     <!-- JS -->
     <script>
@@ -605,10 +372,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             document.getElementById('checkoutName').textContent  = p.name;
             document.getElementById('checkoutPrice').textContent = p.price;
 
-            document.getElementById('instructionText').innerHTML =
-                p.plataforma + '\u00ae | Plan ' + p.plan + ' \uD83D\uDCFA<br>' +
-                '<span>\uD83C\uDF10</span> Acceso inmediato tras el pago<br>' +
-                '<span>\u26D4</span> IMPORTANT NOTE BEFORE PURCHASE';
         }
 
         function initCards() {
@@ -676,5 +439,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/validaciones.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="../../assets/js/code-block.js"></script>
 </body>
 </html>

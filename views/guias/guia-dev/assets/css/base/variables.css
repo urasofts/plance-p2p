@@ -49,6 +49,14 @@
   --shadow-md: 0 8px 32px var(--shadow-color);
   --shadow-lg: 0 24px 60px var(--shadow-color);
 
+  /* Overlay neutro (tinte de hover/borde sutil): rgba(var(--overlay-rgb), X) */
+  --overlay-rgb: 255, 255, 255;
+
+  /* Colores de sintaxis (JSON / editor) */
+  --json-key: #93c5fd;
+  --json-number: #fca5a5;
+  --json-keyword: #c084fc;
+
   /* ========================================
      TIPOGRAFÍA
      ======================================== */
@@ -127,6 +135,37 @@
   --z-toast: 1070;
   --z-overlay: 1080;
   --z-max: 9999;
+}
+
+/* ========================================
+   MODO CLARO
+   Se activa con [data-theme="light"] en <html> (ver theme.js).
+   Solo redefinimos la base neutra: acento/verde/rojo/azul se
+   conservan iguales en ambos temas.
+   ======================================== */
+:root[data-theme="light"] {
+  --bg: #f6f6f8;
+  --surface: #ffffff;
+  --card: #eef0f3;
+  --border: #dfe2e8;
+
+  --text: #16181d;
+  --muted: #6b7078;
+  --text-inverse: #0a0a0a;
+
+  --input-bg: #ffffff;
+  --input-border: var(--border);
+  --input-placeholder: #9aa0aa;
+
+  --shadow-color: rgba(20, 22, 30, 0.12);
+
+  /* el tinte de hover/borde pasa de blanco-sobre-negro a negro-sobre-blanco */
+  --overlay-rgb: 15, 17, 20;
+
+  /* pasteles claros ilegibles sobre fondo blanco -> versiones oscuras */
+  --json-key: #1d4ed8;
+  --json-number: #b91c1c;
+  --json-keyword: #7c3aed;
 }
 
 /* ========================================

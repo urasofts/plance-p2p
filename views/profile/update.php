@@ -44,7 +44,7 @@ if ($accion === 'foto') {
     }
 
     $nombre_archivo = 'avatar_' . $user_id . '_' . time() . '.' . $extension;
-    $destino        = '../uploads/' . $nombre_archivo;
+    $destino        = '../../uploads/' . $nombre_archivo;
 
     if (move_uploaded_file($archivo['tmp_name'], $destino)) {
         $nombre_safe = mysqli_real_escape_string($conexion, $nombre_archivo);

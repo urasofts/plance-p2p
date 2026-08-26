@@ -107,6 +107,15 @@ export const OPTION_INFO = {
   },
 };
 
+/* Mapeo tarjeta de prueba -> resultado cuando simMode = "auto".
+   Antes este mapeo no existía y "auto" siempre devolvía un OK fijo,
+   ignorando la tarjeta seleccionada en el panel. */
+export const AUTO_CARD_OUTCOME = {
+  "4111111111111111": "ok", // Aprueba
+  "4509564638437551": "pending", // Pendiente
+  "4110760000000016": "eXA", // Rechaza (rechazo financiero)
+};
+
 /* Catálogo de respuestas simuladas (PlacetoPay AutoPay codes) */
 export const SIM = {
   ok: {

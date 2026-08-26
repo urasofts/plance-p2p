@@ -2,14 +2,14 @@
 ├─ lab_index.html
 ├─ assets/
 │  ├─ templates/
-│  │  ├─ welcome.html
-│  │  ├─ app-shell.html
+│  │  ├─ welcome.php
+│  │  ├─ app-shell.php
 │  │  └─ sections/
-│  │     ├─ g-home.html
-│  │     ├─ g-session.html
-│  │     ├─ g-process.html
-│  │     ├─ g-links.html
-│  │     └─ g-errors.html
+│  │     ├─ g-home.php
+│  │     ├─ g-session.php
+│  │     ├─ g-process.php
+│  │     ├─ g-links.php
+│  │     └─ g-errors.php
 │  ├─ css/
 │  │  ├─ base/
 │  │  │  ├─ variables.css

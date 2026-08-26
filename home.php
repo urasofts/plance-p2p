@@ -22,12 +22,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://googleapis.com" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
   
@@ -395,7 +391,7 @@ if (isset($_SESSION['user_id'])) {
             </span>
 
             <!-- Avatar clickeable → perfil -->
-            <a href="<?= $nav_base ?>profile/index.php" class="nav-avatar-wrap" title="Mi perfil">
+            <a href="<?= $nav_base ?>../views/profile/index.php" class="nav-avatar-wrap" title="Mi perfil">
                 <?php if ($nav_avatar): ?>
                     <img src="<?= $nav_avatar ?>" class="nav-avatar-img" alt="Perfil">
                 <?php else: ?>

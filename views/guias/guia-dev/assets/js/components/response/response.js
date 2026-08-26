@@ -1,5 +1,5 @@
 import { $, $$, colorize, getSelectedOptionValue } from "../../core/utils.js";
-import { SIM } from "../../core/constants.js";
+import { SIM, AUTO_CARD_OUTCOME } from "../../core/constants.js";
 
 export function initResponse(state, deps = {}) {
   if (!state.responseTab) state.responseTab = "preview";
@@ -50,14 +50,17 @@ export function sendReq(state, deps = {}) {
 
   setTimeout(() => {
     const ms = Date.now() - t0;
-    const cfg = SIM[sim] ||
-      SIM.auto || {
-        kind: "ok",
-        http: "200 OK",
-        status: "OK",
-        reason: "00",
-        message: "OK",
-      };
+    // "auto" no es una clave de SIM: el resultado depende de la tarjeta
+    // de prueba seleccionada (Aprueba / Pendiente / Rechaza).
+    const simKey =
+      sim === "auto" ? AUTO_CARD_OUTCOME[state.card] || "ok" : sim;
+    const cfg = SIM[simKey] || {
+      kind: "ok",
+      http: "200 OK",
+      status: "OK",
+      reason: "00",
+      message: "OK",
+    };
 
     const resp = {
       status: {

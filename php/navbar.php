@@ -46,12 +46,90 @@ if (isset($_SESSION['user_id'])) {
 if (!isset($_SESSION['usuario'])) {
     $nav_initials = 'I';
 }
+
+// ── Links rápidos entre páginas del mismo grupo ──
+// Cada carpeta de views/ que agrupa varias páginas hermanas (tiendas de juegos,
+// plataformas, textiles, historiales...) tiene sus páginas mapeadas aquí.
+// Al entrar a una de ellas, el navbar muestra un desplegable con acceso
+// directo a las demás páginas del mismo grupo.
+$nav_grupos_tiendas = [
+    'games' => [
+        'label' => 'Juegos',
+        'icon'  => 'fa-shop',
+        'items' => [
+            'cod.php'         => 'Call of Duty Mobile',
+            'freefire.php'    => 'Free Fire',
+            'efootball.php'   => 'Efootball Mobile',
+            'easport.php'     => 'EA FC Sports Mobile',
+            'rainbowsix.php'  => 'Rainbow Six Siege',
+            'pubg.php'        => 'PUBG Battlegrounds',
+            'bloodstrike.php' => 'Blood Strike',
+        ],
+    ],
+    'plataformas' => [
+        'label' => 'Plataformas',
+        'icon'  => 'fa-shop',
+        'items' => [
+            'streaming.php'         => 'Streaming',
+            'otras_streaming.php'   => 'Otros Streaming',
+            'music_gateway.php'     => 'Música',
+            'streaming_gateway.php' => 'Streaming Gateway',
+            'ia.php'                => 'Inteligencia Artificial',
+            'redes.php'             => 'Redes Sociales',
+        ],
+    ],
+    'textil' => [
+        'label' => 'Textiles',
+        'icon'  => 'fa-shop',
+        'items' => [
+            'pl.php'         => 'Premier League',
+            'laliga.php'     => 'La Liga',
+            'seriea.php'     => 'Serie A',
+            'bundesliga.php' => 'Bundesliga',
+        ],
+    ],
+    'historial' => [
+        'label' => 'Historiales',
+        'icon'  => 'fa-clock-rotate-left',
+        'items' => [
+            'reg-pgb.php'  => 'Pagos Básicos',
+            'reg-sus.php'  => 'Suscripciones',
+            'reg-rec.php'  => 'Recurrentes',
+            'reg-link.php' => 'Links de Pago',
+            'reg-prea.php' => 'Preautorizaciones',
+            'reg-disp.php' => 'Dispersiones',
+            'reversos.php' => 'Reversos',
+        ],
+    ],
+];
+
+$nav_current_dir   = basename(dirname($_SERVER['SCRIPT_NAME']));
+$nav_current_file  = basename($_SERVER['SCRIPT_NAME']);
+$nav_grupo_activo  = $nav_grupos_tiendas[$nav_current_dir] ?? null;
+$nav_mostrar_tiendas = $nav_grupo_activo && array_key_exists($nav_current_file, $nav_grupo_activo['items']);
+
+// ── Links entre las secciones (juegos, plataformas, textiles, reservaciones, dispersiones) ──
+// Se muestran en cualquier página dentro de esas carpetas para saltar de una sección a otra
+// sin tener que volver primero a sesiones.php.
+$nav_secciones = [
+    'games/juegos.php'               => ['label' => 'Juegos Mobiles',        'icon' => 'fa-solid fa-gamepad'],
+    'plataformas/suscripciones.php'  => ['label' => 'Plataformas Digitales', 'icon' => 'bi bi-google-play'],
+    'textil/textiles.php'            => ['label' => 'Textiles',              'icon' => 'fa-solid fa-tshirt'],
+    'reservaciones/reservas.php'     => ['label' => 'Reservaciones',         'icon' => 'fa-solid fa-calendar-check'],
+    'dispersiones/dispersion.php'    => ['label' => 'Dispersiones',          'icon' => 'bi bi-airplane-fill'],
+];
+
+$nav_dirs_secciones = ['games', 'plataformas', 'textil', 'reservaciones', 'dispersiones'];
+$nav_mostrar_secciones = in_array($nav_current_dir, $nav_dirs_secciones, true);
+$nav_seccion_actual = $nav_current_dir . '/' . $nav_current_file;
 ?>
 
 <style>
     .navbar {
         background-color: var(--pt-navbar, #2e2e2ea9) !important;
         backdrop-filter: blur(8px);
+        position: relative;
+        z-index: 1030;
     }
 
 
@@ -106,7 +184,7 @@ if (!isset($_SESSION['usuario'])) {
     }
 
     .dropbtn {
-        background: hsla(120, 2%, 10%, 0.84);
+        background: var(--pt-dropdown, hsla(120, 2%, 10%, 0.84));
         color: #f07229;
         border: 1.5px solid rgba(240, 180, 41, 0.3);
         border-radius: 8px;
@@ -153,6 +231,11 @@ if (!isset($_SESSION['usuario'])) {
         text-decoration: none;
         transition: background 0.15s, color 0.15s;
     }
+    .dropdown-content a i {
+        width: 1.1em;
+        margin-right: 0.35rem;
+        text-align: center;
+    }
     .dropdown-content a:hover {
         background: rgba(240, 180, 41, 0.1);
         color: #f06829;
@@ -172,7 +255,15 @@ if (!isset($_SESSION['usuario'])) {
         color: #e05252 !important;
     }
 
-    .dropdown:hover .dropdown-content { display: block; }
+    .dropdown-content .tienda-activa {
+        color: #f0b429 !important;
+        font-weight: 700;
+        cursor: default;
+        pointer-events: none;
+        background: rgba(240, 180, 41, 0.08);
+    }
+
+    .dropdown-content.show { display: block; }
 
 
 
@@ -189,6 +280,39 @@ if (!isset($_SESSION['usuario'])) {
     <a href="<?= htmlspecialchars($nav_back_url) ?>" class="btn" style="color: black; color: #f06129;">
         <i class="fa-solid fa-circle-arrow-left fs-6"></i> <?= htmlspecialchars($nav_back_text) ?>
     </a>  <!---->
+
+    <?php if ($nav_mostrar_secciones): ?>
+    <!-- Acceso rápido para saltar a otra sección (juegos, plataformas, textiles, reservaciones, dispersiones) -->
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa-solid fa-layer-group"></i> Secciones ▼</button>
+        <div class="dropdown-content">
+            <?php foreach ($nav_secciones as $nav_sec_ruta => $nav_sec_info): ?>
+                <?php if ($nav_sec_ruta === $nav_seccion_actual): ?>
+                    <a class="tienda-activa" href="#" aria-current="page"><i class="<?= htmlspecialchars($nav_sec_info['icon']) ?>"></i> <?= htmlspecialchars($nav_sec_info['label']) ?></a>
+                <?php else: ?>
+                    <a href="<?= $nav_base . 'views/' . htmlspecialchars($nav_sec_ruta) ?>"><i class="<?= htmlspecialchars($nav_sec_info['icon']) ?>"></i> <?= htmlspecialchars($nav_sec_info['label']) ?></a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($nav_mostrar_tiendas): ?>
+    <!-- Acceso rápido a las demás tiendas del mismo grupo -->
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa-solid <?= htmlspecialchars($nav_grupo_activo['icon'] ?? 'fa-shop') ?>"></i> <?= htmlspecialchars($nav_grupo_activo['label']) ?> ▼</button>
+        <div class="dropdown-content">
+            <?php foreach ($nav_grupo_activo['items'] as $nav_item_file => $nav_item_label): ?>
+                <?php if ($nav_item_file === $nav_current_file): ?>
+                    <a class="tienda-activa" href="#" aria-current="page"><i class="fa-solid fa-check"></i> <?= htmlspecialchars($nav_item_label) ?></a>
+                <?php else: ?>
+                    <a href="<?= htmlspecialchars($nav_item_file) ?>"><?= htmlspecialchars($nav_item_label) ?></a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <div class="ms-auto d-flex align-items-center gap-2">
 
         <!-- Nombre del usuario -->
@@ -224,3 +348,32 @@ if (!isset($_SESSION['usuario'])) {
         </a> -->
     </div>
 </nav>
+
+<script>
+(function () {
+    var dropdowns = document.querySelectorAll('.navbar .dropdown');
+
+    dropdowns.forEach(function (dropdown) {
+        var btn     = dropdown.querySelector('.dropbtn');
+        var content = dropdown.querySelector('.dropdown-content');
+        if (!btn || !content) return;
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var yaAbierto = content.classList.contains('show');
+
+            document.querySelectorAll('.navbar .dropdown-content.show').forEach(function (abierto) {
+                abierto.classList.remove('show');
+            });
+
+            if (!yaAbierto) content.classList.add('show');
+        });
+    });
+
+    document.addEventListener('click', function () {
+        document.querySelectorAll('.navbar .dropdown-content.show').forEach(function (abierto) {
+            abierto.classList.remove('show');
+        });
+    });
+})();
+</script>

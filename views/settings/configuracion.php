@@ -17,39 +17,67 @@ if (!isset($conexion)) {
 $correo = mysqli_real_escape_string($conexion, $_SESSION['correo'] ?? '');
 
 // ══════════════════════════════════════════
-// Guardar tema seleccionado
+// Guardar apariencia seleccionada (tema + fondo personalizado)
 // ══════════════════════════════════════════
 $alerta = '';
 $alerta_tipo = '';
 
+$APARIENCIAS_VALIDAS = ['oscuro', 'claro', 'personalizado1', 'personalizado2'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tema_post = ($_POST['tema'] ?? 'oscuro') === 'claro' ? 'claro' : 'oscuro';
+    $apariencia_post = $_POST['apariencia'] ?? 'oscuro';
+    if (!in_array($apariencia_post, $APARIENCIAS_VALIDAS, true)) {
+        $apariencia_post = 'oscuro';
+    }
+
+    // personalizado1 = oscuro + fondo oscuro · personalizado2 = claro + fondo claro
+    if ($apariencia_post === 'personalizado1') {
+        $tema_post = 'oscuro';
+        $fondo_post = 'personalizado1';
+    } elseif ($apariencia_post === 'personalizado2') {
+        $tema_post = 'claro';
+        $fondo_post = 'personalizado2';
+    } else {
+        $tema_post = $apariencia_post;
+        $fondo_post = 'ninguno';
+    }
 
     if ($es_invitado) {
         // Invitado: se guarda solo en la sesión, no en BD
         $_SESSION['tema_invitado'] = $tema_post;
+        $_SESSION['fondo_invitado'] = $fondo_post;
         $ok = true;
     } else {
         $tema_safe = mysqli_real_escape_string($conexion, $tema_post);
+        $fondo_safe = mysqli_real_escape_string($conexion, $fondo_post);
         $existe = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT id FROM user_preferences WHERE usuario_correo = '$correo'"));
         if ($existe) {
-            $ok = mysqli_query($conexion, "UPDATE user_preferences SET tema = '$tema_safe' WHERE usuario_correo = '$correo'");
+            $ok = mysqli_query($conexion, "UPDATE user_preferences SET tema = '$tema_safe', fondo = '$fondo_safe' WHERE usuario_correo = '$correo'");
         } else {
-            $ok = mysqli_query($conexion, "INSERT INTO user_preferences (usuario_correo, tema) VALUES ('$correo', '$tema_safe')");
+            $ok = mysqli_query($conexion, "INSERT INTO user_preferences (usuario_correo, tema, fondo) VALUES ('$correo', '$tema_safe', '$fondo_safe')");
         }
     }
 
-    $alerta = $ok ? '¡Tema actualizado!' : 'No se pudo guardar el tema.';
+    $alerta = $ok ? '¡Apariencia actualizada!' : 'No se pudo guardar la apariencia.';
     $alerta_tipo = $ok ? 'success' : 'error';
 }
 
-// Cargar tema actual
+// Cargar apariencia actual
 $tema_actual = 'oscuro';
+$fondo_actual = 'ninguno';
 if ($es_invitado) {
     $tema_actual = $_SESSION['tema_invitado'] ?? 'oscuro';
+    $fondo_actual = $_SESSION['fondo_invitado'] ?? 'ninguno';
 } else {
-    $pref = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT tema FROM user_preferences WHERE usuario_correo = '$correo'"));
+    $pref = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT tema, fondo FROM user_preferences WHERE usuario_correo = '$correo'"));
     if ($pref && !empty($pref['tema'])) $tema_actual = $pref['tema'];
+    if ($pref && !empty($pref['fondo'])) $fondo_actual = $pref['fondo'];
+}
+
+if ($fondo_actual === 'personalizado1' || $fondo_actual === 'personalizado2') {
+    $apariencia_actual = $fondo_actual;
+} else {
+    $apariencia_actual = $tema_actual === 'claro' ? 'claro' : 'oscuro';
 }
 
 $theme_seccion = 'settings';
@@ -101,8 +129,8 @@ require_once __DIR__ . '/../../php/theme.php';
         .settings-main { display: grid; gap: 20px; }
 
         .card-panel {
-            background: var(--pt-bg-card,); border-radius: var(--radius-lg);
-            border: 1px solid var(-- border); box-shadow: var(--shadow);
+            background: var(--pt-bg-card); border-radius: var(--radius-lg);
+            border: 1px solid var(--border); box-shadow: var(--shadow);
             padding: 22px; opacity: 0;
         }
         .settings-card-title { font-size: 1.15rem; font-weight: 800; margin: 0 0 4px; }
@@ -112,16 +140,87 @@ require_once __DIR__ . '/../../php/theme.php';
         .alert-box.success { background: rgba(73,199,116,0.12); color: var(--success); border: 1px solid rgba(73,199,116,0.3); }
         .alert-box.error   { background: rgba(224,82,82,0.12); color: #e05252; border: 1px solid rgba(224,82,82,0.3); }
 
-        .theme-toggle-wrap { display: flex; gap: 10px; max-width: 420px; }
-        .theme-opt {
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 16px; border-radius: 12px; border: 1.5px solid var(--border);
-            background: var(--bg-base); color: var(--text-soft);
-            cursor: pointer; font-weight: 700; font-size: 1rem; transition: all .2s;
+        .theme-picker { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        .theme-card {
+            width: 188px;
+            display: block;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border);
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease;
         }
-        .theme-opt:hover { border-color: var(--orange); }
-        .theme-opt.active { border-color: var(--orange); background: rgba(211,155,23,0.12); color: var(--orange); }
-        .theme-opt i { font-size: 1.2rem; }
+        .theme-card:hover { border-color: rgba(255,123,0,0.55); transform: translateY(-1px); }
+        .theme-card.active { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,123,0,0.15); }
+        .theme-card input { position: absolute; opacity: 0; pointer-events: none; }
+
+        .theme-preview {
+            height: 100px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .theme-preview-dark { background: #0d0e10; }
+        .theme-preview-light { background: #eef0f3; }
+        .theme-preview-photo {
+            background-size: cover;
+            background-position: center;
+            justify-content: flex-start;
+        }
+
+        .tp-tabs { display: flex; gap: 4px; }
+        .tp-tab { height: 6px; width: 20px; border-radius: 3px; }
+        .theme-preview-dark .tp-tab { background: rgba(255,255,255,0.14); }
+        .theme-preview-light .tp-tab { background: rgba(17,17,20,0.14); }
+
+        .tp-titlebar { height: 6px; width: 42%; border-radius: 3px; }
+        .theme-preview-dark .tp-titlebar { background: rgba(255,255,255,0.22); }
+        .theme-preview-light .tp-titlebar { background: rgba(17,17,20,0.2); }
+
+        .tp-row { display: flex; gap: 6px; flex: 1; }
+        .tp-accent-block {
+            flex: 1.6; border-radius: 6px;
+            background: linear-gradient(135deg, rgba(255,140,0,0.95), rgba(255,80,0,0.7));
+        }
+        .tp-side-block { flex: 1; border-radius: 6px; }
+        .theme-preview-dark .tp-side-block { background: rgba(255,255,255,0.07); }
+        .theme-preview-light .tp-side-block { background: rgba(17,17,20,0.08); }
+
+        .theme-card-footer {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 12px;
+            background: var(--pt-bg-card);
+            border-top: 1px solid var(--border);
+        }
+        .theme-radio {
+            width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0;
+            border: 2px solid var(--text-soft);
+            position: relative; transition: border-color .2s ease;
+        }
+        .theme-card.active .theme-radio { border-color: var(--orange); }
+        .theme-card.active .theme-radio::after {
+            content: ''; position: absolute; inset: 2px; border-radius: 50%; background: var(--orange);
+        }
+        .theme-card-label {
+            font-weight: 700; font-size: .88rem;
+            display: flex; align-items: center; gap: 6px;
+            white-space: nowrap;
+        }
+        .theme-card-badge {
+            margin-left: auto; font-size: .62rem; font-weight: 800; letter-spacing: .03em;
+            text-transform: uppercase; white-space: nowrap;
+            color: var(--orange); background: rgba(255,123,0,0.12);
+            border: 1px solid rgba(255,123,0,0.3); border-radius: 20px; padding: 2px 7px;
+        }
+
+        .theme-picker-hint {
+            display: flex; align-items: flex-start; gap: 8px;
+            margin: 14px 0 0; max-width: 620px;
+            color: var(--text-soft); font-size: .84rem; line-height: 1.5;
+        }
+        .theme-picker-hint i { margin-top: 2px; }
 
         .form-actions { margin-top: 20px; }
         .btn-save {
@@ -168,16 +267,70 @@ require_once __DIR__ . '/../../php/theme.php';
                     <?php endif; ?>
 
                     <form method="POST" id="temaForm">
-                        <div class="theme-toggle-wrap">
-                            <label class="theme-opt <?= $tema_actual === 'oscuro' ? 'active' : '' ?>">
-                                <input type="radio" name="tema" value="oscuro" <?= $tema_actual === 'oscuro' ? 'checked' : '' ?> style="display:none;">
-                                <i class="bi bi-moon-stars-fill"></i> Oscuro
+                        <div class="theme-picker">
+                            <label class="theme-card <?= $apariencia_actual === 'oscuro' ? 'active' : '' ?>">
+                                <input type="radio" name="apariencia" value="oscuro" <?= $apariencia_actual === 'oscuro' ? 'checked' : '' ?>>
+                                <div class="theme-preview theme-preview-dark">
+                                    <div class="tp-tabs"><span class="tp-tab"></span><span class="tp-tab"></span><span class="tp-tab"></span></div>
+                                    <div class="tp-titlebar"></div>
+                                    <div class="tp-row">
+                                        <div class="tp-accent-block"></div>
+                                        <div class="tp-side-block"></div>
+                                    </div>
+                                </div>
+                                <div class="theme-card-footer">
+                                    <span class="theme-radio"></span>
+                                    <span class="theme-card-label"><i class="bi bi-moon-stars-fill"></i> Oscuro</span>
+                                    <?php if ($apariencia_actual === 'oscuro'): ?><span class="theme-card-badge">Activo</span><?php endif; ?>
+                                </div>
                             </label>
-                            <label class="theme-opt <?= $tema_actual === 'claro' ? 'active' : '' ?>">
-                                <input type="radio" name="tema" value="claro" <?= $tema_actual === 'claro' ? 'checked' : '' ?> style="display:none;">
-                                <i class="bi bi-sun-fill"></i> Claro
+
+                            <label class="theme-card <?= $apariencia_actual === 'claro' ? 'active' : '' ?>">
+                                <input type="radio" name="apariencia" value="claro" <?= $apariencia_actual === 'claro' ? 'checked' : '' ?>>
+                                <div class="theme-preview theme-preview-light">
+                                    <div class="tp-tabs"><span class="tp-tab"></span><span class="tp-tab"></span><span class="tp-tab"></span></div>
+                                    <div class="tp-titlebar"></div>
+                                    <div class="tp-row">
+                                        <div class="tp-accent-block"></div>
+                                        <div class="tp-side-block"></div>
+                                    </div>
+                                </div>
+                                <div class="theme-card-footer">
+                                    <span class="theme-radio"></span>
+                                    <span class="theme-card-label"><i class="bi bi-sun-fill"></i> Claro</span>
+                                    <?php if ($apariencia_actual === 'claro'): ?><span class="theme-card-badge">Activo</span><?php endif; ?>
+                                </div>
+                            </label>
+
+                            <label class="theme-card <?= $apariencia_actual === 'personalizado1' ? 'active' : '' ?>">
+                                <input type="radio" name="apariencia" value="personalizado1" <?= $apariencia_actual === 'personalizado1' ? 'checked' : '' ?>>
+                                <div class="theme-preview theme-preview-photo" style="background-image: linear-gradient(180deg, rgba(10,10,10,0.15), rgba(10,10,10,0.75)), url('/assets/images/bg25.webp');">
+                                    <div class="tp-tabs"><span class="tp-tab" style="background:rgba(255,255,255,0.35);"></span><span class="tp-tab" style="background:rgba(255,255,255,0.35);"></span><span class="tp-tab" style="background:rgba(255,255,255,0.35);"></span></div>
+                                </div>
+                                <div class="theme-card-footer">
+                                    <span class="theme-radio"></span>
+                                    <span class="theme-card-label"><i class="bi bi-image-fill"></i> Personalizado 1</span>
+                                    <?php if ($apariencia_actual === 'personalizado1'): ?><span class="theme-card-badge">Activo</span><?php endif; ?>
+                                </div>
+                            </label>
+
+                            <label class="theme-card <?= $apariencia_actual === 'personalizado2' ? 'active' : '' ?>">
+                                <input type="radio" name="apariencia" value="personalizado2" <?= $apariencia_actual === 'personalizado2' ? 'checked' : '' ?>>
+                                <div class="theme-preview theme-preview-photo" style="background-image: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.6)), url('/assets/images/bg43.webp');">
+                                    <div class="tp-tabs"><span class="tp-tab" style="background:rgba(17,17,20,0.3);"></span><span class="tp-tab" style="background:rgba(17,17,20,0.3);"></span><span class="tp-tab" style="background:rgba(17,17,20,0.3);"></span></div>
+                                </div>
+                                <div class="theme-card-footer">
+                                    <span class="theme-radio"></span>
+                                    <span class="theme-card-label"><i class="bi bi-image-fill"></i> Personalizado 2</span>
+                                    <?php if ($apariencia_actual === 'personalizado2'): ?><span class="theme-card-badge">Activo</span><?php endif; ?>
+                                </div>
                             </label>
                         </div>
+
+                        <p class="theme-picker-hint">
+                            <i class="bi bi-info-circle"></i>
+                            Personalizado 1 y 2 aplican un fondo de imagen (oscuro o claro) en Inicio, Sesiones, Juegos, Historial, Plataformas y Guías.
+                        </p>
 
                         <div class="form-actions">
                             <button type="submit" class="btn-save">Guardar</button>
@@ -189,11 +342,19 @@ require_once __DIR__ . '/../../php/theme.php';
     </div>
 
     <script>
-        document.querySelectorAll('.theme-opt').forEach(function(opt) {
-            opt.addEventListener('click', function() {
-                document.querySelectorAll('.theme-opt').forEach(o => o.classList.remove('active'));
+        document.querySelectorAll('.theme-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.theme-card').forEach(function(c) {
+                    c.classList.remove('active');
+                    var oldBadge = c.querySelector('.theme-card-badge');
+                    if (oldBadge) oldBadge.remove();
+                });
                 this.classList.add('active');
                 this.querySelector('input[type="radio"]').checked = true;
+                var badge = document.createElement('span');
+                badge.className = 'theme-card-badge';
+                badge.textContent = 'Activo';
+                this.querySelector('.theme-card-footer').appendChild(badge);
             });
         });
 

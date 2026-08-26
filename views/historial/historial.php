@@ -40,7 +40,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <?php $theme_seccion = 'historial'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
     body {
@@ -86,6 +86,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         transition: all 0.2s ease;
         backdrop-filter: blur(8px);
         opacity: 0;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
     }
     .historial-card:hover {
         border-color: var(--card-color);

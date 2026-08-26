@@ -24,15 +24,15 @@
 
     <!-- Tu CSS -->
     <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
-    <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-juegos.css">
+    <?php $theme_seccion = 'tiendas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 
 
 <style>
     body {
         /* background-image: url(../assets/images/bg22.jpg); */
-        color: white;
+        color: var(--pt-text-ter);
         background-color: var(--pt-bg-base);
         background-repeat: no-repeat;
         background-position: center;
@@ -169,19 +169,20 @@
     }
     
     .second-title {
-        background:rgba(77, 77, 77, 0.08);
-        border-radius:0 12px 12px 0;
-        padding:0.9rem 1.2rem;
-        margin: 10px;
-        gap:0.8rem;
+        background: linear-gradient(135deg, rgba(240, 180, 41, 0.20), rgba(255, 196, 68, 0.08));
+        border: 1px solid rgba(240, 180, 41, 0.35);
+        border-radius: 14px;
+        padding: 1.25rem 1.75rem;
+        margin: 0 10px 20px;
+        gap: 1rem;
         align-items: center;
-        font-size: 1.00rem;
-
-        line-height:1.4;
-
+        font-size: 1.05rem;
+        color: var(--pt-text);
+        line-height: 1.5;
+        box-shadow: 0 6px 22px rgba(240, 180, 41, 0.18);
     }
-    .second-title i{color: #e0cb52;font-size:1.2rem;flex-shrink:0;}
-    .second-title strong{color: rgb(255, 196, 68);}
+    .second-title i{color: #e0cb52;font-size:1.7rem;flex-shrink:0;}
+    .second-title strong{color: rgb(255, 196, 68); font-size: 1.12rem;}
     
 </style>
 
@@ -197,7 +198,7 @@
         require_once '../../php/navbar.php';
     ?>
 
-    <div class="container text-center" >
+    <div class="container-fluid text-center px-4" >
        <div class="second-title ">
         <i class="bi bi-controller fs-3"></i>
         <div>

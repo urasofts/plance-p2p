@@ -23,7 +23,7 @@
    ======================================== */
 
 .guide-sidebar {
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(var(--overlay-rgb), 0.06);
   background: var(--surface);
   padding: clamp(var(--space-md), 1.4vw, var(--space-xl));
   display: flex;
@@ -56,7 +56,7 @@
   align-items: center;
   gap: var(--space-sm);
   padding-bottom: var(--space-sm);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(var(--overlay-rgb), 0.04);
 }
 
 .guide-dot {
@@ -138,8 +138,13 @@
    BOTÓN DE ACCIÓN EN SIDEBAR
    ======================================== */
 
-.welcome-btn.full {
+.sidebar-actions {
   margin-top: auto;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.welcome-btn.full {
   width: 100%;
   justify-content: center;
   padding: 0.65rem;
@@ -251,8 +256,8 @@
 }
 
 .home-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(var(--overlay-rgb), 0.02);
+  border: 1px solid rgba(var(--overlay-rgb), 0.06);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   cursor: pointer;
@@ -264,7 +269,7 @@
   transform: translateY(-3px);
   border-color: var(--accent);
   box-shadow: var(--shadow-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(var(--overlay-rgb), 0.03);
 }
 
 .home-card:active {
@@ -514,8 +519,8 @@
 }
 
 .session-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(var(--overlay-rgb), 0.02);
+  border: 1px solid rgba(var(--overlay-rgb), 0.06);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   transition: all var(--transition-speed) var(--ease);
@@ -527,7 +532,7 @@
   border-color: var(--accent);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(var(--overlay-rgb), 0.03);
 }
 
 .session-card .session-icon {
@@ -604,7 +609,7 @@
 
   .guide-sidebar {
     border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(var(--overlay-rgb), 0.06);
     max-height: 200px;
     overflow-y: auto;
     padding: var(--space-md);

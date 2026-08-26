@@ -204,6 +204,7 @@
   font-size: var(--font-md);
   flex-shrink: 0;
   position: relative;
+  text-decoration: none;
 }
 
 .sidebar-toggle:hover {
@@ -272,7 +273,7 @@
 
 .topbar .user-menu:hover {
   border-color: var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(var(--overlay-rgb), 0.02);
 }
 
 .topbar .user-menu .avatar {

@@ -13,112 +13,24 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/styles-juegos-mixto.css">
+    <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+    <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
+    /* Rainbow Six Siege Mobile — dorado (Platinum) + azul (Web Checkout / multi) */
     :root {
-        --bg-base:#0d0e10; --bg-surface:#16181c; --bg-card:#1e2128;
-        --bg-card-hover:#252830; --bg-selected:#0a0f1a; --border:#2e3038;
-        --accent:#f0b429; --accent-glow:rgba(240,180,41,0.25); --accent-dark:#c99010;
-        --accent2:#3b82f6; --accent2-glow:rgba(59,130,246,0.2);
-        --text-primary:#f0f1f3; --text-secondary:#8a8d96; --text-muted:#555860;
-        --font-display:'Calibri',sans-serif; --font-body:'Calibri',sans-serif;
-        --radius-md:10px; --radius-lg:14px;
+        --gj-accent:        #f0b429;
+        --gj-accent-glow:   rgba(240, 180, 41, 0.25);
+        --gj-accent-soft:   rgba(240, 180, 41, 0.15);
+        --gj-accent-hover:  rgba(240, 180, 41, 0.4);
+        --gj-accent-dark:   #c99010;
+        --gj-accent2:       #3b82f6;
+        --gj-accent2-glow:  rgba(59, 130, 246, 0.2);
+        --gj-accent2-soft:  rgba(59, 130, 246, 0.15);
+        --gj-accent2-hover: rgba(59, 130, 246, 0.5);
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background-color:var(--bg-base);color:var(--text-primary);font-family:var(--font-body);min-height:100vh;-webkit-font-smoothing:antialiased;}
-    .navbar{background-color:#0f0f0fa9!important;backdrop-filter:blur(8px);border-bottom:1px solid var(--pt-border);}
-
-    .game-banner{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 2rem; background: var(--pt-th2); border-bottom:1px solid var(--pt-border);gap:1rem;flex-wrap:wrap;}
-    .game-banner__tag{display:flex;align-items:center; gap:0.5rem;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:0.04em;}
-    .wc-badge{background:rgba(240,180,41,0.15);color:var(--accent);font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;letter-spacing:0.05em;font-family:var(--font-display);}
-    .mixto-badge{background:rgba(59,130,246,0.15);color:var(--accent2);font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;letter-spacing:0.05em;font-family:var(--font-display);}
-
-    .shop-layout{display:grid;grid-template-columns:1fr 370px;gap:1.5rem;max-width:1200px;margin:1.5rem auto;padding:0 1.5rem 3rem;align-items:start;}
-
-    .section-label{font-family:var(--font-display);font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:0.75rem;}
-
-    /* GRID PLATINUM */
-    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.65rem;margin-bottom:1.5rem;}
-
-    .product-card{position:relative; background:var(--pt-navbar);border:1.5px solid var(--pt-border);border-radius:var(--radius-md);padding:1rem 0.85rem 0.9rem;cursor:pointer;transition:all 0.18s ease;display:flex;flex-direction:row;align-items:center;gap:0.75rem;overflow:hidden;user-select:none;}
-    .product-card:hover{background:var(--pt-boxitem);border-color:rgba(240,180,41,0.4);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
-    .product-card.selected{background:var(--pt-border);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 4px 24px var(--accent-glow);}
-    .product-card.in-cart{border-color:var(--accent2);background:rgba(59,130,246,0.05);}
-    .product-card.in-cart::after{content:'✔';position:absolute;top:0.5rem;right:0.55rem;width:18px;height:18px;background:var(--accent2);border-radius:50%;color:#fff;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:900;line-height:18px;text-align:center;}
-    .badge-popular{position:absolute;top:-1px;left:-1px;background:var(--accent);color:#0d0e10;font-family:var(--font-display);font-size:0.68rem;font-weight:800;letter-spacing:0.05em;padding:0.15rem 0.5rem;border-radius:6px 0 6px 0;}
-    .product-card__icon{width:44px;height:44px;object-fit:contain;flex-shrink:0;}
-    .product-card__info{display:flex;flex-direction:column;gap:0.1rem;min-width:0;}
-    .product-card__pts{font-family:var(--font-display);font-size:1.15rem;font-weight:800;color:var(--pt-text-sec);line-height:1.1;}
-    .product-card__label{font-size:0.72rem;color:var(--pt-text);margin-bottom:0.2rem;}
-    .product-card__price{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--accent);}
-
-    /* PASES */
-    .pases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.65rem;margin-bottom:1.5rem;}
-    .pase-card{position:relative; background: var(--pt-boxitem);  border:1.5px solid rgba(59,130,246,0.2);border-radius:var(--radius-md);padding:1.2rem;cursor:pointer;transition:all 0.18s ease;overflow:hidden;}
-    .pase-card:hover{ border-color:rgba(59,130,246,0.5);transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,0.15);}
-    .pase-card.selected{background:var(--pt-border); border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2),0 4px 24px var(--accent2-glow);}
-    .pase-card.in-cart{border-color:var(--accent);background:rgba(240,180,41,0.05);}
-    .pase-card.in-cart::after{content:'✔';position:absolute;top:0.5rem;right:0.55rem;width:18px;height:18px;background:var(--accent);border-radius:50%;color:#0d0e10;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:900;line-height:18px;text-align:center;}
-    .pase-tag{display:inline-block;background:rgba(59,130,246,0.15);color:var(--accent2);font-size:0.68rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:4px;margin-bottom:0.5rem;font-family:var(--font-display);letter-spacing:0.05em;}
-    .pase-head{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.3rem;}
-    .pase-icon{width:42px;height:42px;object-fit:contain;flex-shrink:0;}
-    .pase-name{font-family:var(--font-display);font-size:1.1rem;font-weight:800;}
-    .pase-desc{font-size:0.78rem;color:var(--text-secondary);line-height:1.5;margin-bottom:0.6rem;}
-    .pase-price{font-family:var(--font-display);font-size:1.1rem;font-weight:800; color:var(--accent2);}
-
-    /* CHECKOUT */
-    .checkout-panel{display:flex;flex-direction:column;gap:1rem;position:sticky;top:16px;}
-    .checkout-box{background: var(--pt-navbar); border:1px solid var(--pt-border);border-radius:var(--radius-lg);padding:1.3rem;}
-    .section-label-sm{font-family:var(--font-display);font-size:0.73rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:0.5rem;display:block;}
-
-    /* Resumen carrito */
-    .cart-items{margin-bottom:0.8rem;}
-    .cart-empty{text-align:center;padding:1.2rem;color:var(--text-muted);font-size:0.85rem;}
-    .cart-item{display:flex;justify-content:space-between;align-items:center;padding:0.45rem 0;border-bottom:1px solid var(--pt-border);font-size:0.85rem;}
-    .cart-item:last-child{border-bottom:none;}
-    .cart-item-name{color:var(--pt-text);font-weight:600;}
-    .cart-item-price{color:var(--accent);font-family:var(--font-display);font-weight:700;}
-
-    .total-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-top:1px solid var(--pt-border);margin-top:0.3rem;}
-    .total-label{font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--pt-text-sec);text-transform:uppercase;letter-spacing:0.05em;}
-    .total-price{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--pt-text);}
-
-    /* Checkbox multi-producto y pago parcial */
-    .check-wrap{display:flex;align-items:flex-start;gap:0.5rem;padding:0.65rem 0.8rem;border-radius:8px;cursor:pointer;transition:background 0.2s;margin-bottom:0.5rem;}
-    .check-wrap.multi{background:rgba(59,130,246,0.06);border:1.5px solid rgba(59,130,246,0.2);}
-    .check-wrap.parcial{background:rgba(240,180,41,0.06);border:1.5px solid rgba(240,180,41,0.2);}
-    .check-wrap input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;cursor:pointer;}
-    .check-wrap.multi  input{accent-color:var(--accent2);}
-    .check-wrap.parcial input{accent-color:var(--accent);}
-    .check-label{font-size:0.81rem;line-height:1.4;}
-    .check-wrap.multi   .check-label{color:#93c5fd;}
-    .check-wrap.parcial .check-label{color:#fbbf24;}
-    .check-label strong{display:block;margin-bottom:0.1rem;}
-
-    /* Pago parcial slider */
-    .parcial-panel{display:none;background:rgba(240,180,41,0.05);border:1px solid rgba(240,180,41,0.2);border-radius:8px;padding:0.8rem;margin-bottom:0.6rem;}
-    .parcial-panel.show{display:block;}
-    .parcial-slider{width:100%;accent-color:var(--accent);margin:0.5rem 0;}
-    .parcial-amounts{display:flex;justify-content:space-between;font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.3rem;}
-    .parcial-now{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--accent);text-align:center;}
-    .parcial-rest{font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:0.2rem;}
-
-    .field-group{margin-bottom:0.65rem;}
-    .field-label{font-size:0.73rem;font-weight:600;color:var(--pt-text); margin-bottom:0.25rem; display:block;}
-    .field-input{width:100%;background:var(--pt-border); border:0.5px solid var(--pt-border);  border-radius:8px; color:var(--pt-text-sec); font-family:var(--font-body); font-size:0.83rem;padding:0.4rem 0.7rem;}
-    .field-input:focus{border-color:var(--accent);}
-    .field-input::placeholder{color:var(--text-muted);}
-
-    .btn-pagar{width:100%;margin-top:0.8rem;padding:0.85rem;background:var(--accent);border:none;border-radius:var(--radius-md);color:#0a0a0b;font-family:var(--font-display);font-size:1.05rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.18s ease;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
-    .btn-pagar:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);}
-    .security-note{display:flex;align-items:center;gap:0.4rem;font-size:0.73rem;color:var(--text-muted);margin-top:0.5rem;justify-content:center;}
-
-    @keyframes fadeSlideIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-    .products-panel{animation:fadeSlideIn 0.4s ease both;}
-    .checkout-panel{animation:fadeSlideIn 0.4s 0.1s ease both;}
-    @media(max-width:900px){.shop-layout{grid-template-columns:1fr;}.checkout-panel{position:static;}.products-grid,.pases-grid{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:600px){.products-grid{grid-template-columns:repeat(2,1fr);}.pases-grid{grid-template-columns:1fr;}.game-banner{flex-direction:column;align-items:flex-start;}}
 </style>
 <body>
     <?php
@@ -283,6 +195,118 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         </aside>
     </main>
 
+    <!-- ═══ INTEGRACIÓN PLACETOPAY ═══ -->
+    <section class="integration-docs" style="--code-accent:var(--gj-accent); --code-accent-ink:var(--gj-accent-ink); --code-accent-soft:var(--gj-accent-soft); --code-radius-sm:var(--gj-radius-sm, 6px); --code-radius-md:var(--gj-radius-md); --code-radius-lg:var(--gj-radius-lg); --code-font:var(--gj-font-body);">
+        <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
+        <h3>Así se crea la sesión de pago de esta tienda</h3>
+        <p>Cuando presionas <strong>"Pagar ahora"</strong>, nuestro backend arma este mismo request y lo envía a <strong>PlacetoPay Web Checkout</strong> con <code>payment.allowPartial: true</code>. En la pasarela verás una casilla para elegir cuánto pagar ahora — el resto queda pendiente para completarlo después.</p>
+
+        <div class="endpoint-bar">
+            <span class="method-pill">POST</span>
+            <span class="endpoint-url">https://checkout-test.placetopay.com/api/session</span>
+            <span class="endpoint-note">ambiente de pruebas</span>
+        </div>
+
+        <div class="code-block">
+            <div class="code-tabs">
+                <button class="code-tab active" data-key="json">JSON</button>
+                <button class="code-tab" data-key="php">PHP</button>
+                <button class="code-copy"><i class="bi bi-clipboard"></i> Copiar</button>
+            </div>
+            <pre class="code-panel active" data-key="json"><code>{
+  <span class="jk">"auth"</span>: {
+    <span class="jk">"login"</span>: <span class="js">"YOUR_LOGIN"</span>,
+    <span class="jk">"tranKey"</span>: <span class="js">"TRAN_KEY_CALCULADO"</span>,
+    <span class="jk">"nonce"</span>: <span class="js">"Tm9uY2VFbkJhc2U2NA=="</span>,
+    <span class="jk">"seed"</span>: <span class="js">"2026-08-25T10:15:32-05:00"</span>
+  },
+  <span class="jk">"payment"</span>: {
+    <span class="jk">"reference"</span>: <span class="js">"MIX-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"300 Platinum"</span>,
+    <span class="jk">"amount"</span>: {
+      <span class="jk">"currency"</span>: <span class="js">"COP"</span>,
+      <span class="jk">"total"</span>: <span class="jn">24900</span>,
+      <span class="cm">// mínimo permitido: 10% del total</span>
+      <span class="jk">"minimum"</span>: <span class="jn">2490</span>
+    },
+    <span class="cm">// clave: habilita la casilla de pago parcial en la pasarela</span>
+    <span class="jk">"allowPartial"</span>: <span class="jb">true</span>
+  },
+  <span class="jk">"expiration"</span>: <span class="js">"2026-08-25T10:45:32-05:00"</span>,
+  <span class="jk">"returnUrl"</span>: <span class="js">"https://tu-dominio.com/retorno/retorno_mixto.php"</span>,
+  <span class="jk">"ipAddress"</span>: <span class="js">"203.0.113.42"</span>,
+  <span class="jk">"userAgent"</span>: <span class="js">"Mozilla/5.0 (Windows NT 10.0; Win64; x64)"</span>,
+  <span class="jk">"locale"</span>: <span class="js">"es_CO"</span>
+}</code></pre>
+            <pre class="code-panel" data-key="php"><code>&lt;?php
+<span class="cm">// credenciales fuera del código, nunca hardcodeadas</span>
+<span class="cvar">$login</span>     = getenv(<span class="js">'P2P_LOGIN'</span>);
+<span class="cvar">$secretKey</span> = getenv(<span class="js">'P2P_SECRET_KEY'</span>);
+<span class="cvar">$endpoint</span>  = <span class="js">'https://checkout-test.placetopay.com/api/session'</span>;
+
+<span class="cm">// autenticación: Base64( SHA256( nonce + seed + secretKey ) )</span>
+<span class="cvar">$seed</span>     = date(<span class="js">'c'</span>);
+<span class="cvar">$nonce</span>    = bin2hex(random_bytes(16));
+<span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
+<span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
+
+<span class="cm">// para pagos mixtos: siempre se envía el total completo</span>
+<span class="cvar">$amount</span> = [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$total</span>];
+
+<span class="cm">// si se permite pago parcial, se agrega el monto mínimo (10%)</span>
+<span class="fn">if</span> (<span class="cvar">$allow_partial</span>) {
+    <span class="cvar">$amount</span>[<span class="js">'minimum'</span>] = (float) ceil(<span class="cvar">$total</span> * 0.1);
+}
+
+<span class="cvar">$body</span> = [
+    <span class="jk">'auth'</span> =&gt; [
+        <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
+        <span class="jk">'tranKey'</span> =&gt; <span class="cvar">$tranKey</span>,
+        <span class="jk">'nonce'</span>   =&gt; <span class="cvar">$nonceB64</span>,
+        <span class="jk">'seed'</span>    =&gt; <span class="cvar">$seed</span>,
+    ],
+    <span class="jk">'payment'</span> =&gt; [
+        <span class="jk">'reference'</span>    =&gt; <span class="js">'MIX-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'description'</span>  =&gt; <span class="cvar">$productos</span>,             <span class="cm">// ej: "300 Platinum" (o varios unidos con " + ")</span>
+        <span class="jk">'amount'</span>       =&gt; <span class="cvar">$amount</span>,
+        <span class="jk">'allowPartial'</span> =&gt; <span class="cvar">$allow_partial</span>,      <span class="cm">// ← clave: activa el pago mixto</span>
+    ],
+    <span class="jk">'expiration'</span> =&gt; date(<span class="js">'c'</span>, strtotime(<span class="js">'+30 minutes'</span>)),
+    <span class="jk">'returnUrl'</span>  =&gt; app_base_url() . <span class="js">'/retorno/retorno_mixto.php'</span>,
+    <span class="jk">'ipAddress'</span>  =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'REMOTE_ADDR'</span>],
+    <span class="jk">'userAgent'</span>  =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'HTTP_USER_AGENT'</span>],
+    <span class="jk">'locale'</span>     =&gt; <span class="js">'es_CO'</span>,
+];
+
+<span class="cvar">$ch</span> = curl_init(<span class="cvar">$endpoint</span>);
+curl_setopt_array(<span class="cvar">$ch</span>, [
+    CURLOPT_POST           =&gt; true,
+    CURLOPT_RETURNTRANSFER =&gt; true,
+    CURLOPT_HTTPHEADER     =&gt; [<span class="js">'Content-Type: application/json'</span>],
+    CURLOPT_POSTFIELDS     =&gt; json_encode(<span class="cvar">$body</span>),
+]);
+
+<span class="cvar">$result</span> = json_decode(curl_exec(<span class="cvar">$ch</span>), true);
+curl_close(<span class="cvar">$ch</span>);
+
+<span class="cm">// redirige al comprador a la pasarela de PlacetoPay</span>
+header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[<span class="js">'processUrl'</span>]);</code></pre>
+        </div>
+
+        <div class="doc-note">
+            <span class="doc-note-icon">💡</span>
+            <span>Este carrito soporta <strong>selección múltiple</strong>: si agregas varios productos, todos viajan juntos en un solo <code>description</code> y un único <code>amount.total</code>. El pago mixto siempre está activo aquí, así que el comprador decide en la pasarela si paga todo de una vez o solo una parte.</span>
+        </div>
+
+        <a class="integration-docs__link" href="../guias/guia-developer.php#web-checkout">
+            <div>
+                <strong>¿Quieres entender esta integración a fondo?</strong>
+                <span>Lee la documentación completa de Web Checkout — autenticación, notificaciones y más.</span>
+            </div>
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </section>
+
     <script>
     (function() {
         let cart      = {};   // { id: { nombre, precio } }
@@ -404,5 +428,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/code-block.js"></script>
 </body>
 </html>

@@ -36,7 +36,8 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <?php $theme_seccion = 'preautor'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
 </head>
 <style>
     body {
@@ -180,18 +181,20 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         margin-left: 0.5rem;
     }
      .second-title {
-        background: var(--pt-bg-base);
-        border-radius:0 12px 12px 0;
-        padding:0.9rem 1.2rem;
-        margin: 10px;
-        gap:0.8rem;
-        font-size: 1.00rem;
-        color: var(--pt-text);  
-        line-height:1.4;
-
+        background: linear-gradient(135deg, rgba(61, 168, 255, 0.20), rgba(38, 201, 241, 0.08));
+        border: 1px solid rgba(61, 168, 255, 0.35);
+        border-radius: 14px;
+        padding: 1.25rem 1.75rem;
+        margin: 0 10px 20px;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1.05rem;
+        color: var(--pt-text);
+        line-height: 1.5;
+        box-shadow: 0 6px 22px rgba(61, 168, 255, 0.18);
     }
-    .second-title i{color: #3da8ff;font-size:1.2rem;flex-shrink:0;}
-    .second-title strong{color: rgb(38, 201, 241);}
+    .second-title i{color: #3da8ff;font-size:1.7rem;flex-shrink:0;}
+    .second-title strong{color: rgb(38, 201, 241); font-size: 1.12rem;}
 
 
 
@@ -205,7 +208,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         require_once '../../php/navbar.php';
     ?>
 
-    <div class="container text-center" >
+    <div class="container-fluid text-center px-4" >
        <div class="second-title ">
         <i class="fa-solid fa-calendar-check fs-3"></i>
         <div>
@@ -218,7 +221,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
     <div class="panel-container text-start">
         <!-- enlaces-->
         <!-- Personaliza esta tarjeta agregando --card-img: url('../assets/images/tu-imagen.jpg'); en el style -->
-        <a href="hotel.php" class="historial-card" style="--card-color: #ffffff; --card-bg: hsla(194, 100%, 50%, 0.12); --card-img: url('../assets/images/img/hoteles.jpg');">
+        <a href="hotel.php" class="historial-card" style="--card-color: #ffffff; --card-bg: hsla(194, 100%, 50%, 0.12); --card-img: url('/assets/images/img/hoteles.jpg');">
             <div class="card-image">
                 <span class="card-image-badge">
                     <i class="bi bi-building-fill"></i>

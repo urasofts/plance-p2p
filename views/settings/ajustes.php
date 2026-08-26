@@ -135,8 +135,8 @@ $total_rechazadas = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) 
 $total_pendientes = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE estado = 'pendiente'" . $cond_hoy))['total'] ?? 0;
 
 $avatar = '';
-if (!empty($row['profile_image']) && file_exists('../uploads/' . $row['profile_image'])) {
-    $avatar = '../uploads/' . htmlspecialchars($row['profile_image']);
+if (!empty($row['profile_image']) && file_exists('../../uploads/' . $row['profile_image'])) {
+    $avatar = '../../uploads/' . htmlspecialchars($row['profile_image']);
 }
 
 $initial = strtoupper(substr($row['usuario'] ?? 'U', 0, 1));

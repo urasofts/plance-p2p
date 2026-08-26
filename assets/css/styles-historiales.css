@@ -1,0 +1,287 @@
+/* ══════════════════════════════════════════════════════════════
+   styles-historiales.css
+   Estilos compartidos para las vistas de historial en tabla:
+   reg-pgb, reg-sus, reg-disp, reg-prea, reg-link, reg-rec, reversos.
+
+   Las superficies (contenedor, tabla, filas, pills genéricos) leen
+   --pt-* (de php/theme.php) para respetar el tema claro/oscuro.
+   El acento de cada historial vive en --hist-accent / --hist-accent-rgb,
+   sobreescribible por cada página en su propio <style>.
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --hist-accent:      #f0b429;
+    --hist-accent-rgb:  240, 180, 41;
+    --hist-maxw:        1100px;
+    --hist-font:        'Barlow', sans-serif;
+}
+
+body { font-family: var(--hist-font); }
+
+.navbar {
+    background-color: #0f0f0fa9 !important;
+    backdrop-filter: blur(8px);
+}
+
+/* ── CONTENEDOR / TÍTULO ── */
+.tabla-container {
+    background: var(--pt-paint);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: var(--hist-maxw);
+    backdrop-filter: blur(8px);
+}
+
+.tabla-titulo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--hist-accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ── TABLA ── */
+.table { color: var(--pt-text); border-color: var(--pt-border); }
+
+.table thead th {
+    background: var(--pt-th);
+    color: var(--hist-accent);
+    border-color: var(--pt-border);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.table tbody tr {
+    border-color: var(--pt-border);
+    background: var(--pt-th);
+    transition: background 0.15s;
+}
+.table tbody tr:hover { background: var(--pt-hover); }
+
+.table tbody td {
+    border-color: var(--pt-border);
+    font-size: 0.88rem;
+    vertical-align: middle;
+    background: var(--pt-paint);
+    color: var(--pt-text);
+}
+
+/* ── ESTADOS ── */
+.badge-aprobada  { background: rgba(62, 207, 142, 0.2);  color: #3ecf8e; }
+.badge-pendiente { background: rgba(240, 180, 41, 0.2);  color: #f0b429; }
+.badge-rechazada { background: rgba(224, 82, 82, 0.2);   color: #e05252; }
+.badge-cancelada { background: rgba(138, 141, 150, 0.2); color: #8a8d96; }
+
+.estado-pill {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sin-registros {
+    text-align: center;
+    padding: 3rem;
+    color: var(--pt-text-sec);
+    font-size: 0.95rem;
+}
+
+/* ── ALERTAS ── */
+.alert-verify,
+.alert-success-custom {
+    background: rgba(62, 207, 142, 0.12);
+    color: #3ecf8e;
+    border: 1px solid rgba(62, 207, 142, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+}
+.alert-cancel,
+.alert-error-custom {
+    background: rgba(224, 82, 82, 0.12);
+    color: #e05252;
+    border: 1px solid rgba(224, 82, 82, 0.3);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+}
+
+/* ── BOTONES DE ACCIÓN (acento de la página) ── */
+.btn-verificar,
+.btn-link-action,
+.btn-detalle {
+    background: rgba(var(--hist-accent-rgb), 0.15);
+    border: 1px solid rgba(var(--hist-accent-rgb), 0.4);
+    color: var(--hist-accent);
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: var(--hist-font);
+}
+.btn-verificar:hover,
+.btn-link-action:hover,
+.btn-detalle:hover {
+    background: rgba(var(--hist-accent-rgb), 0.3);
+    color: var(--hist-accent);
+    text-decoration: none;
+}
+.btn-link-action.copied { background: rgba(62, 207, 142, 0.2); border-color: rgba(62, 207, 142, 0.4); color: #3ecf8e; }
+
+/* Continuar pago parcial — siempre azul (acción fija, no depende del acento) */
+.btn-continuar {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #3b82f6;
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.btn-continuar:hover { background: rgba(59, 130, 246, 0.3); color: #3b82f6; text-decoration: none; }
+
+/* Cancelar suscripción/recurrencia — siempre rojo (acción destructiva fija) */
+.btn-cancelar {
+    background: rgba(224, 82, 82, 0.15);
+    border: 1px solid rgba(224, 82, 82, 0.4);
+    color: #e05252;
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-top: 0.3rem;
+}
+.btn-cancelar:hover { background: rgba(224, 82, 82, 0.3); color: #e05252; text-decoration: none; }
+
+/* ── BANNER INFORMATIVO (acento de la página) ── */
+.info-banner {
+    background: rgba(var(--hist-accent-rgb), 0.07);
+    border: 1px solid rgba(var(--hist-accent-rgb), 0.2);
+    border-left: 3px solid var(--hist-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.82rem;
+    color: var(--hist-accent);
+    line-height: 1.6;
+}
+
+/* ── PILLS ESPECÍFICOS (acento de la página) ── */
+.disp-pill,
+.preauth-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(var(--hist-accent-rgb), 0.15);
+    color: var(--hist-accent);
+    border: 1px solid rgba(var(--hist-accent-rgb), 0.3);
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.recurrente-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(var(--hist-accent-rgb), 0.12);
+    color: var(--hist-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+}
+
+/* Desglose de dispersión — la parte "vuelo" sigue el acento de la página */
+.desglose-cell { font-size: 0.78rem; line-height: 1.7; }
+.desglose-vuelo { color: var(--hist-accent); font-weight: 600; }
+.desglose-imp   { color: #f0b429; font-weight: 600; }
+
+/* Estados de link de pago (reg-link) */
+.badge-activo   { background: rgba(var(--hist-accent-rgb), 0.2); color: var(--hist-accent); }
+.badge-error    { background: rgba(224, 82, 82, 0.2); color: #e05252; }
+.badge-expirado { background: rgba(138, 141, 150, 0.2); color: #8a8d96; }
+
+/* Tipo de transacción (reversos) — colores semánticos fijos, no siguen el acento */
+.tipo-badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.tipo-orden       { background: rgba(240, 180, 41, 0.15); color: #f0b429; }
+.tipo-suscripcion { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+.tipo-recurrencia { background: rgba(77, 159, 255, 0.15); color: #4d9fff; }
+
+/* ── TABS DE MODO (reg-pgb / reg-sus) ── */
+.modo-tabs-group { margin-bottom: 1.2rem; }
+.modo-tabs-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pt-text-sec);
+    margin-bottom: 0.4rem;
+}
+.tabs-divider { height: 1px; background: var(--pt-border); margin: 0.6rem 0; }
+
+.modo-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+
+.modo-tab {
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s;
+    border: 1.5px solid var(--pt-border);
+    color: var(--pt-text-sec);
+    background: var(--pt-boxitem2);
+}
+.modo-tab:hover { text-decoration: none; color: var(--pt-text); }
+
+.modo-tab.active-wc     { border-color: #f0b429; background: var(--pt-paint); color: #f0b429; }
+.modo-tab.active-gw     { border-color: #f59e0b; background: var(--pt-paint); color: #f59e0b; }
+.modo-tab.active-mixto  { border-color: #3b82f6; background: var(--pt-paint); color: #3b82f6; }
+.modo-tab.active-purple { border-color: #a855f7; background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+.modo-tab.active-blue   { border-color: #4d9fff; background: rgba(77, 159, 255, 0.1);  color: #4d9fff; }
+.modo-tab.active-green  { border-color: #3ecf8e; background: rgba(62, 207, 142, 0.1);  color: #3ecf8e; }
+.modo-tab.active-orange { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1);  color: #f59e0b; }

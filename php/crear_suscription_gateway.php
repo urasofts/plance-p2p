@@ -142,7 +142,8 @@ if (in_array($estado_elegido, ['aprobada-token', 'aprobada-sin', 'pendiente', 'r
 }
 
 $estado_safe = mysqli_real_escape_string($conexion, $nuevo_estado);
-$ref_safe    = mysqli_real_escape_string($conexion, $reference);
+$gw_request_id = $result['internalReference'] ?? $reference;
+$ref_safe    = mysqli_real_escape_string($conexion, $gw_request_id);
 $token_safe  = mysqli_real_escape_string($conexion, $token);
 
 $query = "INSERT INTO gateway_suscription (servicio, plan, precio, nombre, correo, telefono, tipo_doc, num_doc, estado, request_id, token)

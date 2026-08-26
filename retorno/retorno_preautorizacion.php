@@ -92,23 +92,23 @@ if ($requestId) {
 if ($gw_status === 'APPROVED') {
     $icono   = '🏨'; $titulo  = '¡Reserva confirmada!';
     $mensaje = 'Tu habitación ha sido reservada exitosamente. La preautorización fue aprobada — tu tarjeta no ha sido cobrada aún.';
-    $color   = '#3ecf8e'; $bg_icon = 'rgba(62,207,142,0.15)';
+    $color   = '#3ecf8e'; $bg_icon = 'rgba(62,207,142,0.15)'; $color_rgb = '62, 207, 142';
 } elseif ($gw_status === 'PENDING') {
     $icono   = '⏳'; $titulo  = 'Reserva pendiente';
     $mensaje = 'Tu reserva está siendo procesada. Te notificaremos cuando se confirme la preautorización.';
-    $color   = '#f0b429'; $bg_icon = 'rgba(240,180,41,0.15)';
+    $color   = '#f0b429'; $bg_icon = 'rgba(240,180,41,0.15)'; $color_rgb = '240, 180, 41';
 } elseif ($gw_reason === 'EX') {
     $icono   = '⏱️'; $titulo  = 'Sesión expirada';
     $mensaje = 'El tiempo para completar la preautorización se agotó y la sesión de pago venció. Tu tarjeta no fue afectada. Vuelve a intentar la reserva.';
-    $color   = '#f0b429'; $bg_icon = 'rgba(240,180,41,0.15)';
+    $color   = '#f0b429'; $bg_icon = 'rgba(240,180,41,0.15)'; $color_rgb = '240, 180, 41';
 } elseif ($gw_reason === '¬C') {
     $icono   = '✋'; $titulo  = 'Pago cancelado';
     $mensaje = 'Cancelaste el proceso de preautorización antes de completarlo. Tu tarjeta no fue afectada. Puedes volver a intentar la reserva cuando quieras.';
-    $color   = '#8a8d96'; $bg_icon = 'rgba(138,141,150,0.15)';
+    $color   = '#8a8d96'; $bg_icon = 'rgba(138,141,150,0.15)'; $color_rgb = '138, 141, 150';
 } else {
     $icono   = '❌'; $titulo  = 'Reserva rechazada';
     $mensaje = 'No se pudo procesar la preautorización. Por favor intenta con otra tarjeta o contacta a tu banco.';
-    $color   = '#e05252'; $bg_icon = 'rgba(224,82,82,0.15)';
+    $color   = '#e05252'; $bg_icon = 'rgba(224,82,82,0.15)'; $color_rgb = '224, 82, 82';
 }
 ?>
 <!DOCTYPE html>
@@ -122,44 +122,34 @@ if ($gw_status === 'APPROVED') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <?php require_once dirname(__DIR__) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../assets/css/styles-retorno.css">
     <style>
-        :root{--bg:#0d0e10;--surface:#16181c;--card:#1e2128;--border:#2e3038;--text:#f0f1f3;--muted:#8a8d96;--font-d:'Barlow',sans-serif;--font-b:'Barlow',sans-serif;}
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        body{background:var(--bg);color:var(--text);font-family:var(--font-b);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;}
-        .result-card{background:var(--pt-boxitem);border:1px solid var(--pt-border);border-radius:16px;padding:2.5rem 2rem;max-width:500px;width:100%;text-align:center;animation:fadeUp 0.4s ease both;  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-        .result-icon{font-size:3rem;width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;background:<?= $bg_icon ?>;}
-        .result-title{font-family:var(--font-d);font-size:2rem;font-weight:800;color:<?= $color ?>;margin-bottom:0.5rem;letter-spacing:0.02em;}
-        .result-msg{font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
-
-        .pre-badge{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:8px;padding:0.6rem 1rem;margin-bottom:1.2rem;font-size:0.8rem;color:#a5b4fc;display:flex;gap:0.5rem;align-items:center;justify-content:center;}
-
-        /* Fechas de estadía */
-        .stay-box{background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.2);border-radius:10px;padding:0.9rem 1.2rem;margin-bottom:1.2rem;display:flex;justify-content:space-around;align-items:center;}
-        .stay-item{text-align:center;}
-        .stay-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.2rem;}
-        .stay-date{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:#a5b4fc;}
-        .stay-sep{color:var(--muted);font-size:1.2rem;}
-
-        .order-details{background:var(--pt-bg-card);border:1px solid var(--pt-border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1.2rem;text-align:left;}
-        .order-row{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;font-size:0.875rem;border-bottom:1px solid var(--pt-border);}
-        .order-row:last-child{border-bottom:none;}
-        .order-row span:first-child{color:var(--muted);}
-        .order-row span:last-child{font-weight:600;}
-        .estado-badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:4px;font-size:0.78rem;font-weight:700;font-family:var(--font-d);letter-spacing:0.05em;background:<?= $bg_icon ?>;color:<?= $color ?>;}
-
-        /* Aviso preauth */
-        .preauth-aviso{background:rgba(240,180,41,0.07);border:1px solid rgba(240,180,41,0.2);border-radius:8px;padding:0.7rem 1rem;margin-bottom:1.2rem;font-size:0.8rem;color:#fbbf24;text-align:left;line-height:1.5;}
-
-        .btn-home{display:inline-block;padding:0.75rem 2rem;background:<?= $color ?>;color:#0d0e10;border:none;border-radius:8px;font-family:var(--font-d);font-size:1rem;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;transition:opacity 0.2s;margin-right:0.5rem;}
-        .btn-home:hover{opacity:0.85;color:#0d0e10;text-decoration:none;}
-        .btn-volver{display:inline-block;padding:0.75rem 1.5rem;background:transparent;color:var(--muted);border:1px solid var(--pt-border);border-radius:8px;font-family:var(--font-d);font-size:1rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;}
-        .btn-volver:hover{border-color:<?= $color ?>;color:<?= $color ?>;text-decoration:none;}
+        :root {
+            --ret-color:     <?= $color ?>;
+            --ret-bg-icon:   <?= $bg_icon ?>;
+            --ret-color-rgb: <?= $color_rgb ?>;
+            --ret-ctx-color: #a5b4fc;
+            --ret-ctx-rgb:   99, 102, 241;
+        }
     </style>
 </head>
 <body>
     <div class="result-card">
+        <?php if ($gw_status === 'PENDING'): ?>
+        <div class="result-icon">
+            <div class="pending-spinner">
+                <div class="pending-ring"></div>
+                <div class="pending-dots">
+                    <span class="pending-dot"></span>
+                    <span class="pending-dot"></span>
+                    <span class="pending-dot"></span>
+                </div>
+            </div>
+        </div>
+        <div class="pending-label">Procesando...</div>
+        <?php else: ?>
         <div class="result-icon"><?= $icono ?></div>
+        <?php endif; ?>
         <div class="result-title"><?= $titulo ?></div>
         <p class="result-msg"><?= $mensaje ?></p>
 
@@ -201,7 +191,7 @@ if ($gw_status === 'APPROVED') {
                 <span>Monto preautorizado</span>
                 <span style="color:<?= $color ?>;font-size:1.05rem;">$<?= number_format($total, 0, ',', '.') ?> COP</span>
             </div>
-            <div class="order-row"><span>Referencia</span><span style="font-size:0.78rem;color:var(--muted);"><?= htmlspecialchars($reference) ?></span></div>
+            <div class="order-row"><span>Referencia</span><span style="font-size:0.78rem;color:var(--pt-text-sec);"><?= htmlspecialchars($reference) ?></span></div>
             <div class="order-row">
                 <span>Estado</span>
                 <span><span class="estado-badge"><?= strtoupper($nuevo_estado) ?></span></span>

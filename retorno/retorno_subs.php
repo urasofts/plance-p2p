@@ -81,6 +81,7 @@ if ($status_p2p === 'APPROVED') {
     $icono        = '✅';
     $color        = '#3ecf8e';
     $bg_icon      = 'rgba(62, 207, 142, 0.15)';
+    $color_rgb    = '62, 207, 142';
 } elseif ($status_p2p === 'REJECTED') {
     $nuevo_estado = 'rechazada';
     $icono        = '❌';
@@ -88,6 +89,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Tu pago no pudo ser procesado. Intenta de nuevo.';
     $color        = '#e05252';
     $bg_icon      = 'rgba(224, 82, 82, 0.15)';
+    $color_rgb    = '224, 82, 82';
 } elseif ($status_p2p === 'PENDING') {
     $nuevo_estado = 'pendiente';
     $icono        = '⏳';
@@ -95,6 +97,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Tu pago está siendo procesado. Te notificaremos pronto.';
     $color        = '#f0b429';
     $bg_icon      = 'rgba(240, 180, 41, 0.15)';
+    $color_rgb    = '240, 180, 41';
 } else {
     $nuevo_estado = 'cancelada';
     $icono        = '🚫';
@@ -102,6 +105,7 @@ if ($status_p2p === 'APPROVED') {
     $mensaje      = 'Cancelaste el proceso de pago.';
     $color        = '#8a8d96';
     $bg_icon      = 'rgba(138, 141, 150, 0.15)';
+    $color_rgb    = '138, 141, 150';
 }
 
 // ══════════════════════════════════════════
@@ -174,192 +178,34 @@ $subs = $row;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <?php require_once dirname(__DIR__) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../assets/css/styles-retorno.css">
     <style>
         :root {
-            --bg-base:    #0d0e10;
-            --bg-surface: #16181c;
-            --bg-card:    #1e2128;
-            --border:     #2e3038;
-            --text-primary:   #f0f1f3;
-            --text-secondary: #8a8d96;
-            --font-display: 'Barlow', sans-serif;
-            --font-body:    'Barlow', sans-serif;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background-color: var(--pt-bg-base);
-            color: var(--pt-text);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .result-card {
-            background: var(--pt-boxitem);
-            /* border: 1px solid var(--border); */
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            max-width: 460px;
-            width: 100%;
-            text-align: center;
-            animation: fadeUp 0.4s ease both;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-icon {
-            font-size: 3rem;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.2rem;
-            background: <?= $bg_icon ?>;
-        }
-
-        .result-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 800;
-            color: <?= $color ?>;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.02em;
-        }
-
-        .result-message {
-            font-size: 0.95rem;
-            color: var(--pt-text-sec);
-            margin-bottom: 1.5rem;
-        }
-
-        .order-details {
-            background: var(--pt-bg-card);
-            /* border: 1px solid var(--border); */
-            border-radius: 10px;
-            padding: 1rem 1.2rem;
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .order-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.4rem 0;
-            font-size: 0.875rem;
-            /* border-bottom: 1px solid var(--border); */
-            color: var(--pt-text);
-        }
-
-        .order-row:last-child { border-bottom: none; }
-        .order-row span:first-child { color: var(--pt-text-sec); }
-        .order-row span:last-child  { font-weight: 600; color: var(--pt-text); }
-
-        .estado-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            font-family: var(--font-display);
-            letter-spacing: 0.05em;
-            background: <?= $bg_icon ?>;
-            color: <?= $color ?>;
-        }
-
-        .btn-home {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: <?= $color ?>;
-            color: #0d0e10;
-            border: none;
-            border-radius: 8px;
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: opacity 0.2s;
-            margin-right: 0.5rem;
-        }
-        .btn-home:hover { opacity: 0.85; color: #0d0e10; text-decoration: none; }
-
-        .btn-volver {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            color: var(--pt-text-sec);
-            border: 1px solid var(--pt-border);
-            border-radius: 8px;
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        .btn-volver:hover { border-color: <?= $color ?>; color: <?= $color ?>; text-decoration: none; }
-
-        .tip-box {
-            background: rgba(240, 180, 41, 0.08);
-            border: 1px solid rgba(240, 180, 41, 0.25);
-            border-radius: 10px;
-            padding: 0.85rem 1rem;
-            margin-bottom: 1.2rem;
-            text-align: left;
-            display: flex;
-            gap: 0.6rem;
-            align-items: flex-start;
-        }
-        .tip-box-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
-        .tip-box-text { font-size: 0.82rem; color: #c99010; line-height: 1.5; }
-        .tip-box-text strong { color: #f0b429; }
-
-        .btn-tokenizar {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            width: 100%;
-            justify-content: center;
-            padding: 0.75rem 1.2rem;
-            background: rgba(240,180,41,0.12);
-            border: 1.5px solid #f0b429;
-            color: #f0b429;
-            border-radius: 8px;
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            text-decoration: none;
-            margin-bottom: 0.8rem;
-            transition: all 0.2s;
-        }
-        .btn-tokenizar:hover {
-            background: rgba(240,180,41,0.25);
-            color: #f0b429;
-            text-decoration: none;
-            transform: translateY(-1px);
+            --ret-color:     <?= $color ?>;
+            --ret-bg-icon:   <?= $bg_icon ?>;
+            --ret-color-rgb: <?= $color_rgb ?>;
+            --ret-maxw:      460px;
         }
     </style>
 </head>
 <body>
     <div class="result-card">
 
+        <?php if ($status_p2p === 'PENDING'): ?>
+        <div class="result-icon">
+            <div class="pending-spinner">
+                <div class="pending-ring"></div>
+                <div class="pending-dots">
+                    <span class="pending-dot"></span>
+                    <span class="pending-dot"></span>
+                    <span class="pending-dot"></span>
+                </div>
+            </div>
+        </div>
+        <div class="pending-label">Procesando...</div>
+        <?php else: ?>
         <div class="result-icon"><?= $icono ?></div>
+        <?php endif; ?>
         <div class="result-title"><?= $titulo ?></div>
         <p class="result-message"><?= $mensaje ?></p>
 
@@ -370,7 +216,7 @@ $subs = $row;
         <?php endif; ?>
 
         <?php if ($nuevo_estado === 'aprobada' && !empty($token)): ?>
-        <div style="background:rgba(62,207,142,0.08);border:1px solid rgba(62,207,142,0.25);border-radius:8px;padding:0.7rem 1rem;margin-bottom:1.2rem;font-size:0.82rem;color:#3ecf8e;text-align:left;">
+        <div class="token-box">
             🔐 <strong>Tarjeta guardada</strong> — Tus próximos pagos serán automáticos.
         </div>
         <?php endif; ?>
@@ -404,8 +250,8 @@ $subs = $row;
         </div>
         <?php endif; ?>
 
-        <a href="sesiones.php" class="btn-home">← Inicio</a>
-        <a href="../views/plataformas/suscripciones.php" class="btn-volver">Volver al comercior</a>
+        <a href="../sesiones.php" class="btn-home">← Inicio</a>
+        <a href="../views/plataformas/suscripciones.php" class="btn-volver">Volver al comercio</a>
 
     </div>
 

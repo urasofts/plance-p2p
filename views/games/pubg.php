@@ -16,251 +16,21 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/styles-juegos-gateway.css">
+    <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
+    /* PUBG — acento ámbar */
     :root {
-        --bg-base:        #0d0e10;
-        --bg-surface:     #16181c;
-        --bg-card:        #1e2128;
-        --bg-card-hover:  #252830;
-        --bg-selected:    #0a1520;
-        --border:         #2e3038;
-        --accent:         hsl(38, 100%, 72%);
-        --accent-glow:    rgba(245,158,11,0.25);
-        --accent-dark:    rgb(255, 208, 0);
-        --text-primary:   #f0f1f3;
-        --text-secondary: #8a8d96;
-        --text-muted:     #555860;
-        --green:          #3ecf8e;
-        --font-display:   'Calibri', sans-serif;
-        --font-body:      'Calibri', sans-serif;
-        --radius-sm:      6px;
-        --radius-md:      10px;
-        --radius-lg:      14px;
-        --transition:     0.2s ease;
+        --gj-accent:        hsl(38, 100%, 72%);
+        --gj-accent-glow:   rgba(245, 158, 11, 0.25);
+        --gj-accent-soft:   rgba(245, 158, 11, 0.15);
+        --gj-accent-hover:  rgba(245, 158, 11, 0.4);
+        --gj-accent-dark:   rgb(255, 208, 0);
     }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-base); color: var(--text-primary); font-family: var(--font-body); min-height: 100vh; -webkit-font-smoothing: antialiased; }
-    .navbar { background-color: #0f0f0fa9 !important; backdrop-filter: blur(8px); border-bottom: 1px solid var(--pt-border); }
-
-    .game-banner {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 0.6rem 2rem; background: var(--pt-th2);
-        border-bottom: 1px solid var(--pt-border); gap: 1rem;
-    }
-        .game-banner__tag {
-        display: flex; align-items: center; gap: 0.5rem;
-        font-family: var(--font-display); font-weight: 700;
-        font-size: 1rem; letter-spacing: 0.04em; color: var(--pt-text);
-    }
-    .gw-badge {
-        background: rgba(245,158,11,0.15); color: var(--accent);
-        font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem;
-        border-radius: 20px; letter-spacing: 0.05em; font-family: var(--font-display);
-    }
-    .card-img-top {
-      border-radius: 15px 15px 0 0;
-      height: 20px;
-      width: 10%;
-      object-fit: cover;
-    }
-
-    /* ID jugador en banner */
-    .banner-player-id { display: flex; align-items: center; gap: 0.5rem; }
-    .banner-player-id label { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
-    .banner-player-id input {
-        background: var(--pt-border); border: 1.5px solid var(--pt-border);
-        border-radius: var(--radius-sm); color: var(--pt-text);
-        font-family: var(--font-body); font-size: 0.85rem;
-        padding: 0.35rem 0.75rem; outline: none;
-        transition: border-color var(--transition); width: 180px;
-    }
-    .banner-player-id input::placeholder { color: var(--text-muted); }
-    .banner-player-id input:focus { border-color: var(--accent); }
-
-    .shop-layout {
-        display: grid; grid-template-columns: 1fr 360px;
-        gap: 1.5rem; max-width: 1200px;
-        margin: 1.5rem auto; padding: 0 1.5rem 3rem; align-items: start;
-    }
-
-    .section-block { margin-bottom: 1.4rem; }
-    .section-label {
-        font-family: var(--font-display); font-size: 0.8rem;
-        font-weight: 700; letter-spacing: 0.1em;
-        text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.75rem;
-    }
-
-    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem; }
-
-    .product-card {
-        position: relative; background: var(--pt-navbar);
-        border: 1.5px solid var(--pt-border); border-radius: var(--radius-md);
-        padding: 0.9rem 0.75rem 0.8rem; cursor: pointer;
-        transition: all 0.18s ease; display: flex;
-        flex-direction: column; gap: 0.1rem; overflow: hidden;
-    }
-    .product-card:hover { background: var(--pt-boxitem); border-color: rgba(245,158,11,0.4); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
-    .product-card.selected { background: var(--pt-border); border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 4px 24px var(--accent-glow); }
-    .product-card.selected::after {
-        content: '✔'; position: absolute; top: 0.5rem; right: 0.55rem;
-        width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
-        color: #0d0e10; font-size: 0.65rem; display: flex; align-items: center;
-        justify-content: center; font-weight: 900; line-height: 18px; text-align: center;
-    }
-    .badge-popular {
-        position: absolute; top: -1px; left: -1px; background: var(--accent); color: #0d0e10;
-        font-family: var(--font-display); font-size: 0.68rem; font-weight: 800;
-        letter-spacing: 0.05em; padding: 0.15rem 0.5rem;
-        border-radius: var(--radius-sm) 0 var(--radius-sm) 0;
-    }
-    .product-card__img { font-size: 1.5rem; margin-bottom: 0.25rem; }
-    .product-card__pts { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: var(--pt-text-sec); line-height: 1; }
-    .product-card__label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
-    .product-card__price-old { font-size: 0.72rem; color: var(--text-muted); text-decoration: line-through; }
-    .product-card__price { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; }
-    .discount-tag { background: rgba(245,158,11,0.15); color: var(--accent); font-size: 0.68rem; font-weight: 700; padding: 0.1rem 0.3rem; border-radius: 3px; }
-
-    /* CHECKOUT */
-    .checkout-panel { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 16px; }
-    .checkout-box { background: var(--pt-navbar); border: 1px solid var(--pt-border); border-radius: var(--radius-lg); padding: 1.2rem 1.3rem; }
-
-    .checkout-product-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: var(--pt-text); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
-    .checkout-product-name img { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
-    .checkout-product-name img[src=""], .checkout-product-name img:not([src]) { display: none; }
-    .checkout-price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-    .checkout-price { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--pt-text); }
-    .checkout-divider { height: 1px; background: var(--pt-border); margin: 0.8rem 0; }
-
-    /* Método de pago tabs */
-    .payment-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-    .payment-tab {
-        flex: 1; padding: 0.5rem; border: 1.5px solid var(--pt-border);
-        border-radius: var(--radius-sm); background: var(--pt-bg);
-        color: var(--pt-text-sec); font-family: var(--font-body);
-        font-size: 0.82rem; font-weight: 600; cursor: pointer;
-        transition: all 0.2s; text-align: center;
-        display: flex; align-items: center; justify-content: center; gap: 0.3rem;
-    }
-    .payment-tab:hover { border-color: var(--accent); color: var(--text-primary); }
-    .payment-tab.active { border-color: var(--accent); background: rgba(245,158,11,0.1); color: var(--accent); }
-
-    /* Form fields */
-    .form-section { display: none; }
-    .form-section.active { display: block; }
-
-    .field-group { margin-bottom: 0.75rem; }
-    .field-label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.3rem; display: block; }
-    .field-input {
-        width: 100%; background: var(--pt-border); border: 1.5px solid var(--pt-border);
-        border-radius: 8px; color: var(--pt-text); font-family: var(--font-body);
-        font-size: 0.85rem; padding: 0.45rem 0.75rem; outline: none;
-        transition: border-color 0.2s;
-    }
-    .field-input:focus { border-color: var(--accent); }
-    .field-input::placeholder { color: var(--text-muted); }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-
-    .btn-pagar {
-        width: 100%; margin-top: 0.8rem; padding: 0.85rem;
-        background: var(--accent); border: none; border-radius: var(--radius-md);
-        color: #0a0a0b; font-family: var(--font-display); font-size: 1.1rem;
-        font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
-        cursor: pointer; transition: all 0.18s ease; display: flex;
-        align-items: center; justify-content: center; gap: 0.5rem;
-    }
-    .btn-pagar:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 20px var(--accent-glow); }
-
-    /* Modo de simulación */
-    .sim-mode-wrap { margin-top: 0.9rem; }
-    .sim-mode-label {
-        font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
-        letter-spacing: 0.08em; text-transform: uppercase;
-        color: var(--text-secondary); margin-bottom: 0.45rem; display: block;
-    }
-    .sim-mode-toggle {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
-        background: var(--pt-navbar); border: 1.5px solid var(--pt-border);
-        border-radius: var(--radius-md); padding: 0.3rem;
-    }
-    .sim-mode-opt {
-        border: none; background: transparent; cursor: pointer;
-        padding: 0.55rem 0.4rem; border-radius: var(--radius-sm);
-        font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
-        color: var(--text-secondary); transition: all 0.18s ease;
-        display: flex; align-items: center; justify-content: center; gap: 0.35rem;
-    }
-    .sim-mode-opt:hover {background-color: rgba(255, 194, 89, 0.12); color: var(--pt-text-sec); }
-    .sim-mode-opt.active { background: rgba(245,158,11,0.12); color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); }
-    .sim-mode-hint { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4; }
-
-    .security-note {
-        display: flex; align-items: center; gap: 0.4rem;
-        font-size: 0.75rem; color: var(--text-muted);
-        margin-top: 0.6rem; justify-content: center;
-    }
-
-    /* Vendor */
-    .vendor-box{
-    background: var(--pt-navbar);
-    border: solid var(--pt-border);
-    border-radius: 10px;
-    padding: 1.2rem 1.3rem;
-
-    }
-    .vendor-info {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-    
-    }
-
-    .vendor-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ffdb87, #ffc02c);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 0.85rem;
-    color: var(--pt-text);
-    flex-shrink: 0;
-    }
-
-    .vendor-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--pt-text-sec);
-    }
-
-    .vendor-rating {
-    font-size: 0.78rem;
-    color: #6d6d6d;
-    margin-top: 0.1rem;
-    }
-
-    .security-warning{background:rgba(224,82,82,0.08);border-left:4px solid #e05252;border-radius:0 8px 8px 0;padding:0.9rem 1.2rem;margin:1rem 2rem;display:flex;gap:0.8rem;align-items:flex-start;font-size:0.83rem; color:var(--pt-text);line-height:1.6;}
-    .security-warning i{color:#e05252;font-size:1.2rem;flex-shrink:0;margin-top:0.1rem;}
-    .security-warning strong{color:#e05252;}
-    .security-warning-header{display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;user-select:none;}
-    .security-warning-toggle{color: #e05252 ;font-size:1rem;transition:transform 0.3s ease;margin-left:auto;padding-left:1rem;}
-    .security-warning-toggle.collapsed{transform:rotate(-90deg);}
-    .security-warning-content{margin-top:0.5rem;overflow:hidden;max-height:500px;transition:max-height 0.3s ease,opacity 0.3s ease;opacity:1;}
-    .security-warning-content.collapsed{max-height:0;opacity:0;margin-top:0;}
-
-    @keyframes fadeSlideIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-    .products-panel { animation: fadeSlideIn 0.4s ease both; }
-    .checkout-panel { animation: fadeSlideIn 0.4s 0.1s ease both; }
-
-    @media (max-width: 900px) { .shop-layout { grid-template-columns: 1fr; } .checkout-panel { position: static; } .products-grid { grid-template-columns: repeat(3,1fr); } }
-    @media (max-width: 600px) { .products-grid { grid-template-columns: repeat(2,1fr); } .game-banner { flex-direction: column; align-items: flex-start; } }
 </style>
 <body>
     <?php
@@ -375,7 +145,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <div class="checkout-box">
                 <div class="checkout-product-name"><img id="checkoutImg" src="" alt="" /><span id="checkoutName">💎 325 UC Points</span></div>
                 <div class="checkout-price-row">
-                    <span style="font-size:0.85rem;color:var(--text-secondary);">Total</span>
+                    <span style="font-size:0.85rem;color:var(--pt-text-sec);">Total</span>
                     <span class="checkout-price" id="checkoutPrice">21.900 COP</span>
                 </div>
 
@@ -516,6 +286,128 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
         </div>
         </aside>
     </main>
+
+    <!-- ═══ INTEGRACIÓN PLACETOPAY ═══ -->
+    <section class="integration-docs" style="--code-accent:var(--gj-accent); --code-accent-ink:var(--gj-accent-ink); --code-accent-soft:var(--gj-accent-soft); --code-radius-sm:var(--gj-radius-sm); --code-radius-md:var(--gj-radius-md); --code-radius-lg:var(--gj-radius-lg); --code-font:var(--gj-font-body);">
+        <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
+        <h3>Así se procesa el pago de esta tienda</h3>
+        <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de la tarjeta (o cuenta) que llenas en este mismo panel viajan en el request de creación de la transacción, y <strong>PlaceToPay Gateway</strong> responde de una vez con el estado final del pago — <code>APPROVED</code>, <code>PENDING</code> o <code>REJECTED</code> — sin devolver un <code>processUrl</code>.</p>
+
+        <div class="endpoint-bar">
+            <span class="method-pill">POST</span>
+            <span class="endpoint-url">https://api-test.placetopay.com/rest/gateway/process</span>
+            <span class="endpoint-note">ambiente de pruebas</span>
+        </div>
+
+        <div class="code-block">
+            <div class="code-tabs">
+                <button class="code-tab active" data-key="json">JSON</button>
+                <button class="code-tab" data-key="php">PHP</button>
+                <button class="code-copy"><i class="bi bi-clipboard"></i> Copiar</button>
+            </div>
+            <pre class="code-panel active" data-key="json"><code>{
+  <span class="jk">"auth"</span>: {
+    <span class="jk">"login"</span>: <span class="js">"YOUR_LOGIN"</span>,
+    <span class="jk">"tranKey"</span>: <span class="js">"TRAN_KEY_CALCULADO"</span>,
+    <span class="jk">"nonce"</span>: <span class="js">"Tm9uY2VFbkJhc2U2NA=="</span>,
+    <span class="jk">"seed"</span>: <span class="js">"2026-08-25T10:15:32-05:00"</span>
+  },
+  <span class="jk">"payer"</span>: {
+    <span class="jk">"name"</span>: <span class="js">"Andrés Torres"</span>,
+    <span class="jk">"surname"</span>: <span class="js">""</span>,
+    <span class="jk">"email"</span>: <span class="js">"usuario@correo.com"</span>,
+    <span class="jk">"documentType"</span>: <span class="js">"CC"</span>,
+    <span class="jk">"document"</span>: <span class="js">"1234567890"</span>,
+    <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
+  },
+  <span class="jk">"payment"</span>: {
+    <span class="jk">"reference"</span>: <span class="js">"GW-PUBG-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"325 UC Points"</span>,
+    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">21900</span> }
+  },
+  <span class="jk">"instrument"</span>: {
+    <span class="jk">"card"</span>: {
+      <span class="jk">"number"</span>: <span class="js">"tok_************1111"</span>,
+      <span class="jk">"expiration"</span>: <span class="js">"12/28"</span>,
+      <span class="jk">"cvv"</span>: <span class="js">"***"</span>
+    }
+  },
+  <span class="jk">"notificationUrl"</span>: <span class="js">"https://tu-dominio.com/php/notify.php"</span>,
+  <span class="jk">"ipAddress"</span>: <span class="js">"203.0.113.42"</span>,
+  <span class="jk">"userAgent"</span>: <span class="js">"Mozilla/5.0 (Windows NT 10.0; Win64; x64)"</span>
+}</code></pre>
+            <pre class="code-panel" data-key="php"><code>&lt;?php
+<span class="cm">// credenciales fuera del código, nunca hardcodeadas</span>
+<span class="cvar">$login</span>     = getenv(<span class="js">'P2P_LOGIN'</span>);
+<span class="cvar">$secretKey</span> = getenv(<span class="js">'P2P_SECRET_KEY'</span>);
+<span class="cvar">$endpoint</span>  = <span class="js">'https://api-test.placetopay.com/rest/gateway/process'</span>;
+
+<span class="cm">// autenticación: Base64( SHA256( nonce + seed + secretKey ) )</span>
+<span class="cvar">$seed</span>     = date(<span class="js">'c'</span>);
+<span class="cvar">$nonce</span>    = bin2hex(random_bytes(16));
+<span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
+<span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
+
+<span class="cm">// según el método elegido, el instrumento es tarjeta o cuenta</span>
+<span class="cvar">$instrument</span> = <span class="cvar">$metodo</span> === <span class="js">'tarjeta'</span>
+    ? [<span class="jk">'card'</span> =&gt; [<span class="jk">'number'</span> =&gt; <span class="cvar">$card_number</span>, <span class="jk">'expiration'</span> =&gt; <span class="cvar">$card_expiry</span>, <span class="jk">'cvv'</span> =&gt; <span class="cvar">$card_cvv</span>]]
+    : [<span class="jk">'bank'</span> =&gt; [<span class="jk">'code'</span> =&gt; <span class="cvar">$banco</span>, <span class="jk">'account'</span> =&gt; <span class="cvar">$num_cuenta</span>]];
+
+<span class="cm">// cuerpo del request — así lo arma esta tienda</span>
+<span class="cvar">$body</span> = [
+    <span class="jk">'auth'</span> =&gt; [
+        <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
+        <span class="jk">'tranKey'</span> =&gt; <span class="cvar">$tranKey</span>,
+        <span class="jk">'nonce'</span>   =&gt; <span class="cvar">$nonceB64</span>,
+        <span class="jk">'seed'</span>    =&gt; <span class="cvar">$seed</span>,
+    ],
+    <span class="jk">'payer'</span> =&gt; [
+        <span class="jk">'name'</span>         =&gt; <span class="cvar">$nombre</span>,
+        <span class="jk">'surname'</span>      =&gt; <span class="js">''</span>,
+        <span class="jk">'email'</span>        =&gt; <span class="cvar">$correo</span>,
+        <span class="jk">'documentType'</span> =&gt; <span class="cvar">$tipo_doc</span>,
+        <span class="jk">'document'</span>     =&gt; <span class="cvar">$num_doc</span>,
+        <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
+    ],
+    <span class="jk">'payment'</span> =&gt; [
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'GW-PUBG-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'description'</span> =&gt; <span class="cvar">$producto</span>,               <span class="cm">// ej: "325 UC Points"</span>
+        <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
+    ],
+    <span class="jk">'instrument'</span>      =&gt; <span class="cvar">$instrument</span>,
+    <span class="jk">'notificationUrl'</span> =&gt; <span class="cvar">$notifyUrl</span>,
+    <span class="jk">'ipAddress'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'REMOTE_ADDR'</span>],
+    <span class="jk">'userAgent'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'HTTP_USER_AGENT'</span>],
+];
+
+<span class="cvar">$ch</span> = curl_init(<span class="cvar">$endpoint</span>);
+curl_setopt_array(<span class="cvar">$ch</span>, [
+    CURLOPT_POST           =&gt; true,
+    CURLOPT_RETURNTRANSFER =&gt; true,
+    CURLOPT_HTTPHEADER     =&gt; [<span class="js">'Content-Type: application/json'</span>],
+    CURLOPT_POSTFIELDS     =&gt; json_encode(<span class="cvar">$body</span>),
+]);
+
+<span class="cvar">$result</span> = json_decode(curl_exec(<span class="cvar">$ch</span>), true);
+curl_close(<span class="cvar">$ch</span>);
+
+<span class="cm">// aquí no hay processUrl: el estado ya viene resuelto</span>
+<span class="cvar">$estado</span> = <span class="cvar">$result</span>[<span class="js">'status'</span>][<span class="js">'status'</span>]; <span class="cm">// APPROVED / PENDING / REJECTED</span></code></pre>
+        </div>
+
+        <div class="doc-note">
+            <span class="doc-note-icon">⚠️</span>
+            <span>Por eso el aviso de seguridad de esta página: como los datos de tarjeta pasan por nuestra página antes de llegar a PlacetoPay, este flujo requiere <strong>certificación PCI-DSS</strong> en producción. Esta demo no guarda número, fecha ni CVV — se usan solo para armar el request y nunca se persisten en la base de datos.</span>
+        </div>
+
+        <a class="integration-docs__link" href="../guias/guia-developer.php#api-gateway">
+            <div>
+                <strong>¿Quieres entender esta integración a fondo?</strong>
+                <span>Lee la documentación completa de API Gateway — alcance PCI-DSS, 3D Secure y más.</span>
+            </div>
+            <i class="bi bi-arrow-right"></i>
+        </a>
+    </section>
 
     <input type="hidden" id="currentPayment" value="tarjeta">
 
@@ -686,5 +578,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/code-block.js"></script>
 </body>
 </html>

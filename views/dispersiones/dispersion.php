@@ -23,8 +23,8 @@ if (!isset($conexion)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <?php $theme_seccion = 'dispersion'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
     body {
@@ -108,18 +108,20 @@ if (!isset($conexion)) {
         z-index: 2;
     }
      .second-title {
-        background:rgba(97, 97, 97, 0.08);
-        border-radius:0 12px 12px 0;
-        padding:0.9rem 1.2rem;
-        margin: 10px;
-        gap:0.8rem;
-        font-size: 1.00rem;
+        background: linear-gradient(135deg, rgba(10, 255, 51, 0.20), rgba(65, 141, 34, 0.10));
+        border: 1px solid rgba(10, 255, 51, 0.35);
+        border-radius: 14px;
+        padding: 1.25rem 1.75rem;
+        margin: 0 10px 20px;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1.05rem;
         color: var(--pt-text);
-        line-height:1.4;
-
+        line-height: 1.5;
+        box-shadow: 0 6px 22px rgba(10, 255, 51, 0.18);
     }
-    .second-title i{color: hsl(130, 100%, 52%);font-size:1.2rem;flex-shrink:0;}
-    .second-title strong{color: rgb(65, 141, 34);}
+    .second-title i{color: hsl(130, 100%, 52%);font-size:1.7rem;flex-shrink:0;}
+    .second-title strong{color: rgb(65, 141, 34); font-size: 1.12rem;}
 </style>
 <body>
     <?php
@@ -129,7 +131,7 @@ if (!isset($conexion)) {
         require_once '../../php/navbar.php';
     ?>
 
-    <div class="container text-center" >
+    <div class="container-fluid text-center px-4" >
        <div class="second-title ">
         <i class="fa-solid fa-plane-departure fs-3"></i>
         <div>
@@ -143,7 +145,7 @@ if (!isset($conexion)) {
         <div class="cards-grid">
             <!-- carta en forma de cuadro -->
             <!-- Personaliza agregando --card-img: url('../assets/images/tu-imagen.jpg'); en el style -->
-            <a href="tickets.php" class="tienda-card" style="--card-color: #ffffff; --card-bg: hsla(194, 100%, 50%, 0.12); --card-img: url('../assets/images/img/vuelos.jpg');">
+            <a href="tickets.php" class="tienda-card" style="--card-color: #ffffff; --card-bg: hsla(194, 100%, 50%, 0.12); --card-img: url('/assets/images/img/vuelos.jpg');">
                 <span class="card-image-badge">
                     <i class="fa-solid fa-plane" style="color: #4aa8ff;"></i>
                 </span>

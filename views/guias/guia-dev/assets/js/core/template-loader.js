@@ -14,8 +14,8 @@ async function injectTemplates() {
 
   // 1) Cargar shells principales
   const [welcomeHtml, appShellHtml] = await Promise.all([
-    loadTemplate(`${templateBase}/welcome.html`),
-    loadTemplate(`${templateBase}/app-shell.html`),
+    loadTemplate(`${templateBase}/welcome.php`),
+    loadTemplate(`${templateBase}/app-shell.php`),
   ]);
 
   // 2) Inyectar shells
@@ -24,15 +24,15 @@ async function injectTemplates() {
   // 3) Inyectar secciones de welcome dentro de #guideContent
   const guideContent = document.getElementById("guideContent");
   if (!guideContent) {
-    throw new Error("No existe #guideContent dentro de welcome.html");
+    throw new Error("No existe #guideContent dentro de welcome.php");
   }
 
   const sectionPaths = [
-    `${templateBase}/sections/g-home.html`,
-    `${templateBase}/sections/g-session.html`,
-    `${templateBase}/sections/g-process.html`,
-    `${templateBase}/sections/g-links.html`,
-    `${templateBase}/sections/g-errors.html`,
+    `${templateBase}/sections/g-home.php`,
+    `${templateBase}/sections/g-session.php`,
+    `${templateBase}/sections/g-process.php`,
+    `${templateBase}/sections/g-links.php`,
+    `${templateBase}/sections/g-errors.php`,
   ];
 
   const sectionsHtml = await Promise.all(sectionPaths.map(loadTemplate));

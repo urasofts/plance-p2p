@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
     <!-- Tu CSS -->
     <link rel="stylesheet" href="assets/css/estilos?v=<?php echo filemtime(__DIR__ . '/assets/css/e'); ?>">
-     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+     <?php $theme_seccion = 'guias'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 
 
@@ -377,7 +377,7 @@
                     </div>
                 </a>
 
-                <a href="guia-dev/lab_index.php" class="doc-card doc-card--developer">
+                <a href="guia-developer.php" class="doc-card doc-card--developer">
                     <div class="doc-card-visual">
                         <div class="visual-panel"></div>
                         <span class="mini-tag tag-api">API</span>

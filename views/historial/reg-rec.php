@@ -28,138 +28,14 @@ $resultado     = mysqli_query($conexion, "SELECT * FROM recurrencias WHERE usuar
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <?php $theme_seccion = 'historial'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+    <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
 </head>
 <style>
-    body {
-        /* background-image: url(../assets/images/bg26.jpg); */
-        background-color: #000000;
-        color: white;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: fixed;
-        background-size: cover;
-        font-family: 'Barlow', sans-serif;
-    }
-    .navbar {
-        background-color: #0f0f0fa9 !important;
-        backdrop-filter: blur(8px);
-    }
-    .tabla-container {
-        background: rgba(15, 15, 15, 0.85);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 2rem auto;
-        max-width: 1100px;
-        backdrop-filter: blur(8px);
-    }
-    .tabla-titulo {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #4d9fff;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .table {
-        color: white;
-        border-color: rgba(255,255,255,0.1);
-    }
-    .table thead th {
-        background: rgba(0, 0, 0, 0.79);
-        color: #4d9fff;
-        border-color: rgba(255,255,255,0.1);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-    }
-    .table tbody tr {
-        border-color: rgba(255,255,255,0.07);
-        transition: background 0.15s;
-    }
-    .table tbody tr:hover { background: rgba(255,255,255,0.05); }
-    .table tbody td { border-color: rgba(255,255,255,0.07); font-size: 0.88rem; vertical-align: middle; background: #1312129a; color: white;   }
-
-    .badge-aprobada  { background: rgba(62,207,142,0.2);  color: #3ecf8e; }
-    .badge-pendiente { background: rgba(240,180,41,0.2);  color: #f0b429; }
-    .badge-rechazada { background: rgba(224,82,82,0.2);   color: #e05252; }
-    .badge-cancelada { background: rgba(138,141,150,0.2); color: #8a8d96; }
-
-    .estado-pill {
-        display: inline-block;
-        padding: 0.2rem 0.65rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .recurrente-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        background: rgba(77,159,255,0.12);
-        color: #4d9fff;
-        font-size: 0.72rem;
-        font-weight: 700;
-        padding: 0.15rem 0.5rem;
-        border-radius: 20px;
-    }
-
-    .sin-registros {
-        text-align: center;
-        padding: 3rem;
-        color: #8a8d96;
-        font-size: 0.95rem;
-    }
-    .btn-verificar {
-        background: rgba(77,159,255,0.15);
-        border: 1px solid rgba(77,159,255,0.4);
-        color: #4d9fff;
-        border-radius: 6px;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        transition: all 0.2s;
-        white-space: nowrap;
-    }
-    .btn-verificar:hover { background: rgba(77,159,255,0.3); color: #4d9fff; text-decoration: none; }
-    .alert-verify {
-        background: rgba(62,207,142,0.12); color: #3ecf8e;
-        border: 1px solid rgba(62,207,142,0.3);
-        border-radius: 8px; padding: 0.75rem 1rem;
-        margin-bottom: 1rem; font-size: 0.88rem;
-    }
-    .btn-cancelar {
-        background: rgba(224,82,82,0.15);
-        border: 1px solid rgba(224,82,82,0.4);
-        color: #e05252;
-        border-radius: 6px;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        transition: all 0.2s;
-        white-space: nowrap;
-        margin-top: 0.3rem;
-    }
-    .btn-cancelar:hover { background: rgba(224,82,82,0.3); color: #e05252; text-decoration: none; }
-    .alert-cancel {
-        background: rgba(224,82,82,0.12); color: #e05252;
-        border: 1px solid rgba(224,82,82,0.3);
-        border-radius: 8px; padding: 0.75rem 1rem;
-        margin-bottom: 1rem; font-size: 0.88rem;
+    /* Historial de Membresías Recurrentes — acento azul */
+    :root {
+        --hist-accent:     #4d9fff;
+        --hist-accent-rgb: 77, 159, 255;
     }
 </style>
 <body>

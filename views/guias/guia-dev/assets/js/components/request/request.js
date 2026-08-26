@@ -150,8 +150,8 @@ export function buildBody(state) {
       auth,
       payer: {
         name: "Usuario Demo",
-        surname: "Plance",
-        email: "demo@plance.co",
+        surname: "Pruebas",
+        email: "demo@ejemplo.com",
       },
       payment: {
         reference: ref,

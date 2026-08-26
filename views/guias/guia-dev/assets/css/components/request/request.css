@@ -272,7 +272,7 @@
 }
 
 .json-view .json-line:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(var(--overlay-rgb), 0.02);
 }
 
 .json-view .json-line .line-number {
@@ -408,7 +408,7 @@
 }
 
 .cm-number {
-  color: #fca5a5 !important;
+  color: var(--json-number) !important;
 }
 
 .cm-atom {
@@ -420,7 +420,7 @@
 }
 
 .cm-keyword {
-  color: #c084fc !important;
+  color: var(--json-keyword) !important;
 }
 
 .cm-comment {
@@ -437,7 +437,7 @@
 }
 
 .cm-variable {
-  color: #93c5fd !important;
+  color: var(--json-key) !important;
 }
 
 /* ========================================
@@ -445,7 +445,7 @@
    ======================================== */
 
 .jk {
-  color: #93c5fd;
+  color: var(--json-key);
 }
 
 .js {
@@ -453,7 +453,7 @@
 }
 
 .jn {
-  color: #fca5a5;
+  color: var(--json-number);
 }
 
 .jb {

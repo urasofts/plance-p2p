@@ -15,7 +15,7 @@
 </head>
 <style>
     .welcome {
-        background-image: url(assets/images/bg13.jpg); 
+        background-image: url(assets/images/bg13.webp);
         min-height: 100vh;
         display: flex;
         flex-direction: column;

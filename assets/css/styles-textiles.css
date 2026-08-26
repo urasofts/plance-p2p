@@ -1,0 +1,266 @@
+/* ══════════════════════════════════════════════════════════════
+   styles-textiles.css
+   Estilos compartidos para las tiendas de camisetas/kits deportivos
+   (pl.php, laliga.php, bundesliga.php, seriea.php): banner + grid
+   de equipos + panel de generación de link de pago.
+
+   Las superficies leen --pt-* (de php/theme.php) para respetar el
+   tema claro/oscuro. El acento de marca de cada liga vive en
+   --tex-accent / --tex-accent-rgb / --tex-accent-dark,
+   sobreescribible por cada tienda en su propio <style>.
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+    --tex-accent:      #3b82f6;
+    --tex-accent-rgb:  59, 130, 246;
+    --tex-accent-dark: #2563eb;
+    --tex-accent-ink:  #ffffff;
+
+    --tex-font: 'Barlow', sans-serif;
+
+    --tex-radius-sm: 6px;
+    --tex-radius-md: 10px;
+    --tex-radius-lg: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: var(--tex-font); -webkit-font-smoothing: antialiased; }
+
+.navbar {
+    background-color: var(--pt-navbar) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--pt-border);
+}
+
+/* ── BANNER ── */
+.game-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 2rem;
+    background: var(--pt-th2);
+    border-bottom: 1px solid var(--pt-border);
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.game-banner__tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--tex-font);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--pt-text);
+}
+.link-badge {
+    background: rgba(var(--tex-accent-rgb), 0.15);
+    color: var(--tex-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-family: var(--tex-font);
+}
+
+/* ── LAYOUT ── */
+.shop-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 0 1.5rem 3rem;
+    align-items: start;
+}
+
+.section-label {
+    font-family: var(--tex-font);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pt-text-sec);
+    margin-bottom: 0.75rem;
+}
+
+/* ── GRID DE EQUIPOS ── */
+.products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem; }
+
+.product-card {
+    position: relative;
+    background: var(--pt-navbar);
+    border: 1.5px solid var(--pt-border);
+    border-radius: var(--tex-radius-md);
+    padding: 0.85rem 0.75rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    overflow: hidden;
+}
+.product-card:hover {
+    background: var(--pt-boxitem);
+    border-color: rgba(var(--tex-accent-rgb), 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.product-card.selected {
+    background: var(--pt-border);
+    border-color: var(--tex-accent);
+    box-shadow: 0 0 0 1px var(--tex-accent), 0 4px 24px rgba(var(--tex-accent-rgb), 0.25);
+}
+.product-card.selected::after {
+    content: '✔';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.55rem;
+    width: 18px;
+    height: 18px;
+    background: var(--tex-accent);
+    border-radius: 50%;
+    color: var(--tex-accent-ink);
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    line-height: 18px;
+    text-align: center;
+}
+
+.product-card__img {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    background: var(--pt-bg-base);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--pt-border);
+}
+.product-card__img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.product-card__name {
+    font-family: var(--tex-font);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--pt-text);
+    line-height: 1.1;
+    text-align: center;
+}
+.product-card__label { font-size: 0.7rem; color: var(--pt-text-sec); margin-bottom: 0.25rem; text-align: center; }
+.product-card__price { font-family: var(--tex-font); font-size: 0.9rem; font-weight: 700; color: var(--tex-accent); margin-top: auto; text-align: center; }
+
+/* ── CHECKOUT ── */
+.checkout-panel { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 16px; }
+.checkout-box { background: var(--pt-bg-surface); border: 1px solid var(--pt-border); border-radius: var(--tex-radius-lg); padding: 1.4rem; }
+
+.checkout-header {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--pt-border);
+}
+.checkout-product-img {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    background: var(--pt-navbar);
+    border: 2px solid var(--pt-border);
+    border-radius: var(--tex-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+}
+.checkout-product-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.checkout-product-info { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; min-width: 0; }
+.checkout-product-name { font-family: var(--tex-font); font-size: 1.05rem; font-weight: 800; color: var(--pt-text); line-height: 1.2; }
+.checkout-product-label { font-size: 0.72rem; color: var(--pt-text-sec); margin-bottom: 0.15rem; }
+.checkout-price-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+.checkout-price { font-family: var(--tex-font); font-size: 1.35rem; font-weight: 800; color: var(--tex-accent); }
+.checkout-divider { height: 1px; background: var(--pt-border); margin: 0.8rem 0; }
+.section-label-sm { font-family: var(--tex-font); font-size: 0.73rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pt-text-sec); margin-bottom: 0.5rem; display: block; }
+
+.field-group { margin-bottom: 0.65rem; }
+.field-label { font-size: 0.73rem; font-weight: 600; color: var(--pt-text-sec); margin-bottom: 0.25rem; display: block; }
+.field-input {
+    width: 100%;
+    background: var(--pt-border);
+    border: 1.5px solid var(--pt-border);
+    border-radius: 8px;
+    color: var(--pt-text);
+    font-family: var(--tex-font);
+    font-size: 0.83rem;
+    padding: 0.4rem 0.7rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.field-input:focus { border-color: var(--tex-accent); }
+.field-input::placeholder { color: var(--pt-text-sec); }
+
+/* Info del link de pago — sigue el acento de la liga */
+.link-info {
+    background: rgba(var(--tex-accent-rgb), 0.08);
+    border: 1px solid rgba(var(--tex-accent-rgb), 0.2);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--tex-accent);
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+
+.btn-generar {
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--tex-accent);
+    border: none;
+    border-radius: var(--tex-radius-md);
+    color: var(--tex-accent-ink);
+    font-family: var(--tex-font);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.btn-generar:hover { background: var(--tex-accent-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(var(--tex-accent-rgb), 0.25); }
+.security-note { display: flex; align-items: center; gap: 0.4rem; font-size: 0.73rem; color: var(--pt-text-sec); margin-top: 0.5rem; justify-content: center; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.products-panel { animation: fadeSlideIn 0.4s ease both; }
+.checkout-panel { animation: fadeSlideIn 0.4s 0.1s ease both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .shop-layout { grid-template-columns: 1fr; }
+    .checkout-panel { position: static; }
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .game-banner { flex-direction: column; align-items: flex-start; }
+}

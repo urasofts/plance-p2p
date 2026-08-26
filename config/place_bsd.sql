@@ -387,6 +387,7 @@ CREATE TABLE `user_preferences` (
   `id` int(11) NOT NULL,
   `usuario_correo` varchar(255) NOT NULL,
   `tema` varchar(10) NOT NULL DEFAULT 'oscuro',
+  `fondo` varchar(20) NOT NULL DEFAULT 'ninguno',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -394,9 +395,9 @@ CREATE TABLE `user_preferences` (
 -- Volcado de datos para la tabla `user_preferences`
 --
 
-INSERT INTO `user_preferences` (`id`, `usuario_correo`, `tema`, `updated_at`) VALUES
-(1, 'mjairstiven@gmail.com', 'oscuro', '2026-08-11 21:28:12'),
-(2, 'jairmosquera2019@gmail.com', 'claro', '2026-08-08 20:53:41');
+INSERT INTO `user_preferences` (`id`, `usuario_correo`, `tema`, `fondo`, `updated_at`) VALUES
+(1, 'mjairstiven@gmail.com', 'oscuro', 'ninguno', '2026-08-11 21:28:12'),
+(2, 'jairmosquera2019@gmail.com', 'claro', 'ninguno', '2026-08-08 20:53:41');
 
 --
 -- Índices para tablas volcadas

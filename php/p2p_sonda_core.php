@@ -9,7 +9,7 @@ require_once __DIR__ . '/p2p_config.php';
 
 if (!function_exists('p2p_tablas_gateway')) {
     function p2p_tablas_gateway(): array {
-        return ['gateway_ordenes', 'gateway_suscripciones', 'gateway_suscription'];
+        return ['gateway_ordenes', 'gateway_recurrencias', 'gateway_suscription'];
     }
 }
 
@@ -103,6 +103,95 @@ if (!function_exists('p2p_consultar_y_actualizar')) {
         mysqli_query($conexion, "UPDATE `$tabla` SET estado = '$estado_safe' WHERE id = " . (int) $id);
 
         return ['ok' => true, 'estado_nuevo' => $nuevo_estado, 'mensaje' => "actualizado a $nuevo_estado"];
+    }
+}
+
+// Recalcula el estado y el monto_pagado de una orden de gateway_ordenes con
+// tipo_pago = 'mixto' a partir de sus abonos aprobados en gateway_abonos.
+// Si aun no hay ningun abono aprobado, refleja el resultado del ultimo
+// abono intentado (para que el historial distinga "nunca se pagó nada y el
+// ultimo intento fue rechazado" de "pendiente de un primer intento").
+if (!function_exists('p2p_recalcular_orden_mixta')) {
+    function p2p_recalcular_orden_mixta($conexion, int $orden_id): void {
+        $row = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT precio FROM gateway_ordenes WHERE id = " . $orden_id));
+        if (!$row) return;
+        $precio = (float) $row['precio'];
+
+        $sumRow = mysqli_fetch_assoc(mysqli_query(
+            $conexion,
+            "SELECT COALESCE(SUM(monto), 0) AS pagado FROM gateway_abonos WHERE gateway_orden_id = $orden_id AND estado = 'aprobada'"
+        ));
+        $pagado = (float) ($sumRow['pagado'] ?? 0);
+
+        if ($pagado >= $precio) {
+            $nuevo_estado = 'aprobada';
+        } elseif ($pagado > 0) {
+            $nuevo_estado = 'parcial';
+        } else {
+            $ultimo = mysqli_fetch_assoc(mysqli_query(
+                $conexion,
+                "SELECT estado FROM gateway_abonos WHERE gateway_orden_id = $orden_id ORDER BY id DESC LIMIT 1"
+            ));
+            $nuevo_estado = $ultimo['estado'] ?? 'pendiente';
+        }
+
+        $pagado_safe = mysqli_real_escape_string($conexion, (string) $pagado);
+        $estado_safe = mysqli_real_escape_string($conexion, $nuevo_estado);
+        mysqli_query($conexion, "UPDATE gateway_ordenes SET monto_pagado = '$pagado_safe', estado = '$estado_safe' WHERE id = $orden_id");
+    }
+}
+
+// Consulta el estado de un abono pendiente (gateway_abonos) contra PlaceToPay.
+// Igual que p2p_consultar_y_actualizar pero a nivel de abono: al resolverse
+// también recalcula la orden padre (gateway_ordenes) con la función de arriba.
+if (!function_exists('p2p_verificar_abono')) {
+    function p2p_verificar_abono($conexion, int $abono_id, string $request_id): array {
+        $cred = p2p_credenciales()['principal'];
+        $auth = p2p_construir_auth($cred['login'], $cred['secretKey']);
+
+        $ch = curl_init("https://api-test.placetopay.com/rest/gateway/query");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST,  'POST');
+        curl_setopt($ch, CURLOPT_POSTFIELDS,     json_encode(["auth" => $auth, "internalReference" => $request_id]));
+        curl_setopt($ch, CURLOPT_HTTPHEADER,     ["Content-Type: application/json"]);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+
+        $response = curl_exec($ch);
+        $curl_err = curl_error($ch);
+        curl_close($ch);
+
+        if ($response === false) {
+            return ['ok' => false, 'mensaje' => "Error de conexion con PlaceToPay: $curl_err"];
+        }
+
+        $result     = json_decode($response, true);
+        $status_p2p = $result['status']['status'] ?? 'UNKNOWN';
+
+        $map = [
+            'APPROVED'  => 'aprobada',
+            'REJECTED'  => 'rechazada',
+            'PENDING'   => 'pendiente',
+            'CANCELLED' => 'cancelada',
+            'REFUNDED'  => 'cancelada',
+            'FAILED'    => 'rechazada',
+        ];
+
+        if (!isset($map[$status_p2p]) || $map[$status_p2p] === 'pendiente') {
+            return ['ok' => false, 'mensaje' => "sin cambios (PlaceToPay respondio: $status_p2p)"];
+        }
+
+        $nuevo_estado = $map[$status_p2p];
+        $estado_safe  = mysqli_real_escape_string($conexion, $nuevo_estado);
+        mysqli_query($conexion, "UPDATE gateway_abonos SET estado = '$estado_safe' WHERE id = " . (int) $abono_id);
+
+        $abono_row = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT gateway_orden_id FROM gateway_abonos WHERE id = " . (int) $abono_id));
+        if ($abono_row) {
+            p2p_recalcular_orden_mixta($conexion, (int) $abono_row['gateway_orden_id']);
+        }
+
+        return ['ok' => true, 'estado_nuevo' => $nuevo_estado, 'mensaje' => "abono actualizado a $nuevo_estado"];
     }
 }
 

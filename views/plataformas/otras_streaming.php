@@ -56,7 +56,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- AMAZON PRIME -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=primevideo.com&sz=32" alt="Amazon Prime">
+                    <img src="../../assets/implataformas/streaming/primevideo-icon.svg" alt="Amazon Prime">
                     <span>Amazon Prime</span>
                 </div>
                 <div class="products-grid">
@@ -79,7 +79,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- CRUNCHYROLL -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=crunchyroll.com&sz=32" alt="Crunchyroll">
+                    <img src="../../assets/implataformas/streaming/crunchyroll-icon.svg" alt="Crunchyroll">
                     <span>Crunchyroll</span>
                 </div>
                 <div class="products-grid">
@@ -102,7 +102,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- STAR+ -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=starplus.com&sz=32" alt="Star+">
+                    <img src="../../assets/implataformas/streaming/starplus-icon.svg" alt="Star+">
                     <span>Star+</span>
                 </div>
                 <div class="products-grid">

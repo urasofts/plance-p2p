@@ -6,8 +6,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     exit();
 }
 
-$gw = $_SESSION['gw_mus_result'] ?? null;
-unset($_SESSION['gw_mus_result']);
+$gw = $_SESSION['gw_sus_result'] ?? null;
+unset($_SESSION['gw_sus_result']);
 
 if (!$gw) {
     header("Location: ../home.php");
@@ -45,7 +45,7 @@ if ($status === 'APPROVED') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado — Suscripción Música</title>
+    <title>Resultado — Suscripción</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +101,7 @@ if ($status === 'APPROVED') {
             <div class="order-row"><span>Plan</span><span><?= htmlspecialchars($plan) ?></span></div>
             <div class="order-row"><span>Nombre</span><span><?= htmlspecialchars($nombre) ?></span></div>
             <div class="order-row"><span>Correo</span><span><?= htmlspecialchars($correo) ?></span></div>
-            <div class="order-row"><span>Total</span><span style="color:<?= $color ?>;font-size:1.1rem;">$<?= number_format((float)$precio, 0, ',', '.') ?> COP</span></div>
+            <div class="order-row"><span>Precio del plan</span><span style="color:<?= $color ?>;font-size:1.1rem;">$<?= number_format((float)$precio, 0, ',', '.') ?> COP</span></div>
             <div class="order-row"><span>Token</span><span style="color:<?= !empty($token) ? '#3ecf8e' : '#8a8d96' ?>;"><?= !empty($token) ? '✅ Guardado' : '— No tokenizado' ?></span></div>
             <?php if (!empty($reference)): ?>
             <div class="order-row"><span>Referencia</span><span style="font-size:0.78rem;color:var(--pt-text-sec);"><?= htmlspecialchars($reference) ?></span></div>
@@ -110,7 +110,7 @@ if ($status === 'APPROVED') {
         </div>
 
         <a href="../home.php" class="btn-home">← Inicio</a>
-        <a href="../views/plataformas/music_gateway.php" class="btn-volver">Ver planes</a>
+        <a href="../views/plataformas/streaming_gateway.php" class="btn-volver">Ver planes</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
+    <link rel="stylesheet" href="../../assets/css/estilos.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/estilos.css'); ?>">
 
     <?php $theme_seccion = 'textiles'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 
@@ -197,11 +197,10 @@
         <div class="container mt-5" >
             <h1 class="text-center mb-3">Textiles</h1>
 
-            <!-- Botones para filtrar por servicio PlaceToPay -->
+            <!-- Canal de pago disponible -->
             <div class="d-flex justify-content-center mb-4">
-                <div class="servicio-toggle" role="group" aria-label="Filtrar ropa por servicio" id="tipo-flujo">
+                <div class="servicio-toggle" role="group" aria-label="Canal de pago" id="tipo-flujo">
                     <button type="button" class="servicio-btn active" data-filter="web">API Link de pagos</button>
-                    <button type="button" class="servicio-btn" data-filter="api">N/A</button>
                 </div>
             </div>
 
@@ -210,65 +209,17 @@
                 <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100" id="tarjeta">
 
-                        <img src="https://static.designboom.com/wp-content/uploads/2016/02/designstudio-premier-league-logo-graphic-design-designboom-09.jpg" class="card-img-top" alt="Juego 1" style="height: 100px width 100px;"><div class="linkp" id="tipo-link-pagos">API Link de pagos</div>
-                            
+                        <img src="../../assets/imtextil/premier-league-card.svg" class="card-img-top" alt="Premier League" style="height: 100px; width: 100%; object-fit: cover;"><div class="linkp" id="tipo-link-pagos">API Link de pagos</div>
+
                         <div class="card-body">
                             <div class="servicio1">API Link de pagos</div>
                             <h5 class="card-title">Premier League</h5>
-                            <p class="card-text">Compra Equipaciones de tus equipos ingleses favoritos</p> 
+                            <p class="card-text">Compra Equipaciones de tus equipos ingleses favoritos</p>
                             <a href="../textil/pl.php" class="btn btn-producto" styles=""; >Productos</a>
                         </div>
                     </div>
-                    
-                </div>
-                <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100" >
-                        <img src="https://logowik.com/content/uploads/images/laliga-santander5892.logowik.com.webp" class="card-img-top" alt="Free Fire">
-                        <div class="card-body">
-                            <div class="linkp">API Link de pagos</div>
-                            <div class="servicio1">API Link de pagos</div>
-                            <h5 class="card-title">La Liga</h5>
-                            <p class="card-text">Compra Equipaciones de tus equipos españoles favoritos</p>
-                            <a href="../textil/laliga.php" class="btn btn-producto" >Productos</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100">
-                        <img src="https://logowik.com/content/uploads/blog/bundesliga-football-clubs-and-logos3600.logowik.com.webp" class="card-img-top" alt="Efootball">
-                        <div class="card-body">
-                            <div class="linkp">API Link de pagos</div>
-                            <div class="servicio1">API Link de pagos</div>
-                            <h5 class="card-title">Bundesliga</h5>
-                            <p class="card-text">Compra equipaciones de tus equipos alemanes favoritos</p>
-                            <a href="../textil/bundesliga.php" class="btn btn-producto">Productos</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100">
-                        <img src="https://1000logos.net/wp-content/uploads/2019/01/Italian-Serie-A-Logo.png" class="card-img-top" alt="serie A">
-                        <div class="card-body">
-                            <div class="linkp">API Link de pagos</div>
-                            <div class="servicio1">API Link de pagos</div>
-                            <h5 class="card-title">Serie A</h5>
-                            <p class="card-text">Compra equipaciones de tus equipos italianos favoritos</p>
-                            <a href="../textil/seriea.php" class="btn btn-producto">Productos</a>
-                        </div>
-                    </div>
-                </div>
 
-                 <!-- OTRO APARTADO 
-                <div class="col-md-4 mb-4" data-servicio="api">
-                    <div class="card h-100">
-                        <img src="https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2018/02/13/c3c16515-d639-45cd-8d7d-5fe26623130b/pubg" class="card-img-top" alt="Juego 3">
-                        <div class="linkp">Link de pagos</div>
-                        <div class="servicio2">Api Link de pagos</div>
-                        <h5 class="card-title">No Disponible</h5>
-                        <p class="card-text">No Disponible</p>
-                        <a href="../games/pubg.php" class="btn" style="background-color: #2424249f; color: #ffffff;">Productos</a>
-                    </div>
-                </div>-->
+                </div>
             </div>
         </div>
     </section>

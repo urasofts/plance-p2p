@@ -19,6 +19,10 @@ if (empty($_SESSION['gw_pending'])) {
 
 $producto = $_SESSION['gw_pending']['producto'] ?? 'Producto';
 $precio   = $_SESSION['gw_pending']['precio']   ?? 0;
+$destino  = $_SESSION['gw_pending']['destino']  ?? 'basico';
+$form_action = $destino === 'mixto' ? '../php/pago_mixto_gateway.php' : '../php/crear_pb_gateway.php';
+// En pago mixto solo se cobra el abono elegido, no el total del pedido
+$monto_a_simular = $destino === 'mixto' ? ($_SESSION['gw_pending']['monto_pagar'] ?? $precio) : $precio;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -50,8 +54,8 @@ $precio   = $_SESSION['gw_pending']['precio']   ?? 0;
 
         <!-- Info producto -->
         <div class="product-info">
-            <span class="product-info-name">🎮 <?= htmlspecialchars($producto) ?></span>
-            <span class="product-info-price">$<?= number_format((float)$precio, 0, ',', '.') ?> COP</span>
+            <span class="product-info-name">🎮 <?= htmlspecialchars($producto) ?><?= $destino === 'mixto' ? ' (abono)' : '' ?></span>
+            <span class="product-info-price">$<?= number_format((float) $monto_a_simular, 0, ',', '.') ?> COP</span>
         </div>
 
         <!-- Selector de estado -->
@@ -91,7 +95,7 @@ $precio   = $_SESSION['gw_pending']['precio']   ?? 0;
         </div>
 
         <!-- Formulario oculto -->
-        <form method="POST" action="../php/crear_pb_gateway.php" id="estadoForm">
+        <form method="POST" action="<?= htmlspecialchars($form_action) ?>" id="estadoForm">
             <input type="hidden" name="estado_elegido" id="estadoElegido" value="aprobada">
             <input type="hidden" name="razon_elegida" id="razonElegida" value="APPROVED_TRANSACTION">
             <?php foreach ($_SESSION['gw_pending'] as $key => $value): ?>

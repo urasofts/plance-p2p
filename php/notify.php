@@ -163,7 +163,7 @@ if (strpos($reference, 'PRE-') === 0) {
 } elseif (strpos($reference, 'GW-') === 0) {
     // Gateway (pago basico sin Web Checkout)
     $queries[] = "UPDATE gateway_ordenes SET estado = '$est_safe' WHERE request_id = '$rid_safe'";
-    $queries[] = "UPDATE gateway_suscripciones SET estado = '$est_safe' WHERE request_id = '$rid_safe'";
+    $queries[] = "UPDATE gateway_recurrencias SET estado = '$est_safe' WHERE request_id = '$rid_safe'";
 
 } else {
     // Ordenes basicas (referencia numerica)

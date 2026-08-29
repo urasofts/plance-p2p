@@ -172,8 +172,8 @@
         <div class="card">
             <div class="card-icon"><i class="bi bi-joystick" style="color: #f06829;"></i></div>
             <h3>Juegos</h3>
-            <p>CoD Mobile, Free Fire, eFootball, EA Sports, PUBG y Blood Strike. Cada tienda muestra un flujo diferente — Web Checkout o API Gateway con 3DS.</p>
-            <span class="card-tag">6 juegos</span>
+            <p>CoD Mobile y Rainbow Six por Web Checkout, PUBG y Blood Strike por API Gateway — cada tienda con pago básico o mixto.</p>
+            <span class="card-tag">4 juegos</span>
         </div>
         <div class="card">
             <div class="card-icon"><i class="bi bi-tv" style="color: #f06829;"></i></div>

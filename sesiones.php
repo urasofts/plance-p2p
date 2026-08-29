@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="assets/css/estilos?v=<?php echo filemtime(__DIR__ . '/assets/css/e'); ?>">
+    <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
     <?php $theme_seccion = 'sesiones'; require_once __DIR__ . '/php/theme.php'; ?>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
@@ -378,7 +378,7 @@
             </div>
 
             <div class="speed-dial-item" title="Reservaciones">
-                <a href="views/reservaciones/reservas.php" class="speed-dial-link">
+                <a href="views/reservaciones/hotel.php" class="speed-dial-link">
                     <div class="speed-dial-icon">
                         <i class="fa-solid fa-calendar-check fs-3" style="color: rgb(255, 102, 0);"></i>
                     </div>
@@ -393,7 +393,7 @@
                 </div>
             </div>
             <div class="speed-dial-item" title="Dispersiones">
-                <a href="views/dispersiones/dispersion.php" class="speed-dial-link">
+                <a href="views/dispersiones/tickets.php" class="speed-dial-link">
                     <div class="speed-dial-icon">
                         <i class="bi bi-airplane-fill fs-3" style="color: rgb(255, 102, 0);"></i>
                     </div>

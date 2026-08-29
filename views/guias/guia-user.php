@@ -492,22 +492,16 @@
             <span class="card-tag">Suscripción</span>
           </article>
           <article class="card">
-            <div class="card-icon"><i class="icon-colors bi bi-patch-check"></i></div>
-            <h5>Membresías y verificados</h5>
-            <p>Obtén tu verificado en redes sociales como X (Twitter) o Meta, o activa YouTube Premium con cobro mensual automático.</p>
-            <span class="card-tag">Recurrente</span>
-          </article>
-          <article class="card">
             <div class="card-icon"><i class="icon-colors bi bi-robot"></i></div>
             <h5>Planes de IA</h5>
             <p>Activa planes de inteligencia artificial como Claude Pro o ChatGPT Plus con renovación mensual o anual.</p>
             <span class="card-tag">Recurrente</span>
           </article>
           <article class="card">
-            <div class="card-icon"><i class="icon-colors bi bi-music-note-beamed"></i></div>
-            <h5>Música</h5>
-            <p>Suscríbete a Spotify o Deezer y disfruta de música sin anuncios. Tu tarjeta queda guardada de forma segura.</p>
-            <span class="card-tag">Suscripción</span>
+            <div class="card-icon"><i class="icon-colors bi bi-robot"></i></div>
+            <h5>Planes de IA vía API Gateway</h5>
+            <p>Activa Blackbox AI o DeepSeek directo en la misma página: se cobra el primer periodo y tu tarjeta queda tokenizada para el siguiente.</p>
+            <span class="card-tag">Recurrente</span>
           </article>
           <article class="card">
             <div class="card-icon"><i class="icon-colors bi bi-stars"></i></div>
@@ -563,7 +557,7 @@
           </div>
           <div class="tipo-card">
             <h6><i class="bi bi-cpu fs-5" style="color: #f0b429"></i> API Gateway</h6>
-            <p>El pago se procesa directo en la misma página, sin redirigir a otro sitio. Usado en tiendas como PUBG, Blood Strike, Streaming y Música.</p>
+            <p>El pago se procesa directo en la misma página, sin redirigir a otro sitio. Usado en tiendas como PUBG, Blood Strike, Streaming e IA's.</p>
           </div>
           <div class="tipo-card">
             <h6><i class="bi bi-link-45deg fs-5" style="color: #3b82f6"></i> Link de Pagos</h6>
@@ -993,14 +987,14 @@
           <div class="section-icon"><i class="icon-colors bi bi-arrow-repeat"></i></div>
           <h4>Cómo crear una sesión de recurrencia</h4>
         </div>
-        <p>Las recurrencias son cobros automáticos que se realizan cada mes o cada año sin que tengas que hacer nada. Son ideales para membresías de redes sociales o planes de IA. Las encontrarás en <strong>Plataformas → Redes Sociales</strong> o <strong>Plataformas → IA's</strong>.</p>
+        <p>Las recurrencias son cobros automáticos que se realizan cada mes o cada año sin que tengas que hacer nada. Son ideales para planes de IA. Las encontrarás en <strong>Plataformas → IA's</strong>, tanto por Web Checkout como por API Gateway.</p>
 
         <div class="steps">
           <div class="step">
             <div class="step-index">1</div>
             <div>
-              <h6>Ve a Plataformas → Redes Sociales o IA's</h6>
-              <p>Desde el menú de plataformas elige la sección de redes sociales (para verificados y membresías) o IA's (para planes como Claude Pro o ChatGPT Plus).</p>
+              <h6>Ve a Plataformas → IA's</h6>
+              <p>Desde el menú de plataformas elige la sección de IA's (para planes como Claude Pro, ChatGPT Plus, Blackbox AI o DeepSeek).</p>
             </div>
           </div>
           <div class="step">
@@ -1115,7 +1109,7 @@
           <div class="section-icon"><i class="icon-colors bi bi-cpu"></i></div>
           <h4>Pagos con API Gateway</h4>
         </div>
-        <p>Algunas tiendas (como PUBG, Blood Strike, Streaming y Música) usan <strong>API Gateway</strong> en lugar de la pasarela visual. Aquí ingresas los datos de tu tarjeta o cuenta directamente en la misma página, sin ser redirigido a otro sitio.</p>
+        <p>Algunas tiendas (como PUBG, Blood Strike, Streaming e IA's) usan <strong>API Gateway</strong> en lugar de la pasarela visual. Aquí ingresas los datos de tu tarjeta o cuenta directamente en la misma página, sin ser redirigido a otro sitio.</p>
 
         <div class="steps">
           <div class="step">

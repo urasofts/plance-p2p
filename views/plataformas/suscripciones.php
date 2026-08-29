@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="assets/css/estilo.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estils.css'); ?>">
+    <link rel="stylesheet" href="../../assets/css/estilos.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/estilos.css'); ?>">
     <?php $theme_seccion = 'plataformas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
@@ -224,7 +224,7 @@
                 <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100" id="tarjeta">
 
-                        <img src="https://www.dongee.com/tutoriales/content/images/2024/04/image-6.png" class="card-img-top" alt="streaming">
+                        <img src="../../assets/implataformas/streaming/streaming-card.svg" class="card-img-top" alt="streaming">
 
                         <div class="card-body">
                             <div class="suscrip" id="tipo-suscripcion-mixta">Pago + Suscripción</div>
@@ -239,20 +239,7 @@
                 <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100">
                         <div class="suscrip" id="tipo-suscripcion-recurrencia">Recurrencia</div>
-                        <img src="https://imagenes.20minutos.es/files/image_1280_720/files/fp/uploads/imagenes/2024/06/26/redes-sociales.r_d.566-624-11532.jpeg" class="card-img-top" alt="redes">
-                        <div class="card-body">
-                            <div class="servicio1">Web Chekout</div>
-                            <h5 class="card-title">Redes Sociales</h5>
-                            <p class="card-text">Adquiere Membresías y verificados</p>
-                            <a href="redes.php" class="btn btn-producto">Productos</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100">
-                        <div class="suscrip">Suscripción + Recurrencia</div>
-                        <img src="https://www.clarin.com/2025/06/02/r8YhhzdFc_0x750__1.jpg" class="card-img-top" alt="ia">
+                        <img src="../../assets/implataformas/ia/ia-card.svg" class="card-img-top" alt="ia">
                         <div class="card-body">
                             <div class="servicio1">Web Chekout</div>
                             <h5 class="card-title">IA's</h5>
@@ -261,12 +248,12 @@
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100 ">
                         <div class="suscrip">Suscripción</div>
-                        <img src="https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2022/11/23/comparacion-de-precios-de-netflix-hbo-max-prime-video-y-otras-plataformas-para-ver-series-y-peliculas.jpeg" class="card-img-top" alt="otras streaming">
+                        <img src="../../assets/implataformas/streaming/otras-streaming-card.svg" class="card-img-top" alt="otras streaming">
                         <div class="card-body">
                             <div class="servicio1">Web Chekout</div>
                             <h5 class="card-title">Otros Streamings</h5>
@@ -279,8 +266,8 @@
                 <!-- API GATEWAY -->
                 <div class="col-md-4 mb-4" data-servicio="api">
                     <div class="card h-100 ">
-                        <div class="suscrip">Pago + Suscripción</div>
-                        <img src="https://elfrente.com.co/content/images/2024/01/stream-1.jpg" class="card-img-top" alt="streamings gateway">
+                        <div class="suscrip">Suscripción</div>
+                        <img src="../../assets/implataformas/streaming/streaming-card.svg" class="card-img-top" alt="streamings gateway">
                         <div class="card-body">
                             <div class="servicio2">Api Gateway</div>
                             <h5 class="card-title">Streamings</h5>
@@ -292,13 +279,13 @@
 
                 <div class="col-md-4 mb-4" data-servicio="api">
                     <div class="card h-100">
-                        <div class="suscrip">Suscripción</div>
-                        <img src="https://i.blogs.es/e018be/portada/1366_2000.webp" class="card-img-top" alt="musica">
+                        <div class="suscrip">Recurrencia</div>
+                        <img src="../../assets/implataformas/ia/ia-card.svg" class="card-img-top" alt="ia gateway">
                         <div class="card-body">
                             <div class="servicio2">Api Gateway</div>
-                            <h5 class="card-title">Música</h5>
-                            <p class="card-text">Mejora tus planes de música</p>
-                            <a href="../plataformas/music_gateway.php" class="btn btn-producto">Productos</a>
+                            <h5 class="card-title">IA's</h5>
+                            <p class="card-text">Mejora tus planes</p>
+                            <a href="../plataformas/ia_gateway.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>
                 </div>

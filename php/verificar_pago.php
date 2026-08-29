@@ -19,7 +19,7 @@ $request_id = $_GET['request_id'] ?? '';
 $redirect   = $_GET['redirect']   ?? '../views/historial/historial.php';
 
 // Validar tabla permitida (seguridad)
-$tablas_permitidas = ['ordenes', 'suscripciones', 'recurrencias', 'suscription_rec', 'suscription', 'gateway_suscripciones', 'gateway_suscription', 'gateway_ordenes', 'reservaciones', 'dispersiones'];
+$tablas_permitidas = ['ordenes', 'suscripciones', 'recurrencias', 'suscription_rec', 'suscription', 'gateway_recurrencias', 'gateway_suscription', 'gateway_ordenes', 'gateway_abonos', 'reservaciones', 'dispersiones'];
 if (!in_array($tabla, $tablas_permitidas) || !$id || !$request_id) {
     header("Location: $redirect");
     exit();
@@ -31,11 +31,15 @@ if (!in_array($tabla, $tablas_permitidas) || !$id || !$request_id) {
 // ==========================================
 require_once 'p2p_sonda_core.php';
 
-$resultado = p2p_consultar_y_actualizar($conexion, $tabla, $id, $request_id);
+// gateway_abonos se verifica a nivel de abono (recalcula la orden padre después)
+$resultado = $tabla === 'gateway_abonos'
+    ? p2p_verificar_abono($conexion, $id, $request_id)
+    : p2p_consultar_y_actualizar($conexion, $tabla, $id, $request_id);
 
+$etiqueta = $tabla === 'gateway_abonos' ? "Abono #$id" : "Orden #$id";
 $_SESSION['verify_msg'] = $resultado['ok']
-    ? "Orden #$id actualizada a: " . strtoupper($resultado['estado_nuevo'])
-    : "No se pudo verificar el estado de la orden #$id. Estado sin cambios.";
+    ? "$etiqueta actualizado a: " . strtoupper($resultado['estado_nuevo'])
+    : "No se pudo verificar el estado de $etiqueta. Estado sin cambios.";
 
 header("Location: $redirect");
 exit();

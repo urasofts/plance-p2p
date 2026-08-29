@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140">
+  <defs>
+    <linearGradient id="coinBodyB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe8a3"/>
+      <stop offset="45%" stop-color="#f0b429"/>
+      <stop offset="100%" stop-color="#b9790c"/>
+    </linearGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0b429" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f0b429" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="70" r="68" fill="url(#glowB)"/>
+  <circle cx="60" cy="95" r="26" fill="#b9790c" opacity="0.5"/>
+  <circle cx="140" cy="92" r="22" fill="#c9860f" opacity="0.55"/>
+  <circle cx="100" cy="65" r="42" fill="url(#coinBodyB)" stroke="#8a5c07" stroke-width="2.5"/>
+  <circle cx="100" cy="65" r="31" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2.5" stroke-dasharray="4 5"/>
+  <text x="100" y="79" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" fill="#7a4e05" text-anchor="middle">$</text>
+  <circle cx="80" cy="42" r="6" fill="#fff" opacity="0.6"/>
+</svg>

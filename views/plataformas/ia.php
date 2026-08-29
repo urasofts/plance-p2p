@@ -17,7 +17,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/estilos.?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../../assets/css/estilos.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <?php $theme_seccion = 'plataformas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-plataformas.css">
@@ -63,7 +63,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- CLAUDE -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=32" alt="Claude">
+                    <img src="../../assets/implataformas/ia/claude-icon.svg" alt="Claude">
                     <span>Claude</span>
                 </div>
                 <div class="products-grid">
@@ -92,7 +92,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- CHATGPT -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=32" alt="ChatGPT">
+                    <img src="../../assets/implataformas/ia/chatgpt-icon.svg" alt="ChatGPT">
                     <span>ChatGPT</span>
                 </div>
                 <div class="products-grid">

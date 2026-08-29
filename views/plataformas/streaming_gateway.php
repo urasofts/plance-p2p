@@ -37,8 +37,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
     <div class="game-banner">
         <div class="game-banner__tag">
-            <i class="bi bi-tv-fill"></i> Streaming — Pago + Suscripción
+            <i class="bi bi-tv-fill"></i> Streaming — Suscripción
             <span class="gw-badge"><i class="bi bi-lightning-charge-fill"></i> API Gateway</span>
+            <span class="sub-badge"><i class="bi bi-shield-lock-fill"></i> Tokenización</span>
         </div>
     </div>
 
@@ -51,7 +52,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                 <i class="bi bi-chevron-down security-warning-toggle" id="warningToggle"></i>
             </div>
             <div class="security-warning-content" id="warningContent">
-                La integración con API Gateway implica el manejo directo de datos sensibles del usuario (número de tarjeta, CVV, datos bancarios). Para operar en producción es <strong>obligatorio</strong> contar con certificación <strong>PCI-DSS</strong> y se recomienda implementar autenticación <strong>3D Secure (3DS)</strong> para reducir el riesgo de fraude. Esta demo es solo con fines ilustrativos.
+                La integración con API Gateway implica el manejo directo de datos sensibles del usuario (número de tarjeta y CVV). Para operar en producción es <strong>obligatorio</strong> contar con certificación <strong>PCI-DSS</strong> y se recomienda implementar autenticación <strong>3D Secure (3DS)</strong> para reducir el riesgo de fraude. Esta demo es solo con fines ilustrativos.
                 <br><br>
                 La base de datos de esta web <strong>NO! Guarda datos sensibles </strong> como el <strong> Numero de tarjeta, Fecha y CVV</strong> o <strong>Numeros de cuenta</strong> esta es solo una demostracion del servicio.
             </div>
@@ -64,7 +65,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- NETFLIX -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=netflix.com&sz=32" alt="Netflix">
+                    <img src="../../assets/implataformas/streaming/netflix-icon.svg" alt="Netflix">
                     <span>Netflix</span>
                 </div>
                 <div class="products-grid">
@@ -93,7 +94,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- PARAMOUNT+ -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=paramountplus.com&sz=32" alt="Paramount+">
+                    <img src="../../assets/implataformas/streaming/paramount-icon.svg" alt="Paramount+">
                     <span>Paramount+</span>
                 </div>
                 <div class="products-grid">
@@ -116,7 +117,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- DAZN -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=dazn.com&sz=32" alt="DAZN">
+                    <img src="../../assets/implataformas/streaming/dazn-icon.svg" alt="DAZN">
                     <span>DAZN</span>
                 </div>
                 <div class="products-grid">
@@ -157,21 +158,11 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <div class="checkout-box">
                 <div class="checkout-product-name" id="checkoutName">📺 Netflix — Estándar</div>
                 <div class="checkout-price-row">
-                    <span style="font-size:0.85rem;color:var(--pt-text-sec);">Total / mes</span>
+                    <span style="font-size:0.85rem;color:var(--pt-text-sec);">Precio del plan / mes</span>
                     <span class="checkout-price" id="checkoutPrice">26.900 COP</span>
                 </div>
 
                 <div class="checkout-divider"></div>
-
-                <!-- Tabs método pago -->
-                <div class="payment-tabs">
-                    <button class="payment-tab active" id="tabTarjeta" onclick="setPayment('tarjeta')">
-                        <i class="bi bi-credit-card-fill"></i> Tarjeta
-                    </button>
-                    <button class="payment-tab" id="tabPSE" onclick="setPayment('pse')">
-                        <i class="bi bi-bank2"></i> PSE
-                    </button>
-                </div>
 
                 <!-- FORMULARIO TARJETA -->
                 <div class="form-section active" id="formTarjeta">
@@ -219,65 +210,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                             <input type="text" class="field-input" id="cardNumDoc" placeholder="1234567890">
                         </div>
                     </div>
-                    <!-- Checkbox guardar tarjeta -->
-                    <div class="save-card-wrap">
-                        <input type="checkbox" id="guardarTarjeta">
-                        <label for="guardarTarjeta">
-                            🔐 Guardar tarjeta para futuros cobros automáticos
-                        </label>
-                    </div>
-                </div>
-
-                <!-- FORMULARIO PSE -->
-                <div class="form-section" id="formPSE">
-                    <div class="pse-notice">
-                        <i class="bi bi-info-circle-fill"></i>
-                        <span><strong>PSE no guarda tu método de pago.</strong> Los cobros automáticos del mes siguiente requieren tarjeta. Si pagas con PSE, deberás renovar manualmente cada mes.</span>
-                    </div>
-                    <span class="section-label-sm">Datos bancarios (PSE)</span>
-                    <div class="field-group">
-                        <label class="field-label">Banco</label>
-                        <select class="field-input" id="pseBanco">
-                            <option value="BANCOLOMBIA">Bancolombia</option>
-                            <option value="NEQUI">Nequi</option>
-                            <option value="DAVIVIENDA">Davivienda</option>
-                            <option value="BBVA">BBVA</option>
-                            <option value="BOGOTA">Banco de Bogotá</option>
-                            <option value="OCCIDENTE">Banco de Occidente</option>
-                        </select>
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Tipo de persona</label>
-                        <select class="field-input" id="pseTipoPersona">
-                            <option value="N">Natural</option>
-                            <option value="J">Jurídica</option>
-                        </select>
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Nombre completo</label>
-                        <input type="text" class="field-input" id="pseNombre" placeholder="Nombre y apellido">
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Correo electrónico</label>
-                        <input type="email" class="field-input" id="pseCorreo" value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>">
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label">Teléfono</label>
-                        <input type="text" class="field-input" id="pseTelefono" placeholder="3001234567">
-                    </div>
-                    <div class="field-row">
-                        <div class="field-group">
-                            <label class="field-label">Tipo de documento</label>
-                            <select class="field-input" id="pseTipoDoc">
-                                <option value="CC">Cédula</option>
-                                <option value="CE">Cédula Extranjería</option>
-                                <option value="NIT">NIT</option>
-                            </select>
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label">Número de documento</label>
-                            <input type="text" class="field-input" id="pseNumDoc" placeholder="1234567890">
-                        </div>
+                    <div class="token-info">
+                        <i class="bi bi-shield-lock-fill"></i>
+                        <span>No se cobra nada ahora — tu tarjeta será tokenizada de forma segura para el primer cobro.</span>
                     </div>
                 </div>
 
@@ -296,7 +231,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <section class="integration-docs" style="--code-accent:var(--plat-accent); --code-accent-ink:var(--plat-accent-ink); --code-accent-soft:rgba(var(--plat-accent-rgb),0.12); --code-radius-sm:var(--plat-radius-sm); --code-radius-md:var(--plat-radius-md); --code-radius-lg:var(--plat-radius-lg); --code-font:var(--plat-font);">
         <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
         <h3>Así se procesa el pago de esta tienda</h3>
-        <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de tarjeta que llenas en este mismo panel viajan en el request, y <strong>PlaceToPay Gateway</strong> cobra el primer mes y tokeniza la tarjeta (<code>subscribe: true</code>) en una sola llamada, sin devolver un <code>processUrl</code>.</p>
+        <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de tarjeta que llenas en este mismo panel viajan en el request. Como esta tienda es de <strong>suscripción pura</strong>, el cuerpo usa <code>subscription</code> en vez de <code>payment</code> — <strong>no se cobra nada en este request</strong>, solo se tokeniza la tarjeta.</p>
 
         <div class="endpoint-bar">
             <span class="method-pill">POST</span>
@@ -325,12 +260,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <span class="jk">"document"</span>: <span class="js">"1234567890"</span>,
     <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
   },
-  <span class="jk">"payment"</span>: {
-    <span class="jk">"reference"</span>: <span class="js">"GWSUB-9F3A2E1C"</span>,
-    <span class="jk">"description"</span>: <span class="js">"Netflix — Estándar"</span>,
-    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">26900</span> },
-    <span class="cm">// clave: cobra el primer mes Y tokeniza la tarjeta</span>
-    <span class="jk">"subscribe"</span>: <span class="jb">true</span>
+  <span class="cm">// "subscription" (sin "payment"): solo tokeniza, no cobra nada ahora</span>
+  <span class="jk">"subscription"</span>: {
+    <span class="jk">"reference"</span>: <span class="js">"GWSUS-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"Netflix — Estándar"</span>
   },
   <span class="jk">"instrument"</span>: {
     <span class="jk">"card"</span>: {
@@ -355,7 +288,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 <span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
 <span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
 
-<span class="cm">// cuerpo del request — cobra el primer mes Y tokeniza la tarjeta</span>
+<span class="cm">// cuerpo del request — "subscription" en vez de "payment": tokeniza sin cobrar</span>
 <span class="cvar">$body</span> = [
     <span class="jk">'auth'</span> =&gt; [
         <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
@@ -371,11 +304,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         <span class="jk">'document'</span>     =&gt; <span class="cvar">$num_doc</span>,
         <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
     ],
-    <span class="jk">'payment'</span> =&gt; [
-        <span class="jk">'reference'</span>   =&gt; <span class="js">'GWSUB-'</span> . strtoupper(bin2hex(random_bytes(4))),
+    <span class="jk">'subscription'</span> =&gt; [
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'GWSUS-'</span> . strtoupper(bin2hex(random_bytes(4))),
         <span class="jk">'description'</span> =&gt; <span class="cvar">$servicio</span> . <span class="js">' — '</span> . <span class="cvar">$plan</span>,
-        <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
-        <span class="jk">'subscribe'</span>   =&gt; true,  <span class="cm">// ← clave: cobra + tokeniza en un solo paso</span>
     ],
     <span class="jk">'instrument'</span> =&gt; [
         <span class="jk">'card'</span> =&gt; [
@@ -418,8 +349,6 @@ curl_close(<span class="cvar">$ch</span>);
         </a>
     </section>
 
-    <input type="hidden" id="currentPayment" value="tarjeta">
-
     <script>
     (function() {
         const products = {
@@ -438,14 +367,6 @@ curl_close(<span class="cvar">$ch</span>);
             document.getElementById('checkoutName').textContent  = p.name;
             document.getElementById('checkoutPrice').textContent = p.price;
         }
-
-        window.setPayment = function(method) {
-            document.getElementById('currentPayment').value = method;
-            document.getElementById('tabTarjeta').classList.toggle('active', method === 'tarjeta');
-            document.getElementById('tabPSE').classList.toggle('active', method === 'pse');
-            document.getElementById('formTarjeta').classList.toggle('active', method === 'tarjeta');
-            document.getElementById('formPSE').classList.toggle('active', method === 'pse');
-        };
 
         // Formatear tarjeta
         document.getElementById('cardNumber').addEventListener('input', function() {
@@ -488,66 +409,57 @@ curl_close(<span class="cvar">$ch</span>);
         };
 
         let envioEnCurso = false;
+        const btnPagarDefaultHTML = document.getElementById('btnPagar').innerHTML;
+
+        // Al volver desde el mock (ej. "Cancelar y volver") el navegador puede
+        // restaurar esta página desde bfcache con el botón tal como quedó justo
+        // antes de enviar el formulario (deshabilitado y en "Procesando...").
+        window.addEventListener('pageshow', function(event) {
+            if (!event.persisted) return;
+            envioEnCurso = false;
+            const btn = document.getElementById('btnPagar');
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.cursor = '';
+            btn.innerHTML = btnPagarDefaultHTML;
+        });
+
         document.getElementById('btnPagar').addEventListener('click', function() {
             if (envioEnCurso) return; // ya se está procesando, ignorar clics repetidos
 
             const selected = document.querySelector('.product-card.selected');
             if (!selected) { alert('⚠️ Selecciona un plan primero.'); return; }
 
-            const method = document.getElementById('currentPayment').value;
             const id = parseInt(selected.getAttribute('data-id'));
             const p  = products[id];
 
-            let nombre, correo, telefono, tipoDoc, numDoc;
-
-            if (method === 'tarjeta') {
-                nombre   = document.getElementById('cardName').value.trim();
-                correo   = document.getElementById('cardCorreo').value.trim();
-                telefono = document.getElementById('cardTelefono').value.trim();
-                tipoDoc  = document.getElementById('cardTipoDoc').value;
-                numDoc   = document.getElementById('cardNumDoc').value.trim();
-                const cardNum = document.getElementById('cardNumber').value.replace(/\s/g,'');
-                const cvv     = document.getElementById('cardCvv').value;
-                if (!nombre || !correo || !numDoc || !telefono || !cardNum || !cvv) {
-                    alert('⚠️ Por favor completa todos los campos de tarjeta.'); return;
-                }
-            } else {
-                nombre   = document.getElementById('pseNombre').value.trim();
-                correo   = document.getElementById('pseCorreo').value.trim();
-                telefono = document.getElementById('pseTelefono').value.trim();
-                tipoDoc  = document.getElementById('pseTipoDoc').value;
-                numDoc   = document.getElementById('pseNumDoc').value.trim();
-                if (!nombre || !correo || !numDoc || !telefono) {
-                    alert('⚠️ Por favor completa todos los campos de PSE.'); return;
-                }
+            const nombre   = document.getElementById('cardName').value.trim();
+            const correo   = document.getElementById('cardCorreo').value.trim();
+            const telefono = document.getElementById('cardTelefono').value.trim();
+            const tipoDoc  = document.getElementById('cardTipoDoc').value;
+            const numDoc   = document.getElementById('cardNumDoc').value.trim();
+            const cardNum  = document.getElementById('cardNumber').value.replace(/\s/g,'');
+            const cvv      = document.getElementById('cardCvv').value;
+            if (!nombre || !correo || !numDoc || !telefono || !cardNum || !cvv) {
+                alert('⚠️ Por favor completa todos los campos de tarjeta.'); return;
             }
 
             const form = document.createElement("form");
             form.method = 'POST';
             form.action = (modoSimulacion === 'auto')
-                ? '../../php/crear_suscripciones_gateway.php'
+                ? '../../php/crear_suscription_gateway.php'
                 : '../../retorno/estados-subs-gateway.php';
 
             const campos = [
                 ['servicio', p.servicio], ['plan', p.plan], ['precio', p.precio],
                 ['nombre', nombre], ['correo', correo], ['telefono', telefono],
-                ['tipo_doc', tipoDoc], ['num_doc', numDoc], ['metodo', method],
-                ['guardar_tarjeta', document.getElementById('guardarTarjeta').checked ? '1' : '0']
+                ['tipo_doc', tipoDoc], ['num_doc', numDoc],
+                ['destino', 'suscripcion'],
+                ['card_number', document.getElementById('cardNumber').value.replace(/\s/g,'')],
+                ['card_expiry', document.getElementById('cardExpiry').value],
+                ['card_cvv',    document.getElementById('cardCvv').value],
+                ['card_name',   document.getElementById('cardName').value]
             ];
-
-            if (method === 'tarjeta') {
-                campos.push(
-                    ['card_number', document.getElementById('cardNumber').value.replace(/\s/g,'')],
-                    ['card_expiry', document.getElementById('cardExpiry').value],
-                    ['card_cvv',    document.getElementById('cardCvv').value],
-                    ['card_name',   document.getElementById('cardName').value]
-                );
-            } else {
-                campos.push(
-                    ['cuenta_banco',    document.getElementById('pseBanco').value],
-                    ['tipo_persona',    document.getElementById('pseTipoPersona').value]
-                );
-            }
 
             campos.forEach(function(pair) {
                 const input = document.createElement('input');

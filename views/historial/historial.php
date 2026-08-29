@@ -164,7 +164,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
                 </div>
                 <div>
                     <div class="card-name">Pagos Básicos</div>
-                    <div class="card-desc">Recargas de juegos — COD, Free Fire, EA FC, eFootball</div>
+                    <div class="card-desc">Recargas de juegos — Call of Duty Mobile y Rainbow Six Siege</div>
                 </div>
             </div>
             <div style="display:flex; align-items:center; gap:0.5rem;">

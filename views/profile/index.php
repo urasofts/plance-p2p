@@ -140,7 +140,7 @@ $total_pendientes = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) 
 
 // ── Gateway ──
 $total_gw_ordenes   = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM gateway_ordenes WHERE correo = '$correo'"))['total'] ?? 0;
-$total_gw_subs      = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM gateway_suscripciones WHERE correo = '$correo'"))['total'] ?? 0;
+$total_gw_subs      = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM gateway_recurrencias WHERE correo = '$correo'"))['total'] ?? 0;
 $total_gw_suscription = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM gateway_suscription WHERE correo = '$correo'"))['total'] ?? 0;
 
 
@@ -629,11 +629,11 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <div class="summary-box">
                     <div class="summary-num"><?= $total_gw_subs ?></div>
-                    <div class="summary-label">⚡ Gateway Suscripciones</div>
+                    <div class="summary-label">⚡ Gateway Recurrencia</div>
                 </div>
                 <div class="summary-box">
                     <div class="summary-num"><?= $total_gw_suscription ?></div>
-                    <div class="summary-label">⚡ Gateway Suscripción pura</div>
+                    <div class="summary-label">⚡ Gateway Suscripción</div>
                 </div>
             </div>
         </div>

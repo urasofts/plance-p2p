@@ -106,7 +106,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 </style>
 <body>
     <?php
-    $nav_back_url  = "dispersion.php";
+    $nav_back_url  = "../../sesiones.php";
     $nav_back_text = "Atras";
     $nav_base      = "../../";
     require_once '../../php/navbar.php';

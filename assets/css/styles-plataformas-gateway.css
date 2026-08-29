@@ -3,7 +3,7 @@
    Estilos compartidos para tiendas de plataformas con checkout tipo
    "API Gateway" (formulario propio de tarjeta/PSE, sin redirigir a
    una pasarela externa). Usado por streaming_gateway.php y
-   music_gateway.php.
+   ia_gateway.php.
 
    Misma convención que styles-plataformas.css: las superficies leen
    --pt-* (de php/theme.php); el acento de marca vive en
@@ -310,6 +310,7 @@ body { font-family: var(--plat-font); -webkit-font-smoothing: antialiased; }
 .sim-mode-opt { border: none; background: transparent; cursor: pointer; padding: 0.55rem 0.4rem; border-radius: var(--plat-radius-sm); font-family: var(--plat-font); font-size: 0.8rem; font-weight: 600; color: var(--pt-text-sec); transition: all 0.18s ease; display: flex; align-items: center; justify-content: center; gap: 0.35rem; }
 .sim-mode-opt:hover { background-color: rgba(var(--plat-accent-rgb), 0.12); color: var(--pt-text); }
 .sim-mode-opt.active { background: rgba(var(--plat-accent-rgb), 0.12); color: var(--plat-accent); box-shadow: inset 0 0 0 1.5px var(--plat-accent); }
+.sim-mode-opt:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 .sim-mode-hint { font-size: 0.72rem; color: var(--pt-text-sec); margin-top: 0.4rem; line-height: 1.4; }
 .security-note { display: flex; align-items: center; gap: 0.4rem; font-size: 0.73rem; color: var(--pt-text-sec); margin-top: 0.5rem; justify-content: center; }
 

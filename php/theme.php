@@ -53,7 +53,7 @@ $FONDOS_PERSONALIZADOS = [
         'registros'   => 'bg7.webp',
         'historial'   => 'bg40.webp',
         'plataformas' => 'bg50.webp',
-        'guias'       => 'bg9.webp',
+        'guias'       => 'bg39.webp',
     ],
     'personalizado2' => [ // claros
         'home'        => 'bg43.webp',

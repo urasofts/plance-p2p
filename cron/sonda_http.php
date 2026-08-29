@@ -48,7 +48,7 @@ require_once __DIR__ . '/../php/p2p_sonda_core.php';
 
 $TABLAS = [
     'ordenes', 'gateway_ordenes',                                    // pago basico: Web Checkout / API Gateway
-    'suscripciones', 'suscription', 'gateway_suscripciones', 'gateway_suscription', // suscripciones
+    'suscripciones', 'suscription', 'gateway_recurrencias', 'gateway_suscription', // suscripciones
     'recurrencias', 'suscription_rec',                                // pagos recurrentes
 ];
 $MARGEN_MIN = (int) env_get('SONDA_MARGEN_MIN', 5);

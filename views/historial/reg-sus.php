@@ -26,7 +26,7 @@ switch ($modo) {
         $resultado = mysqli_query($conexion, "SELECT *, 'wc-pura' as modo FROM suscription WHERE usuario_id = '$correo_sesion' ORDER BY created_at DESC");
         break;
     case 'gw-sub':
-        $resultado = mysqli_query($conexion, "SELECT *, 'gw-sub' as modo FROM gateway_suscripciones WHERE correo = '$correo_sesion' ORDER BY created_at DESC");
+        $resultado = mysqli_query($conexion, "SELECT *, 'gw-sub' as modo FROM gateway_recurrencias WHERE correo = '$correo_sesion' ORDER BY created_at DESC");
         break;
     case 'gw-pura':
         $resultado = mysqli_query($conexion, "SELECT *, 'gw-pura' as modo FROM gateway_suscription WHERE correo = '$correo_sesion' ORDER BY created_at DESC");
@@ -83,8 +83,8 @@ switch ($modo) {
             <div class="tabs-divider"></div>
             <div class="modo-tabs-label">⚡ API Gateway</div>
             <div class="modo-tabs">
-                <a href="reg-sus.php?modo=gw-sub"  class="modo-tab <?= $modo === 'gw-sub'  ? 'active-orange' : '' ?>"><i class="bi bi-tv"></i> Pago + Suscripción</a>
-                <a href="reg-sus.php?modo=gw-pura" class="modo-tab <?= $modo === 'gw-pura' ? 'active-orange' : '' ?>"><i class="bi bi-key"></i>  Suscripción pura</a>
+                <a href="reg-sus.php?modo=gw-sub"  class="modo-tab <?= $modo === 'gw-sub'  ? 'active-orange' : '' ?>"><i class="bi bi-arrow-repeat"></i> Recurrencia</a>
+                <a href="reg-sus.php?modo=gw-pura" class="modo-tab <?= $modo === 'gw-pura' ? 'active-orange' : '' ?>"><i class="bi bi-key"></i>  Suscripción</a>
             </div>
         </div>
 
@@ -110,7 +110,7 @@ switch ($modo) {
                     <?php elseif ($modo === 'wc-pura'): ?>
                     <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Correo</th><th>Precio</th><th>Token</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
                     <?php elseif ($modo === 'gw-sub'): ?>
-                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Token</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
+                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Periodicidad</th><th>Próx. cobro</th><th>Fin</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
                     <?php elseif ($modo === 'gw-pura'): ?>
                     <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Token</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
                     <?php endif; ?>
@@ -178,12 +178,14 @@ switch ($modo) {
                         <td><?= htmlspecialchars($row['nombre']) ?></td>
                         <td><code style="color:#f59e0b;"><?= htmlspecialchars($row['correo']) ?></code></td>
                         <td style="color:#f59e0b;font-weight:700;">$<?= number_format($row['precio'],0,',','.') ?> COP</td>
-                        <td style="color:<?= !empty($row['token']) ? '#3ecf8e' : '#555860' ?>;font-size:0.78rem;"><?= !empty($row['token']) ? '<i class="bi bi-key-fill fs-5"></i> Guardado' : '—' ?></td>
+                        <td><span style="background:rgba(240,180,41,0.12);color:#f0b429;font-size:0.72rem;padding:0.1rem 0.4rem;border-radius:3px;"><?= $row['periodicidad'] === 'Y' ? 'Anual' : 'Mensual' ?></span></td>
+                        <td style="color:#f0f1f3;"><?= !empty($row['next_payment']) ? htmlspecialchars($row['next_payment']) : '—' ?></td>
+                        <td style="color:#f0b429;"><?= !empty($row['fecha_fin']) ? htmlspecialchars($row['fecha_fin']) : '—' ?></td>
                         <td><span class="estado-pill badge-<?= strtolower($row['estado']) ?>"><?= strtoupper($row['estado']) ?></span></td>
                         <td style="color:#8a8d96;font-size:0.8rem;"><?= htmlspecialchars($row['created_at']) ?></td>
                         <td>
                             <?php if (strtolower($row['estado']) === 'pendiente' && !empty($row['request_id'])): ?>
-                            <a href="../../php/verificar_pago.php?tabla=gateway_suscripciones&id=<?= $row['id'] ?>&request_id=<?= urlencode($row['request_id']) ?>&redirect=../views/historial/reg-sus.php?modo=gw-sub" class="btn-verificar"><i class="bi bi-arrow-repeat"></i> Verificar</a>
+                            <a href="../../php/verificar_pago.php?tabla=gateway_recurrencias&id=<?= $row['id'] ?>&request_id=<?= urlencode($row['request_id']) ?>&redirect=../views/historial/reg-sus.php?modo=gw-sub" class="btn-verificar"><i class="bi bi-arrow-repeat"></i> Verificar</a>
                             <?php else: ?><span style="color:#555860;font-size:0.75rem;">—</span><?php endif; ?>
                         </td>
 

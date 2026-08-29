@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="spi" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="88" height="88" rx="20" fill="url(#spi)"/>
+  <text x="46" y="64" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="800" fill="#fff" text-anchor="middle">S+</text>
+  <polygon points="76,26 79,33 87,34 81,39 82,47 76,43 70,47 71,39 65,34 73,33" fill="#fff" opacity="0.85"/>
+</svg>

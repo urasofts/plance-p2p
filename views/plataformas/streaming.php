@@ -65,7 +65,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- NETFLIX -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=netflix.com&sz=32" alt="Netflix">
+                    <img src="../../assets/implataformas/streaming/netflix-icon.svg" alt="Netflix">
                     <span>Netflix</span>
                 </div>
                 <div class="products-grid">
@@ -98,7 +98,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- HBO MAX -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=max.com&sz=32" alt="HBO Max">
+                    <img src="../../assets/implataformas/streaming/hbomax-icon.svg" alt="HBO Max">
                     <span>HBO Max</span>
                 </div>
                 <div class="products-grid">
@@ -130,7 +130,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <!-- DISNEY+ -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=disneyplus.com&sz=32" alt="Disney+">
+                    <img src="../../assets/implataformas/streaming/disney-icon.svg" alt="Disney+">
                     <span>Disney+</span>
                 </div>
                 <div class="products-grid">

@@ -8,7 +8,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
 
 // Solo acepta POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: ../views/plataformas/redes.php");
+    header("Location: ../views/plataformas/suscripciones.php");
     exit();
 }
 
@@ -137,6 +137,6 @@ if (isset($result['processUrl'])) {
     echo "<pre style='background:#1e2128;color:#f0f1f3;padding:1rem;border-radius:8px;font-size:0.85rem;'>";
     print_r($result);
     echo "</pre>";
-    echo "<a href='../views/plataformas/redes.php' style='color:#4d9fff;font-family:sans-serif;'>← Volver</a>";
+    echo "<a href='../views/plataformas/suscripciones.php' style='color:#4d9fff;font-family:sans-serif;'>← Volver</a>";
 }
 ?>

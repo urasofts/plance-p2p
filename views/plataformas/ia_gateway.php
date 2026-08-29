@@ -7,7 +7,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Música — API Gateway</title>
+    <title>IA's — API Gateway</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,11 +20,11 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
 </head>
 <style>
-    /* Música API Gateway — acento verde Spotify */
+    /* IA's API Gateway — acento naranja, igual que la IA's de Web Checkout */
     :root {
-        --plat-accent:      #1db954;
-        --plat-accent-rgb:  29, 185, 84;
-        --plat-accent-dark: #17a248;
+        --plat-accent:      hsl(29, 99%, 45%);
+        --plat-accent-rgb:  228, 111, 1;
+        --plat-accent-dark: rgb(255, 187, 0);
     }
 </style>
 <body>
@@ -37,9 +37,13 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
     <div class="game-banner">
         <div class="game-banner__tag">
-            <i class="bi bi-music-note-list"></i> Música — Suscripción Pura
+            <i class="bi bi-robot"></i> IA's — Recurrencia
             <span class="gw-badge"><i class="bi bi-lightning-charge-fill"></i> API Gateway</span>
-            <span class="sub-badge"><i class="bi bi-shield-lock-fill"></i> Tokenización</span>
+            <span class="sub-badge"><i class="bi bi-arrow-repeat"></i> Recurrencia</span>
+        </div>
+        <div class="period-selector">
+            <button class="period-btn active" id="btnMensual" onclick="setPeriod('mensual')">Mensual</button>
+            <button class="period-btn" id="btnAnual" onclick="setPeriod('anual')">Anual</button>
         </div>
     </div>
 
@@ -61,57 +65,56 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <main class="shop-layout">
         <section class="products-panel">
 
-            <!-- SPOTIFY -->
+            <!-- BLACKBOX -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=32" alt="Spotify">
-                    <span>Spotify</span>
+                    <img src="../../assets/implataformas/ia/blackbox-icon.svg" alt="Blackbox AI">
+                    <span>Blackbox AI</span>
                 </div>
                 <div class="products-grid">
-                    <div class="product-card popular-card" data-id="1" data-servicio="Spotify" data-plan="Individual" data-precio="14900">
+                    <div class="product-card popular-card" data-id="1" data-servicio="Blackbox AI" data-plan="Pro" data-precio-mensual="24900" data-precio-anual="249000">
                         <div class="badge-popular">★ Popular</div>
-                        <div class="product-card__platform">Spotify</div>
-                        <div class="product-card__pts">Individual</div>
-                        <div class="product-card__label">Sin anuncios · Descargas · 1 cuenta</div>
-                        <div class="product-card__price">14.900 COP <span class="sub-tag">/ mes</span></div>
+                        <div class="product-card__platform">Blackbox AI</div>
+                        <div class="product-card__pts">Pro</div>
+                        <div class="product-card__label">Autocompletado ilimitado · Chat de código</div>
+                        <div class="product-card__price price-mensual">24.900 COP <span class="sub-tag">/ mes</span></div>
+                        <div class="product-card__price price-anual">249.000 COP <span class="sub-tag">/ año</span></div>
                     </div>
-                    <div class="product-card" data-id="2" data-servicio="Spotify" data-plan="Duo" data-precio="19900">
-                        <div class="product-card__platform">Spotify</div>
-                        <div class="product-card__pts">Duo</div>
-                        <div class="product-card__label">Sin anuncios · Descargas · 2 cuentas</div>
-                        <div class="product-card__price">19.900 COP <span class="sub-tag">/ mes</span></div>
-                    </div>
-                    <div class="product-card" data-id="3" data-servicio="Spotify" data-plan="Familiar" data-precio="24900">
-                        <div class="product-card__platform">Spotify</div>
-                        <div class="product-card__pts">Familiar</div>
-                        <div class="product-card__label">Sin anuncios · Descargas · 6 cuentas</div>
-                        <div class="product-card__price">24.900 COP <span class="sub-tag">/ mes</span></div>
+                    <div class="product-card" data-id="2" data-servicio="Blackbox AI" data-plan="Ultra" data-precio-mensual="79900" data-precio-anual="799000">
+                        <div class="product-card__platform">Blackbox AI</div>
+                        <div class="product-card__pts">Ultra</div>
+                        <div class="product-card__label">Modelos avanzados · Uso ilimitado en equipo</div>
+                        <div class="product-card__price price-mensual">79.900 COP <span class="sub-tag">/ mes</span></div>
+                        <div class="product-card__price price-anual">799.000 COP <span class="sub-tag">/ año</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- DEEZER -->
+            <!-- DEEPSEEK -->
             <div class="section-block">
                 <div class="platform-header">
-                    <img src="https://www.google.com/s2/favicons?domain=deezer.com&sz=32" alt="Deezer">
-                    <span>Deezer</span>
+                    <img src="../../assets/implataformas/ia/deepseek-icon.svg" alt="DeepSeek">
+                    <span>DeepSeek</span>
                 </div>
                 <div class="products-grid">
-                    <div class="product-card" data-id="4" data-servicio="Deezer" data-plan="Premium" data-precio="12900">
-                        <div class="product-card__platform">Deezer</div>
-                        <div class="product-card__pts">Premium</div>
-                        <div class="product-card__label">Sin anuncios · HD · 1 cuenta</div>
-                        <div class="product-card__price">12.900 COP <span class="sub-tag">/ mes</span></div>
+                    <div class="product-card" data-id="3" data-servicio="DeepSeek" data-plan="Plus" data-precio-mensual="15900" data-precio-anual="159000">
+                        <div class="product-card__platform">DeepSeek</div>
+                        <div class="product-card__pts">Plus</div>
+                        <div class="product-card__label">Uso extendido · Sin límites de espera</div>
+                        <div class="product-card__price price-mensual">15.900 COP <span class="sub-tag">/ mes</span></div>
+                        <div class="product-card__price price-anual">159.000 COP <span class="sub-tag">/ año</span></div>
                     </div>
-                    <div class="product-card popular-card" data-id="5" data-servicio="Deezer" data-plan="Familia" data-precio="19900">
+                    <div class="product-card popular-card" data-id="4" data-servicio="DeepSeek" data-plan="Pro" data-precio-mensual="39900" data-precio-anual="399000">
                         <div class="badge-popular">★ Popular</div>
-                        <div class="product-card__platform">Deezer</div>
-                        <div class="product-card__pts">Familia</div>
-                        <div class="product-card__label">Sin anuncios · HD · 6 cuentas</div>
-                        <div class="product-card__price">19.900 COP <span class="sub-tag">/ mes</span></div>
+                        <div class="product-card__platform">DeepSeek</div>
+                        <div class="product-card__pts">Pro</div>
+                        <div class="product-card__label">Modelo de razonamiento · Prioridad de cómputo</div>
+                        <div class="product-card__price price-mensual">39.900 COP <span class="sub-tag">/ mes</span></div>
+                        <div class="product-card__price price-anual">399.000 COP <span class="sub-tag">/ año</span></div>
                     </div>
                 </div>
             </div>
+
             <!-- Modo de simulación -->
             <div class="sim-mode-wrap">
                 <span class="sim-mode-label">Modo de simulación</span>
@@ -123,7 +126,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                             <i class="bi bi-lightning-charge-fill"></i> Pago normal
                         </button>
                 </div>
-                <div class="sim-mode-hint" id="modoHint">Elige manualmente cómo termina la suscripción.</div>
+                <div class="sim-mode-hint" id="modoHint">Elige manualmente cómo termina la recurrencia.</div>
             </div>
 
         </section>
@@ -131,17 +134,17 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         <!-- CHECKOUT -->
         <aside class="checkout-panel">
             <div class="checkout-box">
-                <div class="checkout-product-name" id="checkoutName">🎵 Spotify — Individual</div>
+                <div class="checkout-product-name" id="checkoutName">🤖 Blackbox AI — Pro</div>
                 <div class="checkout-price-row">
-                    <span style="font-size:0.85rem;color:var(--pt-text-sec);">Total / mes</span>
-                    <span class="checkout-price" id="checkoutPrice">14.900 COP</span>
+                    <span style="font-size:0.85rem;color:var(--pt-text-sec);" id="checkoutPeriodLabel">Total / mes</span>
+                    <span class="checkout-price" id="checkoutPrice">24.900 COP</span>
                 </div>
 
                 <div class="checkout-divider"></div>
 
                 <div class="token-info">
-                    <i class="bi bi-shield-lock-fill"></i>
-                    <span>Suscripción pura — tu tarjeta será tokenizada de forma segura para futuros cobros.</span>
+                    <i class="bi bi-arrow-repeat"></i>
+                    <span>Recurrencia — se cobra el primer periodo y PlacetoPay programa los cobros siguientes automáticamente.</span>
                 </div>
 
                 <span class="section-label-sm">Datos de la tarjeta</span>
@@ -192,7 +195,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                 </div>
 
                 <button class="btn-pagar" id="btnPagar">
-                    <i class="bi bi-lock-fill"></i> Registrar suscripción
+                    <i class="bi bi-lock-fill"></i> Activar recurrencia
                 </button>
                 <div class="security-note">
                     <i class="bi bi-shield-check"></i>
@@ -206,7 +209,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <section class="integration-docs" style="--code-accent:var(--plat-accent); --code-accent-ink:var(--plat-accent-ink); --code-accent-soft:rgba(var(--plat-accent-rgb),0.12); --code-radius-sm:var(--plat-radius-sm); --code-radius-md:var(--plat-radius-md); --code-radius-lg:var(--plat-radius-lg); --code-font:var(--plat-font);">
         <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
         <h3>Así se procesa el pago de esta tienda</h3>
-        <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de tarjeta que llenas en este mismo panel viajan en el request, y <strong>PlaceToPay Gateway</strong> cobra el primer mes y tokeniza la tarjeta (<code>subscribe: true</code>) en una sola llamada, sin devolver un <code>processUrl</code>.</p>
+        <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de tarjeta viajan en el request. Pero la recurrencia funciona igual en ambos canales — el cuerpo lleva el mismo bloque <code>recurring</code> dentro de <code>payment</code>: se cobra el primer periodo <strong>ahora mismo</strong> y <strong>PlaceToPay</strong> programa y ejecuta los cobros siguientes automáticamente, sin que nuestro backend tenga que volver a hacer nada.</p>
+        <p>No hay <code>subscribe</code> ni token de por medio: esta tienda no gestiona el reintento, PlacetoPay sí. El <code>periodicidad</code>/<code>next_payment</code>/<code>fecha_fin</code> quedan guardados en nuestra base de datos solo como referencia informativa.</p>
 
         <div class="endpoint-bar">
             <span class="method-pill">POST</span>
@@ -236,11 +240,16 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
   },
   <span class="jk">"payment"</span>: {
-    <span class="jk">"reference"</span>: <span class="js">"GWMUS-9F3A2E1C"</span>,
-    <span class="jk">"description"</span>: <span class="js">"Spotify — Individual"</span>,
-    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">14900</span> },
-    <span class="cm">// clave: cobra el primer mes Y tokeniza la tarjeta</span>
-    <span class="jk">"subscribe"</span>: <span class="jb">true</span>
+    <span class="jk">"reference"</span>: <span class="js">"GWREC-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"Blackbox AI — Pro"</span>,
+    <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">24900</span> },
+    <span class="cm">// clave: programa el cobro automático de los siguientes periodos</span>
+    <span class="jk">"recurring"</span>: {
+      <span class="jk">"periodicity"</span>: <span class="js">"M"</span>,
+      <span class="jk">"interval"</span>: <span class="js">"1"</span>,
+      <span class="jk">"nextPayment"</span>: <span class="js">"2026-09-28"</span>,
+      <span class="jk">"maxPeriods"</span>: <span class="jn">12</span>
+    }
   },
   <span class="jk">"instrument"</span>: {
     <span class="jk">"card"</span>: {
@@ -259,13 +268,16 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 <span class="cvar">$secretKey</span> = getenv(<span class="js">'P2P_SECRET_KEY'</span>);
 <span class="cvar">$endpoint</span>  = <span class="js">'https://api-test.placetopay.com/rest/gateway/process'</span>;
 
-<span class="cm">// autenticación: Base64( SHA256( nonce + seed + secretKey ) )</span>
-<span class="cvar">$seed</span>     = date(<span class="js">'c'</span>);
-<span class="cvar">$nonce</span>    = bin2hex(random_bytes(16));
-<span class="cvar">$tranKey</span>  = base64_encode(hash(<span class="js">'sha256'</span>, <span class="cvar">$nonce</span> . <span class="cvar">$seed</span> . <span class="cvar">$secretKey</span>, true));
-<span class="cvar">$nonceB64</span> = base64_encode(<span class="cvar">$nonce</span>);
+<span class="cm">// según la periodicidad elegida, arma el bloque "recurring"</span>
+<span class="fn">if</span> (<span class="cvar">$periodicidad</span> === <span class="js">'Y'</span>) {
+    <span class="cvar">$interval</span>    = <span class="js">'12'</span>;
+    <span class="cvar">$maxPeriods</span>  = 1;
+} <span class="fn">else</span> {
+    <span class="cvar">$interval</span>    = <span class="js">'1'</span>;
+    <span class="cvar">$maxPeriods</span>  = 12;
+}
 
-<span class="cm">// cuerpo del request — cobra el primer mes Y tokeniza la tarjeta</span>
+<span class="cm">// cuerpo del request — cobra el primer periodo, PlacetoPay programa el resto</span>
 <span class="cvar">$body</span> = [
     <span class="jk">'auth'</span> =&gt; [
         <span class="jk">'login'</span>   =&gt; <span class="cvar">$login</span>,
@@ -273,50 +285,35 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         <span class="jk">'nonce'</span>   =&gt; <span class="cvar">$nonceB64</span>,
         <span class="jk">'seed'</span>    =&gt; <span class="cvar">$seed</span>,
     ],
-    <span class="jk">'payer'</span> =&gt; [
-        <span class="jk">'name'</span>         =&gt; <span class="cvar">$nombre</span>,
-        <span class="jk">'surname'</span>      =&gt; <span class="js">''</span>,
-        <span class="jk">'email'</span>        =&gt; <span class="cvar">$correo</span>,
-        <span class="jk">'documentType'</span> =&gt; <span class="cvar">$tipo_doc</span>,
-        <span class="jk">'document'</span>     =&gt; <span class="cvar">$num_doc</span>,
-        <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
-    ],
     <span class="jk">'payment'</span> =&gt; [
-        <span class="jk">'reference'</span>   =&gt; <span class="js">'GWMUS-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'GWREC-'</span> . strtoupper(bin2hex(random_bytes(4))),
         <span class="jk">'description'</span> =&gt; <span class="cvar">$servicio</span> . <span class="js">' — '</span> . <span class="cvar">$plan</span>,
         <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
-        <span class="jk">'subscribe'</span>   =&gt; true,  <span class="cm">// ← clave: cobra + tokeniza en un solo paso</span>
+        <span class="jk">'recurring'</span>   =&gt; [
+            <span class="jk">'periodicity'</span> =&gt; <span class="cvar">$periodicidad</span>,  <span class="cm">// 'M' o 'Y'</span>
+            <span class="jk">'interval'</span>    =&gt; <span class="cvar">$interval</span>,
+            <span class="jk">'nextPayment'</span> =&gt; <span class="cvar">$nextPayment</span>,
+            <span class="jk">'maxPeriods'</span>  =&gt; <span class="cvar">$maxPeriods</span>,
+        ],
     ],
     <span class="jk">'instrument'</span> =&gt; [
-        <span class="jk">'card'</span> =&gt; [
-            <span class="jk">'number'</span>     =&gt; <span class="cvar">$card_number</span>,
-            <span class="jk">'expiration'</span> =&gt; <span class="cvar">$card_expiry</span>,
-            <span class="jk">'cvv'</span>        =&gt; <span class="cvar">$card_cvv</span>,
-        ],
+        <span class="jk">'card'</span> =&gt; [<span class="jk">'number'</span> =&gt; <span class="cvar">$card_number</span>, <span class="jk">'expiration'</span> =&gt; <span class="cvar">$card_expiry</span>, <span class="jk">'cvv'</span> =&gt; <span class="cvar">$card_cvv</span>],
     ],
     <span class="jk">'notificationUrl'</span> =&gt; <span class="cvar">$notifyUrl</span>,
     <span class="jk">'ipAddress'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'REMOTE_ADDR'</span>],
     <span class="jk">'userAgent'</span>       =&gt; <span class="cvar">$_SERVER</span>[<span class="js">'HTTP_USER_AGENT'</span>],
 ];
 
-<span class="cvar">$ch</span> = curl_init(<span class="cvar">$endpoint</span>);
-curl_setopt_array(<span class="cvar">$ch</span>, [
-    CURLOPT_POST           =&gt; true,
-    CURLOPT_RETURNTRANSFER =&gt; true,
-    CURLOPT_HTTPHEADER     =&gt; [<span class="js">'Content-Type: application/json'</span>],
-    CURLOPT_POSTFIELDS     =&gt; json_encode(<span class="cvar">$body</span>),
-]);
-
 <span class="cvar">$result</span> = json_decode(curl_exec(<span class="cvar">$ch</span>), true);
-curl_close(<span class="cvar">$ch</span>);
 
-<span class="cm">// el token de la tarjeta viene en la respuesta, listo para renovar el mes siguiente</span>
-<span class="cvar">$token</span> = <span class="cvar">$result</span>[<span class="js">'subscription'</span>][<span class="js">'token'</span>][<span class="js">'token'</span>] ?? <span class="js">''</span>;</code></pre>
+<span class="cm">// guardamos periodicidad/next_payment/fecha_fin solo como referencia —</span>
+<span class="cm">// el cobro de los siguientes periodos lo ejecuta PlacetoPay, no nosotros</span>
+<span class="cvar">$query</span> = <span class="js">"INSERT INTO gateway_recurrencias (..., periodicidad, next_payment, fecha_fin) VALUES (...)"</span>;</code></pre>
         </div>
 
         <div class="doc-note">
             <span class="doc-note-icon">⚠️</span>
-            <span>Como los datos de tarjeta pasan por nuestra página, este flujo requiere <strong>certificación PCI-DSS</strong> en producción. El <code>token</code> que devuelve PlacetoPay reemplaza la tarjeta para los cobros de los meses siguientes — nunca volvemos a pedir ni guardar el número real.</span>
+            <span>Como los datos de tarjeta pasan por nuestra página, este flujo requiere <strong>certificación PCI-DSS</strong> en producción. Igual que en Web Checkout, esta demo no guarda número, fecha ni CVV — se usan solo para armar el request.</span>
         </div>
 
         <a class="integration-docs__link" href="../guias/guia-developer.php#api-gateway">
@@ -328,22 +325,41 @@ curl_close(<span class="cvar">$ch</span>);
         </a>
     </section>
 
+    <input type="hidden" id="currentPeriod" value="mensual">
+
     <script>
     (function() {
         const products = {
-            1:{name:' Spotify — Individual',servicio:'Spotify',plan:'Individual',precio:14900,price:'14.900 COP'},
-            2:{name:' Spotify — Duo',       servicio:'Spotify',plan:'Duo',       precio:19900,price:'19.900 COP'},
-            3:{name:' Spotify — Familiar',  servicio:'Spotify',plan:'Familiar',  precio:24900,price:'24.900 COP'},
-            4:{name:' Deezer — Premium',    servicio:'Deezer', plan:'Premium',   precio:12900,price:'12.900 COP'},
-            5:{name:' Deezer — Familia',    servicio:'Deezer', plan:'Familia',   precio:19900,price:'19.900 COP'},
+            1:{name:' Blackbox AI — Pro',   servicio:'Blackbox AI', plan:'Pro',   precioM:24900, precioA:249000},
+            2:{name:' Blackbox AI — Ultra', servicio:'Blackbox AI', plan:'Ultra', precioM:79900, precioA:799000},
+            3:{name:' DeepSeek — Plus',     servicio:'DeepSeek',    plan:'Plus',  precioM:15900, precioA:159000},
+            4:{name:' DeepSeek — Pro',      servicio:'DeepSeek',    plan:'Pro',   precioM:39900, precioA:399000},
         };
+
+        function fmt(n) { return n.toLocaleString('es-CO') + ' COP'; }
 
         function updateCheckout(id) {
             const p = products[id];
             if (!p) return;
-            document.getElementById('checkoutName').textContent  = p.name;
-            document.getElementById('checkoutPrice').textContent = p.price;
+            const period = document.getElementById('currentPeriod').value;
+            const precio = period === 'mensual' ? p.precioM : p.precioA;
+
+            document.getElementById('checkoutName').textContent        = p.name;
+            document.getElementById('checkoutPrice').textContent       = fmt(precio);
+            document.getElementById('checkoutPeriodLabel').textContent = period === 'mensual' ? 'Total / mes' : 'Total / año';
         }
+
+        window.setPeriod = function(period) {
+            document.getElementById('currentPeriod').value = period;
+            document.getElementById('btnMensual').classList.toggle('active', period === 'mensual');
+            document.getElementById('btnAnual').classList.toggle('active', period === 'anual');
+
+            document.querySelectorAll('.price-mensual').forEach(el => el.style.display = period === 'mensual' ? 'flex' : 'none');
+            document.querySelectorAll('.price-anual').forEach(el => el.style.display = period === 'anual' ? 'flex' : 'none');
+
+            const sel = document.querySelector('.product-card.selected');
+            if (sel) updateCheckout(parseInt(sel.getAttribute('data-id')));
+        };
 
         function initCards() {
             const cards = document.querySelectorAll('.product-card');
@@ -382,11 +398,23 @@ curl_close(<span class="cvar">$ch</span>);
             document.getElementById('modoElegir').classList.toggle('active', modo === 'elegir');
             document.getElementById('modoAuto').classList.toggle('active', modo === 'auto');
             document.getElementById('modoHint').textContent = (modo === 'elegir')
-                ? 'Elige manualmente cómo termina la suscripción.'
+                ? 'Elige manualmente cómo termina la recurrencia.'
                 : 'El estado se asigna automáticamente, como un pago real.';
         };
 
         let envioEnCurso = false;
+        const btnPagarDefaultHTML = document.getElementById('btnPagar').innerHTML;
+
+        window.addEventListener('pageshow', function(event) {
+            if (!event.persisted) return;
+            envioEnCurso = false;
+            const btn = document.getElementById('btnPagar');
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.cursor = '';
+            btn.innerHTML = btnPagarDefaultHTML;
+        });
+
         document.getElementById('btnPagar').addEventListener('click', function() {
             if (envioEnCurso) return;
 
@@ -397,7 +425,7 @@ curl_close(<span class="cvar">$ch</span>);
             const expiry   = document.getElementById('cardExpiry').value;
             const cvv      = document.getElementById('cardCvv').value;
             const cardName = document.getElementById('cardNameOnCard').value.trim();
-            const nombre   = cardName; // nombre en tarjeta = nombre del titular
+            const nombre   = cardName;
             const correo   = document.getElementById('gwCorreo').value.trim();
             const telefono = document.getElementById('gwTelefono').value.trim();
             const tipoDoc  = document.getElementById('gwTipoDoc').value;
@@ -411,19 +439,23 @@ curl_close(<span class="cvar">$ch</span>);
                 alert('⚠️ Por favor completa todos los campos del titular.'); return;
             }
 
-            const id = parseInt(selected.getAttribute('data-id'));
-            const p  = products[id];
+            const id     = parseInt(selected.getAttribute('data-id'));
+            const p      = products[id];
+            const period = document.getElementById('currentPeriod').value;
+            const precio = period === 'mensual' ? p.precioM : p.precioA;
+            const periodicidad = period === 'mensual' ? 'M' : 'Y';
 
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = (modoSimulacion === 'auto')
-                ? '../../php/crear_suscription_gateway.php'
+                ? '../../php/crear_recurrencia_gateway.php'
                 : '../../retorno/estados-subs-gateway.php';
 
             const campos = [
-                ['servicio', p.servicio], ['plan', p.plan], ['precio', p.precio],
+                ['servicio', p.servicio], ['plan', p.plan], ['precio', precio],
                 ['nombre', nombre], ['correo', correo], ['telefono', telefono],
                 ['tipo_doc', tipoDoc], ['num_doc', numDoc],
+                ['periodicidad', periodicidad], ['destino', 'recurrencia'],
                 ['card_number', document.getElementById('cardNumber').value.replace(/\s/g,'')],
                 ['card_expiry', document.getElementById('cardExpiry').value],
                 ['card_cvv',    document.getElementById('cardCvv').value],

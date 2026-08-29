@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 
 if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
@@ -11,7 +11,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUBG — UC Points</title>
+    <title>Tienda de Cash</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,13 +23,13 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
-    /* PUBG — acento ámbar */
+    /* Tienda de Cash — acento verde */
     :root {
-        --gj-accent:        hsl(38, 100%, 72%);
-        --gj-accent-glow:   rgba(245, 158, 11, 0.25);
-        --gj-accent-soft:   rgba(245, 158, 11, 0.15);
-        --gj-accent-hover:  rgba(245, 158, 11, 0.4);
-        --gj-accent-dark:   rgb(255, 208, 0);
+        --gj-accent:        hsl(142, 71%, 55%);
+        --gj-accent-glow:   rgba(34, 197, 94, 0.25);
+        --gj-accent-soft:   rgba(34, 197, 94, 0.15);
+        --gj-accent-hover:  rgba(34, 197, 94, 0.4);
+        --gj-accent-dark:   rgb(21, 128, 61);
     }
 </style>
 <body>
@@ -43,8 +43,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
   <!-- ═══ GAME BANNER ═══ -->
   <div class="game-banner">
     <div class="game-banner__tag">
-      <img src="https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2018/02/13/c3c16515-d639-45cd-8d7d-5fe26623130b/pubg" class="card-img-top" alt="" class="game-icon" />
-      PUBG — UF Points
+      <img src="../../assets/imgames/cash/cash-banner.svg" class="card-img-top" alt="" class="game-icon" />
+      Tienda de Cash
       <span class="gw-badge"> API Gateway</span>
     </div>
     
@@ -77,48 +77,48 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                 <div class="products-grid">
 
                     <div class="product-card" data-id="1" data-pts="60" data-price="4900" data-original="" data-discount="">
-                        <img src="https://martsbd.com/wp-content/uploads/2023/04/PUBG-Mobile-UC-Station.png" style="height: 40px; width: 40px" alt="">
-                        <div class="product-card__pts">60 UC</div>
-                        <div class="product-card__label">UC Points</div>
+                        <img src="../../assets/imgames/cash/cash-icon.svg" style="height: 40px; width: 40px" alt="">
+                        <div class="product-card__pts">60 Cash</div>
+                        <div class="product-card__label">Cash</div>
                         <div class="product-card__price">4.900 COP</div>
                     </div>
 
                     <div class="product-card popular-card" data-id="2" data-pts="325" data-price="21900" data-original="28000" data-discount="21">
                         <div class="badge-popular">★ Popular</div>
-                        <img src="https://martsbd.com/wp-content/uploads/2023/04/PUBG-Mobile-UC-Station.png" style="height: 40px; width: 40px" alt="">
-                        <div class="product-card__pts">325 UC</div>
-                        <div class="product-card__label">UC Points</div>
+                        <img src="../../assets/imgames/cash/cash-icon.svg" style="height: 40px; width: 40px" alt="">
+                        <div class="product-card__pts">325 Cash</div>
+                        <div class="product-card__label">Cash</div>
                         <div class="product-card__price-old">28.000 COP</div>
                         <div class="product-card__price">21.900 COP <span class="discount-tag">-21%</span></div>
                     </div>
 
                     <div class="product-card" data-id="3" data-pts="660" data-price="39900" data-original="52000" data-discount="23">
-                        <img src="https://martsbd.com/wp-content/uploads/2023/04/PUBG-Mobile-UC-Station.png" style="height: 40px; width: 40px" alt="">
-                        <div class="product-card__pts">660 UC</div>
-                        <div class="product-card__label">UC Points</div>
+                        <img src="../../assets/imgames/cash/cash-icon.svg" style="height: 40px; width: 40px" alt="">
+                        <div class="product-card__pts">660 Cash</div>
+                        <div class="product-card__label">Cash</div>
                         <div class="product-card__price-old">52.000 COP</div>
                         <div class="product-card__price">39.900 COP <span class="discount-tag">-23%</span></div>
                     </div>
 
                     <div class="product-card" data-id="4" data-pts="1800" data-price="99900" data-original="135000" data-discount="26">
-                        <img src="https://martsbd.com/wp-content/uploads/2023/04/PUBG-Mobile-UC-Station.png" style="height: 40px; width: 40px" alt="">
-                        <div class="product-card__pts">1800 UC</div>
-                        <div class="product-card__label">UC Points</div>
+                        <img src="../../assets/imgames/cash/cash-icon.svg" style="height: 40px; width: 40px" alt="">
+                        <div class="product-card__pts">1800 Cash</div>
+                        <div class="product-card__label">Cash</div>
                         <div class="product-card__price-old">135.000 COP</div>
                         <div class="product-card__price">99.900 COP <span class="discount-tag">-26%</span></div>
                     </div>
 
                     <div class="product-card" data-id="5" data-pts="3850" data-price="189900" data-original="260000" data-discount="26">
-                        <img src="https://martsbd.com/wp-content/uploads/2023/04/PUBG-Mobile-UC-Station.png" style="height: 40px; width: 40px" alt="">
-                        <div class="product-card__pts">3850 UC</div>
-                        <div class="product-card__label">UC Points</div>
+                        <img src="../../assets/imgames/cash/cash-icon.svg" style="height: 40px; width: 40px" alt="">
+                        <div class="product-card__pts">3850 Cash</div>
+                        <div class="product-card__label">Cash</div>
                         <div class="product-card__price-old">260.000 COP</div>
                         <div class="product-card__price">189.900 COP <span class="discount-tag">-26%</span></div>
                     </div>
                     <div class="product-card" data-id="6" data-pts="8100" data-price="369900" data-original="500000" data-discount="26">
-                        <img src="https://martsbd.com/wp-content/uploads/2023/04/PUBG-Mobile-UC-Station.png" style="height: 40px; width: 40px" alt="">
-                        <div class="product-card__pts">8100 UC</div>
-                        <div class="product-card__label">UC Points</div>
+                        <img src="../../assets/imgames/cash/cash-icon.svg" style="height: 40px; width: 40px" alt="">
+                        <div class="product-card__pts">8100 Cash</div>
+                        <div class="product-card__label">Cash</div>
                         <div class="product-card__price-old">500.000 COP</div>
                         <div class="product-card__price">369.900 COP <span class="discount-tag">-26%</span></div>
                     </div>
@@ -143,7 +143,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
         <!-- CHECKOUT CON FORMULARIO DE PAGO -->
         <aside class="checkout-panel">
             <div class="checkout-box">
-                <div class="checkout-product-name"><img id="checkoutImg" src="" alt="" /><span id="checkoutName">💎 325 UC Points</span></div>
+                <div class="checkout-product-name"><img id="checkoutImg" src="" alt="" /><span id="checkoutName">💵 325 Cash</span></div>
                 <div class="checkout-price-row">
                     <span style="font-size:0.85rem;color:var(--pt-text-sec);">Total</span>
                     <span class="checkout-price" id="checkoutPrice">21.900 COP</span>
@@ -321,8 +321,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
   },
   <span class="jk">"payment"</span>: {
-    <span class="jk">"reference"</span>: <span class="js">"GW-PUBG-9F3A2E1C"</span>,
-    <span class="jk">"description"</span>: <span class="js">"325 UC Points"</span>,
+    <span class="jk">"reference"</span>: <span class="js">"GW-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"325 Cash"</span>,
     <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">21900</span> }
   },
   <span class="jk">"instrument"</span>: {
@@ -370,8 +370,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
         <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
     ],
     <span class="jk">'payment'</span> =&gt; [
-        <span class="jk">'reference'</span>   =&gt; <span class="js">'GW-PUBG-'</span> . strtoupper(bin2hex(random_bytes(4))),
-        <span class="jk">'description'</span> =&gt; <span class="cvar">$producto</span>,               <span class="cm">// ej: "325 UC Points"</span>
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'GW-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'description'</span> =&gt; <span class="cvar">$producto</span>,               <span class="cm">// ej: "325 Cash"</span>
         <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
     ],
     <span class="jk">'instrument'</span>      =&gt; <span class="cvar">$instrument</span>,
@@ -414,12 +414,12 @@ curl_close(<span class="cvar">$ch</span>);
     <script>
     (function() {
         const products = {
-            1: { name: ' 60 UC Points',   price: '4.900 COP',   precio: 4900   },
-            2: { name: ' 325 UC Points',  price: '21.900 COP',  precio: 21900  },
-            3: { name: ' 660 UC Points',  price: '39.900 COP',  precio: 39900  },
-            4: { name: ' 1800 UC Points', price: '99.900 COP',  precio: 99900  },
-            5: { name: ' 3850 UC Points', price: '189.900 COP', precio: 189900 },
-            6: { name: ' 8100 UC Points', price: '369.900 COP', precio: 369900 },
+            1: { name: ' 60 Cash',   price: '4.900 COP',   precio: 4900   },
+            2: { name: ' 325 Cash',  price: '21.900 COP',  precio: 21900  },
+            3: { name: ' 660 Cash',  price: '39.900 COP',  precio: 39900  },
+            4: { name: ' 1800 Cash', price: '99.900 COP',  precio: 99900  },
+            5: { name: ' 3850 Cash', price: '189.900 COP', precio: 189900 },
+            6: { name: ' 8100 Cash', price: '369.900 COP', precio: 369900 },
         };
 
         function updateCheckout(id) {
@@ -444,7 +444,20 @@ curl_close(<span class="cvar">$ch</span>);
             document.getElementById('tabCuenta').classList.toggle('active', method === 'cuenta');
             document.getElementById('formTarjeta').classList.toggle('active', method === 'tarjeta');
             document.getElementById('formCuenta').classList.toggle('active', method === 'cuenta');
+            actualizarDisponibilidadModo(method);
         };
+
+        // Pago por cuenta no puede resolverse de forma automática/instantánea
+        // (igual que el mock real de PlacetoPay), así que se bloquea "Pago normal".
+        function actualizarDisponibilidadModo(method) {
+            const modoAutoBtn = document.getElementById('modoAuto');
+            const esCuenta = method === 'cuenta';
+            modoAutoBtn.disabled = esCuenta;
+            modoAutoBtn.title = esCuenta ? 'No disponible para pagos por cuenta' : '';
+            if (esCuenta && modoSimulacion === 'auto') {
+                setModo('elegir');
+            }
+        }
 
         // Formatear número de tarjeta
         document.getElementById('cardNumber').addEventListener('input', function() {
@@ -488,6 +501,21 @@ curl_close(<span class="cvar">$ch</span>);
                 : 'El estado se asigna automáticamente, como un pago real.';
         };
          let envioEnCurso = false;
+        const btnPagarDefaultHTML = document.getElementById('btnPagar').innerHTML;
+
+        // Al volver desde el mock (ej. "Cancelar y volver") el navegador puede
+        // restaurar esta página desde bfcache con el botón tal como quedó justo
+        // antes de enviar el formulario (deshabilitado y en "Procesando...").
+        window.addEventListener('pageshow', function(event) {
+            if (!event.persisted) return;
+            envioEnCurso = false;
+            const btn = document.getElementById('btnPagar');
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.cursor = '';
+            btn.innerHTML = btnPagarDefaultHTML;
+        });
+
         document.getElementById('btnPagar').addEventListener('click', function() {
             if (envioEnCurso) return; // ya se está procesando, ignorar clics repetidos
             const jugadorId = document.getElementById('jugadorIdInput').value.trim();

@@ -50,7 +50,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="1" data-producto="Kit Liverpool FC" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/liv.png" alt="Liverpool FC">
+                        <img src="../../assets/kits/generic/liverpool-icon.svg" alt="Liverpool FC">
                     </div>
                     <div class="product-card__name">Liverpool FC</div>
                     <div class="product-card__label">Camiseta · Temporada 17/18</div>
@@ -59,7 +59,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="2" data-producto="Kit Manchester City" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/mcity.png" alt="Manchester City">
+                        <img src="../../assets/kits/generic/mancity-icon.svg" alt="Manchester City">
                     </div>
                     <div class="product-card__name">Manchester City</div>
                     <div class="product-card__label">Camiseta · Temporada 18/19</div>
@@ -68,7 +68,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="3" data-producto="Kit Manchester United" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/mufc.png" alt="Manchester United">
+                        <img src="../../assets/kits/generic/manutd-icon.svg" alt="Manchester United">
                     </div>
                     <div class="product-card__name">Manchester United</div>
                     <div class="product-card__label">Camiseta · Temporada 18/19</div>
@@ -77,7 +77,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                 
                 <div class="product-card" data-id="4" data-producto="Kit Chelsea FC" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/chelsea.png" alt="Chelsea FC">
+                        <img src="../../assets/kits/generic/chelsea-icon.svg" alt="Chelsea FC">
                     </div>
                     <div class="product-card__name">Chelsea FC</div>
                     <div class="product-card__label">Camiseta · Temporada 23/24</div>
@@ -86,7 +86,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="5" data-producto="Kit Arsenal FC" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/arsenal.png" alt="Arsenal FC">
+                        <img src="../../assets/kits/generic/arsenal-icon.svg" alt="Arsenal FC">
                     </div>
                     <div class="product-card__name">Arsenal FC</div>
                     <div class="product-card__label">Camiseta · Temporada 24/25</div>
@@ -95,7 +95,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="6" data-producto=" West Ham United" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/west-ham.png" alt="west-ham">
+                        <img src="../../assets/kits/generic/westham-icon.svg" alt="west-ham">
                     </div>
                     <div class="product-card__name">West Ham United</div>
                     <div class="product-card__label">Camiseta · Temporada 24/25</div>
@@ -104,7 +104,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="7" data-producto="Kit Tottenham Hotspur" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/tot.png" alt="Tottenham Hotspur">
+                        <img src="../../assets/kits/generic/tottenham-icon.svg" alt="Tottenham Hotspur">
                     </div>
                     <div class="product-card__name">Tottenham Hotspur</div>
                     <div class="product-card__label">Camiseta · Temporada 22/23</div>
@@ -113,7 +113,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
                 <div class="product-card" data-id="8" data-producto="Kit Aston Villa" data-precio="50000">
                     <div class="product-card__img">
-                        <img src="/assets/kits/premier-league/aston-villa.png" alt="Aston Villa">
+                        <img src="../../assets/kits/generic/astonvilla-icon.svg" alt="Aston Villa">
                     </div>
                     <div class="product-card__name">Aston Villa</div>
                     <div class="product-card__label">Camiseta · Temporada 21/22</div>

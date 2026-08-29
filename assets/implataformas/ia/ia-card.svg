@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160">
+  <defs>
+    <linearGradient id="iaBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#241a3a"/>
+      <stop offset="100%" stop-color="#120b21"/>
+    </linearGradient>
+    <linearGradient id="iaHead" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <radialGradient id="iaGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="300" height="160" fill="url(#iaBg)"/>
+  <circle cx="150" cy="78" r="90" fill="url(#iaGlow)"/>
+
+  <line x1="150" y1="30" x2="150" y2="46" stroke="#c4b5fd" stroke-width="3"/>
+  <circle cx="150" cy="26" r="5" fill="#c4b5fd"/>
+
+  <rect x="104" y="46" width="92" height="72" rx="16" fill="url(#iaHead)" stroke="#ede9fe" stroke-width="2"/>
+  <circle cx="132" cy="80" r="9" fill="#1e1b3a"/>
+  <circle cx="168" cy="80" r="9" fill="#1e1b3a"/>
+  <circle cx="132" cy="80" r="3" fill="#c4b5fd"/>
+  <circle cx="168" cy="80" r="3" fill="#c4b5fd"/>
+  <rect x="128" y="98" width="44" height="7" rx="3.5" fill="#1e1b3a"/>
+
+  <rect x="86" y="66" width="12" height="24" rx="4" fill="#a78bfa"/>
+  <rect x="202" y="66" width="12" height="24" rx="4" fill="#a78bfa"/>
+</svg>

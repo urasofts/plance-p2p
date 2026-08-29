@@ -57,13 +57,10 @@ $nav_grupos_tiendas = [
         'label' => 'Juegos',
         'icon'  => 'fa-shop',
         'items' => [
-            'cod.php'         => 'Call of Duty Mobile',
-            'freefire.php'    => 'Free Fire',
-            'efootball.php'   => 'Efootball Mobile',
-            'easport.php'     => 'EA FC Sports Mobile',
-            'rainbowsix.php'  => 'Rainbow Six Siege',
-            'pubg.php'        => 'PUBG Battlegrounds',
-            'bloodstrike.php' => 'Blood Strike',
+            'cod.php'         => 'Tienda de Monedas',
+            'rainbowsix.php'  => 'Tienda de Gemas',
+            'pubg.php'        => 'Tienda de Cash',
+            'bloodstrike.php' => 'Tienda de Esmeraldas',
         ],
     ],
     'plataformas' => [
@@ -72,20 +69,16 @@ $nav_grupos_tiendas = [
         'items' => [
             'streaming.php'         => 'Streaming',
             'otras_streaming.php'   => 'Otros Streaming',
-            'music_gateway.php'     => 'Música',
             'streaming_gateway.php' => 'Streaming Gateway',
             'ia.php'                => 'Inteligencia Artificial',
-            'redes.php'             => 'Redes Sociales',
+            'ia_gateway.php'        => 'IA\'s Gateway',
         ],
     ],
     'textil' => [
         'label' => 'Textiles',
         'icon'  => 'fa-shop',
         'items' => [
-            'pl.php'         => 'Premier League',
-            'laliga.php'     => 'La Liga',
-            'seriea.php'     => 'Serie A',
-            'bundesliga.php' => 'Bundesliga',
+            'pl.php' => 'Premier League',
         ],
     ],
     'historial' => [
@@ -115,8 +108,8 @@ $nav_secciones = [
     'games/juegos.php'               => ['label' => 'Juegos Mobiles',        'icon' => 'fa-solid fa-gamepad'],
     'plataformas/suscripciones.php'  => ['label' => 'Plataformas Digitales', 'icon' => 'bi bi-google-play'],
     'textil/textiles.php'            => ['label' => 'Textiles',              'icon' => 'fa-solid fa-tshirt'],
-    'reservaciones/reservas.php'     => ['label' => 'Reservaciones',         'icon' => 'fa-solid fa-calendar-check'],
-    'dispersiones/dispersion.php'    => ['label' => 'Dispersiones',          'icon' => 'bi bi-airplane-fill'],
+    'reservaciones/hotel.php'        => ['label' => 'Reservaciones',         'icon' => 'fa-solid fa-calendar-check'],
+    'dispersiones/tickets.php'       => ['label' => 'Dispersiones',          'icon' => 'bi bi-airplane-fill'],
 ];
 
 $nav_dirs_secciones = ['games', 'plataformas', 'textil', 'reservaciones', 'dispersiones'];

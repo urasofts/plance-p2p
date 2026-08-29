@@ -1,8 +1,8 @@
 /* ══════════════════════════════════════════════════════════════
    styles-textiles.css
-   Estilos compartidos para las tiendas de camisetas/kits deportivos
-   (pl.php, laliga.php, bundesliga.php, seriea.php): banner + grid
-   de equipos + panel de generación de link de pago.
+   Estilos compartidos para la tienda de camisetas/kits deportivos
+   (pl.php): banner + grid de equipos + panel de generación de
+   link de pago.
 
    Las superficies leen --pt-* (de php/theme.php) para respetar el
    tema claro/oscuro. El acento de marca de cada liga vive en

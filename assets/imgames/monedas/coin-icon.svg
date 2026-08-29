@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="coinBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe8a3"/>
+      <stop offset="45%" stop-color="#f0b429"/>
+      <stop offset="100%" stop-color="#b9790c"/>
+    </linearGradient>
+  </defs>
+  <circle cx="36" cy="64" r="24" fill="#c9860f" opacity="0.55"/>
+  <circle cx="55" cy="44" r="32" fill="url(#coinBody)" stroke="#8a5c07" stroke-width="2"/>
+  <circle cx="55" cy="44" r="24" fill="none" stroke="#fff" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="3 4"/>
+  <text x="55" y="55" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#7a4e05" text-anchor="middle">$</text>
+  <circle cx="40" cy="30" r="4" fill="#fff" opacity="0.6"/>
+</svg>

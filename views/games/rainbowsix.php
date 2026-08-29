@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Location: ../../index.php"); exit(); }
 ?>
@@ -7,7 +7,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainbow Six Siege Mobile — Tienda</title>
+    <title>Tienda de Gemas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,13 +19,13 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
-    /* Rainbow Six Siege Mobile — dorado (Platinum) + azul (Web Checkout / multi) */
+    /* Tienda de Gemas — morado (Gemas) + azul (Web Checkout / multi) */
     :root {
-        --gj-accent:        #f0b429;
-        --gj-accent-glow:   rgba(240, 180, 41, 0.25);
-        --gj-accent-soft:   rgba(240, 180, 41, 0.15);
-        --gj-accent-hover:  rgba(240, 180, 41, 0.4);
-        --gj-accent-dark:   #c99010;
+        --gj-accent:        #7c3aed;
+        --gj-accent-glow:   rgba(124, 58, 237, 0.25);
+        --gj-accent-soft:   rgba(124, 58, 237, 0.15);
+        --gj-accent-hover:  rgba(124, 58, 237, 0.4);
+        --gj-accent-dark:   #5b21b6;
         --gj-accent2:       #3b82f6;
         --gj-accent2-glow:  rgba(59, 130, 246, 0.2);
         --gj-accent2-soft:  rgba(59, 130, 246, 0.15);
@@ -43,7 +43,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
     <div class="game-banner">
         <div class="game-banner__tag">
-            🎯 Rainbow Six Siege Mobile — Tienda
+            💎 Tienda de Gemas
             <span class="wc-badge">🖥️ Web Checkout</span>
             <span class="mixto-badge">🔀 Pago Mixto</span>
         </div>
@@ -52,57 +52,57 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <main class="shop-layout">
         <section class="products-panel">
 
-            <!-- PLATINUM -->
-            <p class="section-label">💎 Platinum — Moneda del juego</p>
+            <!-- Gemas -->
+            <p class="section-label">💎 Gemas — Moneda del juego</p>
             <div class="products-grid">
-                <div class="product-card" data-id="p1" data-nombre="60 Platinum" data-precio="4900">
-                    <img class="product-card__icon" src="https://cdn.donatov.net/cover/pack-14533-1771960014.webp" alt="">
+                <div class="product-card" data-id="p1" data-nombre="60 Gemas" data-precio="4900">
+                    <img class="product-card__icon" src="../../assets/imgames/gemas/gem-icon.svg" alt="">
                     <div class="product-card__info">
-                        <div class="product-card__pts">60 Platinum</div>
-                        <div class="product-card__label">Rainbow Six Siege Mobile</div>
+                        <div class="product-card__pts">60 Gemas</div>
+                        <div class="product-card__label">Moneda del juego</div>
                         <div class="product-card__price">4.900 COP</div>
                     </div>
                 </div>
-                <div class="product-card" data-id="p2" data-nombre="120 Platinum" data-precio="9900">
-                    <img class="product-card__icon" src="https://cdn.donatov.net/cover/pack-14533-1771960014.webp" alt="">
+                <div class="product-card" data-id="p2" data-nombre="120 Gemas" data-precio="9900">
+                    <img class="product-card__icon" src="../../assets/imgames/gemas/gem-icon.svg" alt="">
                     <div class="product-card__info">
-                        <div class="product-card__pts">120 Platinum</div>
-                        <div class="product-card__label">Rainbow Six Siege Mobile</div>
+                        <div class="product-card__pts">120 Gemas</div>
+                        <div class="product-card__label">Moneda del juego</div>
                         <div class="product-card__price">9.900 COP</div>
                     </div>
                 </div>
-                <div class="product-card popular-card" data-id="p3" data-nombre="300 Platinum" data-precio="24900">
+                <div class="product-card popular-card" data-id="p3" data-nombre="300 Gemas" data-precio="24900">
                     <div class="badge-popular">★ Popular</div>
-                    <img class="product-card__icon" src="https://cdn.donatov.net/cover/pack-14533-1771960014.webp" alt="">
+                    <img class="product-card__icon" src="../../assets/imgames/gemas/gem-icon.svg" alt="">
                     <div class="product-card__info">
-                        <div class="product-card__pts">300 Platinum</div>
-                        <div class="product-card__label">Rainbow Six Siege Mobile</div>
+                        <div class="product-card__pts">300 Gemas</div>
+                        <div class="product-card__label">Moneda del juego</div>
                         <div class="product-card__price">24.900 COP</div>
                     </div>
                 </div>
-                <div class="product-card" data-id="p4" data-nombre="600 Platinum" data-precio="49900">
-                    <img class="product-card__icon" src="https://cdn.donatov.net/cover/pack-14533-1771960014.webp" alt="">
+                <div class="product-card" data-id="p4" data-nombre="600 Gemas" data-precio="49900">
+                    <img class="product-card__icon" src="../../assets/imgames/gemas/gem-icon.svg" alt="">
                     <div class="product-card__info">
-                        <div class="product-card__pts">600 Platinum</div>
-                        <div class="product-card__label">Rainbow Six Siege Mobile</div>
+                        <div class="product-card__pts">600 Gemas</div>
+                        <div class="product-card__label">Moneda del juego</div>
                         <div class="product-card__price">49.900 COP</div>
                     </div>
                 </div>
 
-                <div class="product-card popular-card" data-id="p5" data-nombre="1200 Platinum" data-precio="99900">
+                <div class="product-card popular-card" data-id="p5" data-nombre="1200 Gemas" data-precio="99900">
                     <div class="badge-popular">Mejor valor</div>
-                    <img class="product-card__icon" src="https://cdn.donatov.net/cover/pack-14533-1771960014.webp" alt="">
+                    <img class="product-card__icon" src="../../assets/imgames/gemas/gem-icon.svg" alt="">
                     <div class="product-card__info">
-                        <div class="product-card__pts">1200 Platinum</div>
-                        <div class="product-card__label">Rainbow Six Siege Mobile</div>
+                        <div class="product-card__pts">1200 Gemas</div>
+                        <div class="product-card__label">Moneda del juego</div>
                         <div class="product-card__price">99.900 COP</div>
                     </div>
                 </div>
-                <div class="product-card" data-id="p6" data-nombre="2400 Platinum" data-precio="189900">
-                    <img class="product-card__icon" src="https://cdn.donatov.net/cover/pack-14533-1771960014.webp" alt="">
+                <div class="product-card" data-id="p6" data-nombre="2400 Gemas" data-precio="189900">
+                    <img class="product-card__icon" src="../../assets/imgames/gemas/gem-icon.svg" alt="">
                     <div class="product-card__info">
-                        <div class="product-card__pts">2400 Platinum</div>
-                        <div class="product-card__label">Rainbow Six Siege Mobile</div>
+                        <div class="product-card__pts">2400 Gemas</div>
+                        <div class="product-card__label">Moneda del juego</div>
                         <div class="product-card__price">189.900 COP</div>
                     </div>
                 </div>
@@ -111,20 +111,20 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <!-- PASES -->
             <p class="section-label">🎖️ Pases de batalla</p>
             <div class="pases-grid">
-                <div class="pase-card" data-id="b1" data-nombre="Pase Premium Fantasma Gris" data-precio="39900">
+                <div class="pase-card" data-id="b1" data-nombre="Pase Premium" data-precio="39900">
                     <span class="pase-tag">PASE DE BATALLA</span>
                     <div class="pase-head">
-                        <img class="pase-icon" src="https://cdn1.codashop.com/images/7930_ce805d3c-62c8-4fd5-9c2c-80f230892257_79233c04adf11386399b9827c345a658_image/0eb60010fc1c69b1b9ef65d53829b521.webp" alt="">
-                        <div class="pase-name">Pase Premium<br>Fantasma Gris</div>
+                        <img class="pase-icon" src="../../assets/imgames/comunes/pase-icon.svg" alt="">
+                        <div class="pase-name">Pase Premium</div>
                     </div>
-                    <div class="pase-desc">Acceso al pase de temporada con recompensas exclusivas del operador Fantasma Gris.</div>
+                    <div class="pase-desc">Acceso al pase de temporada con recompensas exclusivas del operador.</div>
                     <div class="pase-price">39.900 COP</div>
                 </div>
-                <div class="pase-card" data-id="b2" data-nombre="Pase Elite Fantasma Gris" data-precio="79900">
+                <div class="pase-card" data-id="b2" data-nombre="Pase Elite" data-precio="79900">
                     <span class="pase-tag">PASE ELITE</span>
                     <div class="pase-head">
-                        <img class="pase-icon" src="https://cdn1.codashop.com/images/7930_ce805d3c-62c8-4fd5-9c2c-80f230892257_79233c04adf11386399b9827c345a658_image/d7406d15935e21ab8ecb5ad05ee788d2.webp" alt="">
-                        <div class="pase-name">Pase Elite<br>Fantasma Gris</div>
+                        <img class="pase-icon" src="../../assets/imgames/comunes/pase-icon.svg" alt="">
+                        <div class="pase-name">Pase Elite</div>
                     </div>
                     <div class="pase-desc">Incluye todo el Pase Premium más contenido exclusivo elite y recompensas adicionales.</div>
                     <div class="pase-price">79.900 COP</div>
@@ -222,7 +222,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
   },
   <span class="jk">"payment"</span>: {
     <span class="jk">"reference"</span>: <span class="js">"MIX-9F3A2E1C"</span>,
-    <span class="jk">"description"</span>: <span class="js">"300 Platinum"</span>,
+    <span class="jk">"description"</span>: <span class="js">"300 Gemas"</span>,
     <span class="jk">"amount"</span>: {
       <span class="jk">"currency"</span>: <span class="js">"COP"</span>,
       <span class="jk">"total"</span>: <span class="jn">24900</span>,
@@ -267,7 +267,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     ],
     <span class="jk">'payment'</span> =&gt; [
         <span class="jk">'reference'</span>    =&gt; <span class="js">'MIX-'</span> . strtoupper(bin2hex(random_bytes(4))),
-        <span class="jk">'description'</span>  =&gt; <span class="cvar">$productos</span>,             <span class="cm">// ej: "300 Platinum" (o varios unidos con " + ")</span>
+        <span class="jk">'description'</span>  =&gt; <span class="cvar">$productos</span>,             <span class="cm">// ej: "300 Gemas" (o varios unidos con " + ")</span>
         <span class="jk">'amount'</span>       =&gt; <span class="cvar">$amount</span>,
         <span class="jk">'allowPartial'</span> =&gt; <span class="cvar">$allow_partial</span>,      <span class="cm">// ← clave: activa el pago mixto</span>
     ],

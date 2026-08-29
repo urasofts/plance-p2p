@@ -28,7 +28,7 @@ $reference   = $gw['reference'] ?? '';
 // Definir visual según estado
 if ($status === 'APPROVED') {
     $icono   = '✅'; $titulo  = '¡Pago aprobado!';
-    $mensaje = 'Tu compra fue procesada exitosamente. ¡Disfruta tus UC Points!';
+    $mensaje = 'Tu compra fue procesada exitosamente. ¡Disfruta tu Cash!';
     $color   = '#3ecf8e'; $bg_icon = 'rgba(62,207,142,0.15)'; $color_rgb = '62, 207, 142';
 } elseif ($status === 'PENDING') {
     $icono   = '⏳'; $titulo  = 'Pago pendiente';
@@ -45,7 +45,7 @@ if ($status === 'APPROVED') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado — PUBG Gateway</title>
+    <title>Resultado — Cash Gateway</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">

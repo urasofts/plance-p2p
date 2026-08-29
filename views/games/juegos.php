@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="assets/css/estilos.css?v=<?php echo filemtime(__DIR__ . '/assets/css/estilos.css'); ?>">
+    <link rel="stylesheet" href="../../assets/css/estilos.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/estilos.css'); ?>">
     <link rel="stylesheet" href="../../assets/css/styles-juegos.css">
     <?php $theme_seccion = 'tiendas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 
@@ -239,62 +239,25 @@
                 <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100" id="tarjeta">
 
-                        <img src="https://media.tycsports.com/files/2021/07/15/307410/cod-mobile-todas-las-novedades-de-la-beta-de-julio-_862x485.jpg" class="card-img-top" alt="Juego 1" style="height: 100px width 100px;"><div class="pagob" id="tipo-servicio-basico">Pago Basico</div>
-                            
+                        <img src="../../assets/imgames/monedas/coin-banner.svg" class="card-img-top" alt="Tienda de Monedas" style="height: 100px width 100px;"><div class="pagob" id="tipo-servicio-basico">Pago Basico</div>
+
                         <div class="card-body">
                             <div class="servicio1">Web Chekout</div>
-                            <h5 class="card-title">Call Of Duty Mobile</h5>
-                            <p class="card-text">Compra Cod Points mobiles</p> 
+                            <h5 class="card-title">Tienda de Monedas</h5>
+                            <p class="card-text">Compra monedas del juego</p>
                             <a href="../games/cod.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100" >
-                        <img src="https://imgs.search.brave.com/cBrxoXQ0p2T30-Vq6Ts386OyiwwHw2rnetfHOU_bJws/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDQ4NTU3/MzcuanBn
-                        " class="card-img-top" alt="Free Fire">
-                        <div class="card-body">
-                            <div class="pagob">Pago Basico</div>
-                            <div class="servicio1">Web Chekout</div>
-                            <h5 class="card-title">Free Fire</h5>
-                            <p class="card-text">Compra diamantes y más.</p>
-                            <a href="../games/freefire.php" class="btn btn-producto">Productos</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-servicio="web">
                     <div class="card h-100">
-                        <img src="https://4kwallpapers.com/images/walls/thumbs_2t/16540.jpg" class="card-img-top" alt="Efootball">
-                        <div class="card-body">
-                            <div class="pagob">Pago Basico</div>
-                            <div class="servicio1">Web Chekout</div>
-                            <h5 class="card-title">Efootball Mobile</h5>
-                            <p class="card-text">Compra monedas y más.</p>
-                            <a href="../games/efootball.php" class="btn btn-producto">Productos</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100">
-                        <img src="https://media.es.wired.com/photos/64dad651532fc59e0e8d53a4/16:9/w_1280,c_limit/EA%20Sports.jpg" class="card-img-top" alt="EA Sports">
-                        <div class="card-body">
-                            <div class="pagob">Pago Basico</div>
-                            <div class="servicio1">Web Chekout</div>
-                            <h5 class="card-title">EA FC Sports Mobile</h5>
-                            <p class="card-text">Compra puntos y más</p>
-                            <a href="../games/easport.php" class="btn btn-producto">Productos</a>                  
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-servicio="web">
-                    <div class="card h-100">
-                        <img src="https://cdn.mos.cms.futurecdn.net/xaL9drgBrarwALudYvLpgZ-650-80.jpg.webp" class="card-img-top" alt="EA Sports">
+                        <img src="../../assets/imgames/gemas/gem-banner.svg" class="card-img-top" alt="Tienda de Gemas">
                         <div class="card-body">
                             <div class="pagom" id="tipo-servicio-mixto">Pago Mixto</div>
                             <div class="servicio1">Web Chekout</div>
-                            <h5 class="card-title">Rainbow Six Siege</h5>
-                            <p class="card-text">Compra puntos y más</p>
-                            <a href="../games/rainbowsix.php" class="btn btn-producto">Productos</a>                        
+                            <h5 class="card-title">Tienda de Gemas</h5>
+                            <p class="card-text">Compra gemas y más</p>
+                            <a href="../games/rainbowsix.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>
                 </div>
@@ -303,13 +266,13 @@
                 <div class="col-md-4 mb-4" data-servicio="api">
                     <div class="card h-100">
 
-                        <img src="https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2018/02/13/c3c16515-d639-45cd-8d7d-5fe26623130b/pubg" class="card-img-top" alt="Juego 3">
+                        <img src="../../assets/imgames/cash/cash-banner.svg" class="card-img-top" alt="Tienda de Cash">
                         <div class="card-body">
                             <div class="pagob">Pago Basico</div>
                             <div class="servicio2">Api Gateway</div>
-                            <h5 class="card-title">PUBG Battlegrounds</h5>
-                            
-                            <p class="card-text">Compra UC y más</p> 
+                            <h5 class="card-title">Tienda de Cash</h5>
+
+                            <p class="card-text">Compra cash y más</p>
                             <a href="../games/pubg.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>
@@ -317,13 +280,13 @@
                 <div class="col-md-4 mb-4" data-servicio="api">
                     <div class="card h-100">
 
-                        <img src="https://cdn.aptoide.com/imgs/6/8/c/68c301631138548dca9af0d780cccff9_fgraphic.png" class="card-img-top" alt="Juego 3">
+                        <img src="../../assets/imgames/esmeraldas/emerald-banner.svg" class="card-img-top" alt="Tienda de Esmeraldas">
                         <div class="card-body">
-                            <div class="pagob">Pago Basico</div>
+                            <div class="pagom">Pago Mixto</div>
                             <div class="servicio2">Api Gateway</div>
-                            <h5 class="card-title">Blood Strike</h5>
-                            
-                            <p class="card-text">Compra Gold y más</p> 
+                            <h5 class="card-title">Tienda de Esmeraldas</h5>
+
+                            <p class="card-text">Compra esmeraldas y más</p>
                             <a href="../games/bloodstrike.php" class="btn btn-producto">Productos</a>
                         </div>
                     </div>

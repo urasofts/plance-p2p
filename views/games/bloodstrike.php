@@ -1,13 +1,31 @@
-<?php
+﻿<?php
 session_start();
 if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Location: ../../index.php"); exit(); }
+
+// ── Continuar pago: si llegamos con ?orden=ID, precargamos el saldo pendiente ──
+$continuar_orden = null;
+if (isset($_GET['orden'])) {
+    require_once dirname(__DIR__, 2) . '/php/conexion_be.php';
+    if (!isset($conexion)) { $conexion = plance_db_connect(); }
+    $orden_id_get = (int) $_GET['orden'];
+    if ($conexion && $orden_id_get) {
+        $row = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT * FROM gateway_ordenes WHERE id = $orden_id_get AND tipo_pago = 'mixto'"));
+        if ($row) {
+            $saldo = (float) $row['precio'] - (float) ($row['monto_pagado'] ?? 0);
+            if ($saldo > 0) {
+                $row['saldo']        = $saldo;
+                $continuar_orden     = $row;
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Strike — Gold</title>
+    <title>Tienda de Esmeraldas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,16 +41,42 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 <style>
-    /* Blood Strike — acento dorado, tipografía Barlow */
+    /* Tienda de Esmeraldas — acento esmeralda, tipografía Barlow */
     :root {
-        --gj-accent:        #f0b429;
-        --gj-accent-glow:   rgba(240, 180, 41, 0.25);
-        --gj-accent-soft:   rgba(240, 180, 41, 0.15);
-        --gj-accent-hover:  rgba(240, 180, 41, 0.4);
-        --gj-accent-dark:   #c99010;
+        --gj-accent:        #10b981;
+        --gj-accent-glow:   rgba(16, 185, 129, 0.25);
+        --gj-accent-soft:   rgba(16, 185, 129, 0.15);
+        --gj-accent-hover:  rgba(16, 185, 129, 0.4);
+        --gj-accent-dark:   #065f46;
         --gj-font-display:  'Barlow', sans-serif;
         --gj-font-body:     'Barlow', sans-serif;
     }
+
+    .field-hint { display:block; font-size:0.72rem; color:var(--pt-text-sec); margin-top:0.35rem; }
+    .field-hint.hint-error { color:#e05252; }
+
+    .continuar-orden-banner {
+        margin: 0 2rem 1rem;
+        padding: 0.7rem 1.1rem;
+        background: var(--gj-accent-soft);
+        border: 1px solid var(--gj-accent);
+        border-radius: var(--gj-radius-sm);
+        color: var(--pt-text);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+    }
+
+    .continuar-orden-card {
+        border: 1.5px solid var(--pt-border);
+        border-radius: var(--gj-radius-md);
+        padding: 1rem 1.1rem;
+    }
+    .continuar-orden-title { font-weight: 700; margin-bottom: 0.6rem; }
+    .continuar-orden-row { display:flex; justify-content:space-between; font-size:0.85rem; padding:0.3rem 0; color: var(--pt-text-sec); }
+    .continuar-orden-row.continuar-orden-saldo { color: var(--gj-accent); font-weight: 700; border-top: 1px solid var(--pt-border); margin-top: 0.3rem; padding-top: 0.6rem; }
 </style>
 <body>
     <?php
@@ -44,8 +88,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
 
     <div class="game-banner">
         <div class="game-banner__tag">
-            🩸 Blood Strike — Gold
+            💚 Tienda de Esmeraldas
             <span class="gw-badge">⚡ API Gateway</span>
+            <span class="gw-badge"><i class="bi bi-shuffle"></i> Pago Mixto</span>
             <!--<span class="tds-badge"><i class="bi bi-shield-lock-fill"></i> 3DS Obligatorio</span -->
         </div>
         <div class="banner-player-id">
@@ -71,83 +116,100 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         </div>
     </div>
 
+    <?php if ($continuar_orden): ?>
+    <div class="continuar-orden-banner">
+        <i class="bi bi-arrow-repeat"></i>
+        Completando la orden <strong>#<?= (int) $continuar_orden['id'] ?></strong> — saldo pendiente:
+        <strong>$<?= number_format($continuar_orden['saldo'], 0, ',', '.') ?> COP</strong>
+    </div>
+    <?php endif; ?>
+
     <main class="shop-layout">
         <section class="products-panel">
-            <p class="section-label">Elige el importe de Gold</p>
+            <?php if ($continuar_orden): ?>
+            <p class="section-label">Orden en curso</p>
+            <div class="continuar-orden-card">
+                <div class="continuar-orden-title"><?= htmlspecialchars($continuar_orden['producto']) ?></div>
+                <div class="continuar-orden-row"><span>Total del pedido</span><span>$<?= number_format((float) $continuar_orden['precio'], 0, ',', '.') ?> COP</span></div>
+                <div class="continuar-orden-row"><span>Pagado hasta ahora</span><span>$<?= number_format((float) ($continuar_orden['monto_pagado'] ?? 0), 0, ',', '.') ?> COP</span></div>
+                <div class="continuar-orden-row continuar-orden-saldo"><span>Saldo pendiente</span><span>$<?= number_format($continuar_orden['saldo'], 0, ',', '.') ?> COP</span></div>
+            </div>
+            <?php else: ?>
+            <p class="section-label">Elige el importe de Esmeraldas</p>
             <div class="products-grid">
 
                 <div class="product-card" data-id="1" data-price="4900" data-pts="80">
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">80 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">80 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">4.900 COP</div>
                 </div>
 
                 <div class="product-card" data-id="2" data-price="9900" data-pts="170">
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">170 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">170 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">9.900 COP</div>
                 </div>
 
                 <div class="product-card popular-card" data-id="3" data-price="19900" data-pts="360">
                     <div class="badge-popular">★ Popular</div>
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">360 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">360 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">19.900 COP <span class="discount-tag">+20 extra</span></div>
                 </div>
 
                 <div class="product-card" data-id="4" data-price="34900" data-pts="660">
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
 
                     </div>
-                    <div class="product-card__pts">660 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">660 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">34.900 COP <span class="discount-tag">+40 extra</span></div>
                 </div>
 
                 <div class="product-card" data-id="5" data-price="54900" data-pts="1120">
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">1120 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">1120 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">54.900 COP <span class="discount-tag">+80 extra</span></div>
                 </div>
 
                 <div class="product-card popular-card" data-id="6" data-price="99900" data-pts="2240">
                     <div class="badge-popular">🔥 Mejor valor</div>
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">2240 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">2240 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">99.900 COP <span class="discount-tag">+200 extra</span></div>
                 </div>
 
                 <div class="product-card" data-id="7" data-price="179900" data-pts="4480">
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">4480 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">4480 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">179.900 COP <span class="discount-tag">+480 extra</span></div>
                 </div>
 
                 <div class="product-card" data-id="8" data-price="299900" data-pts="8960">
                     <div class="product-card__img">
-                        <img src="https://cdn.gameboost.com/games/blood-strike/gold/gold.webp" style="height: 40px; width: 40px" alt="">
+                        <img src="../../assets/imgames/esmeraldas/emerald-icon.svg" style="height: 40px; width: 40px" alt="">
                     </div>
-                    <div class="product-card__pts">8960 Gold</div>
-                    <div class="product-card__label">Blood Strike</div>
+                    <div class="product-card__pts">8960 Esmeraldas</div>
+                    <div class="product-card__label">Moneda del juego</div>
                     <div class="product-card__price">299.900 COP <span class="discount-tag">+960 extra</span></div>
                 </div>
             </div>
@@ -164,15 +226,24 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                     </div>
                 <div class="sim-mode-hint" id="modoHint">Elige manualmente cómo termina la transacción.</div>
             </div>
+            <?php endif; ?>
         </section>
 
         <!-- CHECKOUT -->
         <aside class="checkout-panel">
             <div class="checkout-box">
-                <div class="checkout-product-name"><img id="checkoutImg" src="" alt="" /><span id="checkoutName">🥇 360 Gold</span></div>
+                <div class="checkout-product-name"><img id="checkoutImg" src="" alt="" /><span id="checkoutName"><?= $continuar_orden ? '💚 ' . htmlspecialchars($continuar_orden['producto']) : '💚 360 Esmeraldas' ?></span></div>
                 <div class="checkout-price-row">
-                    <span style="font-size:0.85rem;color:var(--pt-text-sec);">Total</span>
-                    <span class="checkout-price" id="checkoutPrice">19.900 COP</span>
+                    <span style="font-size:0.85rem;color:var(--pt-text-sec);"><?= $continuar_orden ? 'Total del pedido' : 'Total' ?></span>
+                    <span class="checkout-price" id="checkoutPrice"><?= $continuar_orden ? number_format((float) $continuar_orden['precio'], 0, ',', '.') . ' COP' : '19.900 COP' ?></span>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">¿Cuánto quieres pagar ahora?</label>
+                    <input type="number" class="field-input" id="montoPagar" min="1000"
+                           max="<?= $continuar_orden ? (int) $continuar_orden['saldo'] : 19900 ?>" step="100"
+                           value="<?= $continuar_orden ? (int) $continuar_orden['saldo'] : 19900 ?>">
+                    <span class="field-hint" id="montoHint">Mínimo $1.000 COP · Máximo $<span id="montoMaxLabel"><?= $continuar_orden ? number_format($continuar_orden['saldo'], 0, ',', '.') : '19.900' ?></span> COP (saldo pendiente)</span>
                 </div>
 
                 <div class="checkout-divider"></div>
@@ -206,31 +277,32 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                     </div>
                     <div class="field-group">
                         <label class="field-label">Nombre en la tarjeta</label>
-                        <input type="text" class="field-input" id="cardName" placeholder="Como aparece en la tarjeta">
+                        <input type="text" class="field-input" id="cardName" placeholder="Como aparece en la tarjeta" value="<?= htmlspecialchars($continuar_orden['nombre'] ?? '') ?>">
                     </div>
                     <div class="checkout-divider"></div>
                     <span class="section-label-sm">Datos del titular</span>
                     <div class="field-group">
                         <label class="field-label">Correo electrónico</label>
-                        <input type="email" class="field-input" id="bsCorreo" value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>">
+                        <input type="email" class="field-input" id="bsCorreo" value="<?php echo htmlspecialchars($continuar_orden['correo'] ?? $_SESSION['correo'] ?? ''); ?>">
                     </div>
                     <div class="field-group">
                         <label class="field-label">Teléfono</label>
-                        <input type="text" class="field-input" id="bsTelefono" placeholder="3001234567">
+                        <input type="text" class="field-input" id="bsTelefono" placeholder="3001234567" value="<?= htmlspecialchars($continuar_orden['telefono'] ?? '') ?>">
                     </div>
                     <div class="field-row">
                         <div class="field-group">
                             <label class="field-label">Tipo de documento</label>
                             <select class="field-input" id="bsTipoDoc">
-                                <option value="CC">Cédula</option>
-                                <option value="CE">Cédula Extranjería</option>
-                                <option value="NIT">NIT</option>
-                                <option value="PP">Pasaporte</option>
+                                <?php $bs_tipo_doc = $continuar_orden['tipo_doc'] ?? 'CC'; ?>
+                                <option value="CC" <?= $bs_tipo_doc === 'CC' ? 'selected' : '' ?>>Cédula</option>
+                                <option value="CE" <?= $bs_tipo_doc === 'CE' ? 'selected' : '' ?>>Cédula Extranjería</option>
+                                <option value="NIT" <?= $bs_tipo_doc === 'NIT' ? 'selected' : '' ?>>NIT</option>
+                                <option value="PP" <?= $bs_tipo_doc === 'PP' ? 'selected' : '' ?>>Pasaporte</option>
                             </select>
                         </div>
                         <div class="field-group">
                             <label class="field-label">Número de documento</label>
-                            <input type="text" class="field-input" id="bsNumDoc" placeholder="1234567890">
+                            <input type="text" class="field-input" id="bsNumDoc" placeholder="1234567890" value="<?= htmlspecialchars($continuar_orden['num_doc'] ?? '') ?>">
                         </div>
                     </div>
                     <div class="field-group">
@@ -267,28 +339,29 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                     <span class="section-label-sm">Datos del titular</span>
                     <div class="field-group">
                         <label class="field-label">Nombre completo</label>
-                        <input type="text" class="field-input" id="cuentaNombre" placeholder="Nombre y apellido">
+                        <input type="text" class="field-input" id="cuentaNombre" placeholder="Nombre y apellido" value="<?= htmlspecialchars($continuar_orden['nombre'] ?? '') ?>">
                     </div>
                     <div class="field-group">
                         <label class="field-label">Correo electrónico</label>
-                        <input type="email" class="field-input" id="cuentaCorreo" value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>">
+                        <input type="email" class="field-input" id="cuentaCorreo" value="<?php echo htmlspecialchars($continuar_orden['correo'] ?? $_SESSION['correo'] ?? ''); ?>">
                     </div>
                     <div class="field-group">
                         <label class="field-label">Teléfono</label>
-                        <input type="text" class="field-input" id="cuentaTelefono" placeholder="3001234567">
+                        <input type="text" class="field-input" id="cuentaTelefono" placeholder="3001234567" value="<?= htmlspecialchars($continuar_orden['telefono'] ?? '') ?>">
                     </div>
                     <div class="field-row">
                         <div class="field-group">
                             <label class="field-label">Tipo de documento</label>
                             <select class="field-input" id="cuentaTipoDoc">
-                                <option value="CC">Cédula</option>
-                                <option value="CE">Cédula Extranjería</option>
-                                <option value="NIT">NIT</option>
+                                <?php $cuenta_tipo_doc = $continuar_orden['tipo_doc'] ?? 'CC'; ?>
+                                <option value="CC" <?= $cuenta_tipo_doc === 'CC' ? 'selected' : '' ?>>Cédula</option>
+                                <option value="CE" <?= $cuenta_tipo_doc === 'CE' ? 'selected' : '' ?>>Cédula Extranjería</option>
+                                <option value="NIT" <?= $cuenta_tipo_doc === 'NIT' ? 'selected' : '' ?>>NIT</option>
                             </select>
                         </div>
                         <div class="field-group">
                             <label class="field-label">Número de documento</label>
-                            <input type="text" class="field-input" id="cuentaNumDoc" placeholder="1234567890">
+                            <input type="text" class="field-input" id="cuentaNumDoc" placeholder="1234567890" value="<?= htmlspecialchars($continuar_orden['num_doc'] ?? '') ?>">
                         </div>
                     </div>
                 </div>
@@ -298,7 +371,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                 </button>
                 <div class="security-note">
                     <i class="bi bi-shield-check"></i>
-                     API Gateway · Evertec
+                     Pago Mixto · API Gateway · Evertec
                 </div>
             </div>
         </aside>
@@ -309,6 +382,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         <span class="integration-docs__badge"><i class="bi bi-braces"></i> Integración PlacetoPay</span>
         <h3>Así se procesa el pago de esta tienda</h3>
         <p>A diferencia de Web Checkout, aquí <strong>no hay redirección</strong>: los datos de la tarjeta (o cuenta) que llenas en este mismo panel viajan en el request de creación de la transacción, y <strong>PlaceToPay Gateway</strong> responde de una vez con el estado final del pago — <code>APPROVED</code>, <code>PENDING</code> o <code>REJECTED</code> — sin devolver un <code>processUrl</code>.</p>
+        <p>Como esta tienda es de <strong>Pago Mixto</strong>, cada envío solo cobra el monto que elijas (no el total): se guarda como un <em>abono</em> y puedes repetir el proceso — incluso con otro medio de pago — hasta completar el total del pedido.</p>
 
         <div class="endpoint-bar">
             <span class="method-pill">POST</span>
@@ -338,8 +412,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <span class="jk">"mobile"</span>: <span class="js">"3001234567"</span>
   },
   <span class="jk">"payment"</span>: {
-    <span class="jk">"reference"</span>: <span class="js">"GW-BS-9F3A2E1C"</span>,
-    <span class="jk">"description"</span>: <span class="js">"360 Gold"</span>,
+    <span class="jk">"reference"</span>: <span class="js">"GW-9F3A2E1C"</span>,
+    <span class="jk">"description"</span>: <span class="js">"360 Esmeraldas"</span>,
     <span class="jk">"amount"</span>: { <span class="jk">"currency"</span>: <span class="js">"COP"</span>, <span class="jk">"total"</span>: <span class="jn">19900</span> }
   },
   <span class="jk">"instrument"</span>: {
@@ -387,8 +461,8 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         <span class="jk">'mobile'</span>       =&gt; <span class="cvar">$telefono</span>,
     ],
     <span class="jk">'payment'</span> =&gt; [
-        <span class="jk">'reference'</span>   =&gt; <span class="js">'GW-BS-'</span> . strtoupper(bin2hex(random_bytes(4))),
-        <span class="jk">'description'</span> =&gt; <span class="cvar">$producto</span>,               <span class="cm">// ej: "360 Gold"</span>
+        <span class="jk">'reference'</span>   =&gt; <span class="js">'GW-'</span> . strtoupper(bin2hex(random_bytes(4))),
+        <span class="jk">'description'</span> =&gt; <span class="cvar">$producto</span>,               <span class="cm">// ej: "360 Esmeraldas"</span>
         <span class="jk">'amount'</span>      =&gt; [<span class="jk">'currency'</span> =&gt; <span class="js">'COP'</span>, <span class="jk">'total'</span> =&gt; (float) <span class="cvar">$precio</span>],
     ],
     <span class="jk">'instrument'</span>      =&gt; <span class="cvar">$instrument</span>,
@@ -428,27 +502,44 @@ curl_close(<span class="cvar">$ch</span>);
 
     <input type="hidden" id="usuarioIdInput" value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>">
     <input type="hidden" id="currentPayment" value="tarjeta">
+    <input type="hidden" id="ordenIdInput" value="<?= $continuar_orden ? (int) $continuar_orden['id'] : '' ?>">
 
     <script>
 
         
     (function() {
         const products = {
-            1:{name:' 80 Gold',   precio:4900,  price:'4.900 COP'},
-            2:{name:' 170 Gold',  precio:9900,  price:'9.900 COP'},
-            3:{name:' 360 Gold',  precio:19900, price:'19.900 COP'},
-            4:{name:' 660 Gold',  precio:34900, price:'34.900 COP'},
-            5:{name:' 1120 Gold', precio:54900, price:'54.900 COP'},
-            6:{name:' 2240 Gold', precio:99900, price:'99.900 COP'},
-            7:{name:' 4480 Gold', precio:179900,price:'179.900 COP'},
-            8:{name:' 8960 Gold', precio:299900,price:'299.900 COP'},
+            1:{name:' 80 Esmeraldas',   precio:4900,  price:'4.900 COP'},
+            2:{name:' 170 Esmeraldas',  precio:9900,  price:'9.900 COP'},
+            3:{name:' 360 Esmeraldas',  precio:19900, price:'19.900 COP'},
+            4:{name:' 660 Esmeraldas',  precio:34900, price:'34.900 COP'},
+            5:{name:' 1120 Esmeraldas', precio:54900, price:'54.900 COP'},
+            6:{name:' 2240 Esmeraldas', precio:99900, price:'99.900 COP'},
+            7:{name:' 4480 Esmeraldas', precio:179900,price:'179.900 COP'},
+            8:{name:' 8960 Esmeraldas', precio:299900,price:'299.900 COP'},
         };
+
+        // ── Continuar pago: cuando venimos de ?orden=ID no hay tarjetas que elegir,
+        // el producto y el saldo ya vienen fijados desde PHP. ──
+        const isContinuar       = <?= $continuar_orden ? 'true' : 'false' ?>;
+        const continuarProducto = <?= json_encode($continuar_orden['producto'] ?? '') ?>;
+        const continuarPrecio   = <?= (int) ($continuar_orden['precio'] ?? 0) ?>;
+        let montoMaxActual      = <?= $continuar_orden ? (int) $continuar_orden['saldo'] : 19900 ?>;
+
+        function actualizarMontoMax(max) {
+            montoMaxActual = max;
+            const montoInput = document.getElementById('montoPagar');
+            montoInput.max   = max;
+            if (parseInt(montoInput.value, 10) > max || !montoInput.value) montoInput.value = max;
+            document.getElementById('montoMaxLabel').textContent = max.toLocaleString('es-CO');
+        }
 
         function updateCheckout(id) {
             const p = products[id];
             if (!p) return;
             document.getElementById('checkoutName').textContent  = p.name;
             document.getElementById('checkoutPrice').textContent = p.price;
+            actualizarMontoMax(p.precio);
 
             const imgEl   = document.getElementById('checkoutImg');
             const cardImg = document.querySelector('.product-card[data-id="' + id + '"] img');
@@ -474,9 +565,11 @@ curl_close(<span class="cvar">$ch</span>);
             if (def) { def.classList.add('selected'); updateCheckout(3); }
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initCards);
-        } else { initCards(); }
+        if (!isContinuar) {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initCards);
+            } else { initCards(); }
+        }
 
         // ── Tabs método de pago ──
         window.setPayment = function(method) {
@@ -485,7 +578,20 @@ curl_close(<span class="cvar">$ch</span>);
             document.getElementById('tabCuenta').classList.toggle('active', method === 'cuenta');
             document.getElementById('formTarjeta').classList.toggle('active', method === 'tarjeta');
             document.getElementById('formCuenta').classList.toggle('active', method === 'cuenta');
+            actualizarDisponibilidadModo(method);
         };
+
+        // Pago por cuenta no puede resolverse de forma automática/instantánea
+        // (igual que el mock real de PlacetoPay), así que se bloquea "Pago normal".
+        function actualizarDisponibilidadModo(method) {
+            const modoAutoBtn = document.getElementById('modoAuto');
+            const esCuenta = method === 'cuenta';
+            modoAutoBtn.disabled = esCuenta;
+            modoAutoBtn.title = esCuenta ? 'No disponible para pagos por cuenta' : '';
+            if (esCuenta && modoSimulacion === 'auto') {
+                setModo('elegir');
+            }
+        }
 
         // Formatear tarjeta
         document.getElementById('cardNumber').addEventListener('input', function() {
@@ -510,13 +616,42 @@ curl_close(<span class="cvar">$ch</span>);
                 : 'El estado se asigna automáticamente, como un pago real.';
         };
         let envioEnCurso = false;
+        const btnPagarDefaultHTML = document.getElementById('btnPagar').innerHTML;
+
+        // Al volver desde el mock (ej. "Cancelar y volver") el navegador puede
+        // restaurar esta página desde bfcache con el botón tal como quedó justo
+        // antes de enviar el formulario (deshabilitado y en "Procesando...").
+        window.addEventListener('pageshow', function(event) {
+            if (!event.persisted) return;
+            envioEnCurso = false;
+            const btn = document.getElementById('btnPagar');
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.cursor = '';
+            btn.innerHTML = btnPagarDefaultHTML;
+        });
+
         document.getElementById('btnPagar').addEventListener('click', function() {
             if (envioEnCurso) return; // ya se está procesando, ignorar clics repetidos
             const jugadorId = document.getElementById('jugadorIdInput').value.trim();
             if (!jugadorId) { alert('⚠️ Por favor ingresa tu ID de jugador.'); return; }
 
-            const selected = document.querySelector('.product-card.selected');
-            if (!selected) { alert('⚠️ Selecciona un producto.'); return; }
+            let producto, precioTotal;
+            if (isContinuar) {
+                producto    = continuarProducto;
+                precioTotal = continuarPrecio;
+            } else {
+                const selected = document.querySelector('.product-card.selected');
+                if (!selected) { alert('⚠️ Selecciona un producto.'); return; }
+                const id = parseInt(selected.getAttribute('data-id'));
+                const p  = products[id];
+                producto    = p.name;
+                precioTotal = p.precio;
+            }
+
+            const montoPagar = parseInt(document.getElementById('montoPagar').value, 10);
+            if (!montoPagar || montoPagar < 1000) { alert('⚠️ El monto a pagar debe ser de al menos $1.000 COP.'); return; }
+            if (montoPagar > montoMaxActual) { alert('⚠️ El monto a pagar no puede superar el saldo pendiente ($' + montoMaxActual.toLocaleString('es-CO') + ' COP).'); return; }
 
             const method = document.getElementById('currentPayment').value;
             let nombre, correo, telefono, tipoDoc, numDoc;
@@ -545,22 +680,21 @@ curl_close(<span class="cvar">$ch</span>);
                 alert('⚠️ Por favor completa todos los campos del titular.'); return;
             }
 
-            const id = parseInt(selected.getAttribute('data-id'));
-            const p  = products[id];
-
             // Armar formulario pero NO enviarlo aún
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = (modoSimulacion === 'auto')
-                ? '../../php/crear_pb_gateway.php'
+                ? '../../php/pago_mixto_gateway.php'
                 : '../../retorno/estados-gateway.php';
 
             const campos = [
-                ['producto', p.name], ['precio', p.precio],
+                ['producto', producto], ['precio', precioTotal],
                 ['jugador_id', jugadorId], ['metodo', method],
                 ['card_name', nombre], ['correo', correo],
                 ['telefono', telefono], ['tipo_doc', tipoDoc],
-                ['num_doc', numDoc]
+                ['num_doc', numDoc], ['monto_pagar', montoPagar],
+                ['orden_id', document.getElementById('ordenIdInput').value],
+                ['destino', 'mixto']
             ];
 
             // Si es tarjeta, agregar datos de tarjeta

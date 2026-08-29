@@ -15,12 +15,13 @@ if (empty($_SESSION['gw_subs_pending'])) {
     exit();
 }
 
-$data     = $_SESSION['gw_subs_pending'];
-$servicio = $data['servicio'] ?? 'Servicio';
-$plan     = $data['plan']     ?? '';
-$precio   = $data['precio']   ?? 0;
-$tipo     = isset($data['guardar_tarjeta']) ? 'suscripciones' : 'suscription';
-$es_pago_sub = ($tipo === 'suscripciones'); // streaming = pago+sub, music = pura
+$data       = $_SESSION['gw_subs_pending'];
+$servicio   = $data['servicio'] ?? 'Servicio';
+$plan       = $data['plan']     ?? '';
+$precio     = $data['precio']   ?? 0;
+$destino    = $data['destino']  ?? 'suscripcion';
+$es_recurrencia = ($destino === 'recurrencia'); // IA's = recurrencia, Streamings = suscripcion pura
+$form_action = $es_recurrencia ? 'crear_recurrencia_gateway' : 'crear_suscription_gateway';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,7 +52,7 @@ $es_pago_sub = ($tipo === 'suscripciones'); // streaming = pago+sub, music = pur
 
         <div class="product-info">
             <span class="product-info-name">
-                <?= $es_pago_sub ? '📺' : '🎵' ?>
+                <?= $es_recurrencia ? '🤖' : '📺' ?>
                 <?= htmlspecialchars($servicio) ?> — <?= htmlspecialchars($plan) ?>
             </span>
             <span class="product-info-price">$<?= number_format((float)$precio, 0, ',', '.') ?> COP</span>
@@ -92,7 +93,7 @@ $es_pago_sub = ($tipo === 'suscripciones'); // streaming = pago+sub, music = pur
             </select>
         </div>
 
-        <form method="POST" action="../php/<?= $es_pago_sub ? 'crear_suscripciones_gateway' : 'crear_suscription_gateway' ?>.php" id="estadoForm">
+        <form method="POST" action="../php/<?= $form_action ?>.php" id="estadoForm">
             <input type="hidden" name="estado_elegido"   id="estadoElegido"   value="aprobada-token">
             <input type="hidden" name="razon_elegida"    id="razonElegida"    value="APPROVED_TRANSACTION">
             <?php foreach ($data as $key => $value): ?>

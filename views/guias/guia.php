@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
     <!-- Tu CSS -->
-    <link rel="stylesheet" href="assets/css/estilos?v=<?php echo filemtime(__DIR__ . '/assets/css/e'); ?>">
+    <link rel="stylesheet" href="../../assets/css/estilos.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/estilos.css'); ?>">
      <?php $theme_seccion = 'guias'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
 </head>
 

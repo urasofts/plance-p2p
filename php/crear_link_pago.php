@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
+require_once 'p2p_config.php';
 require_once 'conexion_be.php';
 if (!isset($conexion)) {
     $conexion = plance_db_connect();
@@ -41,8 +42,9 @@ $expiracion  = date('Y-m-d H:i:s', strtotime('+24 hours'));
 // ══════════════════════════════════════════
 // 🔗 LINK DE PAGO — PlacetoPay
 // ══════════════════════════════════════════
-$login     = "2d9eaf1e662518756a3d78806543af5b";
-$secretKey = "3YC5brb5eAR4xBGQ";
+$creds     = p2p_credenciales()['principal'];
+$login     = $creds['login'];
+$secretKey = $creds['secretKey'];
 $url       = "https://sites-test.placetopay.com/api/payment-link";
 
 $seed     = date('c');

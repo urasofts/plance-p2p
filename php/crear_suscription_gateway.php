@@ -7,7 +7,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: ../views/plataformas/music_gateway.php");
+    header("Location: ../views/plataformas/streaming_gateway.php");
     exit();
 }
 
@@ -41,29 +41,25 @@ $num_doc  = mysqli_real_escape_string($conexion, $num_doc);
 
 // ══════════════════════════════════════════
 // API Gateway Real — Suscripción pura
+// Solo tokeniza la tarjeta, NO cobra nada en este request
+// (mismo criterio que otras_streaming.php / crear_suscription.php en Web Checkout)
 // Endpoint: api-test.placetopay.com
 // ══════════════════════════════════════════
-$login     = "2d9eaf1e662518756a3d78806543af5b";
-$secretKey = "3YC5brb5eAR4xBGQ";
+require_once 'p2p_config.php';
+require_once 'p2p_sonda_core.php';
+
+$cred      = p2p_credenciales()['principal'];
 $endpoint  = "https://api-test.placetopay.com/rest/gateway/process";
+$auth      = p2p_construir_auth($cred['login'], $cred['secretKey']);
+$reference = 'GWSUS-' . strtoupper(bin2hex(random_bytes(4)));
 
-$seed     = date('c');
-$nonce    = bin2hex(random_bytes(16));
-$tranKey  = base64_encode(hash('sha256', $nonce . $seed . $secretKey, true));
-$nonceB64 = base64_encode($nonce);
-
-$reference   = 'GWMUS-' . strtoupper(bin2hex(random_bytes(4)));
+// Suscripción pura solo admite tarjeta: es lo único que se puede tokenizar
 $card_number = preg_replace('/\s/', '', $_POST['card_number'] ?? '');
 $card_expiry = trim($_POST['card_expiry'] ?? '12/26');
 $card_cvv    = trim($_POST['card_cvv']    ?? '');
 
 $body = [
-    "auth" => [
-        "login"   => $login,
-        "tranKey" => $tranKey,
-        "nonce"   => $nonceB64,
-        "seed"    => $seed
-    ],
+    "auth" => $auth,
     "payer" => [
         "name"         => $nombre,
         "surname"      => "",
@@ -72,14 +68,10 @@ $body = [
         "document"     => $num_doc,
         "mobile"       => $telefono
     ],
-    "payment" => [
+    // "subscription" en vez de "payment": tokeniza sin cobrar
+    "subscription" => [
         "reference"   => $reference,
-        "description" => $servicio . ' — ' . $plan,
-        "amount"      => [
-            "currency" => "COP",
-            "total"    => (float)$precio
-        ],
-        "subscribe"   => true
+        "description" => $servicio . ' — ' . $plan
     ],
     "instrument" => [
         "card" => [
@@ -88,9 +80,9 @@ $body = [
             "cvv"        => $card_cvv
         ]
     ],
-    "ipAddress" => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1',
-    "notificationUrl"  => "https://doorman-situated-delivery.ngrok-free.dev/plance/php/notify.php",
-    "userAgent" => $_SERVER['HTTP_USER_AGENT'] ?? 'PlanceDemoAgent/1.0'
+    "ipAddress"       => $_SERVER['REMOTE_ADDR']     ?? '127.0.0.1',
+    "notificationUrl" => P2P_NOTIFY_URL,
+    "userAgent"       => $_SERVER['HTTP_USER_AGENT'] ?? 'PlanceDemoAgent/1.0'
 ];
 
 $ch = curl_init($endpoint);
@@ -154,7 +146,7 @@ if (!$resultado) die("❌ Error al guardar: " . mysqli_error($conexion));
 
 $orden_id = mysqli_insert_id($conexion);
 
-$_SESSION['gw_mus_result'] = [
+$_SESSION['gw_sus_result'] = [
     'orden_id'  => $orden_id,
     'status'    => $status,
     'estado'    => $nuevo_estado,

@@ -30,6 +30,10 @@ $resultado     = mysqli_query($conexion, "SELECT * FROM recurrencias WHERE usuar
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <?php $theme_seccion = 'historial'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Historial de Membresías Recurrentes — acento azul */
@@ -47,7 +51,7 @@ $resultado     = mysqli_query($conexion, "SELECT * FROM recurrencias WHERE usuar
     ?>
 
     <div class="tabla-container">
-        <div class="tabla-titulo">
+        <div class="tabla-titulo" id="rec-titulo">
             <i class="bi bi-calendar-check-fill" style="color: #4d9fff;"></i>Historial de Membresías Recurrentes
         </div>
 
@@ -63,7 +67,7 @@ $resultado     = mysqli_query($conexion, "SELECT * FROM recurrencias WHERE usuar
         ?>
 
         <?php if (mysqli_num_rows($resultado) > 0): ?>
-        <div class="table-responsive">
+        <div class="table-responsive" id="rec-tabla">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -75,9 +79,9 @@ $resultado     = mysqli_query($conexion, "SELECT * FROM recurrencias WHERE usuar
                         <th>Próximo cobro</th>
                         <th>Fin recurrencia</th>
                         <th>Periodicidad</th>
-                        <th>Estado</th>
+                        <th id="rec-th-estado">Estado</th>
                         <th>Fecha</th>
-                        <th>Acción</th>
+                        <th id="rec-th-accion">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,5 +147,7 @@ $resultado     = mysqli_query($conexion, "SELECT * FROM recurrencias WHERE usuar
     <link rel="stylesheet" href="paginacion.css">
     <style>:root{--pag-accent:#4d9fff;}</style>
     <script src="paginacion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-reg-rec.js"></script>
 </body>
 </html>

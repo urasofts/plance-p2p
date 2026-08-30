@@ -29,6 +29,9 @@ $resultado = mysqli_query($conexion, "SELECT * FROM dispersiones WHERE usuario_i
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Historial de Dispersiones — acento esmeralda */
@@ -47,12 +50,12 @@ $resultado = mysqli_query($conexion, "SELECT * FROM dispersiones WHERE usuario_i
     ?>
 
     <div class="tabla-container">
-        <div class="tabla-titulo">
+        <div class="tabla-titulo" id="disp-titulo">
             <i class="bi bi-diagram-3-fill" style="color:#10b981;"></i>
             Historial de Tiquetes — Dispersión de Pago
         </div>
 
-        <div class="info-banner">
+        <div class="info-banner" id="disp-info">
             <i class="bi bi-info-circle-fill"></i>
             En los pagos con <strong>dispersión</strong>, el monto total se divide automáticamente entre la aerolínea y los impuestos aeroportuarios. Aquí puedes ver el desglose de cada tiquete.
         </div>
@@ -62,19 +65,19 @@ $resultado = mysqli_query($conexion, "SELECT * FROM dispersiones WHERE usuario_i
         <?php unset($_SESSION['verify_msg']); endif; ?>
 
         <?php if (mysqli_num_rows($resultado) > 0): ?>
-        <div class="table-responsive">
+        <div class="table-responsive" id="disp-tabla">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>#ID</th>
                         <th>Destino</th>
                         <th>Tipo</th>
-                        <th>Vuelo (aerolínea)</th>
+                        <th id="disp-th-desglose">Vuelo (aerolínea)</th>
                         <th>Impuestos</th>
                         <th>Total</th>
-                        <th>Estado</th>
+                        <th id="disp-th-estado">Estado</th>
                         <th>Fecha</th>
-                        <th>Acción</th>
+                        <th id="disp-th-accion">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,5 +128,7 @@ $resultado = mysqli_query($conexion, "SELECT * FROM dispersiones WHERE usuario_i
     <link rel="stylesheet" href="paginacion.css">
     <style>:root{--pag-accent:#10b981;}</style>
     <script src="paginacion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-reg-disp.js"></script>
 </body>
 </html>

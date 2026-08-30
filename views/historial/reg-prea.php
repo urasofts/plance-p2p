@@ -29,6 +29,10 @@ $resultado = mysqli_query($conexion, "SELECT * FROM reservaciones WHERE usuario_
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Historial de Preautorizaciones — acento índigo */
@@ -46,12 +50,12 @@ $resultado = mysqli_query($conexion, "SELECT * FROM reservaciones WHERE usuario_
     ?>
 
     <div class="tabla-container">
-        <div class="tabla-titulo">
+        <div class="tabla-titulo" id="prea-titulo">
             <i class="bi bi-shield-lock-fill" style="color:#6366f1;"></i>
             Historial de Preautorizaciones
         </div>
 
-        <div class="info-banner">
+        <div class="info-banner" id="prea-info">
             <i class="bi bi-info-circle-fill"></i>
             Las <strong>preautorizaciones</strong> reservan el monto en tu tarjeta sin cobrarlo. El cargo real se realiza al hacer check-out en el hotel. Si ves estado <strong>Pendiente</strong>, puedes verificar el estado actual con el botón correspondiente.
         </div>
@@ -61,7 +65,7 @@ $resultado = mysqli_query($conexion, "SELECT * FROM reservaciones WHERE usuario_
         <?php unset($_SESSION['verify_msg']); endif; ?>
 
         <?php if (mysqli_num_rows($resultado) > 0): ?>
-        <div class="table-responsive">
+        <div class="table-responsive" id="prea-tabla">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -70,9 +74,9 @@ $resultado = mysqli_query($conexion, "SELECT * FROM reservaciones WHERE usuario_
                         <th>Descripción</th>
                         <th>Monto</th>
                         <th>Tipo</th>
-                        <th>Estado</th>
+                        <th id="prea-th-estado">Estado</th>
                         <th>Fecha</th>
-                        <th>Acción</th>
+                        <th id="prea-th-accion">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -116,5 +120,7 @@ $resultado = mysqli_query($conexion, "SELECT * FROM reservaciones WHERE usuario_
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-reg-prea.js"></script>
 </body>
 </html>

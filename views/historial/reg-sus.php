@@ -51,6 +51,9 @@ switch ($modo) {
     <?php $theme_seccion = 'historial'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Historial de Suscripciones — acento morado */
@@ -68,12 +71,12 @@ switch ($modo) {
     ?>
 
     <div class="tabla-container">
-        <div class="tabla-titulo"><i class="fa-solid fa-credit-card" style="color: rgb(153, 0, 255);"></i>
+        <div class="tabla-titulo" id="sus-titulo"><i class="fa-solid fa-credit-card" style="color: rgb(153, 0, 255);"></i>
          Historial de Suscripciones
         </div>
 
         <!-- TABS Web Checkout -->
-        <div class="modo-tabs-group">
+        <div class="modo-tabs-group" id="sus-tabs">
             <div class="modo-tabs-label"><i class="bi bi-display"></i> Web Checkout</div>
             <div class="modo-tabs">
                 <a href="reg-sus.php?modo=wc-sub"  class="modo-tab <?= $modo === 'wc-sub'  ? 'active-purple' : '' ?>"><i class="bi bi-tv"></i> Pago + Suscripción</a>
@@ -100,19 +103,19 @@ switch ($modo) {
         ?>
 
         <?php if (mysqli_num_rows($resultado) > 0): ?>
-        <div class="table-responsive">
+        <div class="table-responsive" id="sus-tabla">
             <table class="table table-hover">
                 <thead>
                     <?php if (in_array($modo, ['wc-sub'])): ?>
-                    <tr><th>#ID</th><th>Plataforma</th><th>Plan</th><th>Correo</th><th>Precio</th><th>Token</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
+                    <tr><th>#ID</th><th>Plataforma</th><th>Plan</th><th>Correo</th><th>Precio</th><th>Token</th><th id="sus-th-estado">Estado</th><th>Fecha</th><th id="sus-th-accion">Acción</th></tr>
                     <?php elseif ($modo === 'wc-rec'): ?>
-                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Correo</th><th>Precio/mes</th><th>Periodicidad</th><th>Próx. cobro</th><th>Fin</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
+                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Correo</th><th>Precio/mes</th><th>Periodicidad</th><th>Próx. cobro</th><th>Fin</th><th id="sus-th-estado">Estado</th><th>Fecha</th><th id="sus-th-accion">Acción</th></tr>
                     <?php elseif ($modo === 'wc-pura'): ?>
-                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Correo</th><th>Precio</th><th>Token</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
+                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Correo</th><th>Precio</th><th>Token</th><th id="sus-th-estado">Estado</th><th>Fecha</th><th id="sus-th-accion">Acción</th></tr>
                     <?php elseif ($modo === 'gw-sub'): ?>
-                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Periodicidad</th><th>Próx. cobro</th><th>Fin</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
+                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Periodicidad</th><th>Próx. cobro</th><th>Fin</th><th id="sus-th-estado">Estado</th><th>Fecha</th><th id="sus-th-accion">Acción</th></tr>
                     <?php elseif ($modo === 'gw-pura'): ?>
-                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Token</th><th>Estado</th><th>Fecha</th><th>Acción</th></tr>
+                    <tr><th>#ID</th><th>Servicio</th><th>Plan</th><th>Nombre</th><th>Correo</th><th>Precio</th><th>Token</th><th id="sus-th-estado">Estado</th><th>Fecha</th><th id="sus-th-accion">Acción</th></tr>
                     <?php endif; ?>
                 </thead>
                 <tbody>
@@ -221,5 +224,7 @@ switch ($modo) {
     <link rel="stylesheet" href="paginacion.css">
     <style>:root{--pag-accent:#a855f7;}</style>
     <script src="paginacion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-reg-sus.js"></script>
 </body>
 </html>

@@ -189,6 +189,10 @@ switch ($modo) {
                         <td>
                             <?php if (strtolower($row['estado']) === 'pendiente' && !empty($row['request_id'])): ?>
                             <a href="../../php/verificar_pago.php?tabla=gateway_recurrencias&id=<?= $row['id'] ?>&request_id=<?= urlencode($row['request_id']) ?>&redirect=../views/historial/reg-sus.php?modo=gw-sub" class="btn-verificar"><i class="bi bi-arrow-repeat"></i> Verificar</a>
+                            <?php elseif (strtolower($row['estado']) === 'aprobada'): ?>
+                            <a href="../../php/cancelar_gateway.php?id=<?= $row['id'] ?>&tabla=gateway_recurrencias"
+                               class="btn-cancelar"
+                               onclick="return confirm('⚠️ ¿Estás seguro de cancelar esta suscripción? Esta acción no se puede deshacer.')"><i class="bi bi-x-circle-fill"></i> Cancelar</a>
                             <?php else: ?><span style="color:#555860;font-size:0.75rem;">—</span><?php endif; ?>
                         </td>
 
@@ -204,6 +208,10 @@ switch ($modo) {
                         <td>
                             <?php if (strtolower($row['estado']) === 'pendiente' && !empty($row['request_id'])): ?>
                             <a href="../../php/verificar_pago.php?tabla=gateway_suscription&id=<?= $row['id'] ?>&request_id=<?= urlencode($row['request_id']) ?>&redirect=../views/historial/reg-sus.php?modo=gw-pura" class="btn-verificar"><i class="bi bi-arrow-repeat"></i> Verificar</a>
+                            <?php elseif (strtolower($row['estado']) === 'aprobada'): ?>
+                            <a href="../../php/cancelar_gateway.php?id=<?= $row['id'] ?>&tabla=gateway_suscription"
+                               class="btn-cancelar"
+                               onclick="return confirm('⚠️ ¿Estás seguro de cancelar esta suscripción? Esta acción no se puede deshacer.')"><i class="bi bi-x-circle-fill"></i> Cancelar</a>
                             <?php else: ?><span style="color:#555860;font-size:0.75rem;">—</span><?php endif; ?>
                         </td>
                         <?php endif; ?>

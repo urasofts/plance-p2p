@@ -5,12 +5,7 @@
         header("Location: home.php");
         die();
     }
-
-    if(isset($_SESSION['usuario'])){
-        header("Location: juegos.php");
-        die();
-    }
-?>      
+?>
 
 
 

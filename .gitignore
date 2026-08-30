@@ -1,3 +1,5 @@
 vendor/
 .env
 cron/sonda.log
+php/notify_debug.log
+php/webhook_log.txt

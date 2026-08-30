@@ -113,62 +113,73 @@ if (isset($_SESSION['user_id'])) {
         background-color: rgba(15, 23, 42, 0.95) !important;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); 
     }
-    /* ── SPEED DIAL (iconos tipo navegador) ── */
-    .speed-dial-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 28px;
+    /* ── TARJETAS DE ACCESO RÁPIDO ── */
+    .home-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
         padding: 10px 0 20px;
+        max-width: 1000px;
+        margin: 0 auto;
     }
 
-    .speed-dial-item {
+    .home-nav-card {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        text-align: left;
         text-decoration: none;
         cursor: pointer;
         opacity: 0;
-    }
-
-    .speed-dial-icon {
-        width: 72px;
-        height: 72px;
+        padding: 22px;
         border-radius: 18px;
         background: var(--pt-bg-card, rgba(30, 30, 32, 0.85));
         border: 1px solid var(--pt-border, rgba(255,255,255,0.08));
+        transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .home-nav-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(240, 114, 41, 0.5);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(240, 180, 41, 0.1);
+    }
+
+    .home-nav-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(240, 180, 41, 0.08);
+        border: 1px solid rgba(240, 180, 41, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2rem;
+        font-size: 1.4rem;
+        margin-bottom: 14px;
         transition: all 0.22s ease;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.4);
-        backdrop-filter: blur(6px);
     }
 
-    .speed-dial-item:hover .speed-dial-icon {
-        transform: translateY(-6px) scale(1.08);
-        border-color: rgba(240, 114, 41, 0.5);
-        box-shadow: 0 8px 28px rgba(240, 180, 41, 0.25);
-        background: rgba(240, 180, 41, 0.08);
+    .home-nav-card:hover .home-nav-icon {
+        background: rgba(240, 180, 41, 0.16);
+        transform: scale(1.06);
     }
 
-    .speed-dial-label {
-        font-size: 0.78rem;
-        font-weight: 600;
+    .home-nav-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--pt-text, #f0f1f3);
+        margin-bottom: 6px;
+    }
+
+    .home-nav-desc {
+        font-size: 0.85rem;
         color: var(--pt-text-sec, rgba(255,255,255,0.75));
-        text-align: center;
-        max-width: 80px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: color 0.2s;
+        line-height: 1.5;
+        margin-bottom: 0;
     }
-    .speed-dial-item:hover .speed-dial-label {
+
+    .home-nav-card:hover .home-nav-title {
         color: #f07229;
     }
-    
+
     main {
         flex: 1;
     }
@@ -312,55 +323,6 @@ if (isset($_SESSION['user_id'])) {
 
     .dropdown:hover .dropdown-content { display: block; }
 
-    /* Search estilo navegador */
-    .browser-search{ 
-        width: min(720px, 92vw);
-        background: var(--pt-bg-card, rgba(0,0,0,0.35));
-        border: 1px solid var(--pt-border, rgba(255,255,255,0.12));
-        border-radius: 999px;
-        display:flex;
-        align-items:center;
-        padding: 10px 14px;
-        gap: 10px;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.35);
-    }
-    .browser-search-icon{ color: #f06129; display:flex; }
-    .browser-search-input{
-        width: 100%;
-        border: none;
-        outline: none;
-        background: transparent;
-        color: var(--pt-text, #fff);
-        font-size: 0.95rem;
-    }
-    .browser-search-input::placeholder{ color: rgba(255,255,255,0.55); }
-
-    .quick-suggestions{
-        width: min(720px, 92vw);
-        margin: 10px auto 0;
-        background: var(--pt-bg-surface, rgba(10,10,10,0.92));
-        border: 1px solid var(--pt-border, rgba(255,255,255,0.10));
-        border-radius: 14px;
-        overflow: hidden;
-        display: none;
-        backdrop-filter: blur(8px);
-    }
-    .quick-suggestions a{
-        display:flex;
-        align-items:center;
-        gap: 10px;
-        padding: 10px 14px;
-        color: var(--pt-text, #f0f1f3);
-        text-decoration:none;
-        font-weight: 600;
-        border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .quick-suggestions a:first-child{ border-top: none; }
-    .quick-suggestions a:hover{ background: rgba(240,180,41,0.10); color: #f07929; }
-
-
-
     @keyframes fadeIn {
     from {
         opacity: 0;
@@ -421,49 +383,44 @@ if (isset($_SESSION['user_id'])) {
         <div class="container-fluid px-2 py-5">
         <div class="home-card text-center p-5 mb-4" id="welcomeCard">
             <div id="welcomeInner">
-                <h1 class="fw-bold" id="welcomeTitle">Bienvenido👋</h1>
+                <h1 class="fw-bold" id="welcomeTitle">¡Bienvenido<?= isset($_SESSION['usuario']) ? ', ' . htmlspecialchars($_SESSION['usuario']) : '' ?>! 👋</h1>
                 <p class="text" style="color: white" id="welcomeSubtitle">Listo para continuar tu progreso</p>
             </div>
-
-            <!-- Barra de búsqueda tipo navegador -->
-            <div class="d-flex justify-content-center mt-4">
-                <div class="browser-search" role="search">
-                    <span class="browser-search-icon"><i class="bi bi-search"></i></span>
-                    <input id="quickSearch" class="browser-search-input" type="search" placeholder="Buscar: Sesiones, Historial, Configuración..." autocomplete="off">
-                </div>
-            </div>
-            <div id="quickSearchSuggestions" class="quick-suggestions" aria-label="Sugerencias"></div>
         </div>
 
-        <!-- Speed Dial tipo navegador -->
-        <div class="speed-dial-grid" id="home-speed-dial">
+        <!-- Tarjetas de acceso rápido -->
+        <div class="home-cards-grid" id="home-cards-grid">
 
-            <a href="sesiones.php" class="speed-dial-item" title="Sesiones">
-                <div class="speed-dial-icon">
+            <a href="sesiones.php" class="home-nav-card" title="Sesiones">
+                <div class="home-nav-icon">
                     <i class="bi bi-cart-plus-fill" style="color: rgb(255, 102, 0);"></i>
                 </div>
-                <span class="speed-dial-label">Sesiones</span>
+                <span class="home-nav-title">Sesiones</span>
+                <p class="home-nav-desc">Simula pagos con distintos flujos: recargas, suscripciones, reservas y más.</p>
             </a>
 
-            <a href="views/historial/historial.php" class="speed-dial-item" title="Historial">
-                <div class="speed-dial-icon">
+            <a href="views/historial/historial.php" class="home-nav-card" title="Historial">
+                <div class="home-nav-icon">
                     <i class="bi bi-file-text-fill" style="color: rgb(255, 102, 0);"></i>
                 </div>
-                <span class="speed-dial-label">Historial</span>
+                <span class="home-nav-title">Historial</span>
+                <p class="home-nav-desc">Revisa todas tus transacciones y consulta el estado de cada una.</p>
             </a>
 
-            <a href="views/guias/guia.php" class="speed-dial-item" title="Guia">
-                <div class="speed-dial-icon">
-                    <i class="bi bi-book-half" style="color:  rgb(255, 102, 0);"></i>
+            <a href="views/guias/guia.php" class="home-nav-card" title="Guia">
+                <div class="home-nav-icon">
+                    <i class="bi bi-book-half" style="color: rgb(255, 102, 0);"></i>
                 </div>
-                <span class="speed-dial-label">Guia</span>
+                <span class="home-nav-title">Guía</span>
+                <p class="home-nav-desc">Aprende paso a paso cómo funciona la plataforma.</p>
             </a>
 
-            <a href="views/settings/ajustes.php" class="speed-dial-item" title="Configuración">
-                <div class="speed-dial-icon">
-                    <i class="bi bi-gear-fill" style="color: #aaa;"></i>
+            <a href="views/settings/ajustes.php" class="home-nav-card" title="Configuración">
+                <div class="home-nav-icon">
+                    <i class="bi bi-gear-fill" style="color: rgb(255, 102, 0);"></i>
                 </div>
-                <span class="speed-dial-label">Settings</span>
+                <span class="home-nav-title">Ajustes</span>
+                <p class="home-nav-desc">Personaliza tu cuenta y tus preferencias.</p>
             </a>
 
         </div>
@@ -473,6 +430,9 @@ if (isset($_SESSION['user_id'])) {
         (function(){
             // ── Animación de bienvenida temporal ──
             if (typeof anime !== 'undefined') {
+                const welcomeInner = document.getElementById('welcomeInner');
+                const welcomeStartHeight = welcomeInner ? welcomeInner.scrollHeight : 0;
+
                 anime.timeline({ easing: 'easeOutExpo' })
                     .add({
                         targets: '#welcomeTitle',
@@ -490,7 +450,7 @@ if (isset($_SESSION['user_id'])) {
                         targets: '#welcomeInner',
                         opacity: [1, 0.15],
                         translateY: [0, -14],
-                        height: [null, 0],
+                        height: [welcomeStartHeight, 0],
                         marginBottom: [null, 0],
                         duration: 700,
                         easing: 'easeInOutQuad',
@@ -499,7 +459,7 @@ if (isset($_SESSION['user_id'])) {
 
                 // Stagger de accesos rápidos
                 anime({
-                    targets: '.speed-dial-item',
+                    targets: '.home-nav-card',
                     opacity: [0, 1],
                     translateY: [18, 0],
                     delay: anime.stagger(90, { start: 300 }),
@@ -507,51 +467,6 @@ if (isset($_SESSION['user_id'])) {
                     easing: 'easeOutQuad'
                 });
             }
-            const input = document.getElementById('quickSearch');
-            const box = document.getElementById('quickSearchSuggestions');
-            if(!input || !box) return;
-
-            const items = [
-                { key: 'sesiones', label: 'Sesiones', href: 'sesiones.php', icon: 'bi bi-cart-plus-fill' },
-                { key: 'historial', label: 'Historial', href: 'historial/historial.php', icon: 'bi bi-file-text-fill' },
-                { key: 'configuracion', label: 'Configuración', href: 'profile/index.php', icon: 'bi bi-gear-fill' },
-                { key: 'perfil', label: 'Mi Perfil', href: 'profile/index.php', icon: 'bi bi-person-badge' },
-                {key: 'juegos', label: 'Juegos', href: 'games/juegos.php', icon: 'bi bi-controller' },
-                {key: 'plataformas', label: 'Plataformas', href: 'plataformas/suscripciones.php', icon: 'bi bi-tv' },
-            ];
-
-            function norm(s){ return (s || '').toLowerCase().trim(); }
-
-            function render(list){
-                box.innerHTML = '';
-                if(!list.length){ box.style.display = 'none'; return; }
-                list.forEach(it => {
-                    const a = document.createElement('a');
-                    a.href = it.href;
-                    a.innerHTML = `<i class="${it.icon}" style="color:#f0b429;"></i> <span>${it.label}</span>`;
-                    box.appendChild(a);
-                });
-                box.style.display = 'block';
-            }
-
-            input.addEventListener('input', () => {
-                const q = norm(input.value);
-                if(!q){ box.style.display = 'none'; return; }
-                const matches = items.filter(it => it.key.includes(q) || norm(it.label).includes(q)).slice(0,5);
-                render(matches);
-            });
-
-            document.addEventListener('click', (e) => {
-                if(!box.contains(e.target) && e.target !== input) box.style.display = 'none';
-            });
-
-            input.addEventListener('keydown', (e)=>{
-                if(e.key === 'Enter'){
-                    const q = norm(input.value);
-                    const first = items.find(it => it.key.includes(q) || norm(it.label).includes(q));
-                    if(first) window.location.href = first.href;
-                }
-            });
         })();
     </script>
     <script src="assets/js/script.js"></script>

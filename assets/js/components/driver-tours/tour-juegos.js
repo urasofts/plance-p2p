@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         disableActiveInteraction: true,
         advanceOnClick: true,
         stagePadding: 10,
+        smoothScroll: true,
         nextBtnText: 'Siguiente',
         prevBtnText: 'Atrás',
         doneBtnText: 'Finalizar',

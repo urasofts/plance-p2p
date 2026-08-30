@@ -458,17 +458,9 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
 
   })();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../assets/js/code-block.js"></script>
-  <script src="../../assets/imgames/monedas/coin-icon.svg"></script>
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
   <script src="../../assets/js/components/driver-tours/tour-cod.js"></script>
 </body>
-</html>
-
-
-
-</body>
-    <script src="anim.js"></script>
-    <script src="../../assets/imgames/monedas/coin-icon.svg"></script>
-    <script src="assets/js/validaciones.js"></script>
-    <script src="assets/js/script.js"></script>
 </html>

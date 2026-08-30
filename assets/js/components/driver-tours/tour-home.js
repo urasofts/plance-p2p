@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         disableActiveInteraction: false,
         advanceOnClick: true,
         stagePadding: 10,
+        smoothScroll: true,
         nextBtnText: 'Siguiente',
         prevBtnText: 'Atrás',
         doneBtnText: 'Finalizar',
@@ -52,11 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             },
             {
-                element: '#home-speed-dial',
+                element: '#home-cards-grid',
                 disableActiveInteraction: true,
                 popover: {
                     title: 'Accesos rápidos',
-                    description: 'Estos íconos te llevan a Sesiones (los ejemplos de integración), tu Historial de transacciones, la Guía de PlacetoPay y los Ajustes de tu cuenta.'
+                    description: 'Estas tarjetas te llevan a Sesiones (los ejemplos de integración), tu Historial de transacciones, la Guía de PlacetoPay y los Ajustes de tu cuenta.'
                 }
             },
             {

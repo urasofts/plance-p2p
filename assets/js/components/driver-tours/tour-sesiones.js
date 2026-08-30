@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         disableActiveInteraction: true,
         advanceOnClick: true,
         stagePadding: 10,
+        smoothScroll: true,
         nextBtnText: 'Siguiente',
         prevBtnText: 'Atrás',
         doneBtnText: 'Finalizar',
@@ -49,17 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         steps: [
             {
-                element: '#sesiones-speed-dial',
+                element: '#categorias-grid',
                 popover: {
                     title: 'Elige una categoría',
-                    description: 'Cada ícono representa un tipo de comercio distinto (juegos, plataformas digitales, ropa, reservaciones y dispersiones), cada uno con su propio flujo de integración con Place to Pay.'
-                }
+                    description: 'Cada tarjeta representa un tipo de comercio distinto (juegos, plataformas digitales, textiles, dispersiones y reservaciones), cada una con su propio flujo de integración con Place to Pay.'
+                },
+                scrollIntoViewOptions: { block: 'start', behavior: 'smooth' }
             },
             {
-                element: '.speed-dial-item[title="Juegos Mobiles"] .detalles-toggle',
+                element: '#tour-card-method',
+                scrollIntoViewOptions: { block: 'center', behavior: 'smooth' },
                 popover: {
-                    title: 'Ver detalles',
-                    description: 'Haz clic en "Detalles" para ver qué servicios (Web Checkout, API Gateway) y qué tipo de pago usa esa categoría antes de entrar.',
+                    title: 'Servicios y pago de un vistazo',
+                    description: 'Cada tarjeta ya muestra qué servicios (Web Checkout, API Gateway) y qué tipo de pago usa esa categoría, sin necesidad de hacer clic en nada — cuando estés listo, pulsa "Ver categoria" para entrar.',
                     onNextClick: () => {
                         localStorage.setItem('tutorial', 'pendiente');
                         driver.destroy();

@@ -482,7 +482,7 @@
           <article class="card">
             <div class="card-icon"><i class="icon-colors bi bi-controller"></i></div>
             <h5>Recargas de juegos</h5>
-            <p>Compra monedas, puntos o pases de batalla para tus juegos favoritos como Call of Duty, Free Fire, PUBG y más.</p>
+            <p>Compra Monedas, Gemas, Cash o Esmeraldas para tus juegos favoritos.</p>
             <span class="card-tag">Pago único</span>
           </article>
           <article class="card">
@@ -557,7 +557,7 @@
           </div>
           <div class="tipo-card">
             <h6><i class="bi bi-cpu fs-5" style="color: #f0b429"></i> API Gateway</h6>
-            <p>El pago se procesa directo en la misma página, sin redirigir a otro sitio. Usado en tiendas como PUBG, Blood Strike, Streaming e IA's.</p>
+            <p>El pago se procesa directo en la misma página, sin redirigir a otro sitio. Usado en tiendas como Cash, Esmeraldas, Streaming e IA's.</p>
           </div>
           <div class="tipo-card">
             <h6><i class="bi bi-link-45deg fs-5" style="color: #3b82f6"></i> Link de Pagos</h6>
@@ -766,14 +766,14 @@
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/seciones.webp" type="image/webp">
-                <img src="/assets/capturas/seciones.webp" alt="Creacion de una sesion de pago">
+                <source srcset="/assets/capturas/WEBP/sesiones-grid.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/sesiones-grid.webp" alt="Pantalla de Sesiones con las categorias disponibles">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="../assets/capturas/WEBP/webchekout.webp" type="image/webp">
-                <img src="/assets/capturas/webchekout.webp" alt="Pasarela Web Checkout de PlacetoPay">
+                <source srcset="/assets/capturas/WEBP/webchekout.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/webchekout.webp" alt="Pasarela Web Checkout de PlacetoPay">
               </picture>
             </div>
           </div>
@@ -793,7 +793,7 @@
             <div class="step-index">1</div>
             <div>
               <h6>Ingresa a la sección de Juegos</h6>
-              <p>Desde el menú principal ve a <strong>Sesiones → Juegos</strong>. Verás las tiendas disponibles como CoD Mobile, Free Fire, PUBG y más.</p>
+              <p>Desde el menú principal ve a <strong>Sesiones → Juegos</strong>. Verás las tiendas disponibles: Monedas, Gemas, Cash y Esmeraldas.</p>
             </div>
           </div>
           <div class="step">
@@ -828,56 +828,30 @@
 
         <details class="shots-dropdown">
           <summary>📸 Ver capturas — proceso de pago básico</summary>
-          <p class="shots-summary">Selección del producto, ingreso del ID de jugador, la pasarela de PlacetoPay y el recibo final.</p>
+          <p class="shots-summary">La tienda de juegos, la selección de producto con el ID de jugador, el pago con tarjeta y el recibo final.</p>
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/seleccion-juegos.webp" type="image/webp">
-                <img src="/assets/capturas/seleccion-juegos.webp" alt="Selección de producto en la tienda de juegos">
+                <source srcset="/assets/capturas/WEBP/juegos-tienda.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/juegos-tienda.webp" alt="Tienda de juegos con las categorias Monedas y Gemas">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/sesion-juegos.webp" type="image/webp">
-                <img src="/assets/capturas/sesion-juegos.webp" alt="Pasarela Web Checkout de PlacetoPay">
-              </picture>
-  
-            </div>
-            <div class="image-placeholder">
-              <picture>
-                <source srcset="/assets/capturas/WEBP/comprar-recarga.webp" type="image/webp">
-                <img src="/assets/capturas/comprar-recarga.webp" alt="Pantalla de confirmación de pago">
-              </picture>
-            </div>
-            <div class="image-placeholder">
-              <picture>
-                <source srcset="/assets/capturas/WEBP/digitar-id.webp" type="image/webp">
-                <img src="/assets/capturas/digitar-id.webp" alt="Pantalla de confirmación de pago">
-              </picture>
-            </div>
-            
-            <div class="image-placeholder">
-              <picture>
-                <source srcset="/assets/capturas/WEBP/redireccion-wc.webp" type="image/webp">
-                <img src="/assets/capturas/redireccion-wc.webp" alt="Pantalla de confirmación de pago">
-              </picture>
-            </div>         
-            <div class="image-placeholder">
-              <picture>
-                <source srcset="/assets/capturas/WEBP/pago-pse.webp" type="image/webp">
-                <img src="/assets/capturas/pago-pse.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/monedas-producto.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/monedas-producto.webp" alt="Selección de producto e ingreso del ID de jugador">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/pago-tarjeta.webp" type="image/webp">
-                <img src="/assets/capturas/pago-tarjeta.webp" alt="Pantalla de confirmación de pago">
+                <img src="/assets/capturas/WEBP/pago-tarjeta.webp" alt="Pago con tarjeta en PlacetoPay">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/recibo-pago.webp" type="image/webp">
-                <img src="/assets/capturas/recibo-pago.webp" alt="Pantalla de confirmación de pago">
+                <img src="/assets/capturas/WEBP/recibo-pago.webp" alt="Recibo de confirmación de pago">
               </picture>
             </div>
           </div>
@@ -932,7 +906,7 @@
             <div class="image-placeholder">
                 <picture>
                   <source srcset="/assets/capturas/WEBP/opcion-tokenizar.webp" type="image/webp">
-                  <img src="/assets/capturas/opcion-tokenizar.webp" alt="tokenizar tarjeta">
+                  <img src="/assets/capturas/WEBP/opcion-tokenizar.webp" alt="tokenizar tarjeta">
                 </picture>
             </div>
         </div>
@@ -941,40 +915,28 @@
           <summary>📸 Ver capturas — proceso de suscripción</summary>
           <p class="shots-summary">Selección de plataforma y plan, la pasarela de pago y la confirmación de suscripción activa.</p>
           <div class="split" style="margin-top:1.2rem;">
-            <div class="image-placeholder"> 
-              <picture>
-                <source srcset="/assets/capturas/WEBP/seleccion-platf.webp" type="image/webp">
-                <img src="/assets/capturas/seleccion-platf.webp" alt="Pantalla de confirmación de pago">
-              </picture>
-            </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/sesion-streamings.webp" type="image/webp">
-                <img src="../assets/capturas/sesion-streamings.webp" alt="Pantalla de confirmación de pago">
+                <source srcset="/assets/capturas/WEBP/streaming-planes.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/streaming-planes.webp" alt="Selección de plataforma y plan de streaming">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/comprar-subs.webp" type="image/webp">
-                <img src="/assets/capturas/comprar-subs.webp" alt="Pantalla de confirmación de pago">
-              </picture>
-            </div>
-            <div class="image-placeholder">
-              <picture>
-                <source srcset="/assets/capturas/WEBP/pago-tarjeta-subs.webp" type="image/webp">
-                <img src="/assets/capturas/pago-tarjeta-subs.webp" alt="Pantalla de confirmación de pago">
+                <img src="/assets/capturas/WEBP/comprar-subs.webp" alt="Pasarela de pago de la suscripción">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/tokenizar-tar.webp" type="image/webp">
-                <img src="/assets/capturas/tokenizar-tar.webp" alt="Pantalla de confirmación de pago">
+                <img src="/assets/capturas/WEBP/tokenizar-tar.webp" alt="Opción de guardar tarjeta para renovaciones">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/volver-comercio.webp" type="image/webp">
-                <img src="/assets/capturas/volver-comercio.webp" alt="Pantalla de confirmación de pago">
+                <img src="/assets/capturas/WEBP/volver-comercio.webp" alt="Confirmación de suscripción activa">
               </picture>
             </div>
           </div>
@@ -1026,38 +988,32 @@
           <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/cancelar-sub.webp" type="image/webp">
-                <img src="/assets/capturas/cancelar-sub.webp" alt="volver al comercio">
-              </picture>  
+                <img src="/assets/capturas/WEBP/cancelar-sub.webp" alt="Boton de cancelar en el historial de membresias">
+              </picture>
           </div>
         </div>
 
         <details class="shots-dropdown">
           <summary>📸 Ver capturas — proceso de recurrencia</summary>
-          <p class="shots-summary">La tienda de redes sociales o IA's y el historial con la opción de cancelar.</p>
+          <p class="shots-summary">La tienda de IA's y el historial con la opción de cancelar.</p>
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/recurrencias.webp" type="image/webp">
-                <img src="/assets/capturas/recurrencias.webp" alt="tienda de recurrencias">
+                <source srcset="/assets/capturas/WEBP/ia-planes.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/ia-planes.webp" alt="Tienda de planes de IA con cobro recurrente">
               </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/ia-rec.webp" type="image/webp">
-                <img src="/assets/capturas/ia-rec.webp" alt="tienda de ias">
-              </picture>  
-            </div>
-            <div class="image-placeholder">
-              <picture>
                 <source srcset="/assets/capturas/WEBP/pago-recurrente.webp" type="image/webp">
-                <img src="/assets/capturas/pago-recurrente.webp" alt="pago recurrente">
-              </picture>  
+                <img src="/assets/capturas/WEBP/pago-recurrente.webp" alt="pago recurrente">
+              </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/volver-comercio-rec.webp" type="image/webp">
-                <img src="/assets/capturas/volver-comercio-rec.webp" alt="volver al comercio">
-              </picture>  
+                <img src="/assets/capturas/WEBP/volver-comercio-rec.webp" alt="volver al comercio">
+              </picture>
             </div>
           </div>
         </details>
@@ -1109,7 +1065,7 @@
           <div class="section-icon"><i class="icon-colors bi bi-cpu"></i></div>
           <h4>Pagos con API Gateway</h4>
         </div>
-        <p>Algunas tiendas (como PUBG, Blood Strike, Streaming e IA's) usan <strong>API Gateway</strong> en lugar de la pasarela visual. Aquí ingresas los datos de tu tarjeta o cuenta directamente en la misma página, sin ser redirigido a otro sitio.</p>
+        <p>Algunas tiendas (como Cash, Esmeraldas, Streaming e IA's) usan <strong>API Gateway</strong> en lugar de la pasarela visual. Aquí ingresas los datos de tu tarjeta o cuenta directamente en la misma página, sin ser redirigido a otro sitio.</p>
 
         <div class="steps">
           <div class="step">
@@ -1152,29 +1108,28 @@
           <p class="shots-summary">Formulario de pago directo y la verificación 3D Secure.</p>
           <div class="split" style="margin-top:1.2rem;">
             <div class="image-placeholder">
-   
               <picture>
-                <source srcset="/assets/capturas/WEBP/juegos-api.webp" type="image/webp">
-                <img src="/assets/capturas/juegos-api.webp" alt="elegir tienda">
-              </picture>  
+                <source srcset="/assets/capturas/WEBP/gateway-tiendas.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/gateway-tiendas.webp" alt="Tiendas con API Gateway: Cash y Esmeraldas">
+              </picture>
             </div>
             <div class="image-placeholder">
               <picture>
-                <source srcset="/assets/capturas/WEBP/tienda-api.webp" type="image/webp">
-                <img src="/assets/capturas/tienda-api.webp" alt="elegir producto">
-              </picture>  
+                <source srcset="/assets/capturas/WEBP/gateway-formulario.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/gateway-formulario.webp" alt="Formulario de pago directo con tarjeta">
+              </picture>
             </div>
             <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/recibo-api.webp" type="image/webp">
-                <img src="/assets/capturas/recibo-api.webp" alt="recibo de la compra">
-              </picture>  
+                <img src="/assets/capturas/WEBP/recibo-api.webp" alt="recibo de la compra">
+              </picture>
             </div>
               <div class="image-placeholder">
               <picture>
                 <source srcset="/assets/capturas/WEBP/pago-hist.webp" type="image/webp">
-                <img src="/assets/capturas/pago-hist.webp" alt="pago en el historial">
-              </picture>  
+                <img src="/assets/capturas/WEBP/pago-hist.webp" alt="pago en el historial">
+              </picture>
           </div>
           </div>
         </details>
@@ -1219,10 +1174,14 @@
 
         <details class="shots-dropdown">
           <summary>📸 Ver capturas — link de pago</summary>
-          <p class="shots-summary">Generación del enlace y la vista para compartirlo.</p>
+          <p class="shots-summary">La tienda de Textiles con el formulario para generar el link de pago.</p>
           <div class="split" style="margin-top:1.2rem;">
-            <div class="image-placeholder">📸 Captura del botón "Generar link de pago"</div>
-            <div class="image-placeholder">📸 Captura del link generado con opción de compartir</div>
+            <div class="image-placeholder">
+              <picture>
+                <source srcset="/assets/capturas/WEBP/link-pago.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/link-pago.webp" alt="Formulario para generar un link de pago en la tienda de textiles">
+              </picture>
+            </div>
           </div>
         </details>
       </section>
@@ -1233,7 +1192,7 @@
           <div class="section-icon"><i class="icon-colors bi bi-shuffle"></i></div>
           <h4>Pago mixto (parcial)</h4>
         </div>
-        <p>En la tienda de Rainbow Six Siege Mobile puedes seleccionar varios productos a la vez y, si no tienes el monto completo, pagar solo una parte ahora y completar el resto más adelante.</p>
+        <p>En la tienda de Gemas puedes seleccionar varios productos a la vez y, si no tienes el monto completo, pagar solo una parte ahora y completar el resto más adelante.</p>
 
         <div class="steps">
           <div class="step">
@@ -1266,10 +1225,14 @@
 
         <details class="shots-dropdown">
           <summary>📸 Ver capturas — pago mixto</summary>
-          <p class="shots-summary">Selección múltiple de productos y el desglose del pago parcial.</p>
+          <p class="shots-summary">La opción de "Selección múltiple" en la tienda de Gemas para armar el carrito.</p>
           <div class="split" style="margin-top:1.2rem;">
-            <div class="image-placeholder">📸 Captura de la selección múltiple de productos</div>
-            <div class="image-placeholder">📸 Captura del desglose: pagado ahora vs. saldo restante</div>
+            <div class="image-placeholder">
+              <picture>
+                <source srcset="/assets/capturas/WEBP/mixto-carrito.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/mixto-carrito.webp" alt="Selección múltiple de productos en la tienda de Gemas">
+              </picture>
+            </div>
           </div>
         </details>
       </section>
@@ -1313,10 +1276,14 @@
 
         <details class="shots-dropdown">
           <summary>📸 Ver capturas — preautorización</summary>
-          <p class="shots-summary">Selección de habitación y fechas, y la confirmación de la reserva.</p>
+          <p class="shots-summary">Selección de habitación en el Hotel Plance y el formulario de fechas y datos del huésped.</p>
           <div class="split" style="margin-top:1.2rem;">
-            <div class="image-placeholder">📸 Captura de selección de habitación y fechas</div>
-            <div class="image-placeholder">📸 Captura de la reserva confirmada</div>
+            <div class="image-placeholder">
+              <picture>
+                <source srcset="/assets/capturas/WEBP/hotel-habitaciones.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/hotel-habitaciones.webp" alt="Selección de habitación y fechas en el Hotel Plance">
+              </picture>
+            </div>
           </div>
         </details>
       </section>
@@ -1355,10 +1322,14 @@
 
         <details class="shots-dropdown">
           <summary>📸 Ver capturas — dispersión de pago</summary>
-          <p class="shots-summary">Selección de destino y el desglose de la dispersión tras el pago.</p>
+          <p class="shots-summary">Selección de destino, con el desglose de vuelo e impuestos de cada tiquete.</p>
           <div class="split" style="margin-top:1.2rem;">
-            <div class="image-placeholder">📸 Captura de selección de destino</div>
-            <div class="image-placeholder">📸 Captura del desglose aerolínea / impuestos</div>
+            <div class="image-placeholder">
+              <picture>
+                <source srcset="/assets/capturas/WEBP/dispersion-destinos.webp" type="image/webp">
+                <img src="/assets/capturas/WEBP/dispersion-destinos.webp" alt="Selección de destino con desglose de vuelo e impuestos">
+              </picture>
+            </div>
           </div>
         </details>
       </section>

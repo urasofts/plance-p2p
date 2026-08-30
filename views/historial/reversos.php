@@ -50,6 +50,10 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Reversos — acento rojo */
@@ -67,7 +71,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
     ?>
 
     <div class="tabla-container">
-        <div class="tabla-titulo">
+        <div class="tabla-titulo" id="rev-titulo">
             <i class="bi bi-arrow-counterclockwise"></i> Transacciones para Reverso
         </div>
 
@@ -78,18 +82,18 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
         <?php endif; ?>
 
         <?php if (count($transacciones) > 0): ?>
-        <div class="table-responsive">
+        <div class="table-responsive" id="rev-tabla">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>#ID</th>
-                        <th>Tipo</th>
+                        <th id="rev-th-tipo">Tipo</th>
                         <th>Producto / Servicio</th>
                         <th>Usuario</th>
                         <th>Precio</th>
-                        <th>Estado</th>
+                        <th id="rev-th-estado">Estado</th>
                         <th>Fecha</th>
-                        <th>Acción</th>
+                        <th id="rev-th-accion">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -132,5 +136,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
     <link rel="stylesheet" href="paginacion.css">
     <style>:root{--pag-accent:#e05252;}</style>
     <script src="paginacion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-reversos.js"></script>
 </body>
 </html>

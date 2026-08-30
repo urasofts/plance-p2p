@@ -41,6 +41,10 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
     <?php $theme_seccion = 'historial'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     body {
@@ -153,11 +157,11 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         require_once '../../php/navbar.php';
     ?>
 
-    <div class="panel-container">
+    <div class="panel-container" id="historial-panel">
         <div class="panel-titulo"><i class="bi bi-file-text-fill"></i> Mis Historiales</div>
         <div class="panel-subtitulo">Consulta el registro de tus pagos y suscripciones</div>
         <!-- Pagos Básicos -->
-        <a href="reg-pgb.php" class="historial-card" style="--card-color: #f0b429; --card-bg: rgba(255, 246, 226, 0.12);">
+        <a href="reg-pgb.php" id="hist-card-pgb" class="historial-card" style="--card-color: #f0b429; --card-bg: rgba(255, 246, 226, 0.12);">
             <div class="card-left">
                 <div class="card-icon">
                     <i class="fa-solid fa-money-bill-1-wave fs-3l" style="color: #ff6600;"></i>
@@ -191,7 +195,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         </a>
 
         <!-- Membresías Recurrentes -->
-        <a href="reg-rec.php" class="historial-card" style="--card-color: #4d9fff; --card-bg:  rgba(255, 246, 226, 0.12);">
+        <a href="reg-rec.php" id="hist-card-rec" class="historial-card" style="--card-color: #4d9fff; --card-bg:  rgba(255, 246, 226, 0.12);">
             <div class="card-left">
                 <div class="card-icon">
                     <i class="bi bi-calendar-check-fill" style="color: #ff6600;"></i>
@@ -208,7 +212,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         </a>
 
         <!-- Links de Pago -->
-        <a href="reg-link.php" class="historial-card" style="--card-color: #f71cff; --card-bg:  rgba(255, 246, 226, 0.12);">
+        <a href="reg-link.php" id="hist-card-link" class="historial-card" style="--card-color: #f71cff; --card-bg:  rgba(255, 246, 226, 0.12);">
             <div class="card-left">
                 <div class="card-icon">
                     <i class="fa-solid fa-link" style="color: #ff6600;"></i>
@@ -263,7 +267,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
         <div class="panel-subtitulo">Consulta tus pagos aprobados y solicita su reverso</div>
 
         <!--- Reversos -->
-        <a href="reversos.php" class="historial-card" style="--card-color: rgb(255, 238, 0); --card-bg:  rgba(255, 246, 226, 0.12);">
+        <a href="reversos.php" id="hist-card-reversos" class="historial-card" style="--card-color: rgb(255, 238, 0); --card-bg:  rgba(255, 246, 226, 0.12);">
             <div class="card-left">
                 <div class="card-icon2">
                     <i class="fa-solid fa-recycle" style="color: rgb(0, 0, 0);"></i> 
@@ -296,5 +300,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
             });
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-historial.js"></script>
 </body>
 </html>

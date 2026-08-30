@@ -29,6 +29,10 @@ $resultado = mysqli_query($conexion, "SELECT * FROM payment_link ORDER BY create
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-historiales.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Historial de Links de Pago — acento magenta */
@@ -47,12 +51,12 @@ $resultado = mysqli_query($conexion, "SELECT * FROM payment_link ORDER BY create
     ?>
 
     <div class="tabla-container">
-        <div class="tabla-titulo"><i class="fa-solid fa-link" style="color: rgb(235, 84, 255);"></i>
+        <div class="tabla-titulo" id="link-titulo"><i class="fa-solid fa-link" style="color: rgb(235, 84, 255);"></i>
              Historial de Links de Pago
         </div>
 
         <?php if ($resultado && mysqli_num_rows($resultado) > 0): ?>
-        <div class="table-responsive">
+        <div class="table-responsive" id="link-tabla">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -61,11 +65,11 @@ $resultado = mysqli_query($conexion, "SELECT * FROM payment_link ORDER BY create
                         <th>Precio</th>
                         <th>Referencia</th>
                         <th>Correo</th>
-                        <th>Estado</th>
+                        <th id="link-th-estado">Estado</th>
                         <th>Pagos</th>
-                        <th>Expira</th>
+                        <th id="link-th-expira">Expira</th>
                         <th>Fecha</th>
-                        <th>Acción</th>
+                        <th id="link-th-accion">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -136,5 +140,7 @@ $resultado = mysqli_query($conexion, "SELECT * FROM payment_link ORDER BY create
     <link rel="stylesheet" href="paginacion.css">
     <style>:root{--pag-accent:#eb54ff;}</style>
     <script src="paginacion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-reg-link.js"></script>
 </body>
 </html>

@@ -67,6 +67,10 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
     <link href="https://fonts.googleapis.com/css?family=Barlow:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-historiales-detalle.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <body>
     <?php
@@ -88,7 +92,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
 
         <!-- IZQUIERDA: Info transacción -->
         <div>
-            <div class="pcard" style="margin-bottom:1.2rem;">
+            <div class="pcard" id="detrev-info-trx" style="margin-bottom:1.2rem;">
                 <div class="pcard-title">📋 Información de la transacción</div>
 
                 <div class="info-row">
@@ -117,7 +121,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
                 </div>
             </div>
 
-            <div class="pcard">
+            <div class="pcard" id="detrev-info-pagador">
                 <div class="pcard-title"><i class="bi bi-person-vcard-fill"></i> Información del pagador</div>
                 <div class="info-row">
                     <span>Usuario / Correo</span>
@@ -137,7 +141,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
             <div class="pcard">
                 <div class="pcard-title">⚙️ Acciones</div>
 
-                <div class="opciones-wrap">
+                <div class="opciones-wrap" id="detrev-opciones">
                     <button class="btn-opciones" onclick="toggleOpciones()">
                         <span>Opciones</span>
                         <i class="bi bi-chevron-down" id="chevron"></i>
@@ -165,7 +169,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
                     </div>
                 </div>
 
-                <div class="reverso-info">
+                <div class="reverso-info" id="detrev-aviso">
                     <i class="bi bi-exclamation-triangle-fill"></i>
                     <strong> Importante:</strong> El reverso solo está disponible antes de la hora de corte del día. Una vez reversada la transacción, el dinero será devuelto automáticamente.
                 </div>
@@ -234,5 +238,7 @@ unset($_SESSION['reverso_msg'], $_SESSION['reverso_msg_type']);
             }
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-detalle-reverso.js"></script>
 </body>
 </html>

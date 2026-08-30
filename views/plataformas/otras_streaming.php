@@ -21,6 +21,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <?php $theme_seccion = 'plataformas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-plataformas.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Otras Plataformas — acento verde */
@@ -51,7 +55,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
             <!-- AMAZON PRIME -->
             <div class="section-block">
@@ -143,7 +147,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                         <span class="checkout-final-price" id="checkoutPrice">9.900 COP</span>
                     </div>
                 </div>
-                <div class="sub-info">
+                <div class="sub-info" id="subInfo">
                     <i class="bi bi-shield-lock-fill"></i>
                     <span>Tu tarjeta será tokenizada de forma segura para futuros cobros. El primer mes se cobra al suscribirse.</span>
                 </div>
@@ -370,5 +374,7 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-otras-streaming.js"></script>
 </body>
 </html>

@@ -17,6 +17,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <link rel="stylesheet" href="../../assets/css/styles-juegos-mixto.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Tienda de Gemas — morado (Gemas) + azul (Web Checkout / multi) */
@@ -45,12 +49,12 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
         <div class="game-banner__tag">
             💎 Tienda de Gemas
             <span class="wc-badge">🖥️ Web Checkout</span>
-            <span class="mixto-badge">🔀 Pago Mixto</span>
+            <span class="mixto-badge" id="pagoMixtoBadge">🔀 Pago Mixto</span>
         </div>
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
             <!-- Gemas -->
             <p class="section-label">💎 Gemas — Moneda del juego</p>
@@ -429,5 +433,7 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-rainbowsix.js"></script>
 </body>
 </html>

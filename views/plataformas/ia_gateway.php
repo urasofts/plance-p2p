@@ -18,6 +18,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-plataformas-gateway.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* IA's API Gateway — acento naranja, igual que la IA's de Web Checkout */
@@ -41,7 +45,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             <span class="gw-badge"><i class="bi bi-lightning-charge-fill"></i> API Gateway</span>
             <span class="sub-badge"><i class="bi bi-arrow-repeat"></i> Recurrencia</span>
         </div>
-        <div class="period-selector">
+        <div class="period-selector" id="periodSelector">
             <button class="period-btn active" id="btnMensual" onclick="setPeriod('mensual')">Mensual</button>
             <button class="period-btn" id="btnAnual" onclick="setPeriod('anual')">Anual</button>
         </div>
@@ -63,7 +67,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
             <!-- BLACKBOX -->
             <div class="section-block">
@@ -116,7 +120,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
             </div>
 
             <!-- Modo de simulación -->
-            <div class="sim-mode-wrap">
+            <div class="sim-mode-wrap" id="simModeWrap">
                 <span class="sim-mode-label">Modo de simulación</span>
                 <div class="sim-mode-toggle">
                         <button type="button" class="sim-mode-opt active" id="modoElegir" onclick="setModo('elegir')">
@@ -490,5 +494,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-ia-gateway.js"></script>
 </body>
 </html>

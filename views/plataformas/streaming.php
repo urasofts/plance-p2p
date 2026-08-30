@@ -23,6 +23,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <link rel="stylesheet" href="../../assets/css/styles-plataformas.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Streaming — acento morado */
@@ -60,7 +63,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <main class="shop-layout">
 
         <!-- LEFT: Products Panel -->
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
             <!-- NETFLIX -->
             <div class="section-block">
@@ -186,7 +189,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                     </div>
                 </div>
 
-                <div class="card-required-notice">
+                <div class="card-required-notice" id="cardRequiredNotice">
                     <i class="bi bi-info-circle-fill"></i>
                     <span><strong>Solo tarjeta.</strong> Esta suscripción guarda tu método de pago para renovarla automáticamente — PSE no permite esto, por eso en la pasarela solo verás la opción de tarjeta (Visa / Mastercard).</span>
                 </div>
@@ -440,5 +443,7 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
     <script src="assets/js/validaciones.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-streaming.js"></script>
 </body>
 </html>

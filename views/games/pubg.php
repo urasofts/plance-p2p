@@ -21,6 +21,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Tienda de Cash — acento verde */
@@ -71,7 +75,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
             <div class="section-block">
                 <p class="section-label">Elige el importe</p>
                 <div class="products-grid">
@@ -125,7 +129,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
 
                 </div>
                 <!-- Modo de simulación -->
-                <div class="sim-mode-wrap">
+                <div class="sim-mode-wrap" id="simModeWrap">
                     <span class="sim-mode-label">Modo de simulación</span>
                     <div class="sim-mode-toggle">
                         <button type="button" class="sim-mode-opt active" id="modoElegir" onclick="setModo('elegir')">
@@ -152,7 +156,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                 <div class="checkout-divider"></div>
 
                 <!-- Tabs método de pago -->
-                <div class="payment-tabs">
+                <div class="payment-tabs" id="paymentTabs">
                     <button class="payment-tab active" id="tabTarjeta" onclick="setPayment('tarjeta')">
                         <i class="bi bi-credit-card-fill"></i> Tarjeta
                     </button>
@@ -607,5 +611,7 @@ curl_close(<span class="cvar">$ch</span>);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-pubg.js"></script>
 </body>
 </html>

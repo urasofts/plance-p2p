@@ -22,6 +22,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     <?php $theme_seccion = 'plataformas'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-plataformas.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* IA's — acento naranja */
@@ -50,7 +54,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                 <input type="email" id="usuarioIdInput" placeholder="Tu correo electronico"
                        value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>" autocomplete="off">
             </div>
-            <div class="period-selector">
+            <div class="period-selector" id="periodSelector">
                 <button class="period-btn active" id="btnMensual" onclick="setPeriod('mensual')">Mensual</button>
                 <button class="period-btn" id="btnAnual" onclick="setPeriod('anual')">Anual</button>
             </div>
@@ -58,7 +62,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
             <!-- CLAUDE -->
             <div class="section-block">
@@ -437,5 +441,7 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-ia.js"></script>
 </body>
 </html>

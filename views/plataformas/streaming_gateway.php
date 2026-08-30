@@ -18,6 +18,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <?php require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-plataformas-gateway.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Streaming API Gateway — acento ámbar */
@@ -44,7 +48,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     </div>
 
     <!-- AVISO DE SEGURIDAD PARA COMERCIOS -->
-    <div class="security-warning">
+    <div class="security-warning" id="securityWarning">
         <i class="bi bi-shield-exclamation"></i>
         <div style="width: 100%;">
             <div class="security-warning-header" onclick="toggleWarning()">
@@ -60,7 +64,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
             <!-- NETFLIX -->
             <div class="section-block">
@@ -136,7 +140,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                     </div>
                 </div>
                 <!-- Modo de simulación -->
-                <div class="sim-mode-wrap">
+                <div class="sim-mode-wrap" id="simModeWrap">
                     <span class="sim-mode-label">Modo de simulación</span>
                     <div class="sim-mode-toggle">
                         <button type="button" class="sim-mode-opt active" id="modoElegir" onclick="setModo('elegir')">
@@ -489,5 +493,7 @@ curl_close(<span class="cvar">$ch</span>);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-streaming-gateway.js"></script>
 </body>
 </html>

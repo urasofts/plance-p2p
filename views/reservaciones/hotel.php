@@ -16,6 +16,10 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <?php $theme_seccion = 'preautor'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     :root {
@@ -109,9 +113,9 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
     </div>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
 
-            <div class="preauth-info">
+            <div class="preauth-info" id="preauthInfo">
                 <i class="bi bi-info-circle-fill"></i>
                 <span><strong>¿Cómo funciona la preautorización?</strong> Al reservar, PlacetoPay reserva el monto en tu tarjeta sin cobrarlo aún. El cargo real se realiza al momento del check-out del hotel. Si cancelas antes, el monto se libera automáticamente.</span>
             </div>
@@ -304,7 +308,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) { header("Loca
                     Preautorización segura · PlacetoPay · Evertec
                 </div>
 
-                <div class="preauth-notice">
+                <div class="preauth-notice" id="preauthNotice">
                     🔐 <strong>Preautorización:</strong> Tu tarjeta no será cobrada hasta el check-out. Solo se reserva el monto como garantía.
                 </div>
             </div>
@@ -534,5 +538,7 @@ header(<span class="js">'Location: '</span> . <span class="cvar">$result</span>[
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-hotel.js"></script>
 </body>
 </html>

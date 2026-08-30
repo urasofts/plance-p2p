@@ -39,6 +39,10 @@ if (isset($_GET['orden'])) {
     <link rel="stylesheet" href="../../assets/css/styles-juegos-gateway.css">
     <link rel="stylesheet" href="../../assets/css/styles-code-block.css">
     <?php $theme_seccion = 'juegos'; require_once dirname(__DIR__, 2) . '/php/theme.php'; ?>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+    <link rel="stylesheet"
+        href="../../assets/css/components/driver-theme.css?v=<?php echo filemtime(dirname(__DIR__, 2) . '/assets/css/components/driver-theme.css'); ?>">
 </head>
 <style>
     /* Tienda de Esmeraldas — acento esmeralda, tipografía Barlow */
@@ -90,7 +94,7 @@ if (isset($_GET['orden'])) {
         <div class="game-banner__tag">
             💚 Tienda de Esmeraldas
             <span class="gw-badge">⚡ API Gateway</span>
-            <span class="gw-badge"><i class="bi bi-shuffle"></i> Pago Mixto</span>
+            <span class="gw-badge" id="pagoMixtoBadge"><i class="bi bi-shuffle"></i> Pago Mixto</span>
             <!--<span class="tds-badge"><i class="bi bi-shield-lock-fill"></i> 3DS Obligatorio</span -->
         </div>
         <div class="banner-player-id">
@@ -125,7 +129,7 @@ if (isset($_GET['orden'])) {
     <?php endif; ?>
 
     <main class="shop-layout">
-        <section class="products-panel">
+        <section class="products-panel" id="productsPanel">
             <?php if ($continuar_orden): ?>
             <p class="section-label">Orden en curso</p>
             <div class="continuar-orden-card">
@@ -238,7 +242,7 @@ if (isset($_GET['orden'])) {
                     <span class="checkout-price" id="checkoutPrice"><?= $continuar_orden ? number_format((float) $continuar_orden['precio'], 0, ',', '.') . ' COP' : '19.900 COP' ?></span>
                 </div>
 
-                <div class="field-group">
+                <div class="field-group" id="montoPagarGroup">
                     <label class="field-label">¿Cuánto quieres pagar ahora?</label>
                     <input type="number" class="field-input" id="montoPagar" min="1000"
                            max="<?= $continuar_orden ? (int) $continuar_orden['saldo'] : 19900 ?>" step="100"
@@ -743,5 +747,7 @@ curl_close(<span class="cvar">$ch</span>);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/code-block.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script src="../../assets/js/components/driver-tours/tour-bloodstrike.js"></script>
 </body>
 </html>

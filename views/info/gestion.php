@@ -152,7 +152,7 @@
 
 <nav class="topnav">
         <a href="../../welcome.php">
-            <img src="../assets/icons/icono.png" alt="Icon" style="height: 35px;"> 
+            <img src="../../assets/icons/icono.png" alt="Icon" style="height: 35px;">
         </a>
     <a href="../../welcome.php" class="btn-back">← Volver</a>
 </nav>
@@ -192,6 +192,22 @@
             <h3 class="sub-title">Membresías recurrentes</h3>
             <p>Controla las membresías con cobro automático mensual o anual. Desde aquí puedes ver la fecha del próximo cobro, el fin de la recurrencia y cancelar si es necesario.</p>
             <span class="card-tag">Recurrente</span>
+        </div>
+    </div>
+
+    <p class="section-title">Otros tipos de compra</p>
+    <div class="cards-grid cards-grid-2">
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-shirt" style="color: hsl(17, 100%, 56%);"></i></div>
+            <h3 class="sub-title">Compras textiles</h3>
+            <p>Gestiona compras de ropa y accesorios con pago básico, procesadas por Web Checkout o por Link de Pago vía API.</p>
+            <span class="card-tag">Pago Básico</span>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-plane-departure" style="color: hsl(17, 100%, 56%);"></i></div>
+            <h3 class="sub-title">Reservas y dispersión</h3>
+            <p>Reserva hoteles con preautorización de tarjeta o gestiona la dispersión de pagos como tickets y vuelos.</p>
+            <span class="card-tag">Preautorización · Dispersión</span>
         </div>
     </div>
 

@@ -89,7 +89,7 @@
 
 <nav class="topnav">
         <a href="../../welcome.php">
-            <img src="../assets/icons/icono.png" alt="Icon" style="height: 35px;"> 
+            <img src="../../assets/icons/icono.png" alt="Icon" style="height: 35px;">
         </a>
     <a href="../../welcome.php" class="btn-back">← Volver</a>
 </nav>
@@ -186,6 +186,21 @@
             <h3>API Gateway</h3>
             <p>Streaming, música y juegos procesados directamente por backend, con formulario de tarjeta o cuenta bancaria</p>
             <span class="card-tag">Demo avanzada</span>
+        </div>
+    </div>
+
+    <div class="cards-grid cards-grid-2">
+        <div class="card">
+            <div class="card-icon"><i class="bi bi-bag-fill" style="color: #f06829;"></i></div>
+            <h3>Textiles</h3>
+            <p>Tienda de ropa y accesorios con pago básico, disponible por Web Checkout y por Link de Pago vía API.</p>
+            <span class="card-tag">Pago Básico</span>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="bi bi-suitcase-fill" style="color: #f06829;"></i></div>
+            <h3>Reservas y dispersión</h3>
+            <p>Reservas de hotel con preautorización de tarjeta y dispersión de pagos para tickets y vuelos, ambas por Web Checkout.</p>
+            <span class="card-tag">2 categorías</span>
         </div>
     </div>
 

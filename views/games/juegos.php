@@ -206,7 +206,7 @@
        <div class="second-title ">
         <i class="bi bi-controller fs-3"></i>
         <div>
-            <strong>Bienvenido a la sesion de juegos mobiles</strong>
+            <strong>Tiendas Online</strong>
             <br>
             Elige la tienda en la que vas a hacer tus pagos
         </div>
@@ -223,7 +223,7 @@
 
     <section>
         <div class="container mt-5" >
-            <h1 class="text-center mb-3">Juegos</h1>
+            <h1 class="text-center mb-3">Tiendas Disponibles</h1>
 
 
             <!-- Botones para filtrar por servicio PlaceToPay -->

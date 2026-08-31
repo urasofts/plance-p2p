@@ -85,7 +85,7 @@
 
 <nav class="topnav">
         <a href="../../welcome.php">
-            <img src="../assets/icons/icono.png" alt="Icon" style="height: 35px;"> 
+            <img src="../../assets/icons/icono.png" alt="Icon" style="height: 35px;">
         </a>
     <a href="../../welcome.php" class="btn-back">← Volver</a>
 </nav>
@@ -133,7 +133,7 @@
         <div class="card">
             <div class="card-icon"><i class="bi bi-laptop" style="color: #ff5c1b;"></i></div>
             <h3>Registros Web Checkout</h3>
-            <p>Incluyen pagos básicos de juegos, suscripciones de streaming, membresías recurrentes y suscripciones puras. Todos procesados a través de la pasarela visual de PlacetoPay.</p>
+            <p>Incluyen pagos básicos de juegos y textiles, reservas con preautorización, dispersión de tickets, suscripciones de streaming y membresías recurrentes. Todos procesados a través de la pasarela visual de PlacetoPay.</p>
             <span class="card-tag">Web Checkout</span>
         </div>
         <div class="card">

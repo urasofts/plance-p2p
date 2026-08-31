@@ -396,7 +396,7 @@ if (isset($_SESSION['user_id'])) {
                     <i class="bi bi-cart-plus-fill" style="color: rgb(255, 102, 0);"></i>
                 </div>
                 <span class="home-nav-title">Sesiones</span>
-                <p class="home-nav-desc">Simula pagos con distintos flujos: recargas, suscripciones, reservas y más.</p>
+                <p class="home-nav-desc">Simula pagos con distintos flujos: Pagos Rapidos, Suscripciones, Reservas y más.</p>
             </a>
 
             <a href="views/historial/historial.php" class="home-nav-card" title="Historial">

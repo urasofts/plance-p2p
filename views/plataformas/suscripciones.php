@@ -192,7 +192,7 @@
        <div class="second-title ">
         <i class="bi bi-google-play fs-3"></i>
         <div>
-            <strong>Bienvenido a la sesion de plataformas</strong>
+            <strong>Plataformas</strong>
             <br>
             Elige la tienda en la que vas a suscribirte
         </div>
@@ -207,7 +207,7 @@
 
     <section>
         <div class="container mt-5" >
-            <h1 class="text-center mb-3" >Plataformas</h1>
+            <h1 class="text-center mb-3" >Tiendas Disponibles</h1>
 
             <!-- Botones para filtrar por servicio PlaceToPay -->
             <div class="d-flex justify-content-center mb-4">

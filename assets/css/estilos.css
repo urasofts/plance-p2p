@@ -9,7 +9,7 @@
 
 
 .home{
-    background-image: url(../images/bg13.jpg   );
+    background-image: url(../images/bg13.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -17,7 +17,8 @@
     font-family: 'Segoe UI', sans-serif;
 }
 body{
-    background-image: url(../images/bg35.jpg);
+    background-color: #0a0a0a;
+    background-image: linear-gradient(rgba(6, 6, 8, 0.82), rgba(6, 6, 8, 0.88)), url(../images/bg13.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -31,131 +32,290 @@ main{
     margin-top: 100px;
 }
 
-.contenedor__todo{
+/* ===================== AUTH (index.php) ===================== */
+
+.auth-page{
     width: 100%;
-    max-width: 800px;
-    margin: auto;
-    position: relative;
-}
-.caja__trasera{
-    width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.5);
-
-}
-
-.caja__trasera div{
-    margin: 100px 40px;
-    color: white;
-    transition: all 500ms;
-}
-
-
-.caja__trasera div p,
-.caja__trasera button{
-    margin-top: 30px;
-}
-
-.caja__trasera div h3{
-    font-weight: 400;
-    font-size: 26px;
-}
-
-.caja__trasera div p{
-    font-size: 16px;
-    font-weight: 300;
-}
-
-.caja__trasera button{
-    padding: 10px 40px;
-    border: 2px solid #fff;
-    font-size: 14px;
-    background: transparent;
-    font-weight: 600;
-    cursor: pointer;
-    color: white;
-    outline: none;
-    transition: all 300ms;
-}
-
-.caja__trasera button:hover{
-    background: #fff;
-    color: #000000;
-}
-
-/*Formularios*/
-
-.contenedor__login-register{
+    min-height: calc(100vh - 100px);
     display: flex;
     align-items: center;
-    width: 100%;
-    max-width: 380px;
-    position: relative;
-    top: -185px;
-    left: 10px;
-    /*La transicion va despues del codigo JS*/
-    transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    justify-content: center;
+    padding: 20px;
 }
 
-.contenedor__login-register form{
+.auth-shell{
     width: 100%;
-    padding: 80px 20px;
-    background: linear-gradient(to bottom, #1f1f1f, #161616);
-    position: absolute;
-    border-radius: 20px;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
 }
 
-.contenedor__login-register form h2{
-    font-size: 30px;
+/* Panel cuadrado izquierdo: marca / contexto */
+.auth-brand{
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 102, 0, 0.18), transparent 55%),
+        linear-gradient(160deg, #1a1a1a, #0d0d0d);
+    padding: 48px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.auth-brand img{
+    width: 46px;
+    height: 46px;
+    margin-bottom: 22px;
+}
+
+.auth-brand h1{
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.auth-brand p{
+    color: #a8a8a8;
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.auth-brand-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-brand-list li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d8d8d8;
+    font-size: 13.5px;
+}
+
+.auth-brand-list i{
+    color: rgb(255, 102, 0);
+    font-size: 14px;
+    width: 18px;
     text-align: center;
-    margin-bottom: 20px;
-    color: rgb(255, 102, 0) ;
 }
 
-.contenedor__login-register form input{
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
+.auth-brand-back{
+    margin-top: 32px;
+    color: #888;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    transition: color 200ms;
+}
+.auth-brand-back:hover{ color: rgb(255, 102, 0); }
+
+/* Panel cuadrado derecho: formularios */
+.auth-panel{
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-tabs{
+    display: flex;
+    background: #1c1c1c;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 26px;
+}
+
+.auth-tab{
+    flex: 1;
     border: none;
-    background: #272727;
-    font-size: 16px;
+    background: transparent;
+    color: #999;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 0;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: color 200ms, background 200ms;
+}
+
+.auth-tab.is-active{
+    background: rgb(255, 102, 0);
+    color: #fff;
+}
+
+.auth-forms{
+    position: relative;
+    flex: 1;
+}
+
+.auth-form{
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(24px);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.auth-form.is-active{
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.auth-form.is-leaving{
+    transform: translateX(-24px);
+}
+
+.auth-field{
+    margin-top: 16px;
+}
+
+.auth-field label{
+    display: block;
+    color: #999;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+}
+
+.auth-field input{
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: #1e1e1e;
+    font-size: 15px;
     outline: none;
     color: #ffffff;
-    
+    transition: border-color 200ms;
 }
 
+.auth-field input:focus{
+    border-color: rgb(255, 102, 0);
+}
 
-.contenedor__login-register form button{
-    padding: 10px 40px;
-    margin-top: 40px;
-    border: none;
-    font-size: 14px;
-    background-color: rgb(255, 102, 0);
+.auth-field-pass{
+    position: relative;
+}
+
+.auth-field-pass input{
+    padding-right: 42px;
+}
+
+.auth-field-pass .toggle-eye{
+    position: absolute;
+    right: 12px;
+    top: 38px;
+    cursor: pointer;
+    font-size: 17px;
+    color: #8a8a8a;
+}
+
+.auth-hint{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #f0b429;
+    font-size: 12px;
     font-weight: 600;
+    margin-top: 14px;
+}
+
+.auth-hint-text{
+    color: #b7b7b7;
+    font-size: 11.5px;
+    line-height: 1.5;
+    margin-top: 4px;
+}
+
+.auth-strength-track{
+    height: 6px;
+    width: 100%;
+    background: #2a2a2a;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.auth-strength-fill{
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 250ms, background 250ms;
+}
+
+.auth-strength-text{
+    display: block;
+    color: #999;
+    font-size: 11.5px;
+    margin-top: 4px;
+}
+
+.auth-submit{
+    width: 100%;
+    height: 44px;
+    margin-top: 24px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(255, 102, 0);
+    font-size: 14.5px;
+    font-weight: 700;
     cursor: pointer;
     color: #ffffff;
-    outline: none;
+    transition: filter 200ms;
 }
-.contenedor__login-register form button:hover{
-    transition: all 300ms;
-    background: rgb(255, 102, 0) ;
-    color: #fff;
-}   
+.auth-submit:hover{ filter: brightness(1.08); }
 
-
-
-
-.formulario__login{
-    opacity: 1;
-    display: block;
+.auth-divider{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 6px;
 }
-.formulario__register{
-    display: none;
+.auth-divider span:not(.auth-divider-text){
+    flex: 1;
+    height: 1px;
+    background: #333;
 }
+.auth-divider-text{
+    color: #777;
+    font-size: 0.8rem;
+}
+
+.auth-guest{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 42px;
+    width: 100%;
+    border: 1.5px solid rgb(255, 102, 0);
+    border-radius: 10px;
+    color: rgb(255, 102, 0);
+    font-weight: 600;
+    font-size: 14px;
+    background: transparent;
+    transition: background 200ms;
+}
+.auth-guest:hover{ background: rgba(255, 102, 0, 0.1); }
 
 
 .navbar {
@@ -345,28 +505,21 @@ main{
         margin-top: 50px;
     }
 
-    .caja__trasera{
-        max-width: 350px;
-        height: 300px;
-        flex-direction: column;
-        margin: auto;
+    .auth-shell{
+        grid-template-columns: 1fr;
     }
 
-    .caja__trasera div{
-        margin: 0px;
-        position: absolute;
+    .auth-brand{
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 32px 26px;
     }
 
-
-    /*Formularios*/
-
-    .contenedor__login-register{
-        top: -10px;
-        left: -5px;
-        margin: auto;
+    .auth-brand-list{
+        display: none;
     }
 
-    .contenedor__login-register form{
-        position: relative;
+    .auth-panel{
+        padding: 30px 26px;
     }
 }

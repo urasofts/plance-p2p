@@ -41,7 +41,7 @@
     <?php
         $categorias = [
             [
-                'title'     => 'Juegos Mobiles',
+                'title'     => 'Tiendas Online',
                 'link'      => 'views/games/juegos.php',
                 'icon'      => 'fa-solid fa-gamepad',
                 'accent'    => '#FF6C0C',

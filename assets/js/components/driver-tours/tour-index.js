@@ -2,9 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const iniciarTutorialButton = document.getElementById(
         'navbar-iniciar-tutorial'
     );
+    const tutorialQuickStartButton = document.querySelector(
+        '.tutorial-trigger'
+    );
 
     const cerrarTutorialButton = document.getElementById(
         'navbar-cerrar-tutorial'
+    );
+
+    const tutorialHelpButton = document.getElementById(
+        'navbar-tutorial-help'
+    );
+
+    const tutorialHelpWrap = document.getElementById(
+        'tutorial-help-wrap'
     );
 
     if (!iniciarTutorialButton || !cerrarTutorialButton || !window.driver?.js) {
@@ -20,7 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ? '<i class="bi bi-arrow-repeat"></i> Repetir tutorial'
             : '<i class="bi bi-question-circle"></i> Iniciar tutorial';
 
+        iniciarTutorialButton.hidden = false;
         cerrarTutorialButton.hidden = !tutorialIniciado;
+
+        if (tutorialHelpButton) {
+            tutorialHelpButton.hidden = tutorialIniciado;
+        }
+
+        if (tutorialHelpWrap) {
+            tutorialHelpWrap.style.display = tutorialIniciado ? 'none' : 'inline-flex';
+        }
 
         cerrarTutorialButton.innerHTML =
             estadoTutorial === 'pendiente'
@@ -31,20 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const driver = window.driver.js.driver({
         allowClose: false,
         showProgress: true,
-        disableActiveInteraction: true,
+        disableActiveInteraction: false,
         advanceOnClick: true,
         stagePadding: 10,
         nextBtnText: 'Siguiente',
         prevBtnText: 'Atrás',
         doneBtnText: 'Finalizar',
-
-        onDoneClick: () => {
-            driver.destroy();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        },
 
         onDestroyStarted: () => {
             if (localStorage.getItem('tutorial') === 'activo') {
@@ -61,59 +73,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         steps: [
             {
-                element: '#lista-integraciones',
+                element: '#sesiones',
+                disableActiveInteraction: true,
                 popover: {
-                    title: 'Lista de integraciones',
+                    title: 'Ejemplos de integraciones',
                     description:
-                        'Aquí puedes ver rápidamente los tipos de integración disponibles para explorar dentro de esta sección.'
+                        'Podrás recorrer una compra como la que viviría un cliente: elegir un producto, iniciar el pago y observar qué ocurre detrás de cada paso hasta recibir la respuesta de Place to Pay.'
                 }
             },
             {
-                element: '#tour-card-method',
+                element: '#guia-user',
+                disableActiveInteraction: true,
                 popover: {
-                    title: 'Método de integración',
+                    title: 'Guía de usuario',
                     description:
-                        'Indica el tipo de flujo de pago de la categoría, para identificarlo antes de entrar.'
+                        'Es un punto de partida para familiarizarte con el vocabulario y las decisiones habituales de un pago digital, incluso si todavía no sabes cómo se conectan los sistemas.'
                 }
             },
             {
-                element: '#tour-card-description',
+                element: '#guia-developer',
+                disableActiveInteraction: true,
                 popover: {
-                    title: 'Descripción de la categoría',
+                    title: 'Guía developer',
                     description:
-                        'Explica cuándo conviene usar este flujo para que elijas el ejemplo más adecuado.'
+                        'Cuando quieras pasar de entender el flujo a construirlo, aquí verás la estructura técnica, los recursos necesarios y la forma de llevar la integración a tu propio comercio.'
                 }
             },
             {
-                element: '#tour-card-title',
+                element: '#navbar-tutorial-actions',
+                disableActiveInteraction: false,
                 popover: {
-                    title: 'Comercio Ejemplo',
+                    title: 'Barra tutorial',
                     description:
-                        'Muestra un ejemplo para el tipo de integración que se está presentando.',
-                    onNextClick: () => {
-                        localStorage.setItem('tutorial', 'pendiente');
-                        driver.destroy();
-
-                        setTimeout(() => {
-                            window.scrollTo({
-                                top: 0,
-                                behavior: 'smooth'
-                            });
-                        }, 0);
-                    }
+                        'Desde aquí puedes repetir el tutorial o cerrarlo cuando quieras. Hacer clic en "Finalizar tutorial" lo marcará como completado y no se volverá a mostrar.'
                 }
-            }
+            },
         ]
     });
 
-    function iniciarTourSesiones() {
+    window.iniciarTourIndex = () => {
         localStorage.setItem('tutorial', 'activo');
         document.body.classList.add('tutorial-active');
         actualizarBotonTutorial();
         driver.drive();
-    }
+    };
 
-    iniciarTutorialButton.addEventListener('click', iniciarTourSesiones);
+    iniciarTutorialButton.addEventListener('click', iniciarTourIndex);
+
+    if (tutorialQuickStartButton) {
+        tutorialQuickStartButton.addEventListener('click', iniciarTourIndex);
+    }
 
     cerrarTutorialButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -132,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarBotonTutorial();
 
     if (localStorage.getItem('tutorial') === 'pendiente') {
-        iniciarTourSesiones();
+        window.iniciarTourIndex();
     }
 
     window.addEventListener('storage', (event) => {

@@ -1,0 +1,205 @@
+﻿:root {
+    --color-primary: #FF6C0C;
+    --color-secondary-1: #00CFB4;
+    --color-secondary-2: #4C5F71;
+    --color-secondary-3: #0062A8;
+    --color-secondary-4: #1E212C;
+    --color-secondary-5: #7D868C;
+    --text-main: #f1f5f9;
+}
+
+body {
+    background-color: #0d0e10;
+    background-image: url(../../images/bg35.jpg);
+    color: white;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+main {
+    flex: 1;
+    margin-top: 1rem;
+}
+
+.hero-card {
+    background: linear-gradient(135deg, rgba(30, 33, 44, 0.95), rgba(21, 24, 32, 0.95));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+    margin-bottom: 4rem;
+}
+
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(255, 108, 12, 0.16);
+    color: var(--color-primary);
+    border: 1px solid rgba(255, 108, 12, 0.22);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.hero-panel {
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--color-secondary-5);
+    line-height: 1.7;
+}
+
+.hero-panel-list {
+    list-style: disc;
+}
+
+.hero-panel-list li::marker {
+    color: var(--color-primary);
+}
+
+.hero-panel-list a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.hero-panel-list a:hover,
+.hero-panel-list a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.hero-panel-list a:focus-visible {
+    outline: 2px solid rgba(255, 108, 12, 0.7);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.category-card {
+    background: #11141b;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    height: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 108, 12, 0.4);
+}
+
+.card-visual {
+    height: 220px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #FF6C0C 0%, #FF9C45 100%);
+}
+
+.card-visual.card-visual-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: none;
+}
+
+.card-preview-tile {
+    min-height: 220px;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.92) saturate(1.1);
+}
+
+.card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.title-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    color: var(--color-primary);
+    font-size: 1.25rem;
+}
+
+.category-card .card-body {
+    padding: 1.2rem 1.2rem 1.3rem;
+    background: #0b0d11;
+    color: white;
+}
+
+.card-title,
+.card-text,
+.method-pill,
+.btn-continue {
+    color: white;
+}
+
+.card-text {
+    background: #0b0d11;
+    padding: 1rem;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.method-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-secondary-1);
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: none;
+}
+
+.method-pill i {
+    font-size: 1.2rem;
+}
+
+.btn-continue {
+    background: rgba(255, 108, 12, 0.12);
+    color: var(--color-primary);
+    border: 1px solid rgba(255, 108, 12, 0.26);
+    border-radius: 999px;
+    font-weight: 700;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-continue:hover {
+    background: var(--color-primary);
+    color: #11141b;
+    border-color: var(--color-primary);
+}
+
+.section-note {
+    color: var(--color-secondary-5);
+}

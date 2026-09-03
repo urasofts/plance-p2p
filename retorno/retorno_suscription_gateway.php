@@ -64,7 +64,7 @@ if ($status === 'APPROVED') {
     </style>
 </head>
 <body>
-    <div class="result-card">
+    <div class="result-card" id="resultCard" data-tipo="suscripcion" data-id="<?= (int) $orden_id ?>" data-pending="<?= $status === 'PENDING' ? '1' : '0' ?>">
         <?php if ($status === 'PENDING'): ?>
         <div class="result-icon">
             <div class="pending-spinner">
@@ -113,5 +113,8 @@ if ($status === 'APPROVED') {
         <a href="../views/plataformas/streaming_gateway.php" class="btn-volver">Ver planes</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <?php if ($status === 'PENDING'): ?>
+    <script src="../assets/js/gw-resolver-poll.js"></script>
+    <?php endif; ?>
 </body>
 </html>

@@ -58,6 +58,8 @@ CREATE TABLE `gateway_ordenes` (
   `tipo_doc` varchar(10) NOT NULL,
   `num_doc` varchar(20) NOT NULL,
   `estado` varchar(20) NOT NULL,
+  `resuelve_en` datetime DEFAULT NULL,
+  `resuelve_a` varchar(20) DEFAULT NULL,
   `monto_pagado` decimal(10,2) DEFAULT NULL,
   `request_id` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -100,6 +102,8 @@ CREATE TABLE `gateway_recurrencias` (
   `tipo_doc` varchar(10) NOT NULL,
   `num_doc` varchar(20) NOT NULL,
   `estado` varchar(20) NOT NULL,
+  `resuelve_en` datetime DEFAULT NULL,
+  `resuelve_a` varchar(20) DEFAULT NULL,
   `periodicidad` varchar(5) NOT NULL DEFAULT 'M',
   `next_payment` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
@@ -124,6 +128,8 @@ CREATE TABLE `gateway_suscription` (
   `tipo_doc` varchar(10) NOT NULL,
   `num_doc` varchar(20) NOT NULL,
   `estado` varchar(20) NOT NULL,
+  `resuelve_en` datetime DEFAULT NULL,
+  `resuelve_a` varchar(20) DEFAULT NULL,
   `token` varchar(225) NOT NULL,
   `request_id` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()

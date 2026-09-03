@@ -49,11 +49,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <span class="rec-badge"><i class="fa-solid fa-globe" style="color:hsl(29, 99%, 45%) ;"></i> Suscripcion Recurrente</span>
         </div>
         <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
-            <div class="banner-correo">
-                <label for="usuarioIdInput"><i class="bi bi-envelope-fill fs-6"></i> Correo electrónico</label>
-                <input type="email" id="usuarioIdInput" placeholder="Tu correo electronico"
-                       value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>" autocomplete="off">
-            </div>
             <div class="period-selector" id="periodSelector">
                 <button class="period-btn active" id="btnMensual" onclick="setPeriod('mensual')">Mensual</button>
                 <button class="period-btn" id="btnAnual" onclick="setPeriod('anual')">Anual</button>
@@ -156,6 +151,12 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                     <i class="bi bi-arrow-repeat"></i>
                     <span id="recurringMsg">Cobro automático mensual durante 12 meses.</span>
                 </div>
+                <div class="checkout-correo">
+                    <label for="usuarioIdInput"><i class="bi bi-envelope-fill fs-6"></i> Correo electrónico</label>
+                    <input type="email" id="usuarioIdInput" placeholder="Tu correo electronico"
+                           value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>" autocomplete="off">
+                </div>
+
                 <button class="btn-buy" id="btnBuy">
                     <span>Suscribirse ahora</span>
                     <span class="btn-arrow">→</span>
@@ -174,7 +175,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                         <span class="session-step__num">1</span>
                         <div class="session-step__body">
                             <span class="session-step__title">Digita tu correo electrónico</span>
-                            <span class="session-step__desc">Escríbelo en el campo de arriba; ahí gestionamos el acceso a tu suscripción.</span>
+                            <span class="session-step__desc">Escríbelo en el campo "Correo electrónico" del panel de la derecha; ahí gestionamos el acceso a tu suscripción.</span>
                         </div>
                     </li>
                     <li class="session-step">

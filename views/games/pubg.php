@@ -51,13 +51,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
       Tienda de Cash
       <span class="gw-badge"> API Gateway</span>
     </div>
-    
-    
-    <div class="banner-player-id">
-      <label for="jugadorIdInput">ID de jugador</label>
-      <input type="text" id="jugadorIdInput" placeholder="Ej: 123456789" autocomplete="off" />
-    </div>
-
   </div>
       <div class="security-warning">
         <i class="bi bi-shield-exclamation"></i>
@@ -266,6 +259,12 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                         <label class="field-label">Teléfono</label>
                         <input type="text" class="field-input" id="cuentaTelefono" placeholder="3001234567">
                     </div>
+                </div>
+
+                <div class="checkout-divider"></div>
+                <div class="field-group">
+                    <label class="field-label"><i class="bi bi-person-vcard-fill fs-6"></i> ID de jugador</label>
+                    <input type="text" class="field-input" id="jugadorIdInput" placeholder="Ej: 123456789" autocomplete="off">
                 </div>
 
                 <button class="btn-pagar" id="btnPagar">

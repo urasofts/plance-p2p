@@ -54,10 +54,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
       <img src="../../assets/imgames/monedas/coin-banner.svg" class="card-img-top" alt="Monedas" style="height:40px;width:auto;" >
       Tienda de Monedas
     </div>
-    <div class="banner-player-id">
-      <label for="jugadorIdInput"> <i class="bi bi-person-vcard-fill fs-6 text-warning"></i> ID de jugador</label>
-      <input type="text" id="jugadorIdInput" placeholder="Ej: 0011122224444555" autocomplete="off" />
-    </div>
   </div>
 
   <!-- ═══ MAIN LAYOUT ═══ -->
@@ -192,6 +188,11 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
           </div>
         </div>
 
+        <div class="checkout-player-id">
+          <label for="jugadorIdInput"><i class="bi bi-person-vcard-fill fs-6"></i> ID de jugador</label>
+          <input type="text" id="jugadorIdInput" placeholder="Ej: 0011122224444555" autocomplete="off" />
+        </div>
+
         <button class="btn-buy" id="btnBuy">
           <span>Comprar ahora</span>
           <span class="btn-arrow">→</span>
@@ -214,7 +215,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <span class="session-step__num">1</span>
             <div class="session-step__body">
               <span class="session-step__title">Digita tu ID de jugador</span>
-              <span class="session-step__desc">Escríbelo en el campo "ID de jugador" de arriba, tal como aparece en tu cuenta del juego.</span>
+              <span class="session-step__desc">Escríbelo en el campo "ID de jugador" del panel de la derecha, tal como aparece en tu cuenta del juego.</span>
             </div>
           </li>
           <li class="session-step">

@@ -9,7 +9,6 @@
 
 
 .home{
-    background-image: url(../images/bg13.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -18,7 +17,7 @@
 }
 body{
     background-color: #0a0a0a;
-    background-image: linear-gradient(rgba(6, 6, 8, 0.82), rgba(6, 6, 8, 0.88)), url(../images/bg13.webp);
+    background-image: linear-gradient(rgba(6, 6, 8, 0.479), rgba(6, 6, 8, 0.377)), url(../images/bg5.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

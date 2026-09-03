@@ -168,7 +168,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
                 </div>
                 <div>
                     <div class="card-name">Pagos Básicos</div>
-                    <div class="card-desc">Recargas de juegos — Call of Duty Mobile y Rainbow Six Siege</div>
+                    <div class="card-desc">Recargas en tiendas online — Monedas y Gemas</div>
                 </div>
             </div>
             <div style="display:flex; align-items:center; gap:0.5rem;">
@@ -185,7 +185,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
                 </div>
                 <div>
                     <div class="card-name">Suscripciones</div>
-                    <div class="card-desc">Streaming — Netflix, HBO Max, Disney+</div>
+                    <div class="card-desc">Streaming — Plataformas digitales Netflix, HBO Max, Disney+</div>
                 </div>
             </div>
             <div style="display:flex; align-items:center; gap:0.5rem;">
@@ -252,7 +252,7 @@ $total_pagos= number_format($total_pagos, 0, ',', '.');
                 </div>
                 <div>
                     <div class="card-name">Dispersiones</div>
-                    <div class="card-desc">Pagos con dispersión — pagos divididos entre aerolínea e impuestos</div>
+                    <div class="card-desc">Pagos con dispersión — pagos divididos entre entidades e impuestos</div>
                 </div>
             </div>
             <div style="display:flex; align-items:center; gap:0.5rem;">

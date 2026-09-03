@@ -76,6 +76,26 @@ $monto_a_simular = $destino === 'mixto' ? ($_SESSION['gw_pending']['monto_pagar'
                 <div class="estado-icon">❌</div>
                 <div class="estado-name">Rechazada</div>
             </div>
+            <?php if ($destino !== 'mixto'): ?>
+            <div class="estado-btn pend-aprobada" onclick="selectEstado('pend-aprobada', this)">
+                <span class="check">✔</span>
+                <div class="estado-icon">⏳✅</div>
+                <div class="estado-name">Pendiente → Aprobada</div>
+                <div class="estado-desc">Queda pendiente ~90s y luego se aprueba sola</div>
+            </div>
+            <div class="estado-btn pend-rechazada" onclick="selectEstado('pend-rechazada', this)">
+                <span class="check">✔</span>
+                <div class="estado-icon">⏳❌</div>
+                <div class="estado-name">Pendiente → Rechazada</div>
+                <div class="estado-desc">Queda pendiente ~90s y luego se rechaza sola</div>
+            </div>
+            <div class="estado-btn pend-180min" onclick="selectEstado('pend-180min', this)">
+                <span class="check">✔</span>
+                <div class="estado-icon">🐢</div>
+                <div class="estado-name">180 min → Aprobada</div>
+                <div class="estado-desc">Simula una respuesta muy demorada del emisor</div>
+            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Selector de razón -->
@@ -114,15 +134,21 @@ $monto_a_simular = $destino === 'mixto' ? ($_SESSION['gw_pending']['monto_pagar'
     let estadoActual = 'aprobada';
 
     const razonesPorEstado = {
-        aprobada:  ['APPROVED_TRANSACTION (00)'],
-        pendiente: ['PENDING_TRANSACTION (?-)', 'PENDING_VALIDATION (?V)'],
-        rechazada: ['CANCELLED_TRANSACTION (?C)', 'FAILED_TRANSACTION (?F)', 'REJECTED_TRANSACTION (?R)']
+        aprobada:       ['APPROVED_TRANSACTION (00)'],
+        pendiente:      ['PENDING_TRANSACTION (?-)', 'PENDING_VALIDATION (?V)'],
+        rechazada:      ['CANCELLED_TRANSACTION (?C)', 'FAILED_TRANSACTION (?F)', 'REJECTED_TRANSACTION (?R)'],
+        'pend-aprobada':  ['PENDING_TRANSACTION (?-)', 'PENDING_VALIDATION (?V)'],
+        'pend-rechazada': ['PENDING_TRANSACTION (?-)', 'PENDING_VALIDATION (?V)'],
+        'pend-180min':    ['PENDING_TRANSACTION (?-)', 'PENDING_VALIDATION (?V)']
     };
 
     const valoresPorEstado = {
-        aprobada:  ['APPROVED_TRANSACTION'],
-        pendiente: ['PENDING_TRANSACTION', 'PENDING_VALIDATION'],
-        rechazada: ['CANCELLED_TRANSACTION', 'FAILED_TRANSACTION', 'REJECTED_TRANSACTION']
+        aprobada:       ['APPROVED_TRANSACTION'],
+        pendiente:      ['PENDING_TRANSACTION', 'PENDING_VALIDATION'],
+        rechazada:      ['CANCELLED_TRANSACTION', 'FAILED_TRANSACTION', 'REJECTED_TRANSACTION'],
+        'pend-aprobada':  ['PENDING_TRANSACTION', 'PENDING_VALIDATION'],
+        'pend-rechazada': ['PENDING_TRANSACTION', 'PENDING_VALIDATION'],
+        'pend-180min':    ['PENDING_TRANSACTION', 'PENDING_VALIDATION']
     };
 
     function selectEstado(estado, el) {

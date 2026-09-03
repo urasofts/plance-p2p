@@ -47,11 +47,6 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
             <i class="bi bi-tv-fill" style="color: #16a34a;"></i>Otras Plataformas — Suscripción Pura
             <span class="sub-badge"><i class="bi bi-shield-lock-fill"></i> Tokenización</span>
         </div>
-        <div class="banner-correo">
-            <label for="usuarioIdInput"><i class="bi bi-envelope-fill fs-6"></i> Correo electrónico</label>
-            <input type="email" id="usuarioIdInput" placeholder="Ingresa tu correo electrónico"
-                   value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>" autocomplete="off">
-        </div>
     </div>
 
     <main class="shop-layout">
@@ -151,6 +146,12 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                     <i class="bi bi-shield-lock-fill"></i>
                     <span>Tu tarjeta será tokenizada de forma segura para futuros cobros. El primer mes se cobra al suscribirse.</span>
                 </div>
+                <div class="checkout-correo">
+                    <label for="usuarioIdInput"><i class="bi bi-envelope-fill fs-6"></i> Correo electrónico</label>
+                    <input type="email" id="usuarioIdInput" placeholder="Ingresa tu correo electrónico"
+                           value="<?php echo htmlspecialchars($_SESSION['correo'] ?? ''); ?>" autocomplete="off">
+                </div>
+
                 <button class="btn-buy" id="btnBuy">
                     <span>Suscribirse ahora</span>
                     <span class="btn-arrow">→</span>
@@ -169,7 +170,7 @@ if (!isset($_SESSION["usuario"]) && empty($_SESSION["invitado"])) {
                         <span class="session-step__num">1</span>
                         <div class="session-step__body">
                             <span class="session-step__title">Digita tu correo electrónico</span>
-                            <span class="session-step__desc">Escríbelo en el campo de arriba; ahí gestionamos el acceso a tu suscripción.</span>
+                            <span class="session-step__desc">Escríbelo en el campo "Correo electrónico" del panel de la derecha; ahí gestionamos el acceso a tu suscripción.</span>
                         </div>
                     </li>
                     <li class="session-step">

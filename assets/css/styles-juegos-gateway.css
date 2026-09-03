@@ -91,32 +91,6 @@ body { font-family: var(--gj-font-body); -webkit-font-smoothing: antialiased; }
     object-fit: cover;
 }
 
-/* ── BANNER PLAYER ID ── */
-.banner-player-id { display: flex; align-items: center; gap: 0.5rem; }
-
-.banner-player-id label {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--pt-text-sec);
-    white-space: nowrap;
-}
-
-.banner-player-id input {
-    background: var(--pt-navbar);
-    border: 1.5px solid var(--pt-border);
-    border-radius: var(--gj-radius-sm);
-    color: var(--pt-text);
-    font-family: var(--gj-font-body);
-    font-size: 0.85rem;
-    padding: 0.35rem 0.75rem;
-    outline: none;
-    transition: border-color 0.2s;
-    width: 180px;
-}
-
-.banner-player-id input::placeholder { color: var(--pt-text-sec); }
-.banner-player-id input:focus { border-color: var(--gj-accent); }
-
 /* ── MAIN LAYOUT ── */
 .shop-layout {
     display: grid;
@@ -306,6 +280,7 @@ body { font-family: var(--gj-font-body); -webkit-font-smoothing: antialiased; }
 
 .field-group { margin-bottom: 0.75rem; }
 .field-label { font-size: 0.75rem; font-weight: 600; color: var(--pt-text-sec); margin-bottom: 0.3rem; display: block; }
+.field-label i { color: var(--gj-accent); margin-right: 0.3rem; }
 
 .field-input {
     width: 100%;

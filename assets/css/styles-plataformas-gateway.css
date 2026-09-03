@@ -77,6 +77,27 @@ body { font-family: var(--plat-font); -webkit-font-smoothing: antialiased; }
     letter-spacing: 0.04em;
     color: var(--pt-text);
 }
+
+/* ── SELECTOR MENSUAL / ANUAL ── */
+.period-selector { display: flex; gap: 0.4rem; }
+.period-btn {
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--plat-radius-sm);
+    border: 1.5px solid var(--pt-border);
+    background: var(--pt-navbar);
+    color: var(--pt-text-sec);
+    font-family: var(--plat-font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.period-btn:hover { border-color: rgba(var(--plat-accent-rgb), 0.4); color: var(--pt-text); }
+.period-btn.active {
+    border-color: var(--plat-accent);
+    background: rgba(var(--plat-accent-rgb), 0.1);
+    color: var(--plat-accent);
+}
 .gw-badge,
 .sub-badge {
     background: rgba(var(--plat-accent-rgb), 0.15);

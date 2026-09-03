@@ -84,6 +84,24 @@ $form_action = $es_recurrencia ? 'crear_recurrencia_gateway' : 'crear_suscriptio
                 <div class="estado-name">Rechazada</div>
                 <div class="estado-desc">No se pudo procesar</div>
             </div>
+            <div class="estado-btn pend-aprobada" onclick="selectEstado('pend-aprobada', this)">
+                <span class="check">✔</span>
+                <div class="estado-icon">⏳✅</div>
+                <div class="estado-name">Pendiente → Aprobada</div>
+                <div class="estado-desc">Queda pendiente ~90s y luego se aprueba sola</div>
+            </div>
+            <div class="estado-btn pend-rechazada" onclick="selectEstado('pend-rechazada', this)">
+                <span class="check">✔</span>
+                <div class="estado-icon">⏳❌</div>
+                <div class="estado-name">Pendiente → Rechazada</div>
+                <div class="estado-desc">Queda pendiente ~90s y luego se rechaza sola</div>
+            </div>
+            <div class="estado-btn pend-180min" onclick="selectEstado('pend-180min', this)">
+                <span class="check">✔</span>
+                <div class="estado-icon">🐢</div>
+                <div class="estado-name">180 min → Aprobada</div>
+                <div class="estado-desc">Simula una respuesta muy demorada del emisor</div>
+            </div>
         </div>
 
         <div class="razon-wrap">
@@ -112,7 +130,10 @@ $form_action = $es_recurrencia ? 'crear_recurrencia_gateway' : 'crear_suscriptio
         'aprobada-token': [{ v:'APPROVED_TRANSACTION', l:'APPROVED_TRANSACTION (00) — Con token' }],
         'aprobada-sin':   [{ v:'APPROVED_TRANSACTION', l:'APPROVED_TRANSACTION (00) — Sin token' }],
         'pendiente':      [{ v:'PENDING_TRANSACTION', l:'PENDING_TRANSACTION (?-)' }, { v:'PENDING_VALIDATION', l:'PENDING_VALIDATION (?V)' }],
-        'rechazada':      [{ v:'CANCELLED_TRANSACTION', l:'CANCELLED_TRANSACTION (?C)' }, { v:'FAILED_TRANSACTION', l:'FAILED_TRANSACTION (?F)' }, { v:'REJECTED_TRANSACTION', l:'REJECTED_TRANSACTION (?R)' }]
+        'rechazada':      [{ v:'CANCELLED_TRANSACTION', l:'CANCELLED_TRANSACTION (?C)' }, { v:'FAILED_TRANSACTION', l:'FAILED_TRANSACTION (?F)' }, { v:'REJECTED_TRANSACTION', l:'REJECTED_TRANSACTION (?R)' }],
+        'pend-aprobada':  [{ v:'PENDING_TRANSACTION', l:'PENDING_TRANSACTION (?-)' }, { v:'PENDING_VALIDATION', l:'PENDING_VALIDATION (?V)' }],
+        'pend-rechazada': [{ v:'PENDING_TRANSACTION', l:'PENDING_TRANSACTION (?-)' }, { v:'PENDING_VALIDATION', l:'PENDING_VALIDATION (?V)' }],
+        'pend-180min':    [{ v:'PENDING_TRANSACTION', l:'PENDING_TRANSACTION (?-)' }, { v:'PENDING_VALIDATION', l:'PENDING_VALIDATION (?V)' }]
     };
 
     function selectEstado(estado, el) {

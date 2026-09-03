@@ -126,8 +126,8 @@ if (is_dir($carpeta_imgs)) {
 | Si luego me confirmas cómo se relaciona `ordenes` con el usuario,
 | te lo ajusto para que todo sea por usuario logueado.
 */
-$filtro_hoy = $es_invitado ? " WHERE DATE(created_at) = CURDATE()" : "";
-$cond_hoy   = $es_invitado ? " AND DATE(created_at) = CURDATE()" : "";
+$filtro_hoy = " WHERE DATE(created_at) = CURDATE()";
+$cond_hoy   = " AND DATE(created_at) = CURDATE()";
 
 $total_ordenes = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes" . $filtro_hoy))['total'] ?? 0;
 $total_aprobadas = mysqli_fetch_assoc(mysqli_query($conexion, "SELECT COUNT(*) as total FROM ordenes WHERE estado = 'aprobada'" . $cond_hoy))['total'] ?? 0;
@@ -695,7 +695,7 @@ $initial = strtoupper(substr($row['usuario'] ?? 'U', 0, 1));
 
                     <article class="card-panel">
                         <div class="card-header">
-                            <h2 class="card-title"><?= $es_invitado ? 'Transacciones de hoy' : 'Mi Actividad' ?></h2>
+                            <h2 class="card-title">Transacciones de hoy</h2>
                             <span class="card-arrow"><i class="bi bi-chevron-right"></i></span>
                         </div>
 

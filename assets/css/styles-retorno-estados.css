@@ -123,10 +123,15 @@ body {
 .estado-btn.aprobada .check, .estado-btn.aprobada-token .check, .estado-btn.aprobada-sin .check { color: #3ecf8e; }
 .estado-btn.aprobada .estado-name, .estado-btn.aprobada-token .estado-name, .estado-btn.aprobada-sin .estado-name { color: #3ecf8e; }
 
-.estado-btn.pendiente { color: #f0b429; }
-.estado-btn.pendiente:hover, .estado-btn.pendiente.selected { border-color: #f0b429; background: rgba(240, 180, 41, 0.08); }
-.estado-btn.pendiente .check { color: #f0b429; }
-.estado-btn.pendiente .estado-name { color: #f0b429; }
+.estado-btn.pendiente, .estado-btn.pend-aprobada, .estado-btn.pend-rechazada, .estado-btn.pend-180min { color: #f0b429; }
+.estado-btn.pendiente:hover,      .estado-btn.pendiente.selected,
+.estado-btn.pend-aprobada:hover,  .estado-btn.pend-aprobada.selected,
+.estado-btn.pend-rechazada:hover, .estado-btn.pend-rechazada.selected,
+.estado-btn.pend-180min:hover,    .estado-btn.pend-180min.selected {
+    border-color: #f0b429; background: rgba(240, 180, 41, 0.08);
+}
+.estado-btn.pendiente .check, .estado-btn.pend-aprobada .check, .estado-btn.pend-rechazada .check, .estado-btn.pend-180min .check { color: #f0b429; }
+.estado-btn.pendiente .estado-name, .estado-btn.pend-aprobada .estado-name, .estado-btn.pend-rechazada .estado-name, .estado-btn.pend-180min .estado-name { color: #f0b429; }
 
 .estado-btn.rechazada { color: #e05252; }
 .estado-btn.rechazada:hover, .estado-btn.rechazada.selected { border-color: #e05252; background: rgba(224, 82, 82, 0.08); }

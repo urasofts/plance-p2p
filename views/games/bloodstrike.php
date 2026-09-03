@@ -97,10 +97,6 @@ if (isset($_GET['orden'])) {
             <span class="gw-badge" id="pagoMixtoBadge"><i class="bi bi-shuffle"></i> Pago Mixto</span>
             <!--<span class="tds-badge"><i class="bi bi-shield-lock-fill"></i> 3DS Obligatorio</span -->
         </div>
-        <div class="banner-player-id">
-            <label for="jugadorIdInput">🎯 ID de jugador</label>
-            <input type="text" id="jugadorIdInput" placeholder="Ej: 512345678" autocomplete="off">
-        </div>
 
     </div>
 
@@ -368,6 +364,12 @@ if (isset($_GET['orden'])) {
                             <input type="text" class="field-input" id="cuentaNumDoc" placeholder="1234567890" value="<?= htmlspecialchars($continuar_orden['num_doc'] ?? '') ?>">
                         </div>
                     </div>
+                </div>
+
+                <div class="checkout-divider"></div>
+                <div class="field-group">
+                    <label class="field-label"><i class="bi bi-person-vcard-fill fs-6"></i> ID de jugador</label>
+                    <input type="text" class="field-input" id="jugadorIdInput" placeholder="Ej: 512345678" autocomplete="off">
                 </div>
 
                 <button class="btn-pagar" id="btnPagar">

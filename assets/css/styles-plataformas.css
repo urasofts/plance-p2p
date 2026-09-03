@@ -57,35 +57,36 @@ a:hover { text-decoration: underline; }
     color: var(--pt-text);
 }
 
-.banner-correo { display: flex; align-items: center; gap: 0.5rem; }
+/* ── CORREO (panel de checkout) ── */
+.checkout-correo { margin-bottom: 1rem; }
 
-.banner-correo label {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--pt-text-sec);
-    white-space: nowrap;
+.checkout-correo label {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--pt-text-sec);
+    margin-bottom: 0.4rem;
 }
 
-.banner-correo label i { color: var(--plat-accent); }
+.checkout-correo label i { color: var(--plat-accent); }
 
-.banner-correo input {
+.checkout-correo input {
+    width: 100%;
     background: var(--pt-navbar);
     border: 1.5px solid var(--pt-border);
     border-radius: var(--plat-radius-sm);
     color: var(--pt-text);
     font-family: var(--plat-font);
-    font-size: 0.85rem;
-    padding: 0.45rem 0.8rem;
+    font-size: 0.88rem;
+    padding: 0.55rem 0.8rem;
     outline: none;
     transition: border-color 0.2s;
-    width: 260px;
 }
 
-.banner-correo input::placeholder { color: var(--pt-text-sec); }
-.banner-correo input:focus { border-color: var(--plat-accent); }
+.checkout-correo input::placeholder { color: var(--pt-text-sec); }
+.checkout-correo input:focus { border-color: var(--plat-accent); }
 
 /* Insignias del banner (recurrente / tokenización) */
 .rec-badge,

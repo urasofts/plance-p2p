@@ -140,7 +140,7 @@ $rec = $row;
         <?php endif; ?>
         <?php endif; ?>
 
-        <a href="sesiones.php" class="btn-home">← Inicio</a>
+        <a href="../home.php" class="btn-home">← Inicio</a>
         <a href="../views/plataformas/ia.php" class="btn-volver">Ver planes</a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

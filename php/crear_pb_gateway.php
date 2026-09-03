@@ -136,6 +136,12 @@ $gw_message = $result['status']['message'] ?? 'Sin respuesta del servidor';
 $estado_elegido = trim($_POST['estado_elegido'] ?? '');
 $razon_elegida  = trim($_POST['razon_elegida']  ?? $gw_reason);
 
+// Estados "pendiente" con resolución diferida (demo): la transacción queda
+// en 'pendiente' y, pasado `resuelve_en`, gw_resolver.php la resuelve a
+// `resuelve_a` la próxima vez que la pantalla de resultado consulte su estado.
+$resuelve_en = null;
+$resuelve_a  = null;
+
 if (in_array($estado_elegido, ['aprobada', 'pendiente', 'rechazada'])) {
     $nuevo_estado = $estado_elegido;
     $status = match($nuevo_estado) {
@@ -143,6 +149,13 @@ if (in_array($estado_elegido, ['aprobada', 'pendiente', 'rechazada'])) {
         'pendiente' => 'PENDING',
         default     => 'REJECTED'
     };
+} elseif (in_array($estado_elegido, ['pend-aprobada', 'pend-rechazada', 'pend-180min'])) {
+    $nuevo_estado = 'pendiente';
+    $status       = 'PENDING';
+    $resuelve_a   = ($estado_elegido === 'pend-rechazada') ? 'rechazada' : 'aprobada';
+    $resuelve_en  = ($estado_elegido === 'pend-180min')
+        ? date('Y-m-d H:i:s', strtotime('+180 minutes'))
+        : date('Y-m-d H:i:s', strtotime('+90 seconds'));
 } else {
     $gw_status    = $result['status']['status'] ?? 'FAILED';
     $nuevo_estado = match($gw_status) {
@@ -157,9 +170,11 @@ if (in_array($estado_elegido, ['aprobada', 'pendiente', 'rechazada'])) {
 $estado_safe = mysqli_real_escape_string($conexion, $nuevo_estado);
 $gw_request_id = $result['internalReference'] ?? $reference;
 $ref_safe    = mysqli_real_escape_string($conexion, $gw_request_id);
+$resuelve_en_sql = $resuelve_en ? "'" . mysqli_real_escape_string($conexion, $resuelve_en) . "'" : "NULL";
+$resuelve_a_sql  = $resuelve_a  ? "'" . mysqli_real_escape_string($conexion, $resuelve_a)  . "'" : "NULL";
 
-$query = "INSERT INTO gateway_ordenes (producto, precio, nombre, correo, telefono, tipo_doc, num_doc, estado, request_id)
-          VALUES ('$producto', '$precio', '$nombre', '$correo', '$telefono', '$tipo_doc', '$num_doc', '$estado_safe', '$ref_safe')";
+$query = "INSERT INTO gateway_ordenes (producto, precio, nombre, correo, telefono, tipo_doc, num_doc, estado, resuelve_en, resuelve_a, request_id)
+          VALUES ('$producto', '$precio', '$nombre', '$correo', '$telefono', '$tipo_doc', '$num_doc', '$estado_safe', $resuelve_en_sql, $resuelve_a_sql, '$ref_safe')";
 
 $resultado = mysqli_query($conexion, $query);
 if (!$resultado) die("❌ Error al guardar: " . mysqli_error($conexion));
